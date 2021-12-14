@@ -26,6 +26,10 @@
                                 <label>Select Existing</label>
                                 <input type="file" class="form-control form-control-sm" id="selectJsonFileSelect" accept=".json" />
                             </div>
+                            <div class="col-12 pt-2">
+                                <label>Or URL</label>
+                                <input type="url" class="form-control form-control-sm" id="selectJsonFileUrl" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,14 +41,16 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-12 pt-2">
+                            <div class="col-12">
                                 <label>Plugin Name</label>
+                                <span class="d-none text-danger warning-txt" id="nameWarning">You must enter a name for your plugin.</span>
                                 <input type="text" class="form-control form-control-sm" id="pluginNameText" placeholder="Plugin Name" required onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Plugin Author</label>
+                                <span class="d-none text-danger warning-txt" id="authorWarning">You must enter an author for your plugin.</span>
                                 <input type="text" class="form-control form-control-sm" id="pluginAuthorText" placeholder="Plugin Author" required onchange="fieldChanged()" />
                             </div>
                         </div>
@@ -57,19 +63,22 @@
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Documentation URL</label>
-                                <input type="text" class="form-control form-control-sm" id="pluginDocsText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/readme/pluginfinder/readme.md" onchange="fieldChanged()" />
+                                <span class="d-none text-danger warning-txt" id="docsWarning">This is not a valid url.</span>
+                                <input type="url" class="form-control form-control-sm" id="pluginDocsText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/readme/pluginfinder/readme.md" onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Github URL</label>
-                                <input type="text" class="form-control form-control-sm" id="pluginGithubUrl" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins" onchange="fieldChanged()" />
+                                <span class="d-none text-danger warning-txt" id="githubWarning">This is not a valid url.</span>
+                                <input type="url" class="form-control form-control-sm" id="pluginGithubUrl" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins" onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Nexus URL</label>
-                                <input type="text" class="form-control form-control-sm" id="pluginNexusUrl" placeholder="https://www.nexusmods.com/skyrimspecialedition/mods/59869" onchange="fieldChanged()" />
+                                <span class="d-none text-danger warning-txt" id="nexusWarning">This is not a valid url.</span>
+                                <input type="url" class="form-control form-control-sm" id="pluginNexusUrl" placeholder="https://www.nexusmods.com/skyrimspecialedition/mods/59869" onchange="fieldChanged()" />
                             </div>
                         </div>
                     </div>
@@ -100,7 +109,7 @@
                                 <h5>Preview Json</h5>
                             </div>
                             <div class="col-4" style="text-align:right;">
-                                <button id="saveJsonBtn" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Save</button>
+                                <button id="saveJsonBtn" class="btn btn-success btn-sm disabled"><i class="fa fa-save"></i> Save</button>
                             </div>
                         </div>
                     </div>
@@ -112,46 +121,52 @@
         </div>
     </div>
 
-
     <div class="card mt-3 d-none versionCard" id="versionTemplate">
         <div class="card-header">
             <div class="col-12 pt-2">
-                <label>Plugin Version Number</label>
+                <label>Plugin Version Number</label> 
+                <span class="d-none text-danger warning-txt versionWarning">You must enter a version for this release.</span>
+                <span class="d-none text-danger warning-txt versionInvalidWarning">This does not appear to be a valid version number.</span>
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control form-control-sm versionNumberText" placeholder="1.0.0a" onchange="fieldChanged()" />
                     <button class="btn btn-sm btn-danger versionDeleteBtn" onclick="removeVersion(this)"><i class="fa fa-trash"></i> Delete</button>
                 </div>
-                
             </div>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-12 pt-2">
-                    <label>Version Release Date</label>
+                <div class="col-12">
+                    <label>Version Release Date</label> 
+                    <span class="d-none text-danger warning-txt releaseWarning">You must enter a release date for this release.</span>
                     <input type="date" class="form-control form-control-sm releaseDateText" placeholder="2021-01-01" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Min Supported Mod Organizer Version</label>
+                    <label>Min Supported Mod Organizer Version</label> 
                     <input type="text" class="form-control form-control-sm minSupportText" placeholder="2.4.2" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Max Supported Mod Organizer Version</label>
+                    <label>Max Supported Mod Organizer Version</label> 
                     <input type="text" class="form-control form-control-sm maxSupportText" placeholder="2.4.2" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Min Working Mod Organizer Version</label>
+                    <label>Min Working Mod Organizer Version</label> 
                     <input type="text" class="form-control form-control-sm minWorkingText" placeholder="2.4.2" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Max Working Mod Organizer Version</label>
+                    <label>Max Working Mod Organizer Version</label> 
                     <input type="text" class="form-control form-control-sm maxWorkingText" placeholder="2.4.2" onchange="fieldChanged()" />
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Plugin Download URL</label>
-                    <input type="text" class="form-control form-control-sm downloadUrlText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.3.zip" onchange="fieldChanged()" />
+                    <label>Plugin Download URL</label> 
+                    <span class="d-none text-danger warning-txt downloadWarning">You must enter a download url for this release.</span>
+                    <span class="d-none text-danger warning-txt downloadInvalidWarning">This is not a valid url.</span>
+                    <span class="d-none text-danger warning-txt downloadZipWarning">This is not a valid mod download, the url must point to a .zip, or .7z file.</span>
+                    <input type="url" class="form-control form-control-sm downloadUrlText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.3.zip" onchange="fieldChanged()" />
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Plugin Install Paths</label> <button class="btn btn-sm btn-primary pluginPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <label>Plugin Install Paths</label> 
+                    <button class="btn btn-sm btn-primary pluginPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button> 
+                    <span class="d-none text-danger warning-txt pathsWarning">You must enter at least one path for your plugin to be installable.</span>
                     <div class="textArrayContainer pluginPathsContainer">
                     </div>
                 </div>
@@ -311,22 +326,37 @@
             newVersion.removeClass("d-none");
             newVersion.removeAttr('id');
             $("#versionColumn").prepend(newVersion);
+            $("#saveJsonBtn").addClass("disabled");
             return newVersion;
         }
 
         function removeVersion(button) {
             $(button).parent().parent().parent().parent().remove();
+            validate();
         }
 
         $("#selectJsonFileSelect").change(function (evt) {
+            $("#selectJsonFileUrl").val("");
             var file = evt.target.files[0];
             var reader = new FileReader();
             reader.onload = function (event) {
                 loadedJson = JSON.parse(event.target.result);
                 updateForm();
                 updatePreview();
+                validate();
             };
             reader.readAsText(file);
+        });
+
+        $("#selectJsonFileUrl").change(function (evt) {
+            var url = $("#selectJsonFileUrl").val();
+            $("#selectJsonFileSelect").val("");
+            $.getJSON(url, function(data) {
+                loadedJson = data;
+                updateForm();
+                updatePreview();
+                validate();
+            });
         });
 
         $("#saveJsonBtn").click(function () {
@@ -355,7 +385,101 @@
         }
 
         function validate() {
-            // Validate inputs and show errors if they fail.
+            $(".warning-txt").addClass("d-none");
+            var error = false;
+
+            if ($("#pluginNameText") == "") {
+                $("#nameWarning").removeClass("d-none");
+                error = true;
+            }
+            if ($("#pluginAuthorText").val() == "") {
+                $("#authorWarning").removeClass("d-none");
+                error = true;
+            }
+            if ($("#pluginDocsText").val() != "" && !isValidHttpUrl($("#pluginDocsText").val())) {
+                $("#docsWarning").removeClass("d-none");
+                error = true;
+            }
+            if ($("#pluginGithubUrl").val() != "" && !isValidHttpUrl($("#pluginGithubUrl").val())) {
+                $("#githubWarning").removeClass("d-none");
+                error = true;
+            }
+            if ($("#pluginNexusUrl").val() != "" && !isValidHttpUrl($("#pluginNexusUrl").val())) {
+                $("#nexusWarning").removeClass("d-none");
+                error = true;
+            }
+
+            $(".versionCard").each(function (ix, card) {
+                if ($(card).find(".versionNumberText").val() == "") {
+                    $(card).find(".versionWarning").removeClass("d-none");
+                    error = true;
+                }
+                else if (!isVersionValid($(card).find(".versionNumberText").val())) {
+                    $(card).find(".versionInvalidWarning").removeClass("d-none");
+                    error = true;
+                }
+                if ($(card).find(".releaseDateText").val() == "") {
+                    $(card).find(".releaseWarning").removeClass("d-none");
+                    error = true;
+                }
+                if ($(card).find(".downloadUrlText").val() == "") {
+                    $(card).find(".downloadWarning").removeClass("d-none");
+                    error = true;
+                }
+                else if (!isValidHttpUrl($(card).find(".downloadUrlText").val())) {
+                    $(card).find(".downloadInvalidWarning").removeClass("d-none");
+                    error = true;
+                }
+                else if (!isZippedFile($(card).find(".downloadUrlText").val())) {
+                    $(card).find(".downloadZipWarning").removeClass("d-none");
+                    error = true;
+                }
+                
+                var hasPath = false;
+                $(card).find(".pluginPathsContainer").find(".textArrayInput").each(function (ix, input) {
+                    if ($(input).val() != "") {
+                        hasPath = true;
+                    }
+                });
+                if (!hasPath) {
+                    $(card).find(".pathsWarning").removeClass("d-none");
+                    error = true;
+                }
+            });
+
+            if (!error) {
+                $("#saveJsonBtn").removeClass("disabled");
+            }
+            else {
+                $("#saveJsonBtn").addClass("disabled");
+            }
+            return error;
+        }
+
+        var versionRegex = /[0-9]+.?[0-9]*.?[0-9]*.?[0-9]*.?-?_?[A-Za-z0-9]*/g;
+        function isVersionValid(string) {
+            if (string.match(versionRegex)) {
+                return true;
+            }
+            return false;
+        }
+
+        function isValidHttpUrl(string) {
+            let url;
+            try {
+                url = new URL(string);
+            } 
+            catch (_) {
+                return false;  
+            }
+            return url.protocol === "http:" || url.protocol === "https:";
+        }
+
+        function isZippedFile(string) {
+            if (string.endsWith(".zip") || string.endsWith(".7z")) {
+                return true;
+            }
+            return false;
         }
     </script>
 </body>
