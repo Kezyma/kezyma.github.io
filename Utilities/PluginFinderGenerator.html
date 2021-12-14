@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" style="">
+<head>
+    <title>Plugin Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.3/darkly/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <span class="navbar-brand">Plugin Finder Json Generator</span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5>Select Json File</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <label>Select Existing</label>
+                                <input type="file" class="form-control form-control-sm" id="selectJsonFileSelect" accept=".json" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card mt-3" id="pluginCard">
+                    <div class="card-header">
+                        <h5>Plugin Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <label>Plugin Name</label>
+                                <input type="text" class="form-control form-control-sm" id="pluginNameText" placeholder="Plugin Name" required onchange="fieldChanged()" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <label>Plugin Author</label>
+                                <input type="text" class="form-control form-control-sm" id="pluginAuthorText" placeholder="Plugin Author" required onchange="fieldChanged()" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <label>Plugin Description</label>
+                                <textarea class="form-control form-control-sm" id="pluginDescriptionText" maxlength="350" placeholder="Description of the plugin." onchange="fieldChanged()"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <label>Documentation URL</label>
+                                <input type="text" class="form-control form-control-sm" id="pluginDocsText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/readme/pluginfinder/readme.md" onchange="fieldChanged()" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <label>Github URL</label>
+                                <input type="text" class="form-control form-control-sm" id="pluginGithubUrl" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins" onchange="fieldChanged()" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <label>Nexus URL</label>
+                                <input type="text" class="form-control form-control-sm" id="pluginNexusUrl" placeholder="https://www.nexusmods.com/skyrimspecialedition/mods/59869" onchange="fieldChanged()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8">
+                                <h5>Versions</h5>
+                            </div>
+                            <div class="col-4" style="text-align:right;">
+                                <button id="createVersionBtn" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" id="versionColumn">
+                
+            </div>
+            <div class="col-12">
+                <div class="card mt-3" id="previewCard">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8">
+                                <h5>Preview Json</h5>
+                            </div>
+                            <div class="col-4" style="text-align:right;">
+                                <button id="saveJsonBtn" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Save</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <pre><code id="previewJson" class="language-json"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mt-3 d-none versionCard" id="versionTemplate">
+        <div class="card-header">
+            <div class="col-12 pt-2">
+                <label>Plugin Version Number</label>
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control form-control-sm versionNumberText" placeholder="1.0.0a" onchange="fieldChanged()" />
+                    <button class="btn btn-sm btn-danger versionDeleteBtn" onclick="removeVersion(this)"><i class="fa fa-trash"></i> Delete</button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 pt-2">
+                    <label>Version Release Date</label>
+                    <input type="date" class="form-control form-control-sm releaseDateText" placeholder="2021-01-01" onchange="fieldChanged()" />
+                </div>
+                <div class="col-6 pt-2">
+                    <label>Min Supported Mod Organizer Version</label>
+                    <input type="text" class="form-control form-control-sm minSupportText" placeholder="2.4.2" onchange="fieldChanged()" />
+                </div>
+                <div class="col-6 pt-2">
+                    <label>Max Supported Mod Organizer Version</label>
+                    <input type="text" class="form-control form-control-sm maxSupportText" placeholder="2.4.2" onchange="fieldChanged()" />
+                </div>
+                <div class="col-6 pt-2">
+                    <label>Min Working Mod Organizer Version</label>
+                    <input type="text" class="form-control form-control-sm minWorkingText" placeholder="2.4.2" onchange="fieldChanged()" />
+                </div>
+                <div class="col-6 pt-2">
+                    <label>Max Working Mod Organizer Version</label>
+                    <input type="text" class="form-control form-control-sm maxWorkingText" placeholder="2.4.2" onchange="fieldChanged()" />
+                </div>
+                <div class="col-12 pt-2">
+                    <label>Plugin Download URL</label>
+                    <input type="text" class="form-control form-control-sm downloadUrlText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.3.zip" onchange="fieldChanged()" />
+                </div>
+                <div class="col-12 pt-2">
+                    <label>Plugin Install Paths</label> <button class="btn btn-sm btn-primary pluginPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <div class="textArrayContainer pluginPathsContainer">
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                    <label>Localisation Install Paths</label> <button class="btn btn-sm btn-primary localePathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <div class="textArrayContainer localePathsContainer">
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                    <label>Plugin Data Paths</label> <button class="btn btn-sm btn-primary dataPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <div class="textArrayContainer dataPathsContainer">
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                    <label>Release Notes</label> <button class="btn btn-sm btn-primary releaseNotesBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <div class="textArrayContainer releaseNotesContainer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-none" id="textArrayTemplate">
+        <div class="col-12 pt-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control form-control-sm textArrayInput" onchange="fieldChanged()" />
+                <button class="textArrayRemoveBtn btn btn-sm btn-danger" onclick="removeArrayPath(this)"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        loadedJson = JSON.parse("{}");
+
+        function updateJson() {
+            loadedJson["Name"] = $("#pluginNameText").val();
+            loadedJson["Author"] = $("#pluginAuthorText").val();
+            loadedJson["Description"] = $("#pluginDescriptionText").val();
+            loadedJson["DocsUrl"] = $("#pluginDocsText").val();
+            loadedJson["GithubUrl"] = $("#pluginGithubUrl").val();
+            loadedJson["NexusUrl"] = $("#pluginNexusUrl").val();
+
+            loadedJson["Versions"] = []
+            $("#versionColumn").find(".versionCard").each(function (ix) {
+                card = $("#versionColumn").find(".versionCard")[ix];
+                var versionDef = {};
+                versionDef["Version"] = $(card).find(".versionNumberText").val();
+                versionDef["Released"] = $(card).find(".releaseDateText").val();
+                versionDef["MinSupport"] = $(card).find(".minSupportText").val();
+                versionDef["MaxSupport"] = $(card).find(".maxSupportText").val();
+                versionDef["MinWorking"] = $(card).find(".minWorkingText").val();
+                versionDef["MaxWorking"] = $(card).find(".maxWorkingText").val();
+                versionDef["DownloadUrl"] = $(card).find(".downloadUrlText").val();
+
+                versionDef["PluginPath"] = []
+                console.log(card);
+                var pathCard = $(card).find(".pluginPathsContainer");
+                console.log(pathCard);
+                var pathinputs = $(pathCard).find(".textArrayInput");
+                console.log(pathinputs);
+
+                $(card).find(".pluginPathsContainer").find(".textArrayInput").each(function (ix) {
+                    versionDef["PluginPath"].push($($(card).find(".pluginPathsContainer").find(".textArrayInput")[ix]).val());
+                });
+
+                versionDef["LocalePath"] = []
+                $(card).find(".localePathsContainer").find(".textArrayInput").each(function (ix) {
+                    versionDef["LocalePath"].push($($(card).find(".localePathsContainer").find(".textArrayInput")[ix]).val());
+                });
+
+                versionDef["DataPath"] = []
+                $(card).find(".dataPathsContainer").find(".textArrayInput").each(function (ix) {
+                    versionDef["DataPath"].push($($(card).find(".dataPathsContainer").find(".textArrayInput")[ix]).val());
+                });
+
+                versionDef["ReleaseNotes"] = []
+                $(card).find(".releaseNotesContainer").find(".textArrayInput").each(function (ix) {
+                    versionDef["ReleaseNotes"].push($($(card).find(".releaseNotesContainer").find(".textArrayInput")[ix]).val());
+                });
+
+                loadedJson["Versions"].push(versionDef);
+            });
+
+            updatePreview();
+        }
+
+        function updateForm() {
+            $("#versionColumn").html("");
+
+            $("#pluginNameText").val(loadedJson["Name"]);
+            $("#pluginAuthorText").val(loadedJson["Author"]);
+            $("#pluginDescriptionText").val(loadedJson["Description"]);
+            $("#pluginDocsText").val(loadedJson["DocsUrl"]);
+            $("#pluginGithubUrl").val(loadedJson["GithubUrl"]);
+            $("#pluginNexusUrl").val(loadedJson["NexusUrl"]);
+            for (version in loadedJson["Versions"]) {
+                versionData = loadedJson["Versions"][version];
+                versionCard = createVersion();
+                $(versionCard).find(".versionNumberText").val(versionData["Version"]);
+                $(versionCard).find(".releaseDateText").val(versionData["Released"]);
+                $(versionCard).find(".minSupportText").val(versionData["MinSupport"]);
+                $(versionCard).find(".maxSupportText").val(versionData["MaxSupport"]);
+                $(versionCard).find(".minWorkingText").val(versionData["MinWorking"]);
+                $(versionCard).find(".maxWorkingText").val(versionData["MaxWorking"]);
+                $(versionCard).find(".downloadUrlText").val(versionData["DownloadUrl"]);
+
+                for (path in versionData["PluginPath"]) {
+                    pathData = versionData["PluginPath"][path];
+                    createArrayPath($(versionCard).find(".pluginPathBtn")).find(".textArrayInput").val(pathData);
+                }
+                for (path in versionData["LocalePath"]) {
+                    pathData = versionData["LocalePath"][path];
+                    createArrayPath($(versionCard).find(".localePathBtn")).find(".textArrayInput").val(pathData);
+                }
+                for (path in versionData["DataPath"]) {
+                    pathData = versionData["DataPath"][path];
+                    createArrayPath($(versionCard).find(".dataPathBtn")).find(".textArrayInput").val(pathData);
+                }
+                for (path in versionData["ReleaseNotes"]) {
+                    pathData = versionData["ReleaseNotes"][path];
+                    createArrayPath($(versionCard).find(".releaseNotesBtn")).find(".textArrayInput").val(pathData);
+                }
+            }
+        }
+
+        function fieldChanged() {
+            validate();
+            updateJson();
+        }
+
+        $(document).ready(function () {
+            updatePreview();
+        });
+
+        function updatePreview() {
+            $("#previewJson").html(JSON.stringify(loadedJson, null, 1));
+        }
+
+        function downloadJson(content, fileName) {
+            download(JSON.stringify(content, null, 1), fileName, 'text/json');
+        }
+
+        function download(content, fileName, contentType) {
+            var a = document.createElement("a");
+            var file = new Blob([content], { type: contentType });
+            a.href = URL.createObjectURL(file);
+            a.download = fileName;
+            a.click();
+        }
+
+        function createVersion() {
+            var newVersion = $("#versionTemplate").last().clone();
+            newVersion.removeClass("d-none");
+            newVersion.removeAttr('id');
+            $("#versionColumn").prepend(newVersion);
+            return newVersion;
+        }
+
+        function removeVersion(button) {
+            $(button).parent().parent().parent().parent().remove();
+        }
+
+        $("#selectJsonFileSelect").change(function (evt) {
+            var file = evt.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                loadedJson = JSON.parse(event.target.result);
+                updateForm();
+                updatePreview();
+            };
+            reader.readAsText(file);
+        });
+
+        $("#saveJsonBtn").click(function () {
+            fileName = "plugindefinition.json";
+            if ($("#selectJsonFileSelect").prop("files") != null && $("#selectJsonFileSelect").prop("files").length > 0) {
+                fileName = $("#selectJsonFileSelect").prop("files")[0].name;
+            }
+            downloadJson(loadedJson, fileName);
+        });
+
+        $("#createVersionBtn").click(function () {
+            createVersion();
+        });
+
+        function createArrayPath(button) {
+            var container = $(button).parent().find(".textArrayContainer");
+            var newField = $("#textArrayTemplate").last().clone();
+            newField.removeClass("d-none");
+            newField.removeAttr('id');
+            container.append(newField);
+            return newField;
+        }
+
+        function removeArrayPath(button) {
+            $(button).parent().parent().parent().remove();
+        }
+
+        function validate() {
+            // Validate inputs and show errors if they fail.
+        }
+    </script>
+</body>
+</html>
