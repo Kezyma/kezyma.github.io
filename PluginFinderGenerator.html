@@ -49,41 +49,41 @@
                             <div class="col-12">
                                 <label>Plugin Name</label>
                                 <span class="d-none text-danger warning-txt" id="nameWarning">You must enter a name for your plugin.</span>
-                                <input type="text" class="form-control form-control-sm" id="pluginNameText" placeholder="Plugin Name" required onchange="fieldChanged()" />
+                                <input type="text" class="form-control form-control-sm" id="pluginNameText" required onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Plugin Author</label>
                                 <span class="d-none text-danger warning-txt" id="authorWarning">You must enter an author for your plugin.</span>
-                                <input type="text" class="form-control form-control-sm" id="pluginAuthorText" placeholder="Plugin Author" required onchange="fieldChanged()" />
+                                <input type="text" class="form-control form-control-sm" id="pluginAuthorText" required onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Plugin Description</label>
-                                <textarea class="form-control form-control-sm" id="pluginDescriptionText" maxlength="350" placeholder="Description of the plugin." onchange="fieldChanged()"></textarea>
+                                <textarea class="form-control form-control-sm" id="pluginDescriptionText" maxlength="350" onchange="fieldChanged()"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Documentation URL</label>
                                 <span class="d-none text-danger warning-txt" id="docsWarning">This is not a valid url.</span>
-                                <input type="url" class="form-control form-control-sm" id="pluginDocsText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/readme/pluginfinder/readme.md" onchange="fieldChanged()" />
+                                <input type="url" class="form-control form-control-sm" id="pluginDocsText" onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Github URL</label>
                                 <span class="d-none text-danger warning-txt" id="githubWarning">This is not a valid url.</span>
-                                <input type="url" class="form-control form-control-sm" id="pluginGithubUrl" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins" onchange="fieldChanged()" />
+                                <input type="url" class="form-control form-control-sm" id="pluginGithubUrl" onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
                                 <label>Nexus URL</label>
                                 <span class="d-none text-danger warning-txt" id="nexusWarning">This is not a valid url.</span>
-                                <input type="url" class="form-control form-control-sm" id="pluginNexusUrl" placeholder="https://www.nexusmods.com/skyrimspecialedition/mods/59869" onchange="fieldChanged()" />
+                                <input type="url" class="form-control form-control-sm" id="pluginNexusUrl" onchange="fieldChanged()" />
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                 <span class="d-none text-danger warning-txt versionWarning">You must enter a version for this release.</span>
                 <span class="d-none text-danger warning-txt versionInvalidWarning">This does not appear to be a valid version number.</span>
                 <div class="input-group input-group-sm">
-                    <input type="text" class="form-control form-control-sm versionNumberText" placeholder="1.0.0a" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm versionNumberText" onchange="fieldChanged()" />
                     <button class="btn btn-sm btn-danger versionDeleteBtn" onclick="removeVersion(this)"><i class="fa fa-trash"></i> Delete</button>
                 </div>
             </div>
@@ -143,34 +143,34 @@
                 <div class="col-12">
                     <label>Version Release Date</label> 
                     <span class="d-none text-danger warning-txt releaseWarning">You must enter a release date for this release.</span>
-                    <input type="date" class="form-control form-control-sm releaseDateText" placeholder="2021-01-01" onchange="fieldChanged()" />
+                    <input type="date" class="form-control form-control-sm releaseDateText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
                     <label>Min Supported Mod Organizer Version</label> 
                     <span class="d-none text-danger warning-txt minSupInvalidWarning">This does not appear to be a valid version number.</span>
-                    <input type="text" class="form-control form-control-sm minSupportText" placeholder="2.4.2" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm minSupportText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
                     <label>Max Supported Mod Organizer Version</label> 
                     <span class="d-none text-danger warning-txt maxSupInvalidWarning">This does not appear to be a valid version number.</span>
-                    <input type="text" class="form-control form-control-sm maxSupportText" placeholder="2.4.2" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm maxSupportText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
                     <label>Min Working Mod Organizer Version</label> 
                     <span class="d-none text-danger warning-txt minWorkInvalidWarning">This does not appear to be a valid version number.</span>
-                    <input type="text" class="form-control form-control-sm minWorkingText" placeholder="2.4.2" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm minWorkingText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
                     <label>Max Working Mod Organizer Version</label> 
                     <span class="d-none text-danger warning-txt maxWorkInvalidWarning">This does not appear to be a valid version number.</span>
-                    <input type="text" class="form-control form-control-sm maxWorkingText" placeholder="2.4.2" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm maxWorkingText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-12 pt-2">
                     <label>Plugin Download URL</label> 
                     <span class="d-none text-danger warning-txt downloadWarning">You must enter a download url for this release.</span>
                     <span class="d-none text-danger warning-txt downloadInvalidWarning">This is not a valid url.</span>
                     <span class="d-none text-danger warning-txt downloadZipWarning">This is not a valid mod download, the url must point to a .zip, or .7z file.</span>
-                    <input type="url" class="form-control form-control-sm downloadUrlText" placeholder="https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.3.zip" onchange="fieldChanged()" />
+                    <input type="url" class="form-control form-control-sm downloadUrlText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-12 pt-2">
                     <label>Plugin Install Paths</label> 
