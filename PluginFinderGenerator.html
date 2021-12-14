@@ -212,6 +212,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <script>
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
         loadedJson = JSON.parse("{}");
 
         function updateJson() {
@@ -315,11 +318,11 @@
         });
 
         function updatePreview() {
-            $("#previewJson").html(JSON.stringify(loadedJson, null, 1));
+            $("#previewJson").html(JSON.stringify(loadedJson, null, 4));
         }
 
         function downloadJson(content, fileName) {
-            download(JSON.stringify(content, null, 1), fileName, 'text/json');
+            download(JSON.stringify(content, null, 4), fileName, 'text/json');
         }
 
         function download(content, fileName, contentType) {
@@ -345,8 +348,12 @@
         }
 
         $("#selectJsonFileSelect").change(function (evt) {
-            $("#selectJsonFileUrl").val("");
             var file = evt.target.files[0];
+            bindToFile(file);
+        });
+
+        function bindToFile(file) {
+            $("#selectJsonFileUrl").val("");
             var reader = new FileReader();
             reader.onload = function (event) {
                 loadedJson = JSON.parse(event.target.result);
@@ -355,10 +362,14 @@
                 validate();
             };
             reader.readAsText(file);
-        });
+        }
 
         $("#selectJsonFileUrl").change(function (evt) {
             var url = $("#selectJsonFileUrl").val();
+            bindToUrl(url);
+        });
+
+        function bindToUrl(url) {
             $("#selectJsonFileSelect").val("");
             $.getJSON(url, function(data) {
                 loadedJson = data;
@@ -366,7 +377,7 @@
                 updatePreview();
                 validate();
             });
-        });
+        }
 
         $("#saveJsonBtn").click(function () {
             fileName = "plugindefinition.json";
@@ -420,45 +431,55 @@
             }
 
             if ($(".versionCard").length > 1) {
-                $(".versionCard").each(function (ix, card) {
+                $("#versionColumn").find(".versionCard").each(function (ix, card) {
                     if ($(card).find(".versionNumberText").val() == "") {
+                        console.log("versionWarning error")
                         $(card).find(".versionWarning").removeClass("d-none");
                         error = true;
                     }
                     else if (!isVersionValid($(card).find(".versionNumberText").val())) {
+                        console.log("versionInvalidWarning error")
                         $(card).find(".versionInvalidWarning").removeClass("d-none");
                         error = true;
                     }
                     if ($(card).find(".releaseDateText").val() == "") {
+                        console.log("releaseWarning error")
                         $(card).find(".releaseWarning").removeClass("d-none");
                         error = true;
                     }
                     if ($(card).find(".downloadUrlText").val() == "") {
+                        console.log("downloadWarning error")
                         $(card).find(".downloadWarning").removeClass("d-none");
                         error = true;
                     }
                     else if (!isValidHttpUrl($(card).find(".downloadUrlText").val())) {
+                        console.log("downloadInvalidWarning error")
                         $(card).find(".downloadInvalidWarning").removeClass("d-none");
                         error = true;
                     }
                     else if (!isZippedFile($(card).find(".downloadUrlText").val())) {
+                        console.log("downloadZipWarning error")
                         $(card).find(".downloadZipWarning").removeClass("d-none");
                         error = true;
                     }
                     
                     if ($(card).find(".minSupportText").val() != "" && !isVersionValid($(card).find(".minSupportText").val())) {
+                        console.log("minSupInvalidWarning error")
                         $(card).find(".minSupInvalidWarning").removeClass("d-none");
                         error = true;
                     }
                     if ($(card).find(".maxSupportText").val() != "" && !isVersionValid($(card).find(".maxSupportText").val())) {
+                        console.log("maxSupInvalidWarning error")
                         $(card).find(".maxSupInvalidWarning").removeClass("d-none");
                         error = true;
                     }
                     if ($(card).find(".minWorkingText").val() != "" && !isVersionValid($(card).find(".minWorkingText").val())) {
+                        console.log("minWorkInvalidWarning error")
                         $(card).find(".minWorkInvalidWarning").removeClass("d-none");
                         error = true;
                     }
                     if ($(card).find(".maxWorkingText").val() != "" && !isVersionValid($(card).find(".maxWorkingText").val())) {
+                        console.log("maxWorkInvalidWarning error")
                         $(card).find(".maxWorkInvalidWarning").removeClass("d-none");
                         error = true;
                     }
@@ -471,6 +492,7 @@
                     });
                     if (!hasPath) {
                         $(card).find(".pathsWarning").removeClass("d-none");
+                        console.log("pathsWarning error")
                         error = true;
                     }
                 });
