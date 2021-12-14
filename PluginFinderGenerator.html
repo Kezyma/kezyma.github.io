@@ -339,12 +339,14 @@
             newVersion.removeAttr('id');
             $("#versionColumn").prepend(newVersion);
             $("#saveJsonBtn").addClass("disabled");
+            updatePreview();
             return newVersion;
         }
 
         function removeVersion(button) {
             $(button).parent().parent().parent().parent().remove();
             validate();
+            updatePreview();
         }
 
         $("#selectJsonFileSelect").change(function (evt) {
