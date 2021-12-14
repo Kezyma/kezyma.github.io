@@ -382,13 +382,14 @@
 
         function removeArrayPath(button) {
             $(button).parent().parent().parent().remove();
+            validate();
         }
 
         function validate() {
             $(".warning-txt").addClass("d-none");
             var error = false;
 
-            if ($("#pluginNameText") == "") {
+            if ($("#pluginNameText").val() == "") {
                 $("#nameWarning").removeClass("d-none");
                 error = true;
             }
@@ -409,43 +410,45 @@
                 error = true;
             }
 
-            $(".versionCard").each(function (ix, card) {
-                if ($(card).find(".versionNumberText").val() == "") {
-                    $(card).find(".versionWarning").removeClass("d-none");
-                    error = true;
-                }
-                else if (!isVersionValid($(card).find(".versionNumberText").val())) {
-                    $(card).find(".versionInvalidWarning").removeClass("d-none");
-                    error = true;
-                }
-                if ($(card).find(".releaseDateText").val() == "") {
-                    $(card).find(".releaseWarning").removeClass("d-none");
-                    error = true;
-                }
-                if ($(card).find(".downloadUrlText").val() == "") {
-                    $(card).find(".downloadWarning").removeClass("d-none");
-                    error = true;
-                }
-                else if (!isValidHttpUrl($(card).find(".downloadUrlText").val())) {
-                    $(card).find(".downloadInvalidWarning").removeClass("d-none");
-                    error = true;
-                }
-                else if (!isZippedFile($(card).find(".downloadUrlText").val())) {
-                    $(card).find(".downloadZipWarning").removeClass("d-none");
-                    error = true;
-                }
-                
-                var hasPath = false;
-                $(card).find(".pluginPathsContainer").find(".textArrayInput").each(function (ix, input) {
-                    if ($(input).val() != "") {
-                        hasPath = true;
+            if ($(".versionCard").length > 1) {
+                $(".versionCard").each(function (ix, card) {
+                    if ($(card).find(".versionNumberText").val() == "") {
+                        $(card).find(".versionWarning").removeClass("d-none");
+                        error = true;
+                    }
+                    else if (!isVersionValid($(card).find(".versionNumberText").val())) {
+                        $(card).find(".versionInvalidWarning").removeClass("d-none");
+                        error = true;
+                    }
+                    if ($(card).find(".releaseDateText").val() == "") {
+                        $(card).find(".releaseWarning").removeClass("d-none");
+                        error = true;
+                    }
+                    if ($(card).find(".downloadUrlText").val() == "") {
+                        $(card).find(".downloadWarning").removeClass("d-none");
+                        error = true;
+                    }
+                    else if (!isValidHttpUrl($(card).find(".downloadUrlText").val())) {
+                        $(card).find(".downloadInvalidWarning").removeClass("d-none");
+                        error = true;
+                    }
+                    else if (!isZippedFile($(card).find(".downloadUrlText").val())) {
+                        $(card).find(".downloadZipWarning").removeClass("d-none");
+                        error = true;
+                    }
+                    
+                    var hasPath = false;
+                    $(card).find(".pluginPathsContainer").find(".textArrayInput").each(function (ix, input) {
+                        if ($(input).val() != "") {
+                            hasPath = true;
+                        }
+                    });
+                    if (!hasPath) {
+                        $(card).find(".pathsWarning").removeClass("d-none");
+                        error = true;
                     }
                 });
-                if (!hasPath) {
-                    $(card).find(".pathsWarning").removeClass("d-none");
-                    error = true;
-                }
-            });
+            }
 
             if (!error) {
                 $("#saveJsonBtn").removeClass("disabled");
