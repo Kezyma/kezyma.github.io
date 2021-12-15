@@ -10,6 +10,10 @@
         .warning-txt {
             font-size:.9em;
         }
+
+        .help {
+            font-size:.8em;
+        }
     </style>
 </head>
 <body>
@@ -28,12 +32,19 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <label>Select Existing</label>
+                                <label>Select Existing</label> 
+                                <a class="help" title="Select an existing json file from your computer."><i class="far fa-question-circle text-info"></i></a> 
                                 <input type="file" class="form-control form-control-sm" id="selectJsonFileSelect" accept=".json" />
                             </div>
                             <div class="col-12 pt-2">
-                                <label>Or URL</label>
+                                <label>Or URL</label> 
+                                <span class="help" title="Input the url to an existing json file to load it."><i class="far fa-question-circle text-info"></i></span> 
                                 <input type="url" class="form-control form-control-sm" id="selectJsonFileUrl" />
+                            </div>
+                            <div class="col-12 pt-2">
+                                <label>Or Load Example</label> 
+                                <span class="help" title="Load an exmaple json file to see what it should look like."><i class="far fa-question-circle text-info"></i></span> 
+                                <button class="btn btn-sm btn-primary" onclick="loadExample()"><i class="fas fa-file-download"></i> Example</button>
                             </div>
                         </div>
                     </div>
@@ -47,41 +58,47 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <label>Plugin Name</label>
+                                <label>Plugin Name</label> 
+                                <span class="help" title="The name of your plugin to display in Plugin Finder."><i class="far fa-question-circle text-info"></i></span> 
                                 <span class="d-none text-danger warning-txt" id="nameWarning">You must enter a name for your plugin.</span>
                                 <input type="text" class="form-control form-control-sm" id="pluginNameText" required onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <label>Plugin Author</label>
+                                <label>Plugin Author</label> 
+                                <span class="help" title="The name of the author to display in Plugin Finder."><i class="far fa-question-circle text-info"></i></span> 
                                 <span class="d-none text-danger warning-txt" id="authorWarning">You must enter an author for your plugin.</span>
                                 <input type="text" class="form-control form-control-sm" id="pluginAuthorText" required onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <label>Plugin Description</label>
+                                <label>Plugin Description</label> 
+                                <span class="help" title="A short (350 characters maximum) description of this plugin. Some themes cut this short."><i class="far fa-question-circle text-info"></i></span> 
                                 <textarea class="form-control form-control-sm" id="pluginDescriptionText" maxlength="350" onchange="fieldChanged()"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <label>Documentation URL</label>
+                                <label>Documentation URL</label> 
+                                <span class="help" title="The url to a page with documentation for your plugin, optional."><i class="far fa-question-circle text-info"></i></span> 
                                 <span class="d-none text-danger warning-txt" id="docsWarning">This is not a valid url.</span>
                                 <input type="url" class="form-control form-control-sm" id="pluginDocsText" onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <label>Github URL</label>
+                                <label>Github URL</label> 
+                                <span class="help" title="The url to the Github page of your plugin, optional."><i class="far fa-question-circle text-info"></i></span> 
                                 <span class="d-none text-danger warning-txt" id="githubWarning">This is not a valid url.</span>
                                 <input type="url" class="form-control form-control-sm" id="pluginGithubUrl" onchange="fieldChanged()" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <label>Nexus URL</label>
+                                <label>Nexus URL</label> 
+                                <span class="help" title="The url to the Nexus page of your plugin, optional."><i class="far fa-question-circle text-info"></i></span> 
                                 <span class="d-none text-danger warning-txt" id="nexusWarning">This is not a valid url.</span>
                                 <input type="url" class="form-control form-control-sm" id="pluginNexusUrl" onchange="fieldChanged()" />
                             </div>
@@ -96,7 +113,8 @@
                             <div class="col-8">
                                 <h5>Versions</h5>
                             </div>
-                            <div class="col-4" style="text-align:right;">
+                            <div class="col-4" style="text-align:right;"> 
+                                <span class="help" title="Define all the releases of your plugin that you want people to be able to download through Plugin Finder."><i class="far fa-question-circle text-info"></i></span> 
                                 <button id="createVersionBtn" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Create</button>
                             </div>
                         </div>
@@ -113,7 +131,8 @@
                             <div class="col-8">
                                 <h5>Preview Json</h5>
                             </div>
-                            <div class="col-4" style="text-align:right;">
+                            <div class="col-4" style="text-align:right;"> 
+                                <span class="help" title="Once you're satisfied, you can download your json file."><i class="far fa-question-circle text-info"></i></span> 
                                 <button id="saveJsonBtn" class="btn btn-success btn-sm disabled"><i class="fa fa-save"></i> Save</button>
                             </div>
                         </div>
@@ -129,7 +148,8 @@
     <div class="card mt-3 d-none versionCard" id="versionTemplate">
         <div class="card-header">
             <div class="col-12 pt-2">
-                <label>Plugin Version Number</label> 
+                <label>Plugin Version Number</label>  
+                <span class="help" title="The version number of this plugin release, this should be the same as the version number displayed within Mod Organizer's settings."><i class="far fa-question-circle text-info"></i></span> 
                 <span class="d-none text-danger warning-txt versionWarning">You must enter a version for this release.</span>
                 <span class="d-none text-danger warning-txt versionInvalidWarning">This does not appear to be a valid version number.</span>
                 <div class="input-group input-group-sm">
@@ -141,56 +161,69 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
-                    <label>Version Release Date</label> 
+                    <label>Version Release Date</label>  
+                    <span class="help" title="The date of this release, if the date picker does not work, this must be in the format yyyy-MM-dd."><i class="far fa-question-circle text-info"></i></span> 
                     <span class="d-none text-danger warning-txt releaseWarning">You must enter a release date for this release.</span>
                     <input type="date" class="form-control form-control-sm releaseDateText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Min Supported Mod Organizer Version</label> 
+                    <label>Min Supported Mod Organizer Version</label>  
+                    <span class="help" title="This release may work on Mod Organizer versions earlier than this, but they have not been tested. A warning will be displayed to anyone using versions of Mod Organizer earlier than this."><i class="far fa-question-circle text-info"></i></span> 
                     <span class="d-none text-danger warning-txt minSupInvalidWarning">This does not appear to be a valid version number.</span>
                     <input type="text" class="form-control form-control-sm minSupportText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Max Supported Mod Organizer Version</label> 
+                    <label>Max Supported Mod Organizer Version</label>  
+                    <span class="help" title="This release may work on Mod Organizer versions newer than this, but they have not been tested. A warning will be displayed to anyone using versions of Mod Organizer newer than this."><i class="far fa-question-circle text-info"></i></span> 
                     <span class="d-none text-danger warning-txt maxSupInvalidWarning">This does not appear to be a valid version number.</span>
                     <input type="text" class="form-control form-control-sm maxSupportText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Min Working Mod Organizer Version</label> 
+                    <label>Min Working Mod Organizer Version</label>  
+                    <span class="help" title="This release will not work on Mod Organizer versions earlier than this. Users with versions of Mod Organizer earlier than this will not be able to install this release."><i class="far fa-question-circle text-info"></i></span> 
                     <span class="d-none text-danger warning-txt minWorkInvalidWarning">This does not appear to be a valid version number.</span>
                     <input type="text" class="form-control form-control-sm minWorkingText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-6 pt-2">
-                    <label>Max Working Mod Organizer Version</label> 
+                    <label>Max Working Mod Organizer Version</label>  
+                    <span class="help" title="This release will not work on Mod Organizer versions newer than this. Users with versions of Mod Organizer newer than this will not be able to install this release."><i class="far fa-question-circle text-info"></i></span> 
                     <span class="d-none text-danger warning-txt maxWorkInvalidWarning">This does not appear to be a valid version number.</span>
                     <input type="text" class="form-control form-control-sm maxWorkingText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Plugin Download URL</label> 
+                    <label>Plugin Download URL</label>  
+                    <span class="help" title="The url to a direct download of the zip file of this release to be installed. Opening the url in a browser should download your plugin, not open a webpage."><i class="far fa-question-circle text-info"></i></span> 
                     <span class="d-none text-danger warning-txt downloadWarning">You must enter a download url for this release.</span>
                     <span class="d-none text-danger warning-txt downloadInvalidWarning">This is not a valid url.</span>
                     <span class="d-none text-danger warning-txt downloadZipWarning">This is not a valid mod download, the url must point to a .zip, or .7z file.</span>
                     <input type="url" class="form-control form-control-sm downloadUrlText" onchange="fieldChanged()" />
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Plugin Install Paths</label> 
+                    <label>Plugin Install Paths</label>  
+                    <span class="help" title="Paths relative to the root of the zip file. Any file or folder specified will be copied directly to Mod Organizer's plugins folder when this plugin is installed."><i class="far fa-question-circle text-info"></i></span> 
                     <button class="btn btn-sm btn-primary pluginPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button> 
                     <span class="d-none text-danger warning-txt pathsWarning">You must enter at least one path for your plugin to be installable.</span>
                     <div class="textArrayContainer pluginPathsContainer">
                     </div>
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Localisation Install Paths</label> <button class="btn btn-sm btn-primary localePathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <label>Localisation Install Paths</label>  
+                    <span class="help" title="Paths relative to the root of the zip file. Any file or folder specified will be copied directly to Mod Organizer's translations folder when this plugin is installed."><i class="far fa-question-circle text-info"></i></span> 
+                    <button class="btn btn-sm btn-primary localePathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
                     <div class="textArrayContainer localePathsContainer">
                     </div>
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Plugin Data Paths</label> <button class="btn btn-sm btn-primary dataPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <label>Plugin Data Paths</label>  
+                    <span class="help" title="Paths relative to Mod Organizer's plugins folder. Any file or folder specified will be deleted (along with Localisation and Plugin paths) when this release is uninstalled."><i class="far fa-question-circle text-info"></i></span> 
+                    <button class="btn btn-sm btn-primary dataPathBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
                     <div class="textArrayContainer dataPathsContainer">
                     </div>
                 </div>
                 <div class="col-12 pt-2">
-                    <label>Release Notes</label> <button class="btn btn-sm btn-primary releaseNotesBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
+                    <label>Release Notes</label>   
+                    <span class="help" title="A list of notes about this release."><i class="far fa-question-circle text-info"></i></span> 
+                    <button class="btn btn-sm btn-primary releaseNotesBtn" onclick="createArrayPath(this)"><i class="fa fa-plus"></i></button>
                     <div class="textArrayContainer releaseNotesContainer">
                     </div>
                 </div>
@@ -215,7 +248,38 @@
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
 
+        const exampleJson = {
+            "Name": "Plugin Template",
+            "Author": "Kezyma",
+            "Description": "This is a template for a plugin json file to be used with Plugin Finder.",
+            "DocsUrl": "https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/readme/pluginfinder/readme.md",
+            "NexusUrl": "https://www.nexusmods.com/skyrimspecialedition/mods/59869",
+            "GithubUrl": "https://github.com/Kezyma/ModOrganizer-Plugins",
+            "Versions": [
+                    {
+                        "Version": "1.1.0a",
+                        "Released": "2021-12-13",
+                        "MinSupport": "2.4.2",
+                        "MaxSupport": "2.4.2",
+                        "MinWorking": "",
+                        "MaxWorking": "2.4.2",
+                        "ReleaseNotes": [ "Initial alpha. Demo version." ],
+                        "DownloadUrl": "https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.0.zip",
+                        "PluginPath": [ "pluginfinder" ],
+                        "LocalePath": [],
+                        "DataPath": [ "data/pluginfinder" ]
+                    }
+                ]
+        }
+
         loadedJson = JSON.parse("{}");
+
+        function loadExample() {
+            loadedJson = exampleJson;
+            updateForm();
+            updatePreview();
+            validate();
+        }
 
         function updateJson() {
             loadedJson["Name"] = $("#pluginNameText").val();
@@ -315,7 +379,14 @@
 
         $(document).ready(function () {
             updatePreview();
+            bindTooltips();
         });
+
+        function bindTooltips() {
+            $(".help").each(function (ix, help) {
+                tt = new bootstrap.Tooltip(help);
+            })
+        }
 
         function updatePreview() {
             $("#previewJson").html(JSON.stringify(loadedJson, null, 4));
@@ -340,6 +411,7 @@
             $("#versionColumn").prepend(newVersion);
             $("#saveJsonBtn").addClass("disabled");
             updatePreview();
+            bindTooltips();
             return newVersion;
         }
 
@@ -347,6 +419,7 @@
             $(button).parent().parent().parent().parent().remove();
             validate();
             updatePreview();
+            bindTooltips();
         }
 
         $("#selectJsonFileSelect").change(function (evt) {
