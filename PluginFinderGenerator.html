@@ -153,7 +153,20 @@
                 <span class="d-none text-danger warning-txt versionWarning">You must enter a version for this release.</span>
                 <span class="d-none text-danger warning-txt versionInvalidWarning">This does not appear to be a valid version number.</span>
                 <div class="input-group input-group-sm">
-                    <input type="text" class="form-control form-control-sm versionNumberText" onchange="fieldChanged()" />
+                    <input type="number" min="0" step="1" class="form-control form-control-sm majorVerNumText" style="max-width: 80px;" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm disabled text-center" style="max-width: 30px;font-weight: bold;" disabled value="." />
+                    <input type="number" min="0" step="1" class="form-control form-control-sm minorVerNumText" style="max-width: 80px;" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm disabled text-center" style="max-width: 30px;font-weight: bold;" disabled value="." />
+                    <input type="number" min="0" step="1" class="form-control form-control-sm subVerNumText" style="max-width: 80px;" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm disabled text-center" style="max-width: 30px;font-weight: bold;" disabled value="." />
+                    <input type="number" min="0" step="1" class="form-control form-control-sm subSubVerNumText" style="max-width: 80px;" onchange="fieldChanged()" />
+                    <input type="text" class="form-control form-control-sm disabled text-center" style="max-width: 30px;font-weight: bold;" disabled value="-" />
+                    <select class="form-control form-control-sm typeVerSelect" onchange="fieldChanged()">
+                        <option value="">Final</option>
+                        <option value="rc">Release Candidate</option>
+                        <option value="b">Beta</option>
+                        <option value="a">Alpha</option>
+                    </select>
                     <button class="btn btn-sm btn-danger versionDeleteBtn" onclick="removeVersion(this)"><i class="fa fa-trash"></i> Delete</button>
                 </div>
             </div>
@@ -247,7 +260,7 @@
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
-
+        const versionRegex = /^([0-9]+)[.]?([0-9]*)[.]?([0-9]*)[.]?([0-9]*)?[._\-]?([A-Za-z0-9]*)/g;
         const exampleJson = {
             "Name": "Plugin Template",
             "Author": "Kezyma",
@@ -281,6 +294,40 @@
             validate();
         }
 
+        function getVersion(card) {
+            var major = $(card).find(".majorVerNumText").val();
+            var minor = $(card).find(".minorVerNumText").val();
+            var sub = $(card).find(".subVerNumText").val();
+            var subSub = $(card).find(".subSubVerNumText").val();
+            var typ = $(card).find(".typeVerSelect").val();
+            var res = "";
+            if (major != "") {
+                res += major;
+            }
+            if (minor != "") {
+                res += "." + minor;
+            }
+            if (sub != "") {
+                res += "." + sub;
+            }
+            if (subSub != "") {
+                res += "." + subSub;
+            }
+            res += typ;
+            return res;
+        }
+
+        function setVersion(card, versionText) {
+            var versionMatch = versionRegex.exec(versionText);
+            console.log(versionMatch);
+
+            $(card).find(".majorVerNumText").val(versionMatch[1]);
+            $(card).find(".minorVerNumText").val(versionMatch[2]);
+            $(card).find(".subVerNumText").val(versionMatch[3]);
+            $(card).find(".subSubVerNumText").val(versionMatch[4]);
+            $(card).find(".typeVerSelect").val(versionMatch[5]);
+        }
+
         function updateJson() {
             loadedJson["Name"] = $("#pluginNameText").val();
             loadedJson["Author"] = $("#pluginAuthorText").val();
@@ -293,7 +340,7 @@
             $("#versionColumn").find(".versionCard").each(function (ix) {
                 card = $("#versionColumn").find(".versionCard")[ix];
                 var versionDef = {};
-                versionDef["Version"] = $(card).find(".versionNumberText").val();
+                versionDef["Version"] = getVersion(card);
                 versionDef["Released"] = $(card).find(".releaseDateText").val();
                 versionDef["MinSupport"] = $(card).find(".minSupportText").val();
                 versionDef["MaxSupport"] = $(card).find(".maxSupportText").val();
@@ -345,7 +392,7 @@
             for (version in loadedJson["Versions"]) {
                 versionData = loadedJson["Versions"][version];
                 versionCard = createVersion();
-                $(versionCard).find(".versionNumberText").val(versionData["Version"]);
+                setVersion(versionCard, versionData["Version"]);
                 $(versionCard).find(".releaseDateText").val(versionData["Released"]);
                 $(versionCard).find(".minSupportText").val(versionData["MinSupport"]);
                 $(versionCard).find(".maxSupportText").val(versionData["MaxSupport"]);
@@ -507,12 +554,12 @@
 
             if ($(".versionCard").length > 1) {
                 $("#versionColumn").find(".versionCard").each(function (ix, card) {
-                    if ($(card).find(".versionNumberText").val() == "") {
+                    if (getVersion(card) == "") {
                         console.log("versionWarning error")
                         $(card).find(".versionWarning").removeClass("d-none");
                         error = true;
                     }
-                    else if (!isVersionValid($(card).find(".versionNumberText").val())) {
+                    else if (!isVersionValid(getVersion(card))) {
                         console.log("versionInvalidWarning error")
                         $(card).find(".versionInvalidWarning").removeClass("d-none");
                         error = true;
@@ -582,7 +629,7 @@
             return error;
         }
 
-        var versionRegex = /[0-9]+.?[0-9]*.?[0-9]*.?[0-9]*.?-?_?[A-Za-z0-9]*/g;
+        
         function isVersionValid(string) {
             if (string.match(versionRegex)) {
                 return true;
