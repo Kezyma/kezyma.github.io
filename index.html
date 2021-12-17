@@ -1,19 +1,32 @@
 <html>
 <head>
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="lib/bootswatch/dist/darkly/bootstrap.min.css" />
-    <link rel="stylesheet" href="lib/fontawesome/css/all.min.css" />
-    <link rel="stylesheet" href="lib/prism-themes/prism-vsc-dark-plus.css" />
-    <link rel="stylesheet" href="lib/prismjs/plugins/toolbar/prism-toolbar.css" />
+    <link rel="stylesheet" href="css/kezyma.github.io.min.css" />
 </head>
 <body>
     <div class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <span class="navbar-brand" id="navbar-title">Documentation</span>
+            <a class="navbar-brand" id="navbar-title" href="#" data-page="index">Documentation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-collapse" aria-controls="nav-collapse" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mod Organizer
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" data-page="rootbuilder" href="#">Root Builder</a></li>
+                            <li><a class="dropdown-item" data-page="pluginfinder" href="#">Plugin Finder</a></li>
+                            <li><a class="dropdown-item" data-page="reinstaller" href="#">Reinstaller</a></li>
+                            <li><a class="dropdown-item" data-page="shortcutter" href="#">Shortcutter</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="container mt-3" id="content-container">
-        {{content}}
+    <div id="page-content">
     </div>
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -21,15 +34,18 @@
     <script src="lib/prismjs/plugins/autoloader/prism-autoloader.js"></script>
     <script src="lib/prismjs/plugins/toolbar/prism-toolbar.js"></script>
     <script src="lib/prismjs/plugins/show-language/prism-show-language.js"></script>
+    <script src="js/kezyma.github.io.js"></script>
     <script>
-        function loadPage(pageUrl) {
-            $.get({
-                url: pageUrl,
-                success: function (pageHtml) {
-                    $("#content-container").html($(pageHtml));
-                }
-            })
-        }
+        $(document).ready(function () {
+            addPages([
+                page("index", "Documentation", "html/home.html"),
+                page("rootbuilder", "Root Builder", "html/rootbuilder.html"),
+                page("pluginfinder", "Plugin Finder", "html/pluginfinder.html"),
+                page("shortcutter", "Shortcutter", "html/shortcutter.html"),
+                page("reinstaller", "Reinstaller", "html/reinstaller.html")
+            ]);
+            initialisePages();
+        });
     </script>
 </body>
 </html>

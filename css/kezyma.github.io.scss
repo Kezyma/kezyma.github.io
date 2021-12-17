@@ -1,0 +1,15 @@
+﻿// Bootstrap
+@import "../lib/bootswatch/dist/quartz/_variables.scss";
+@import "../lib/bootstrap/scss/bootstrap.scss";
+@import "../lib/bootswatch/dist/quartz/_bootswatch.scss";
+
+// Font Awesome
+$fa-font-path: "../lib/fontawesome/webfonts";
+@import "../lib/fontawesome/scss/fontawesome.scss";
+@import "../lib/fontawesome/scss/brands.scss";
+@import "../lib/fontawesome/scss/regular.scss";
+@import "../lib/fontawesome/scss/solid.scss";
+
+// Prism
+@import "../lib/prism-themes/prism-vsc-dark-plus.css";
+@import "../lib/prismjs/plugins/toolbar/prism-toolbar.css";
