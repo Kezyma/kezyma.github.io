@@ -40,7 +40,7 @@ function initialisePages() {
     }
 
     var id = new URL(location.href).searchParams.get("p");
-    if (id != null && id != "") {
+    if (id == null || id == "") {
         id = "index";
     }
     loadPage(id, true);
