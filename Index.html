@@ -1,0 +1,34 @@
+<html>
+<head>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/bootswatch/dist/darkly/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="lib/prism-themes/prism-vsc-dark-plus.css" />
+    <link rel="stylesheet" href="lib/prismjs/plugins/toolbar/prism-toolbar.css" />
+</head>
+<body>
+    <div class="navbar navbar-expand-lg bg-dark">
+        <div class="container">
+            <span class="navbar-brand" id="navbar-title">Documentation</span>
+        </div>
+    </div>
+    <div class="container mt-3" id="content-container">
+    </div>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/prismjs/prism.js"></script>
+    <script src="lib/prismjs/plugins/autoloader/prism-autoloader.js"></script>
+    <script src="lib/prismjs/plugins/toolbar/prism-toolbar.js"></script>
+    <script src="lib/prismjs/plugins/show-language/prism-show-language.js"></script>
+    <script>
+        function loadPage(pageUrl) {
+            $.get({
+                url: pageUrl,
+                success: function (pageHtml) {
+                    $("#content-container").html($(pageHtml));
+                }
+            })
+        }
+    </script>
+</body>
+</html>

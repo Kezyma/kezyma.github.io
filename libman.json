@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "bootstrap@5.1.3",
+      "destination": "lib/bootstrap/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "lib/jquery/"
+    },
+    {
+      "library": "bootswatch@5.1.3",
+      "destination": "lib/bootswatch/"
+    },
+    {
+      "library": "prismjs@1.25.0",
+      "destination": "lib/prismjs/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "prism-themes@1.9.0",
+      "destination": "lib/prism-themes/"
+    },
+    {
+      "library": "smoothscroll-polyfill@0.4.4",
+      "destination": "lib/smoothscroll-polyfill/"
+    },
+    {
+      "library": "smoothscroll-anchor-polyfill@1.3.2",
+      "destination": "lib/smoothscroll-anchor-polyfill/"
+    },
+    {
+      "library": "@fancyapps/ui@4.0.8",
+      "destination": "lib/fancyapps/"
+    },
+    {
+      "library": "@fortawesome/fontawesome-free@5.15.4",
+      "destination": "lib/fontawesome/"
+    }
+  ]
+}
