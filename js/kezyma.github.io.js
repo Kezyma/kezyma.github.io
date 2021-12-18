@@ -42,11 +42,19 @@
         window.location.title = title;
         $("#page-content").html($(html));
         $("title").text(title);
-        pages.bind();
+        pages.rebind();
     },
     bind: function () {
         for (var i in pages.items) {
             $("a[data-page=" + pages.items[i].id + "]").click(function (e) {
+                e.preventDefault();
+                pages.load($(this).data("page"), false);
+            });
+        }
+    },
+    rebind: function () {
+        for (var i in pages.items) {
+            $("#page-content").find("a[data-page=" + pages.items[i].id + "]").click(function (e) {
                 e.preventDefault();
                 pages.load($(this).data("page"), false);
             });
