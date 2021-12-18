@@ -17422,3 +17422,17 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+
+@font-face {
+  font-family: "Slider";
+  src: url("../fonts/Slider.eot");
+  src: url("../fonts/Slider.eot?#iefix") format("embedded-opentype"), url("../fonts/Slider.woff2") format("woff2"), url("../fonts/Slider.woff") format("woff"), url("../fonts/Slider.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+.mod-heading-text {
+  width: 100%;
+  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6), transparent);
+  font-family: Slider;
+}

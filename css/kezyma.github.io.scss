@@ -14,3 +14,6 @@ $fa-font-path: "../lib/fontawesome/webfonts";
 // Prism
 @import "../lib/prism-themes/prism-vsc-dark-plus.css";
 @import "../lib/prismjs/plugins/toolbar/prism-toolbar.css";
+
+@import "_fonts.scss";
+@import "_parallax.scss";
