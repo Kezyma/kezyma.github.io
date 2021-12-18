@@ -1,5 +1,12 @@
-﻿var pages = {
+﻿// Page template system.
+// Declare pages using pages.add("pageId","Page Title","pagepath.html");
+// Default pageId is 'index'.
+// Then initialise with pages.init("containerId");
+// Add data-page="pageId" to a tags for them to load that page.
+
+var pages = {
     items: [],
+    container: {},
     add: function (id, title, url) {
         pages.items.push({ id: id, title: title, url: url});
     },
@@ -8,7 +15,9 @@
         query.searchParams.set("p", id)
         return query.href;
     },
-    init: function () {
+    init: function (containerId) {
+        pages.container = $("#" + containerId);
+
         window.onpopstate = function (e) {
             if (e.state) {
                 pages.update(e.state.title, e.state.html);
@@ -40,7 +49,7 @@
     },
     update: function (title, html) {
         window.location.title = title;
-        $("#page-content").html($(html));
+        pages.container.html($(html));
         $("title").text(title);
         pages.rebind();
     },
@@ -54,7 +63,7 @@
     },
     rebind: function () {
         for (var i in pages.items) {
-            $("#page-content").find("a[data-page=" + pages.items[i].id + "]").click(function (e) {
+            pages.container.find("a[data-page=" + pages.items[i].id + "]").click(function (e) {
                 e.preventDefault();
                 pages.load($(this).data("page"), false);
             });

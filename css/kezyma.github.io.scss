@@ -15,5 +15,15 @@ $fa-font-path: "../lib/fontawesome/webfonts";
 @import "../lib/prism-themes/prism-vsc-dark-plus.css";
 @import "../lib/prismjs/plugins/toolbar/prism-toolbar.css";
 
+// Simptip
+@import "../lib/simptip/simptip.scss";
+
 @import "_fonts.scss";
 @import "_parallax.scss";
+
+.help {
+    @extend .simptip-position-top;
+    @extend .simptip-multiline;
+    @extend .simptip-smooth;
+    @extend .simptip-fade;
+}

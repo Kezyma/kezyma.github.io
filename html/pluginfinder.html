@@ -2,8 +2,9 @@
     <div class="row row-cols-1">
         <div class="col text-center mt-3">
             <a href="#intro-col" class="btn btn-sm btn-success m-1"><i class="fas fa-play"></i> Introduction</a>
-            <a href="#intall-col" class="btn btn-sm btn-success m-1"><i class="fas fa-download"></i> Installation</a>
+            <a href="#install-col" class="btn btn-sm btn-success m-1"><i class="fas fa-download"></i> Installation</a>
             <a href="#usage-col" class="btn btn-sm btn-info m-1"><i class="fas fa-book"></i> Usage</a>
+            <a href="#new-col" class="btn btn-sm btn-info m-1"><i class="fas fa-plug"></i> Adding Plugins</a>
             <a href="#setting-col" class="btn btn-sm btn-info m-1"><i class="fas fa-cog"></i> Settings</a>
             <a href="#uninst-col" class="btn btn-sm btn-danger m-1"><i class="fas fa-trash-alt"></i> Uninstallation</a>
         </div>
@@ -26,23 +27,27 @@
                     <h5 class="mb-0"><i class="fas fa-play"></i> Introduction</h5>
                 </div>
                 <div class="card-body">
-                    <!--<p>
-                        Root Builder is a plugin for Mod Organizer 2, allowing users to manage files in the base game directory through Mod Organizer.
+                    <p>
+                        Plugin Finder is a plugin for Mod Organizer 2, allowing users to browse and install other Mod Organizer plugins.
                     </p>
                     <p>
-                        Some of the things you can do with Root Builder:
+                        Some of the things you can do with Plugin Finder:
                     </p>
                     <ul>
-                        <li>Install script extenders (SKSE, OBSE, FOSE, etc) through Mod Organizer.</li>
-                        <li>Install ENB and different presets for it through Mod Organizer.</li>
-                        <li>Manage different versions of the same game as mods within Mod Organizer.</li>
-                        <li>Keep your game folder untouched and as clean as the day it was installed.</li>
-                        <li>Keep all your mods in Mod Organizer, saving your setup if you need to reinstall or switch computer.</li>
-                    </ul>-->
+                        <li>Browse a list of plugins and search for them by name.</li>
+                        <li>Install plugins directly to Mod Organizer within Plugin Finder.</li>
+                        <li>Check for updates to installed plugins and install them within Plugin Finder.</li>
+                        <li>Remove plugins form Mod Organizer from within Plugin Finder.</li>
+                    </ul>
+                    <p>
+                        Please note that the plugins found within Plugin Finder are produced and maintained by independent mod authors and may vary in quality.
+                        I am not responsible if a plugin installed through Plugin Finder causes damage to your installation or simply does not work.
+                        Any issues with plugins found in Plugin Finder should be directed to the independent plugin author.
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="col" id="intall-col">
+        <div class="col" id="install-col">
             <div class="card mt-3">
                 <div class="card-header">
                     <h5 class="mb-0"><i class="fas fa-download"></i> Installation</h5>
@@ -73,7 +78,241 @@
                     <h5 class="mb-0"><i class="fas fa-book"></i> Usage</h5>
                 </div>
                 <div class="card-body">
-                    
+                    <p>
+                        Plugin Finder can be opened through a new link added to Mod Organizer's tools menu.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/pluginfinder/tools_menu.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">Plugin Finder in Mod Organizer's tools menu.</figcaption>
+                    </figure>
+                    <p>
+                        This opens the Plugin Finder browser, which allows you to explore the currently available plugins for Mod Organizer.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/pluginfinder/plugin_finder.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">Plugin Finder browser.</figcaption>
+                    </figure>
+                    <p>
+                        The search function will only search plugin names for performance reasons.
+                    </p>
+                    <label>
+                        Key to Plugin Finder icons
+                    </label>
+                    <ul>
+                        <li><img src="../img/pluginfinder/ui-download.png" width="24" /> Total installs through Plugin Finder, with uninstalls subtracted.</li>
+                        <li>
+                            Release Type
+                            <ul>
+                                <li><img src="../img/pluginfinder/ui-alpha.png" width="24" /> Plugin is currently in alpha.</li>
+                                <li><img src="../img/pluginfinder/ui-beta.png" width="24" /> Plugin is currently in beta.</li>
+                                <li><img src="../img/pluginfinder/ui-gamma.png" width="24" /> Plugin is currently a release candidate.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Install Status
+                            <ul>
+                                <li><img src="../img/pluginfinder/ui-check.png" width="24" /> Plugin is installed and up to date.</li>
+                                <li><img src="../img/pluginfinder/ui-warning.png" width="24" /> Plugin may not work on this version of Mod Organizer.</li>
+                                <li><img src="../img/pluginfinder/ui-stop.png" width="24" /> Plugin does not work on this version of Mod Organizer.</li>
+                                <li><img src="../img/pluginfinder/ui-info.png" width="24" /> Plugin cannot be installed through Plugin Finder.</li>
+                                <li><img src="../img/pluginfinder/ui-update.png" width="24" /> Plugin has an update available to install.</li>
+                                <li><img src="../img/pluginfinder/ui-update-alt.png" width="24" /> Plugin has an update available to install, however this update may not work on this version of Mod Organizer.</li>
+                                <li><img src="../img/pluginfinder/ui-no-update.png" width="24" /> Plugin has an update available to install, however this update does not work on this version of Mod Organizer.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Buttons
+                            <ul>
+                                <li><img src="../img/pluginfinder/ui-install.png" width="24" /> Install this plugin.</li>
+                                <li><img src="../img/pluginfinder/ui-trash.png" width="24" /> Uninstall this plugin.</li>
+                                <li><img src="../img/pluginfinder/ui-docs.png" width="24" /> Visit the documentation website for this plugin.</li>
+                                <li><img src="../img/pluginfinder/ui-nexus.png" width="24" /> Visit the Nexus page for this plugin.</li>
+                                <li><img src="../img/pluginfinder/ui-github.png" width="24" /> Visit the Github page for this plugin.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Page Navigation
+                            <ul>
+                                <li><img src="../img/pluginfinder/ui-prev.png" width="24" /> Go to the previous page.</li>
+                                <li><img src="../img/pluginfinder/ui-next.png" width="24" /> Go to the next page.</li>
+                                <li><img src="../img/pluginfinder/ui-refresh.png" width="24" /> Reload all plugin data.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="new-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-plug"></i> Adding Plugins</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Plugin Finder hosts a central repository containing the plugin's name and the url to a json file containing information on that plugin. To have your plugin added to Plugin Finder, you will need to create a special json file for it.
+                    </p>
+                    <p>
+                        This json file will contain information about the plugin itself, as well as some basic information on each release/update to your plugin. 
+                        This file will need to be kept updated each time a new update is released for your plugin. 
+                        You do not need to keep information on every release, but it is suggested to at least leave in the most working release for each different version of Mod Organizer that you can.
+                    </p>
+                    <p>
+                        To create this file, there is a generator that can help you to minimise some minor possible mistakes.
+                    </p>
+                    <p>
+                        <a class="btn btn-sm btn-primary" href="#" data-page="pluginfinder-generator">Plugin Finder JSON Generator</a>
+                    </p>
+                    <p>
+                        Alternatively, you can create your json file manually. Below is an example of a possible json file and an explanation of each possible field.
+                    </p>
+                    <pre><code>{
+    "Name": "Plugin Template",
+    "Author": "Kezyma",
+    "Description": "This is a template for a plugin json file to be used with Plugin Finder.",
+    "DocsUrl": "https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/readme/pluginfinder/readme.md",
+    "NexusUrl": "https://www.nexusmods.com/skyrimspecialedition/mods/59869",
+    "GithubUrl": "https://github.com/Kezyma/ModOrganizer-Plugins",
+    "Versions": [
+        {
+        "Version": "1.1.0a",
+        "Released": "2021-12-13",
+        "MinSupport": "2.4.2",
+        "MaxSupport": "2.4.2",
+        "MinWorking": "",
+        "MaxWorking": "2.4.2",
+        "ReleaseNotes": [ "Initial alpha. Demo version." ],
+        "DownloadUrl": "https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.0.zip",
+        "PluginPath": [ "pluginfinder" ],
+        "LocalePath": [],
+        "DataPath": [ "data/pluginfinder" ]
+        }
+    ]
+}
+</code></pre>
+                    <table class="table table-sm table-responsive">
+                        <thead>
+                            <tr>
+                                <th colspan="3">Plugin Fields</th>
+                            </tr>
+                            <tr>
+                                <th>Field</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td class="text-success">Yes</td>
+                                <td>The name of the plugin to be displayed. Should not be changed once the plugin has been added to Plugin Finder.</td>
+                            </tr>
+                            <tr>
+                                <td>Author</td>
+                                <td class="text-success">Yes</td>
+                                <td>The name of the plugin author to be displayed.</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td class="text-warning">No</td>
+                                <td>A short description of this plugin to be displayed, suggested maximum character limit of 350.</td>
+                            </tr>
+                            <tr>
+                                <td>DocsUrl</td>
+                                <td class="text-warning">No</td>
+                                <td>A url to the documentation for your plugin.</td>
+                            </tr>
+                            <tr>
+                                <td>NexusUrl</td>
+                                <td class="text-warning">No</td>
+                                <td>A url to the Nexus page for your plugin.</td>
+                            </tr>
+                            <tr>
+                                <td>GithubUrl</td>
+                                <td class="text-warning">No</td>
+                                <td>A url to the Github page for your plugin.</td>
+                            </tr>
+                            <tr>
+                                <td>Versions</td>
+                                <td class="text-warning">No</td>
+                                <td>An array of versions of this plugin that can be installed through Plugin Finder.</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="3">Version Fields</th>
+                            </tr>
+                            <tr>
+                                <th>Field</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Version</td>
+                                <td class="text-success">Yes</td>
+                                <td>The version number of this version. Should ideally be in the same format as displayed in the settings page of Mod Organizer.</td>
+                            </tr>
+                            <tr>
+                                <td>Released</td>
+                                <td class="text-success">Yes</td>
+                                <td>The date of this release. Must be in the format yyyy-MM-dd</td>
+                            </tr>
+                            <tr>
+                                <td>MinSupport</td>
+                                <td class="text-warning">No</td>
+                                <td>The minimum version of Mod Organizer that this release has been tested to work with. This release may work on earlier versions, but this has not been tested.</td>
+                            </tr>
+                            <tr>
+                                <td>MaxSupport</td>
+                                <td class="text-warning">No</td>
+                                <td>The maximum version of Mod Organizer that this release has been tested to work with. This release may work on later versions, but this has not been tested.</td>
+                            </tr>
+                            <tr>
+                                <td>MinWorking</td>
+                                <td class="text-warning">No</td>
+                                <td>The minimum version of Mod Organizer that this release works with. This release will not work on earlier versions.</td>
+                            </tr>
+                            <tr>
+                                <td>MaxWorking</td>
+                                <td class="text-warning">No</td>
+                                <td>The maximum version of Mod Organizer that this release works with. This release will not work on later versions.</td>
+                            </tr>
+                            <tr>
+                                <td>ReleaseNotes</td>
+                                <td class="text-warning">No</td>
+                                <td>An array of release notes to be displayed for this version.</td>
+                            </tr>
+                            <tr>
+                                <td>DownloadUrl</td>
+                                <td class="text-success">Yes</td>
+                                <td>A direct download to the zip file for this release. The url must be to the zip file itself and not to a download page.</td>
+                            </tr>
+                            <tr>
+                                <td>PluginPath</td>
+                                <td class="text-success">Yes</td>
+                                <td>An array of paths, relative to the root of the download zip. Any files or folders specified will be copied to Mod Organizer's plugins folder.</td>
+                            </tr>
+                            <tr>
+                                <td>LocalePath</td>
+                                <td class="text-warning">No</td>
+                                <td>An array of paths, relative to the root of the download zip. Any files or folders specified will be copied to Mod Organizer's translations folder.</td>
+                            </tr>
+                            <tr>
+                                <td>DataPath</td>
+                                <td class="text-warning">No</td>
+                                <td>An array of paths, relative to Mod Organizer's plugins folder. Any files or folders specified will be deleted when this plugin is uninstalled.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        Once you have created your json file, you need to host it on Github with your plugin and get it added to Plugin Finder. There are a few ways to do this.
+                    </p>
+                    <ul>
+                        <li>You can open a pull request, editing <a href="https://github.com/Kezyma/ModOrganizer-Plugins/blob/main/directory/plugin_directory.json">plugin_directory.json</a> to add your plugin. This will be checked and approved as soon as it is noticed.</li>
+                        <li>You can open an <a href="https://github.com/Kezyma/ModOrganizer-Plugins/issues">issue</a> with the name of your plugin and the link to your hosted json file. It will be added when possible.</li>
+                        <li>You can contact me directly on Discord and I will add your plugin when I can. Username: Kezyma#7969</li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -38,6 +38,10 @@
     {
       "library": "@fortawesome/fontawesome-free@5.15.4",
       "destination": "lib/fontawesome/"
+    },
+    {
+      "library": "simptip@1.0.4",
+      "destination": "lib/simptip/"
     }
   ]
 }
