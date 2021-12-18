@@ -19,11 +19,5 @@ $fa-font-path: "../lib/fontawesome/webfonts";
 @import "../lib/simptip/simptip.scss";
 
 @import "_fonts.scss";
-@import "_parallax.scss";
+@import "_components.scss";
 
-.help {
-    @extend .simptip-position-top;
-    @extend .simptip-multiline;
-    @extend .simptip-smooth;
-    @extend .simptip-fade;
-}

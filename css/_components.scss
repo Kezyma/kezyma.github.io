@@ -3,3 +3,10 @@
     background-image: linear-gradient(to right, transparent, rgba(0,0,0,0.6), rgba(0,0,0,0.6), transparent);
     font-family:Slider;
 }
+
+.help {
+    @extend .simptip-position-top;
+    @extend .simptip-multiline;
+    @extend .simptip-smooth;
+    @extend .simptip-fade;
+}
