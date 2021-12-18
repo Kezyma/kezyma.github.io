@@ -15,12 +15,7 @@
             }
         }
 
-        for (var i in pages.items) {
-            $("a[data-page=" + pages.items[i].id + "]").click(function (e) {
-                e.preventDefault();
-                pages.load($(this).data("page"), false);
-            });
-        }
+        pages.bind();
 
         var id = new URL(location.href).searchParams.get("p");
         if (id == null || id == "") {
@@ -47,5 +42,14 @@
         window.location.title = title;
         $("#page-content").html($(html));
         $("title").text(title);
+        pages.bind();
+    },
+    bind: function () {
+        for (var i in pages.items) {
+            $("a[data-page=" + pages.items[i].id + "]").click(function (e) {
+                e.preventDefault();
+                pages.load($(this).data("page"), false);
+            });
+        }
     }
 }
