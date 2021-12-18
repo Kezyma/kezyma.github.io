@@ -16,7 +16,8 @@
         }
 
         for (var i in pages.items) {
-            $("a[data-page=" + pages.items[i].id + "]").click(function () {
+            $("a[data-page=" + pages.items[i].id + "]").click(function (e) {
+                e.preventDefault();
                 pages.load($(this).data("page"), false);
             });
         }
