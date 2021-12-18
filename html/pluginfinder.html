@@ -1,1 +1,122 @@
-﻿<p>Test 3</p>
+﻿<div class="container mb-3">
+    <div class="row row-cols-1">
+        <div class="col text-center mt-3">
+            <a href="#intro-col" class="btn btn-sm btn-success m-1"><i class="fas fa-play"></i> Introduction</a>
+            <a href="#intall-col" class="btn btn-sm btn-success m-1"><i class="fas fa-download"></i> Installation</a>
+            <a href="#usage-col" class="btn btn-sm btn-info m-1"><i class="fas fa-book"></i> Usage</a>
+            <a href="#setting-col" class="btn btn-sm btn-info m-1"><i class="fas fa-cog"></i> Settings</a>
+            <a href="#uninst-col" class="btn btn-sm btn-danger m-1"><i class="fas fa-trash-alt"></i> Uninstallation</a>
+        </div>
+        <div class="col">
+            <div class="card border-dark bg-dark mt-3">
+                <img src="img/pluginfinder/background.jpg" class="card-img rounded">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <div class="row mod-heading-text">
+                        <div class="col-12 text-center">
+                            <h1 class="display-1 mb-0 text-white">Plugin Finder</h1>
+                            <h6 class="display-6 text-white">for Mod Organizer 2</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intro-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-play"></i> Introduction</h5>
+                </div>
+                <div class="card-body">
+                    <!--<p>
+                        Root Builder is a plugin for Mod Organizer 2, allowing users to manage files in the base game directory through Mod Organizer.
+                    </p>
+                    <p>
+                        Some of the things you can do with Root Builder:
+                    </p>
+                    <ul>
+                        <li>Install script extenders (SKSE, OBSE, FOSE, etc) through Mod Organizer.</li>
+                        <li>Install ENB and different presets for it through Mod Organizer.</li>
+                        <li>Manage different versions of the same game as mods within Mod Organizer.</li>
+                        <li>Keep your game folder untouched and as clean as the day it was installed.</li>
+                        <li>Keep all your mods in Mod Organizer, saving your setup if you need to reinstall or switch computer.</li>
+                    </ul>-->
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intall-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-download"></i> Installation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To install Plugin Finder, you will first need to download it, either from the Nexus or from the Github releases page for Plugin Finder. Make sure to download the latest version.
+                    </p>
+                    <p>
+                        <a href="https://www.nexusmods.com/skyrimspecialedition/mods/59869" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Nexus</a>
+                        <a href="https://github.com/Kezyma/ModOrganizer-Plugins/releases/tag/pluginfinder" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        Once you've downloaded the Plugin Finder zip file, you will need to extract the <code>pluginfinder</code> folder from it and place it in the Mod Organizer plugins folder. If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then the plugins folder is located at <code>C:\Mod Organizer\plugins\</code>
+                    </p>
+                    <p>
+                        If you have done this correctly, inside <code>C:\Mod Organizer\plugins\pluginfinder\</code> you should find two folders, <code>shared</code> and <code>pluginfinder</code> as well as a file called <code>__init__.py</code>
+                    </p>
+                    <p>
+                        Plugin Finder is now installed and will start the next time you run Mod Organizer.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="usage-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-book"></i> Usage</h5>
+                </div>
+                <div class="card-body">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col" id="setting-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cog"></i> Settings</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th colspan="1">Setting</th>
+                                <th colspan="1">Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>enabled</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Determines whether Plugin Finder is enabled.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="uninst-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trash-alt"></i> Uninstallation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To remove Plugin Finder from Mod Organizer, two folders need to be deleted from Mod Organizer's plugins folder, <code>pluginfinder</code> and <code>data\pluginfinder</code>. Once deleted, Plugin Finder will no longer be installed the next time Mod Organizer starts.
+                    </p>
+                    <p>
+                        If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then these folders are located at <code>C:\Mod Organizer\plugins\pluginfinder\</code> and <code>C:\Mod Organizer\plugins\data\pluginfinder\</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
