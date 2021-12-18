@@ -60,6 +60,7 @@ var pages = {
                 pages.load($(this).data("page"), false);
             });
         }
+        Prism.highlightAll();
     },
     rebind: function () {
         for (var i in pages.items) {
@@ -68,5 +69,6 @@ var pages = {
                 pages.load($(this).data("page"), false);
             });
         }
+        Prism.highlightAll();
     }
 }
