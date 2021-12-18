@@ -1,1 +1,289 @@
-﻿<p>Test 2 </p>
+﻿<div class="container mb-3">
+    <div class="row row-cols-1">
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Introduction</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Root Builder is a plugin for Mod Organizer 2, allowing users to manage files in the base game directory through Mod Organizer.
+                    </p>
+                    <p>
+                        Some of the things you can do with Root Builder:
+                    </p>
+                    <ul>
+                        <li>Install script extenders (SKSE, OBSE, FOSE, etc) through Mod Organizer.</li>
+                        <li>Install ENB and different presets for it through Mod Organizer.</li>
+                        <li>Manage different versions of the same game as mods within Mod Organizer.</li>
+                        <li>Keep your game folder untouched and as clean as the day it was installed.</li>
+                        <li>Keep all your mods in Mod Organizer, saving your setup if you need to reinstall or switch computer.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Installation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To install Root Builder, you will first need to download it, either from the Nexus or from the Github releases page for Root Builder. Make sure to download the latest version.
+                    </p>
+                    <p>
+                        <a href="https://www.nexusmods.com/skyrimspecialedition/mods/31720" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Nexus</a>
+                        <a href="https://github.com/Kezyma/ModOrganizer-Plugins/releases/tag/rootbuilder" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        Once you've downloaded the Root Builder zip file, you will need to extract the <code>rootbuilder</code> folder from it and place it in the Mod Organizer plugins folder. If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then the plugins folder is located at <code>C:\Mod Organizer\plugins\</code>
+                    </p>
+                    <p>
+                        If you have done this correctly, inside <code>C:\Mod Organizer\plugins\rootbuilder\</code> you should find two folders, <code>shared</code> and <code>rootbuilder</code> as well as a file called <code>__init__.py</code>
+                    </p>
+                    <p>
+                        Root Builder is now installed and will start the next time you run Mod Organizer.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Usage</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To install mods to the base game folder, they will need to be arranged in a way that Root Builder understands. To do this, Root Builder uses a special folder called <code>root</code> that can be added to a mod within Mod Organizer.
+                        Any files placed in a mod's <code>root</code> folder will be present in the base game folder when Mod Organizer runs an application.
+                    </p>
+                    <p>
+                        As an example, this is how SKSE is packaged when you download it, it contains three files that need to go into the base game folder; <code>skse64_1_6_342.dll</code>, <code>skse64_steam_loader.dll</code> and <code>skse_loader.exe</code>. It also contains a <code>Scripts</code> folder that Mod Organizer can manage normally.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/rootbuilder/skse_example_1.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">SKSE before being arranged to work with Root Builder.</figcaption>
+                    </figure>
+                    <p>
+                        To install SKSE in Mod Organizer for Root Builder, <code>skse64_1_6_342.dll</code>, <code>skse64_steam_loader.dll</code> and <code>skse_loader.exe</code> need to be moved into a <code>root</code> folder that sits alongside the <code>Scripts</code> folder. Finally, the <code>Data</code> folder can be set as the data directory.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/rootbuilder/skse_example_2.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">SKSE after being arranged to work with Root Builder.</figcaption>
+                    </figure>
+                    <p>
+                        For mods that only include files for the base game folder, Mod Organizer may warn you that the mod does not look valid and may also indicate that it doesn't contain valid files once installed. Both of these can be safely ignored.
+                    </p>
+                    <p>
+                        Once installed in Mod Organizer, it should be checked to enable it just like any other mod. Then you can add <code>skse_loader.exe</code> to Mod Organizer's executables list. Since <code>skse_loader.exe</code> won't be located in the game folder, you should add it from the mod folder instead.
+                        Root Builder will detect this when you launch it and will redirect it to run from the game folder instead.
+                    </p>
+                    <ul>
+                        <li>If Mod Organizer is portable and installed at <code>C:\Mod Organizer\</code> you would add <code>C:\Mod Organizer\mods\SKSE\Root\skse_loader.exe</code> to the executables list.</li>
+                        <li>If Mod Organizer is not portable, by default, you would add <code>%LOCALAPPDATA%\ModOrganizer\INSTANCE_NAME\mods\SKSE\Root\skse_loader.exe</code> to the executables list.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Tools</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Root Builder comes with some new items in the tools menu; the main Root Builder tool and three quick-use tools for manually running a Build, Sync or Clear. Using default settings, all of these tools are entirely optional to use.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/rootbuilder/tools_menu.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">Root Builder in Mod Organizer's tools menu.</figcaption>
+                    </figure>
+                    <h6>Build</h6>
+                    <p>
+                        Running a Build does the following using default settings:
+                    </p>
+                    <ul>
+                        <li>Generates a list of all files in mod root folders.</li>
+                        <li>(First Run) Generates hashes for all files in the base game folder (minus any exclusions or the Data folder) and saves them.</li>
+                        <li>(First Run) Takes a backup of all files in the base game folder (minus any exclusions or the Data folder).</li>
+                        <li>Copies files from mod root folders into the base game folder and records which files have been copied.</li>
+                    </ul>
+                    <h6>Sync</h6>
+                    <p>
+                        Running a Sync does the following using default settings:
+                    </p>
+                    <ul>
+                        <li>Checks every file in the base game folder (minus any exclusions or the Data folder).</li>
+                        <li>Compares the file with hashes from the list of files copied during the last build and the base game hashes.</li>
+                        <li>Files that came from mod root folders that have changed are copied back to Mod Organizer.</li>
+                        <li>Files that came from the base game that have changed are copied to Mod Organizer's overwrite folder.</li>
+                        <li>Files that did not comes from mods or the base game are copied to Mod Organizer's overwrite folder.</li>
+                    </ul>
+                    <h6>Clear</h6>
+                    <p>
+                        Running a Clear does the following using default settings:
+                    </p>
+                    <ul>
+                        <li>Runs a Sync.</li>
+                        <li>Checks every file in the base game folder (minus any exclusions or the Data folder).</li>
+                        <li>Compares the file with hashes from the list of files copied during the last build and the base game hashes.</li>
+                        <li>Files that came from mods are deleted.</li>
+                        <li>Files that came from the base game that have changed are deleted and restored from the backup.</li>
+                        <li>Files that did not come from mods or the base game are deleted.</li>
+                    </ul>
+                    <h6>Menu</h6>
+                    <p>
+
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/rootbuilder/root_builder.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">Root Builder menu.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Settings</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th colspan="1">Setting</th>
+                                <th colspan="1">Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>enabled</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Determines whether Root Builder is enabled.</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td>usvfsmode</td>
+                                <td>false</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        Enables USVFS mode. Using this mode, files will not be copied to the game folder, instead, Root Builder will use Mod Organizer's virtual file system as it does with regular mods. This does not work correctly with files that must be present on launch, such as exe and dll files.
+                                        Manual Build, Sync and Clear no longer function as this mode only works with autobuild. Does not support redirect.
+                                    </p>
+                                    <p>Requires:</p>
+                                    <ul>
+                                        <li>autobuild = true</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>linkmode</td>
+                                <td>false</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        Enables Link mode. Using this mode, files will not be copied to the game folder, instead, Root Builder will create links for any files with the extensions in the linkextensions setting. This improves the compatibility of USVFS mode, allowing it to support most exe and dll files.
+                                        Manual Build, Sync and Clear do function with this mode, however, they only generate and clear linked files and autobuild is still required.
+                                    </p>
+                                    <p>Requires:</p>
+                                    <ul>
+                                        <li>autobuild = true</li>
+                                        <li>usvfsmode = true</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>backup</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        When enabled, Root Builder will take a backup of all base game files and folders (excluding the Data directory) during the next Build. This backup will be used when restoring any game files that may have changed during a Clear.
+                                    </p>
+                                    <p>
+                                        When disabled, Root Builder will only take a backup for files that will be overwritten by mods during a Build. This backup will be deleted during the next Clear.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>cache</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        When enabled, Root Builder will store the hashes of all base game files (excluding the Data directory) during the next Build. These hashes will be used when checking for files that may have changed during a Sync or Clear.
+                                    </p>
+                                    <p>
+                                        When disabled, Root Builder will store the hashes of all base game files (excluding the Data directory) during every Build. These hashes will be used when checking for files that may have changed during a Sync or Clear. Hashes will be deleted during a Clear.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>autobuild</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>When enabled, Root Builder will perform a Build immediately when you launch an application through Root Builder. A Clear will then be run as soon as that application closes.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>redirect</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>When enabled, Root Builder will check if an application being run is inside a mod's root folder, if it is, it will be redirected to run from the game folder instead.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>exclusions</td>
+                                <td>Morrowind.ini, Saves</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>Any files or folders listed here will be ignored by Root Builder in the base game folder. Any mods containing any of these in root folders will be ignored by Root Builder.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>linkextensions</td>
+                                <td>exe, dll</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>Any files in a mod's root folder with these extensions will have links created for them during a build.</p>
+                                    <p>Requires:</p>
+                                    <ul>
+                                        <li>usvfsmode = true</li>
+                                        <li>linkmode = true</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Uninstallation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To remove Root Builder from Mod Organizer, two folders need to be deleted from Mod Organizer's plugins folder, <code>rootbuilder</code> and <code>data\rootbuilder</code>. Once deleted, Root Builder will no longer be installed the next time Mod Organizer starts.
+                    </p>
+                    <p>
+                        If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then these folders are located at <code>C:\Mod Organizer\plugins\rootbuilder\</code> and <code>C:\Mod Organizer\plugins\data\rootbuilder\</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,65 +1,50 @@
-﻿var pages = [];
-
-function page(id, title, url) {
-    return {
-        id: id,
-        title: title,
-        url: url
-    };
-}
-
-function addPage(page) {
-    pages.push(page);
-}
-
-function addPages(pageArray) {
-    for (var i in pageArray) {
-        addPage(pageArray[i]);
-    }
-}
-
-function pageUrl(id) {
-    var query = new URL(location.href);
-    query.searchParams.set("p", id)
-    return query.href;
-}
-
-function initialisePages() {
-    window.onpopstate = function (e) {
-        if (e.state) {
-            window.location.title = e.state.title;
-            $("#page-content").html($(e.state.html));
+﻿var pages = {
+    items: [],
+    add: function (id, title, url) {
+        pages.items.push({ id: id, title: title, url: url});
+    },
+    url: function (id) {
+        var query = new URL(location.href);
+        query.searchParams.set("p", id)
+        return query.href;
+    },
+    init: function () {
+        window.onpopstate = function (e) {
+            if (e.state) {
+                pages.update(e.state.title, e.state.html);
+            }
         }
-    }
 
-    for (var i in pages) {
-        $("a[data-page=" + pages[i].id + "]").click(function () {
-            console.log(this);
-            loadPage($(this).data("page"), false);
+        for (var i in pages.items) {
+            $("a[data-page=" + pages.items[i].id + "]").click(function () {
+                pages.load($(this).data("page"), false);
+            });
+        }
+
+        var id = new URL(location.href).searchParams.get("p");
+        if (id == null || id == "") {
+            id = "index";
+        }
+        pages.load(id, true);
+    },
+    load: function (id, initial) {
+        var p = pages.items.filter(x => x.id == id)[0];
+        $.get({
+            url: p.url,
+            success: function (html) {
+                pages.update(p.title, html);
+                if (initial) {
+                    window.history.replaceState({ title: p.title, html: html, id: id }, p.title, pages.url(id));
+                }
+                else {
+                    window.history.pushState({ title: p.title, html: html, id: id }, p.title, pages.url(id));
+                }
+            }
         });
+    },
+    update: function (title, html) {
+        window.location.title = title;
+        $("#page-content").html($(html));
+        $("title").text(title);
     }
-
-    var id = new URL(location.href).searchParams.get("p");
-    if (id == null || id == "") {
-        id = "index";
-    }
-    loadPage(id, true);
 }
-
-function loadPage(id, initial) {
-    page = pages.filter(x => x.id == id)[0];
-    $.get({
-        url: page.url,
-        success: function (html) {
-            $("#page-content").html($(html));
-            window.location.title = page.title;
-            if (initial) {
-                window.history.replaceState({ title: page.title, html: html, id: id }, page.title, pageUrl(id));
-            }
-            else {
-                window.history.pushState({ title: page.title, html: html, id: id }, page.title, pageUrl(id));
-            }
-        }
-    });
-}
-

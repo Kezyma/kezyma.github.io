@@ -1,9 +1,12 @@
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/kezyma.github.io.min.css" />
+    <title></title>
 </head>
 <body>
-    <div class="navbar navbar-expand-lg bg-dark">
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" id="navbar-title" href="#" data-page="index">Documentation</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-collapse" aria-controls="nav-collapse" aria-expanded="false">
@@ -13,7 +16,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Mod Organizer
+                            Mod Organizer Plugins
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" data-page="rootbuilder" href="#">Root Builder</a></li>
@@ -26,8 +29,10 @@
             </div>
         </div>
     </div>
+
     <div id="page-content">
     </div>
+
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/prismjs/prism.js"></script>
@@ -37,14 +42,12 @@
     <script src="js/kezyma.github.io.js"></script>
     <script>
         $(document).ready(function () {
-            addPages([
-                page("index", "Documentation", "html/home.html"),
-                page("rootbuilder", "Root Builder", "html/rootbuilder.html"),
-                page("pluginfinder", "Plugin Finder", "html/pluginfinder.html"),
-                page("shortcutter", "Shortcutter", "html/shortcutter.html"),
-                page("reinstaller", "Reinstaller", "html/reinstaller.html")
-            ]);
-            initialisePages();
+            pages.add("index", "Documentation", "html/home.html");
+            pages.add("rootbuilder", "Root Builder", "html/rootbuilder.html");
+            pages.add("pluginfinder", "Plugin Finder", "html/pluginfinder.html");
+            pages.add("shortcutter", "Shortcutter", "html/shortcutter.html");
+            pages.add("reinstaller", "Reinstaller", "html/reinstaller.html");
+            pages.init();
         });
     </script>
 </body>
