@@ -17873,8 +17873,23 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-display: swap;
 }
-.mod-heading-text {
+@font-face {
+  font-family: "Planewalker";
+  src: url("../fonts/Planewalker.eot");
+  src: url("../fonts/Planewalker.eot?#iefix") format("embedded-opentype"), url("../fonts/Planewalker.woff2") format("woff2"), url("../fonts/Planewalker.woff") format("woff"), url("../fonts/Planewalker.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.heading-text, .mod-heading-text, .plugin-heading-text {
   width: 100%;
   background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6), transparent);
+}
+
+.plugin-heading-text {
   font-family: Slider;
+}
+
+.mod-heading-text {
+  font-family: Planewalker;
 }
