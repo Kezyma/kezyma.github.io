@@ -1,6 +1,4 @@
-﻿Prism.highlightAll();
-
-function loadExample() {
+﻿function loadExample() {
     loadedJson = exampleJson;
     updateForm();
     updatePreview();
@@ -142,17 +140,11 @@ function fieldChanged() {
 
 $(document).ready(function () {
     updatePreview();
-    bindTooltips();
 });
-
-function bindTooltips() {
-    //$(".help").each(function (ix, help) {
-    //    tt = new bootstrap.Tooltip(help);
-    //});
-}
 
 function updatePreview() {
     $("#previewJson").html(JSON.stringify(loadedJson, null, 4));
+    Prism.highlightAll();
 }
 
 function downloadJson(content, fileName) {
@@ -174,7 +166,6 @@ function createVersion() {
     $("#versionColumn").prepend(newVersion);
     $("#saveJsonBtn").addClass("disabled");
     updatePreview();
-    bindTooltips();
     return newVersion;
 }
 
@@ -182,7 +173,6 @@ function removeVersion(button) {
     $(button).parent().parent().parent().parent().remove();
     validate();
     updatePreview();
-    bindTooltips();
 }
 
 $("#selectJsonFileSelect").change(function (evt) {
