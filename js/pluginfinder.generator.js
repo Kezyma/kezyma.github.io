@@ -68,6 +68,9 @@ function setVersion(card, versionText) {
     $(card).find(".subVerNumText").val(versionMatch[3]);
     $(card).find(".subSubVerNumText").val(versionMatch[4]);
     $(card).find(".typeVerSelect").val(versionMatch[5]);
+    
+    // For some reason, doing this a second time returns null, so do it again and then it'll work the next time.
+    versionRegex.exec(versionText);
 }
 
 function updateJson() {
@@ -373,7 +376,7 @@ function validate() {
 
 
 function isVersionValid(string) {
-    if (string.match(versionRegex)) {
+    if (string != null && string.match(versionRegex)) {
         return true;
     }
     return false;
