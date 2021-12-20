@@ -1,7 +1,7 @@
 ﻿Prism.highlightAll();
 
 // const urlSearchParams = new URLSearchParams(window.location.search);
-const params = Object.fromEntries(urlSearchParams.entries());
+// const params = Object.fromEntries(urlSearchParams.entries());
 const versionRegex = /^([0-9]+)[.]?([0-9]*)[.]?([0-9]*)[.]?([0-9]*)?[._\-]?([A-Za-z0-9]*)/g;
 const exampleJson = {
     "Name": "Plugin Template",
