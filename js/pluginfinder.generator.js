@@ -1,4 +1,32 @@
-﻿function loadExample() {
+﻿// Fields for PF Generator
+versionRegex = /^([0-9]+)[.]?([0-9]*)[.]?([0-9]*)[.]?([0-9]*)?[._\-]?([A-Za-z0-9]*)/g;
+exampleJson = {
+    "Name": "Plugin Template",
+    "Author": "Kezyma",
+    "Description": "This is a template for a plugin json file to be used with Plugin Finder.",
+    "DocsUrl": "https://kezyma.github.io/?p=pluginfinder",
+    "NexusUrl": "https://www.nexusmods.com/skyrimspecialedition/mods/59869",
+    "GithubUrl": "https://github.com/Kezyma/ModOrganizer-Plugins",
+    "Versions": [
+        {
+            "Version": "1.1.0a",
+            "Released": "2021-12-13",
+            "MinSupport": "2.4.2",
+            "MaxSupport": "2.4.2",
+            "MinWorking": "2.4.0",
+            "MaxWorking": "",
+            "ReleaseNotes": ["Initial alpha. Demo version."],
+            "DownloadUrl": "https://github.com/Kezyma/ModOrganizer-Plugins/releases/download/pluginfinder/pluginfinder.1.1.0.zip",
+            "PluginPath": ["pluginfinder"],
+            "LocalePath": [],
+            "DataPath": ["data/pluginfinder"]
+        }
+    ]
+}
+
+loadedJson = JSON.parse("{}");
+
+function loadExample() {
     loadedJson = exampleJson;
     updateForm();
     updatePreview();
