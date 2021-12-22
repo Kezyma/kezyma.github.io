@@ -17893,3 +17893,349 @@ readers do not read off random characters that represent icons */
 .mod-heading-text {
   font-family: Planewalker;
 }
+
+.name-tag {
+  margin-left: -6em;
+}
+
+.txt-1 {
+  font-size: 1vmin;
+}
+
+.txt-2 {
+  font-size: 2vmin;
+}
+
+.txt-3 {
+  font-size: 3vmin;
+}
+
+.txt-4 {
+  font-size: 4vmin;
+}
+
+.txt-5 {
+  font-size: 5vmin;
+}
+
+.txt-6 {
+  font-size: 6vmin;
+}
+
+.txt-7 {
+  font-size: 7vmin;
+}
+
+.txt-8 {
+  font-size: 8vmin;
+}
+
+.txt-9 {
+  font-size: 9vmin;
+}
+
+.txt-10 {
+  font-size: 10vmin;
+}
+
+.txt-11 {
+  font-size: 11vmin;
+}
+
+.txt-12 {
+  font-size: 12vmin;
+}
+
+.txt-xs-1 {
+  font-size: 1vmin;
+}
+
+.txt-xs-2 {
+  font-size: 2vmin;
+}
+
+.txt-xs-3 {
+  font-size: 3vmin;
+}
+
+.txt-xs-4 {
+  font-size: 4vmin;
+}
+
+.txt-xs-5 {
+  font-size: 5vmin;
+}
+
+.txt-xs-6 {
+  font-size: 6vmin;
+}
+
+.txt-xs-7 {
+  font-size: 7vmin;
+}
+
+.txt-xs-8 {
+  font-size: 8vmin;
+}
+
+.txt-xs-9 {
+  font-size: 9vmin;
+}
+
+.txt-xs-10 {
+  font-size: 10vmin;
+}
+
+.txt-xs-11 {
+  font-size: 11vmin;
+}
+
+.txt-xs-12 {
+  font-size: 12vmin;
+}
+
+@media (min-width: 576px) {
+  .txt-sm-1 {
+    font-size: 1vmin;
+  }
+
+  .txt-sm-2 {
+    font-size: 2vmin;
+  }
+
+  .txt-sm-3 {
+    font-size: 3vmin;
+  }
+
+  .txt-sm-4 {
+    font-size: 4vmin;
+  }
+
+  .txt-sm-5 {
+    font-size: 5vmin;
+  }
+
+  .txt-sm-6 {
+    font-size: 6vmin;
+  }
+
+  .txt-sm-7 {
+    font-size: 7vmin;
+  }
+
+  .txt-sm-8 {
+    font-size: 8vmin;
+  }
+
+  .txt-sm-9 {
+    font-size: 9vmin;
+  }
+
+  .txt-sm-10 {
+    font-size: 10vmin;
+  }
+
+  .txt-sm-11 {
+    font-size: 11vmin;
+  }
+
+  .txt-sm-12 {
+    font-size: 12vmin;
+  }
+}
+@media (min-width: 768px) {
+  .txt-md-1 {
+    font-size: 1vmin;
+  }
+
+  .txt-md-2 {
+    font-size: 2vmin;
+  }
+
+  .txt-md-3 {
+    font-size: 3vmin;
+  }
+
+  .txt-md-4 {
+    font-size: 4vmin;
+  }
+
+  .txt-md-5 {
+    font-size: 5vmin;
+  }
+
+  .txt-md-6 {
+    font-size: 6vmin;
+  }
+
+  .txt-md-7 {
+    font-size: 7vmin;
+  }
+
+  .txt-md-8 {
+    font-size: 8vmin;
+  }
+
+  .txt-md-9 {
+    font-size: 9vmin;
+  }
+
+  .txt-md-10 {
+    font-size: 10vmin;
+  }
+
+  .txt-md-11 {
+    font-size: 11vmin;
+  }
+
+  .txt-md-12 {
+    font-size: 12vmin;
+  }
+}
+@media (min-width: 992px) {
+  .txt-lg-1 {
+    font-size: 1vmin;
+  }
+
+  .txt-lg-2 {
+    font-size: 2vmin;
+  }
+
+  .txt-lg-3 {
+    font-size: 3vmin;
+  }
+
+  .txt-lg-4 {
+    font-size: 4vmin;
+  }
+
+  .txt-lg-5 {
+    font-size: 5vmin;
+  }
+
+  .txt-lg-6 {
+    font-size: 6vmin;
+  }
+
+  .txt-lg-7 {
+    font-size: 7vmin;
+  }
+
+  .txt-lg-8 {
+    font-size: 8vmin;
+  }
+
+  .txt-lg-9 {
+    font-size: 9vmin;
+  }
+
+  .txt-lg-10 {
+    font-size: 10vmin;
+  }
+
+  .txt-lg-11 {
+    font-size: 11vmin;
+  }
+
+  .txt-lg-12 {
+    font-size: 12vmin;
+  }
+}
+@media (min-width: 1200px) {
+  .txt-xl-1 {
+    font-size: 1vmin;
+  }
+
+  .txt-xl-2 {
+    font-size: 2vmin;
+  }
+
+  .txt-xl-3 {
+    font-size: 3vmin;
+  }
+
+  .txt-xl-4 {
+    font-size: 4vmin;
+  }
+
+  .txt-xl-5 {
+    font-size: 5vmin;
+  }
+
+  .txt-xl-6 {
+    font-size: 6vmin;
+  }
+
+  .txt-xl-7 {
+    font-size: 7vmin;
+  }
+
+  .txt-xl-8 {
+    font-size: 8vmin;
+  }
+
+  .txt-xl-9 {
+    font-size: 9vmin;
+  }
+
+  .txt-xl-10 {
+    font-size: 10vmin;
+  }
+
+  .txt-xl-11 {
+    font-size: 11vmin;
+  }
+
+  .txt-xl-12 {
+    font-size: 12vmin;
+  }
+}
+@media (min-width: 1400px) {
+  .txt-xxl-1 {
+    font-size: 1vmin;
+  }
+
+  .txt-xxl-2 {
+    font-size: 2vmin;
+  }
+
+  .txt-xxl-3 {
+    font-size: 3vmin;
+  }
+
+  .txt-xxl-4 {
+    font-size: 4vmin;
+  }
+
+  .txt-xxl-5 {
+    font-size: 5vmin;
+  }
+
+  .txt-xxl-6 {
+    font-size: 6vmin;
+  }
+
+  .txt-xxl-7 {
+    font-size: 7vmin;
+  }
+
+  .txt-xxl-8 {
+    font-size: 8vmin;
+  }
+
+  .txt-xxl-9 {
+    font-size: 9vmin;
+  }
+
+  .txt-xxl-10 {
+    font-size: 10vmin;
+  }
+
+  .txt-xxl-11 {
+    font-size: 11vmin;
+  }
+
+  .txt-xxl-12 {
+    font-size: 12vmin;
+  }
+}
