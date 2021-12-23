@@ -73,13 +73,17 @@
                 </div>
                 <div class="card-body">
                     <p>
+                        Curation Club is added to the tools menu in Mod Organizer.
                     </p>
                     <figure class="figure">
                         <img src="../img/curationclub/tools_menu.png" class="figure-img img-fluid rounded" />
                         <figcaption class="figure-caption">Curation Club in the tools menu.</figcaption>
                     </figure>
                     <p>
-
+                        Opening Curation Club presents you with a dialog to modify settings and then move Creation Club content into Mod Organizer.
+                    </p>
+                    <p>
+                        When run, Curation Club will search the game folder and any enabled mods in Mod Organizer. Any Creation Club content found will be added to a new mod in Mod Organizer. Each mod will be named based on the format provided.
                     </p>
                     <figure class="figure">
                         <img src="../img/curationclub/curation_club.png" class="figure-img img-fluid rounded" />
@@ -108,6 +112,20 @@
                             </tr>
                             <tr>
                                 <td colspan="2">Determines whether Curation Club is enabled.</td>
+                            </tr>
+                            <tr>
+                                <td>modnameformat</td>
+                                <td>Creation Club - {creation}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Specifies the format for Creation Club mod names. {creation} is the name of the creation itself.</td>
+                            </tr>
+                            <tr>
+                                <td>rootbuildersupport</td>
+                                <td>false</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Enables support for Root Builder. Creation Club manifest files will also be moved to Mod Organizer inside Root folders with their respective mods. Enable if you use Root Builder, disable otherwise.</td>
                             </tr>
                         </tbody>
                     </table>
