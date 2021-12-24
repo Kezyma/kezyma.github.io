@@ -1,0 +1,157 @@
+﻿<div class="container mb-3">
+    <div class="row row-cols-1">
+        <div class="col text-center mt-3">
+            <a href="#intro-col" class="btn btn-sm btn-success m-1"><i class="fas fa-play"></i> Introduction</a>
+            <a href="#intall-col" class="btn btn-sm btn-success m-1"><i class="fas fa-download"></i> Installation</a>
+            <a href="#usage-col" class="btn btn-sm btn-info m-1"><i class="fas fa-book"></i> Usage</a>
+            <a href="#setting-col" class="btn btn-sm btn-info m-1"><i class="fas fa-cog"></i> Settings</a>
+            <a href="#uninst-col" class="btn btn-sm btn-danger m-1"><i class="fas fa-trash-alt"></i> Uninstallation</a>
+        </div>
+        <div class="col">
+            <div class="card border-dark bg-dark mt-3">
+                <img src="img/profilesync/background.jpg" class="card-img rounded">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <div class="row plugin-heading-text">
+                        <div class="col-12 p-2 text-center">
+                            <h1 class="display-1 mb-0 text-white">Profile Sync</h1>
+                            <h6 class="display-6 text-white">for Mod Organizer 2</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intro-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-play"></i> Introduction</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Profile Sync is a plugin for Mod Organizer 2, it allows you to maintain the same mod order (while keeping the enabled/disabled state) across multiple profiles.
+                    </p>
+                    <p>
+                        Some of the things you can do with Profile Sync:
+                    </p>
+                    <ul>
+                        <li>Keep your mod order synchronised across multiple profiles.</li>
+                        <li>Create multiple sync groups to have different sets of profiles with different mod orders.</li>
+                        <li>Exclude individual profiles that you want to customise and test.</li>
+                        <li>Save time arranging the same mod in every profile each time you install a new one.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intall-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-download"></i> Installation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To install Profile Sync, you will first need to download it, either from the Nexus or from the Github releases page for Reinstaller. Make sure to download the latest version.
+                    </p>
+                    <p>
+                        <a href="https://www.nexusmods.com/skyrimspecialedition/mods/60552" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Nexus</a>
+                        <a href="https://github.com/Kezyma/ModOrganizer-Plugins/releases/tag/profilesync" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        Once you've downloaded the Profile Sync zip file, you will need to extract the <code>profilesync</code> folder from it and place it in the Mod Organizer plugins folder. If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then the plugins folder is located at <code>C:\Mod Organizer\plugins\</code>
+                    </p>
+                    <p>
+                        If you have done this correctly, inside <code>C:\Mod Organizer\plugins\profilesync\</code> you should find two folders, <code>shared</code> and <code>profilesync</code> as well as a file called <code>__init__.py</code>
+                    </p>
+                    <p>
+                        Profile Sync is now installed and will start the next time you run Mod Organizer.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="usage-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-book"></i> Usage</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Profile Sync is added to the tools menu in Mod Organizer.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/profilesync/tools_menu.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">Profile Sync in the tools menu.</figcaption>
+                    </figure>
+                    <p>
+                        Opening Profile Sync presents you with a dialog for managing sync groups.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/profilesync/profile_sync.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">Profile Sync dialog.</figcaption>
+                    </figure>
+                    <h5>Sync Groups</h5>
+                    <p>
+                        A sync group is a group of profiles that will synchronise their mod order. You create one by giving it a name and clicking Add. Once added, sync groups can be selected in the dropdown list and deleted with the Delete button.
+                    </p>
+                    <p>
+                        Once you've created a sync group, you can add profiles to the sync group by checking them in the list below. A profile can only be in one sync group at a time. <b>Make sure to add your profiles in the correct order as there is no way to restore a lost mod order</b>;
+                    </p>
+                    <ul>
+                        <li>The first time a profile is added to a sync group, a separate mod list will be created for the sync group based on the mod order of the profile being added.</li>
+                        <li>Each profile added after this will immediately have its mod list updated to match the group list.</li>
+                        <li>When the last profile is removed from a sync group, the group list is deleted. The next profile added will be treated as the first profile added.</li>
+                    </ul>
+                    <h5>Updating</h5>
+                    <p>
+                        To keep profiles synchronised, Profile Sync does the following;
+                    </p>
+                    <ul>
+                        <li>Each time you change the mod order for a profile in a sync group, the group list will be updated.</li>
+                        <li>Each time you load (or switch to) a profile, that profile's list will be updated to match the group list.</li>
+                    </ul>
+                    <p>
+                        Profile Sync only updates the order that mods (and separators) are listed in Mod Organizer. This does not change which mods are enabled/disabled or the plugin order.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="setting-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cog"></i> Settings</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th colspan="1">Setting</th>
+                                <th colspan="1">Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>enabled</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Determines whether Profile Sync is enabled.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="uninst-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trash-alt"></i> Uninstallation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To remove Profile Sync from Mod Organizer, two folders need to be deleted from Mod Organizer's plugins folder, <code>profilesync</code> and <code>data\profilesync</code>. Once deleted, Reinstaller will no longer be installed the next time Mod Organizer starts.
+                    </p>
+                    <p>
+                        If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then these folders are located at <code>C:\Mod Organizer\plugins\profilesync\</code> and <code>C:\Mod Organizer\plugins\data\profilesync\</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
