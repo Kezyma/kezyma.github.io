@@ -5,7 +5,7 @@
 
 .plugin-heading-text {
     @extend .heading-text;
-    font-family:Slider;
+    font-family: Slider;
 }
 
 .mod-heading-text {
@@ -26,18 +26,57 @@
 
 $v: (1,2,3,4,5,6,7,8,9,10,11,12);
 
-@each $vi in $v
-{
-    .txt-#{$vi} {
+@each $vi in $v {
+    .vw-#{$vi} {
+        font-size: #{$vi}vw;
+    }
+
+    .vh-#{$vi} {
+        font-size: #{$vi}vh;
+    }
+
+    .vmin-#{$vi} {
         font-size: #{$vi}vmin;
+    }
+
+    .vmax-#{$vi} {
+        font-size: #{$vi}vmax;
+    }
+
+    .rem-#{$vi} {
+        font-size: #{$vi}rem;
+    }
+
+    .em-#{$vi} {
+        font-size: #{$vi}em;
     }
 }
 
 @each $w, $s in $grid-breakpoints {
     @include media-breakpoint-up($w) {
         @each $vi in $v {
-            .txt-#{$w}-#{$vi} {
+            .vw-#{$w}-#{$vi} {
+                font-size: #{$vi}vw;
+            }
+
+            .vh-#{$w}-#{$vi} {
+                font-size: #{$vi}vh;
+            }
+
+            .vmin-#{$w}-#{$vi} {
                 font-size: #{$vi}vmin;
+            }
+
+            .vmax-#{$w}-#{$vi} {
+                font-size: #{$vi}vmax;
+            }
+
+            .rem-#{$w}-#{$vi} {
+                font-size: #{$vi}rem;
+            }
+
+            .em-#{$w}-#{$vi} {
+                font-size: #{$vi}em;
             }
         }
     }

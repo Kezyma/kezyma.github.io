@@ -17898,344 +17898,2024 @@ readers do not read off random characters that represent icons */
   margin-left: -6em;
 }
 
-.txt-1 {
+.vw-1 {
+  font-size: 1vw;
+}
+
+.vh-1 {
+  font-size: 1vh;
+}
+
+.vmin-1 {
   font-size: 1vmin;
 }
 
-.txt-2 {
+.vmax-1 {
+  font-size: 1vmax;
+}
+
+.rem-1 {
+  font-size: 1rem;
+}
+
+.em-1 {
+  font-size: 1em;
+}
+
+.vw-2 {
+  font-size: 2vw;
+}
+
+.vh-2 {
+  font-size: 2vh;
+}
+
+.vmin-2 {
   font-size: 2vmin;
 }
 
-.txt-3 {
+.vmax-2 {
+  font-size: 2vmax;
+}
+
+.rem-2 {
+  font-size: 2rem;
+}
+
+.em-2 {
+  font-size: 2em;
+}
+
+.vw-3 {
+  font-size: 3vw;
+}
+
+.vh-3 {
+  font-size: 3vh;
+}
+
+.vmin-3 {
   font-size: 3vmin;
 }
 
-.txt-4 {
+.vmax-3 {
+  font-size: 3vmax;
+}
+
+.rem-3 {
+  font-size: 3rem;
+}
+
+.em-3 {
+  font-size: 3em;
+}
+
+.vw-4 {
+  font-size: 4vw;
+}
+
+.vh-4 {
+  font-size: 4vh;
+}
+
+.vmin-4 {
   font-size: 4vmin;
 }
 
-.txt-5 {
+.vmax-4 {
+  font-size: 4vmax;
+}
+
+.rem-4 {
+  font-size: 4rem;
+}
+
+.em-4 {
+  font-size: 4em;
+}
+
+.vw-5 {
+  font-size: 5vw;
+}
+
+.vh-5 {
+  font-size: 5vh;
+}
+
+.vmin-5 {
   font-size: 5vmin;
 }
 
-.txt-6 {
+.vmax-5 {
+  font-size: 5vmax;
+}
+
+.rem-5 {
+  font-size: 5rem;
+}
+
+.em-5 {
+  font-size: 5em;
+}
+
+.vw-6 {
+  font-size: 6vw;
+}
+
+.vh-6 {
+  font-size: 6vh;
+}
+
+.vmin-6 {
   font-size: 6vmin;
 }
 
-.txt-7 {
+.vmax-6 {
+  font-size: 6vmax;
+}
+
+.rem-6 {
+  font-size: 6rem;
+}
+
+.em-6 {
+  font-size: 6em;
+}
+
+.vw-7 {
+  font-size: 7vw;
+}
+
+.vh-7 {
+  font-size: 7vh;
+}
+
+.vmin-7 {
   font-size: 7vmin;
 }
 
-.txt-8 {
+.vmax-7 {
+  font-size: 7vmax;
+}
+
+.rem-7 {
+  font-size: 7rem;
+}
+
+.em-7 {
+  font-size: 7em;
+}
+
+.vw-8 {
+  font-size: 8vw;
+}
+
+.vh-8 {
+  font-size: 8vh;
+}
+
+.vmin-8 {
   font-size: 8vmin;
 }
 
-.txt-9 {
+.vmax-8 {
+  font-size: 8vmax;
+}
+
+.rem-8 {
+  font-size: 8rem;
+}
+
+.em-8 {
+  font-size: 8em;
+}
+
+.vw-9 {
+  font-size: 9vw;
+}
+
+.vh-9 {
+  font-size: 9vh;
+}
+
+.vmin-9 {
   font-size: 9vmin;
 }
 
-.txt-10 {
+.vmax-9 {
+  font-size: 9vmax;
+}
+
+.rem-9 {
+  font-size: 9rem;
+}
+
+.em-9 {
+  font-size: 9em;
+}
+
+.vw-10 {
+  font-size: 10vw;
+}
+
+.vh-10 {
+  font-size: 10vh;
+}
+
+.vmin-10 {
   font-size: 10vmin;
 }
 
-.txt-11 {
+.vmax-10 {
+  font-size: 10vmax;
+}
+
+.rem-10 {
+  font-size: 10rem;
+}
+
+.em-10 {
+  font-size: 10em;
+}
+
+.vw-11 {
+  font-size: 11vw;
+}
+
+.vh-11 {
+  font-size: 11vh;
+}
+
+.vmin-11 {
   font-size: 11vmin;
 }
 
-.txt-12 {
+.vmax-11 {
+  font-size: 11vmax;
+}
+
+.rem-11 {
+  font-size: 11rem;
+}
+
+.em-11 {
+  font-size: 11em;
+}
+
+.vw-12 {
+  font-size: 12vw;
+}
+
+.vh-12 {
+  font-size: 12vh;
+}
+
+.vmin-12 {
   font-size: 12vmin;
 }
 
-.txt-xs-1 {
+.vmax-12 {
+  font-size: 12vmax;
+}
+
+.rem-12 {
+  font-size: 12rem;
+}
+
+.em-12 {
+  font-size: 12em;
+}
+
+.vw-xs-1 {
+  font-size: 1vw;
+}
+
+.vh-xs-1 {
+  font-size: 1vh;
+}
+
+.vmin-xs-1 {
   font-size: 1vmin;
 }
 
-.txt-xs-2 {
+.vmax-xs-1 {
+  font-size: 1vmax;
+}
+
+.rem-xs-1 {
+  font-size: 1rem;
+}
+
+.em-xs-1 {
+  font-size: 1em;
+}
+
+.vw-xs-2 {
+  font-size: 2vw;
+}
+
+.vh-xs-2 {
+  font-size: 2vh;
+}
+
+.vmin-xs-2 {
   font-size: 2vmin;
 }
 
-.txt-xs-3 {
+.vmax-xs-2 {
+  font-size: 2vmax;
+}
+
+.rem-xs-2 {
+  font-size: 2rem;
+}
+
+.em-xs-2 {
+  font-size: 2em;
+}
+
+.vw-xs-3 {
+  font-size: 3vw;
+}
+
+.vh-xs-3 {
+  font-size: 3vh;
+}
+
+.vmin-xs-3 {
   font-size: 3vmin;
 }
 
-.txt-xs-4 {
+.vmax-xs-3 {
+  font-size: 3vmax;
+}
+
+.rem-xs-3 {
+  font-size: 3rem;
+}
+
+.em-xs-3 {
+  font-size: 3em;
+}
+
+.vw-xs-4 {
+  font-size: 4vw;
+}
+
+.vh-xs-4 {
+  font-size: 4vh;
+}
+
+.vmin-xs-4 {
   font-size: 4vmin;
 }
 
-.txt-xs-5 {
+.vmax-xs-4 {
+  font-size: 4vmax;
+}
+
+.rem-xs-4 {
+  font-size: 4rem;
+}
+
+.em-xs-4 {
+  font-size: 4em;
+}
+
+.vw-xs-5 {
+  font-size: 5vw;
+}
+
+.vh-xs-5 {
+  font-size: 5vh;
+}
+
+.vmin-xs-5 {
   font-size: 5vmin;
 }
 
-.txt-xs-6 {
+.vmax-xs-5 {
+  font-size: 5vmax;
+}
+
+.rem-xs-5 {
+  font-size: 5rem;
+}
+
+.em-xs-5 {
+  font-size: 5em;
+}
+
+.vw-xs-6 {
+  font-size: 6vw;
+}
+
+.vh-xs-6 {
+  font-size: 6vh;
+}
+
+.vmin-xs-6 {
   font-size: 6vmin;
 }
 
-.txt-xs-7 {
+.vmax-xs-6 {
+  font-size: 6vmax;
+}
+
+.rem-xs-6 {
+  font-size: 6rem;
+}
+
+.em-xs-6 {
+  font-size: 6em;
+}
+
+.vw-xs-7 {
+  font-size: 7vw;
+}
+
+.vh-xs-7 {
+  font-size: 7vh;
+}
+
+.vmin-xs-7 {
   font-size: 7vmin;
 }
 
-.txt-xs-8 {
+.vmax-xs-7 {
+  font-size: 7vmax;
+}
+
+.rem-xs-7 {
+  font-size: 7rem;
+}
+
+.em-xs-7 {
+  font-size: 7em;
+}
+
+.vw-xs-8 {
+  font-size: 8vw;
+}
+
+.vh-xs-8 {
+  font-size: 8vh;
+}
+
+.vmin-xs-8 {
   font-size: 8vmin;
 }
 
-.txt-xs-9 {
+.vmax-xs-8 {
+  font-size: 8vmax;
+}
+
+.rem-xs-8 {
+  font-size: 8rem;
+}
+
+.em-xs-8 {
+  font-size: 8em;
+}
+
+.vw-xs-9 {
+  font-size: 9vw;
+}
+
+.vh-xs-9 {
+  font-size: 9vh;
+}
+
+.vmin-xs-9 {
   font-size: 9vmin;
 }
 
-.txt-xs-10 {
+.vmax-xs-9 {
+  font-size: 9vmax;
+}
+
+.rem-xs-9 {
+  font-size: 9rem;
+}
+
+.em-xs-9 {
+  font-size: 9em;
+}
+
+.vw-xs-10 {
+  font-size: 10vw;
+}
+
+.vh-xs-10 {
+  font-size: 10vh;
+}
+
+.vmin-xs-10 {
   font-size: 10vmin;
 }
 
-.txt-xs-11 {
+.vmax-xs-10 {
+  font-size: 10vmax;
+}
+
+.rem-xs-10 {
+  font-size: 10rem;
+}
+
+.em-xs-10 {
+  font-size: 10em;
+}
+
+.vw-xs-11 {
+  font-size: 11vw;
+}
+
+.vh-xs-11 {
+  font-size: 11vh;
+}
+
+.vmin-xs-11 {
   font-size: 11vmin;
 }
 
-.txt-xs-12 {
+.vmax-xs-11 {
+  font-size: 11vmax;
+}
+
+.rem-xs-11 {
+  font-size: 11rem;
+}
+
+.em-xs-11 {
+  font-size: 11em;
+}
+
+.vw-xs-12 {
+  font-size: 12vw;
+}
+
+.vh-xs-12 {
+  font-size: 12vh;
+}
+
+.vmin-xs-12 {
   font-size: 12vmin;
+}
+
+.vmax-xs-12 {
+  font-size: 12vmax;
+}
+
+.rem-xs-12 {
+  font-size: 12rem;
+}
+
+.em-xs-12 {
+  font-size: 12em;
 }
 
 @media (min-width: 576px) {
-  .txt-sm-1 {
+  .vw-sm-1 {
+    font-size: 1vw;
+  }
+
+  .vh-sm-1 {
+    font-size: 1vh;
+  }
+
+  .vmin-sm-1 {
     font-size: 1vmin;
   }
 
-  .txt-sm-2 {
+  .vmax-sm-1 {
+    font-size: 1vmax;
+  }
+
+  .rem-sm-1 {
+    font-size: 1rem;
+  }
+
+  .em-sm-1 {
+    font-size: 1em;
+  }
+
+  .vw-sm-2 {
+    font-size: 2vw;
+  }
+
+  .vh-sm-2 {
+    font-size: 2vh;
+  }
+
+  .vmin-sm-2 {
     font-size: 2vmin;
   }
 
-  .txt-sm-3 {
+  .vmax-sm-2 {
+    font-size: 2vmax;
+  }
+
+  .rem-sm-2 {
+    font-size: 2rem;
+  }
+
+  .em-sm-2 {
+    font-size: 2em;
+  }
+
+  .vw-sm-3 {
+    font-size: 3vw;
+  }
+
+  .vh-sm-3 {
+    font-size: 3vh;
+  }
+
+  .vmin-sm-3 {
     font-size: 3vmin;
   }
 
-  .txt-sm-4 {
+  .vmax-sm-3 {
+    font-size: 3vmax;
+  }
+
+  .rem-sm-3 {
+    font-size: 3rem;
+  }
+
+  .em-sm-3 {
+    font-size: 3em;
+  }
+
+  .vw-sm-4 {
+    font-size: 4vw;
+  }
+
+  .vh-sm-4 {
+    font-size: 4vh;
+  }
+
+  .vmin-sm-4 {
     font-size: 4vmin;
   }
 
-  .txt-sm-5 {
+  .vmax-sm-4 {
+    font-size: 4vmax;
+  }
+
+  .rem-sm-4 {
+    font-size: 4rem;
+  }
+
+  .em-sm-4 {
+    font-size: 4em;
+  }
+
+  .vw-sm-5 {
+    font-size: 5vw;
+  }
+
+  .vh-sm-5 {
+    font-size: 5vh;
+  }
+
+  .vmin-sm-5 {
     font-size: 5vmin;
   }
 
-  .txt-sm-6 {
+  .vmax-sm-5 {
+    font-size: 5vmax;
+  }
+
+  .rem-sm-5 {
+    font-size: 5rem;
+  }
+
+  .em-sm-5 {
+    font-size: 5em;
+  }
+
+  .vw-sm-6 {
+    font-size: 6vw;
+  }
+
+  .vh-sm-6 {
+    font-size: 6vh;
+  }
+
+  .vmin-sm-6 {
     font-size: 6vmin;
   }
 
-  .txt-sm-7 {
+  .vmax-sm-6 {
+    font-size: 6vmax;
+  }
+
+  .rem-sm-6 {
+    font-size: 6rem;
+  }
+
+  .em-sm-6 {
+    font-size: 6em;
+  }
+
+  .vw-sm-7 {
+    font-size: 7vw;
+  }
+
+  .vh-sm-7 {
+    font-size: 7vh;
+  }
+
+  .vmin-sm-7 {
     font-size: 7vmin;
   }
 
-  .txt-sm-8 {
+  .vmax-sm-7 {
+    font-size: 7vmax;
+  }
+
+  .rem-sm-7 {
+    font-size: 7rem;
+  }
+
+  .em-sm-7 {
+    font-size: 7em;
+  }
+
+  .vw-sm-8 {
+    font-size: 8vw;
+  }
+
+  .vh-sm-8 {
+    font-size: 8vh;
+  }
+
+  .vmin-sm-8 {
     font-size: 8vmin;
   }
 
-  .txt-sm-9 {
+  .vmax-sm-8 {
+    font-size: 8vmax;
+  }
+
+  .rem-sm-8 {
+    font-size: 8rem;
+  }
+
+  .em-sm-8 {
+    font-size: 8em;
+  }
+
+  .vw-sm-9 {
+    font-size: 9vw;
+  }
+
+  .vh-sm-9 {
+    font-size: 9vh;
+  }
+
+  .vmin-sm-9 {
     font-size: 9vmin;
   }
 
-  .txt-sm-10 {
+  .vmax-sm-9 {
+    font-size: 9vmax;
+  }
+
+  .rem-sm-9 {
+    font-size: 9rem;
+  }
+
+  .em-sm-9 {
+    font-size: 9em;
+  }
+
+  .vw-sm-10 {
+    font-size: 10vw;
+  }
+
+  .vh-sm-10 {
+    font-size: 10vh;
+  }
+
+  .vmin-sm-10 {
     font-size: 10vmin;
   }
 
-  .txt-sm-11 {
+  .vmax-sm-10 {
+    font-size: 10vmax;
+  }
+
+  .rem-sm-10 {
+    font-size: 10rem;
+  }
+
+  .em-sm-10 {
+    font-size: 10em;
+  }
+
+  .vw-sm-11 {
+    font-size: 11vw;
+  }
+
+  .vh-sm-11 {
+    font-size: 11vh;
+  }
+
+  .vmin-sm-11 {
     font-size: 11vmin;
   }
 
-  .txt-sm-12 {
+  .vmax-sm-11 {
+    font-size: 11vmax;
+  }
+
+  .rem-sm-11 {
+    font-size: 11rem;
+  }
+
+  .em-sm-11 {
+    font-size: 11em;
+  }
+
+  .vw-sm-12 {
+    font-size: 12vw;
+  }
+
+  .vh-sm-12 {
+    font-size: 12vh;
+  }
+
+  .vmin-sm-12 {
     font-size: 12vmin;
+  }
+
+  .vmax-sm-12 {
+    font-size: 12vmax;
+  }
+
+  .rem-sm-12 {
+    font-size: 12rem;
+  }
+
+  .em-sm-12 {
+    font-size: 12em;
   }
 }
 @media (min-width: 768px) {
-  .txt-md-1 {
+  .vw-md-1 {
+    font-size: 1vw;
+  }
+
+  .vh-md-1 {
+    font-size: 1vh;
+  }
+
+  .vmin-md-1 {
     font-size: 1vmin;
   }
 
-  .txt-md-2 {
+  .vmax-md-1 {
+    font-size: 1vmax;
+  }
+
+  .rem-md-1 {
+    font-size: 1rem;
+  }
+
+  .em-md-1 {
+    font-size: 1em;
+  }
+
+  .vw-md-2 {
+    font-size: 2vw;
+  }
+
+  .vh-md-2 {
+    font-size: 2vh;
+  }
+
+  .vmin-md-2 {
     font-size: 2vmin;
   }
 
-  .txt-md-3 {
+  .vmax-md-2 {
+    font-size: 2vmax;
+  }
+
+  .rem-md-2 {
+    font-size: 2rem;
+  }
+
+  .em-md-2 {
+    font-size: 2em;
+  }
+
+  .vw-md-3 {
+    font-size: 3vw;
+  }
+
+  .vh-md-3 {
+    font-size: 3vh;
+  }
+
+  .vmin-md-3 {
     font-size: 3vmin;
   }
 
-  .txt-md-4 {
+  .vmax-md-3 {
+    font-size: 3vmax;
+  }
+
+  .rem-md-3 {
+    font-size: 3rem;
+  }
+
+  .em-md-3 {
+    font-size: 3em;
+  }
+
+  .vw-md-4 {
+    font-size: 4vw;
+  }
+
+  .vh-md-4 {
+    font-size: 4vh;
+  }
+
+  .vmin-md-4 {
     font-size: 4vmin;
   }
 
-  .txt-md-5 {
+  .vmax-md-4 {
+    font-size: 4vmax;
+  }
+
+  .rem-md-4 {
+    font-size: 4rem;
+  }
+
+  .em-md-4 {
+    font-size: 4em;
+  }
+
+  .vw-md-5 {
+    font-size: 5vw;
+  }
+
+  .vh-md-5 {
+    font-size: 5vh;
+  }
+
+  .vmin-md-5 {
     font-size: 5vmin;
   }
 
-  .txt-md-6 {
+  .vmax-md-5 {
+    font-size: 5vmax;
+  }
+
+  .rem-md-5 {
+    font-size: 5rem;
+  }
+
+  .em-md-5 {
+    font-size: 5em;
+  }
+
+  .vw-md-6 {
+    font-size: 6vw;
+  }
+
+  .vh-md-6 {
+    font-size: 6vh;
+  }
+
+  .vmin-md-6 {
     font-size: 6vmin;
   }
 
-  .txt-md-7 {
+  .vmax-md-6 {
+    font-size: 6vmax;
+  }
+
+  .rem-md-6 {
+    font-size: 6rem;
+  }
+
+  .em-md-6 {
+    font-size: 6em;
+  }
+
+  .vw-md-7 {
+    font-size: 7vw;
+  }
+
+  .vh-md-7 {
+    font-size: 7vh;
+  }
+
+  .vmin-md-7 {
     font-size: 7vmin;
   }
 
-  .txt-md-8 {
+  .vmax-md-7 {
+    font-size: 7vmax;
+  }
+
+  .rem-md-7 {
+    font-size: 7rem;
+  }
+
+  .em-md-7 {
+    font-size: 7em;
+  }
+
+  .vw-md-8 {
+    font-size: 8vw;
+  }
+
+  .vh-md-8 {
+    font-size: 8vh;
+  }
+
+  .vmin-md-8 {
     font-size: 8vmin;
   }
 
-  .txt-md-9 {
+  .vmax-md-8 {
+    font-size: 8vmax;
+  }
+
+  .rem-md-8 {
+    font-size: 8rem;
+  }
+
+  .em-md-8 {
+    font-size: 8em;
+  }
+
+  .vw-md-9 {
+    font-size: 9vw;
+  }
+
+  .vh-md-9 {
+    font-size: 9vh;
+  }
+
+  .vmin-md-9 {
     font-size: 9vmin;
   }
 
-  .txt-md-10 {
+  .vmax-md-9 {
+    font-size: 9vmax;
+  }
+
+  .rem-md-9 {
+    font-size: 9rem;
+  }
+
+  .em-md-9 {
+    font-size: 9em;
+  }
+
+  .vw-md-10 {
+    font-size: 10vw;
+  }
+
+  .vh-md-10 {
+    font-size: 10vh;
+  }
+
+  .vmin-md-10 {
     font-size: 10vmin;
   }
 
-  .txt-md-11 {
+  .vmax-md-10 {
+    font-size: 10vmax;
+  }
+
+  .rem-md-10 {
+    font-size: 10rem;
+  }
+
+  .em-md-10 {
+    font-size: 10em;
+  }
+
+  .vw-md-11 {
+    font-size: 11vw;
+  }
+
+  .vh-md-11 {
+    font-size: 11vh;
+  }
+
+  .vmin-md-11 {
     font-size: 11vmin;
   }
 
-  .txt-md-12 {
+  .vmax-md-11 {
+    font-size: 11vmax;
+  }
+
+  .rem-md-11 {
+    font-size: 11rem;
+  }
+
+  .em-md-11 {
+    font-size: 11em;
+  }
+
+  .vw-md-12 {
+    font-size: 12vw;
+  }
+
+  .vh-md-12 {
+    font-size: 12vh;
+  }
+
+  .vmin-md-12 {
     font-size: 12vmin;
+  }
+
+  .vmax-md-12 {
+    font-size: 12vmax;
+  }
+
+  .rem-md-12 {
+    font-size: 12rem;
+  }
+
+  .em-md-12 {
+    font-size: 12em;
   }
 }
 @media (min-width: 992px) {
-  .txt-lg-1 {
+  .vw-lg-1 {
+    font-size: 1vw;
+  }
+
+  .vh-lg-1 {
+    font-size: 1vh;
+  }
+
+  .vmin-lg-1 {
     font-size: 1vmin;
   }
 
-  .txt-lg-2 {
+  .vmax-lg-1 {
+    font-size: 1vmax;
+  }
+
+  .rem-lg-1 {
+    font-size: 1rem;
+  }
+
+  .em-lg-1 {
+    font-size: 1em;
+  }
+
+  .vw-lg-2 {
+    font-size: 2vw;
+  }
+
+  .vh-lg-2 {
+    font-size: 2vh;
+  }
+
+  .vmin-lg-2 {
     font-size: 2vmin;
   }
 
-  .txt-lg-3 {
+  .vmax-lg-2 {
+    font-size: 2vmax;
+  }
+
+  .rem-lg-2 {
+    font-size: 2rem;
+  }
+
+  .em-lg-2 {
+    font-size: 2em;
+  }
+
+  .vw-lg-3 {
+    font-size: 3vw;
+  }
+
+  .vh-lg-3 {
+    font-size: 3vh;
+  }
+
+  .vmin-lg-3 {
     font-size: 3vmin;
   }
 
-  .txt-lg-4 {
+  .vmax-lg-3 {
+    font-size: 3vmax;
+  }
+
+  .rem-lg-3 {
+    font-size: 3rem;
+  }
+
+  .em-lg-3 {
+    font-size: 3em;
+  }
+
+  .vw-lg-4 {
+    font-size: 4vw;
+  }
+
+  .vh-lg-4 {
+    font-size: 4vh;
+  }
+
+  .vmin-lg-4 {
     font-size: 4vmin;
   }
 
-  .txt-lg-5 {
+  .vmax-lg-4 {
+    font-size: 4vmax;
+  }
+
+  .rem-lg-4 {
+    font-size: 4rem;
+  }
+
+  .em-lg-4 {
+    font-size: 4em;
+  }
+
+  .vw-lg-5 {
+    font-size: 5vw;
+  }
+
+  .vh-lg-5 {
+    font-size: 5vh;
+  }
+
+  .vmin-lg-5 {
     font-size: 5vmin;
   }
 
-  .txt-lg-6 {
+  .vmax-lg-5 {
+    font-size: 5vmax;
+  }
+
+  .rem-lg-5 {
+    font-size: 5rem;
+  }
+
+  .em-lg-5 {
+    font-size: 5em;
+  }
+
+  .vw-lg-6 {
+    font-size: 6vw;
+  }
+
+  .vh-lg-6 {
+    font-size: 6vh;
+  }
+
+  .vmin-lg-6 {
     font-size: 6vmin;
   }
 
-  .txt-lg-7 {
+  .vmax-lg-6 {
+    font-size: 6vmax;
+  }
+
+  .rem-lg-6 {
+    font-size: 6rem;
+  }
+
+  .em-lg-6 {
+    font-size: 6em;
+  }
+
+  .vw-lg-7 {
+    font-size: 7vw;
+  }
+
+  .vh-lg-7 {
+    font-size: 7vh;
+  }
+
+  .vmin-lg-7 {
     font-size: 7vmin;
   }
 
-  .txt-lg-8 {
+  .vmax-lg-7 {
+    font-size: 7vmax;
+  }
+
+  .rem-lg-7 {
+    font-size: 7rem;
+  }
+
+  .em-lg-7 {
+    font-size: 7em;
+  }
+
+  .vw-lg-8 {
+    font-size: 8vw;
+  }
+
+  .vh-lg-8 {
+    font-size: 8vh;
+  }
+
+  .vmin-lg-8 {
     font-size: 8vmin;
   }
 
-  .txt-lg-9 {
+  .vmax-lg-8 {
+    font-size: 8vmax;
+  }
+
+  .rem-lg-8 {
+    font-size: 8rem;
+  }
+
+  .em-lg-8 {
+    font-size: 8em;
+  }
+
+  .vw-lg-9 {
+    font-size: 9vw;
+  }
+
+  .vh-lg-9 {
+    font-size: 9vh;
+  }
+
+  .vmin-lg-9 {
     font-size: 9vmin;
   }
 
-  .txt-lg-10 {
+  .vmax-lg-9 {
+    font-size: 9vmax;
+  }
+
+  .rem-lg-9 {
+    font-size: 9rem;
+  }
+
+  .em-lg-9 {
+    font-size: 9em;
+  }
+
+  .vw-lg-10 {
+    font-size: 10vw;
+  }
+
+  .vh-lg-10 {
+    font-size: 10vh;
+  }
+
+  .vmin-lg-10 {
     font-size: 10vmin;
   }
 
-  .txt-lg-11 {
+  .vmax-lg-10 {
+    font-size: 10vmax;
+  }
+
+  .rem-lg-10 {
+    font-size: 10rem;
+  }
+
+  .em-lg-10 {
+    font-size: 10em;
+  }
+
+  .vw-lg-11 {
+    font-size: 11vw;
+  }
+
+  .vh-lg-11 {
+    font-size: 11vh;
+  }
+
+  .vmin-lg-11 {
     font-size: 11vmin;
   }
 
-  .txt-lg-12 {
+  .vmax-lg-11 {
+    font-size: 11vmax;
+  }
+
+  .rem-lg-11 {
+    font-size: 11rem;
+  }
+
+  .em-lg-11 {
+    font-size: 11em;
+  }
+
+  .vw-lg-12 {
+    font-size: 12vw;
+  }
+
+  .vh-lg-12 {
+    font-size: 12vh;
+  }
+
+  .vmin-lg-12 {
     font-size: 12vmin;
+  }
+
+  .vmax-lg-12 {
+    font-size: 12vmax;
+  }
+
+  .rem-lg-12 {
+    font-size: 12rem;
+  }
+
+  .em-lg-12 {
+    font-size: 12em;
   }
 }
 @media (min-width: 1200px) {
-  .txt-xl-1 {
+  .vw-xl-1 {
+    font-size: 1vw;
+  }
+
+  .vh-xl-1 {
+    font-size: 1vh;
+  }
+
+  .vmin-xl-1 {
     font-size: 1vmin;
   }
 
-  .txt-xl-2 {
+  .vmax-xl-1 {
+    font-size: 1vmax;
+  }
+
+  .rem-xl-1 {
+    font-size: 1rem;
+  }
+
+  .em-xl-1 {
+    font-size: 1em;
+  }
+
+  .vw-xl-2 {
+    font-size: 2vw;
+  }
+
+  .vh-xl-2 {
+    font-size: 2vh;
+  }
+
+  .vmin-xl-2 {
     font-size: 2vmin;
   }
 
-  .txt-xl-3 {
+  .vmax-xl-2 {
+    font-size: 2vmax;
+  }
+
+  .rem-xl-2 {
+    font-size: 2rem;
+  }
+
+  .em-xl-2 {
+    font-size: 2em;
+  }
+
+  .vw-xl-3 {
+    font-size: 3vw;
+  }
+
+  .vh-xl-3 {
+    font-size: 3vh;
+  }
+
+  .vmin-xl-3 {
     font-size: 3vmin;
   }
 
-  .txt-xl-4 {
+  .vmax-xl-3 {
+    font-size: 3vmax;
+  }
+
+  .rem-xl-3 {
+    font-size: 3rem;
+  }
+
+  .em-xl-3 {
+    font-size: 3em;
+  }
+
+  .vw-xl-4 {
+    font-size: 4vw;
+  }
+
+  .vh-xl-4 {
+    font-size: 4vh;
+  }
+
+  .vmin-xl-4 {
     font-size: 4vmin;
   }
 
-  .txt-xl-5 {
+  .vmax-xl-4 {
+    font-size: 4vmax;
+  }
+
+  .rem-xl-4 {
+    font-size: 4rem;
+  }
+
+  .em-xl-4 {
+    font-size: 4em;
+  }
+
+  .vw-xl-5 {
+    font-size: 5vw;
+  }
+
+  .vh-xl-5 {
+    font-size: 5vh;
+  }
+
+  .vmin-xl-5 {
     font-size: 5vmin;
   }
 
-  .txt-xl-6 {
+  .vmax-xl-5 {
+    font-size: 5vmax;
+  }
+
+  .rem-xl-5 {
+    font-size: 5rem;
+  }
+
+  .em-xl-5 {
+    font-size: 5em;
+  }
+
+  .vw-xl-6 {
+    font-size: 6vw;
+  }
+
+  .vh-xl-6 {
+    font-size: 6vh;
+  }
+
+  .vmin-xl-6 {
     font-size: 6vmin;
   }
 
-  .txt-xl-7 {
+  .vmax-xl-6 {
+    font-size: 6vmax;
+  }
+
+  .rem-xl-6 {
+    font-size: 6rem;
+  }
+
+  .em-xl-6 {
+    font-size: 6em;
+  }
+
+  .vw-xl-7 {
+    font-size: 7vw;
+  }
+
+  .vh-xl-7 {
+    font-size: 7vh;
+  }
+
+  .vmin-xl-7 {
     font-size: 7vmin;
   }
 
-  .txt-xl-8 {
+  .vmax-xl-7 {
+    font-size: 7vmax;
+  }
+
+  .rem-xl-7 {
+    font-size: 7rem;
+  }
+
+  .em-xl-7 {
+    font-size: 7em;
+  }
+
+  .vw-xl-8 {
+    font-size: 8vw;
+  }
+
+  .vh-xl-8 {
+    font-size: 8vh;
+  }
+
+  .vmin-xl-8 {
     font-size: 8vmin;
   }
 
-  .txt-xl-9 {
+  .vmax-xl-8 {
+    font-size: 8vmax;
+  }
+
+  .rem-xl-8 {
+    font-size: 8rem;
+  }
+
+  .em-xl-8 {
+    font-size: 8em;
+  }
+
+  .vw-xl-9 {
+    font-size: 9vw;
+  }
+
+  .vh-xl-9 {
+    font-size: 9vh;
+  }
+
+  .vmin-xl-9 {
     font-size: 9vmin;
   }
 
-  .txt-xl-10 {
+  .vmax-xl-9 {
+    font-size: 9vmax;
+  }
+
+  .rem-xl-9 {
+    font-size: 9rem;
+  }
+
+  .em-xl-9 {
+    font-size: 9em;
+  }
+
+  .vw-xl-10 {
+    font-size: 10vw;
+  }
+
+  .vh-xl-10 {
+    font-size: 10vh;
+  }
+
+  .vmin-xl-10 {
     font-size: 10vmin;
   }
 
-  .txt-xl-11 {
+  .vmax-xl-10 {
+    font-size: 10vmax;
+  }
+
+  .rem-xl-10 {
+    font-size: 10rem;
+  }
+
+  .em-xl-10 {
+    font-size: 10em;
+  }
+
+  .vw-xl-11 {
+    font-size: 11vw;
+  }
+
+  .vh-xl-11 {
+    font-size: 11vh;
+  }
+
+  .vmin-xl-11 {
     font-size: 11vmin;
   }
 
-  .txt-xl-12 {
+  .vmax-xl-11 {
+    font-size: 11vmax;
+  }
+
+  .rem-xl-11 {
+    font-size: 11rem;
+  }
+
+  .em-xl-11 {
+    font-size: 11em;
+  }
+
+  .vw-xl-12 {
+    font-size: 12vw;
+  }
+
+  .vh-xl-12 {
+    font-size: 12vh;
+  }
+
+  .vmin-xl-12 {
     font-size: 12vmin;
+  }
+
+  .vmax-xl-12 {
+    font-size: 12vmax;
+  }
+
+  .rem-xl-12 {
+    font-size: 12rem;
+  }
+
+  .em-xl-12 {
+    font-size: 12em;
   }
 }
 @media (min-width: 1400px) {
-  .txt-xxl-1 {
+  .vw-xxl-1 {
+    font-size: 1vw;
+  }
+
+  .vh-xxl-1 {
+    font-size: 1vh;
+  }
+
+  .vmin-xxl-1 {
     font-size: 1vmin;
   }
 
-  .txt-xxl-2 {
+  .vmax-xxl-1 {
+    font-size: 1vmax;
+  }
+
+  .rem-xxl-1 {
+    font-size: 1rem;
+  }
+
+  .em-xxl-1 {
+    font-size: 1em;
+  }
+
+  .vw-xxl-2 {
+    font-size: 2vw;
+  }
+
+  .vh-xxl-2 {
+    font-size: 2vh;
+  }
+
+  .vmin-xxl-2 {
     font-size: 2vmin;
   }
 
-  .txt-xxl-3 {
+  .vmax-xxl-2 {
+    font-size: 2vmax;
+  }
+
+  .rem-xxl-2 {
+    font-size: 2rem;
+  }
+
+  .em-xxl-2 {
+    font-size: 2em;
+  }
+
+  .vw-xxl-3 {
+    font-size: 3vw;
+  }
+
+  .vh-xxl-3 {
+    font-size: 3vh;
+  }
+
+  .vmin-xxl-3 {
     font-size: 3vmin;
   }
 
-  .txt-xxl-4 {
+  .vmax-xxl-3 {
+    font-size: 3vmax;
+  }
+
+  .rem-xxl-3 {
+    font-size: 3rem;
+  }
+
+  .em-xxl-3 {
+    font-size: 3em;
+  }
+
+  .vw-xxl-4 {
+    font-size: 4vw;
+  }
+
+  .vh-xxl-4 {
+    font-size: 4vh;
+  }
+
+  .vmin-xxl-4 {
     font-size: 4vmin;
   }
 
-  .txt-xxl-5 {
+  .vmax-xxl-4 {
+    font-size: 4vmax;
+  }
+
+  .rem-xxl-4 {
+    font-size: 4rem;
+  }
+
+  .em-xxl-4 {
+    font-size: 4em;
+  }
+
+  .vw-xxl-5 {
+    font-size: 5vw;
+  }
+
+  .vh-xxl-5 {
+    font-size: 5vh;
+  }
+
+  .vmin-xxl-5 {
     font-size: 5vmin;
   }
 
-  .txt-xxl-6 {
+  .vmax-xxl-5 {
+    font-size: 5vmax;
+  }
+
+  .rem-xxl-5 {
+    font-size: 5rem;
+  }
+
+  .em-xxl-5 {
+    font-size: 5em;
+  }
+
+  .vw-xxl-6 {
+    font-size: 6vw;
+  }
+
+  .vh-xxl-6 {
+    font-size: 6vh;
+  }
+
+  .vmin-xxl-6 {
     font-size: 6vmin;
   }
 
-  .txt-xxl-7 {
+  .vmax-xxl-6 {
+    font-size: 6vmax;
+  }
+
+  .rem-xxl-6 {
+    font-size: 6rem;
+  }
+
+  .em-xxl-6 {
+    font-size: 6em;
+  }
+
+  .vw-xxl-7 {
+    font-size: 7vw;
+  }
+
+  .vh-xxl-7 {
+    font-size: 7vh;
+  }
+
+  .vmin-xxl-7 {
     font-size: 7vmin;
   }
 
-  .txt-xxl-8 {
+  .vmax-xxl-7 {
+    font-size: 7vmax;
+  }
+
+  .rem-xxl-7 {
+    font-size: 7rem;
+  }
+
+  .em-xxl-7 {
+    font-size: 7em;
+  }
+
+  .vw-xxl-8 {
+    font-size: 8vw;
+  }
+
+  .vh-xxl-8 {
+    font-size: 8vh;
+  }
+
+  .vmin-xxl-8 {
     font-size: 8vmin;
   }
 
-  .txt-xxl-9 {
+  .vmax-xxl-8 {
+    font-size: 8vmax;
+  }
+
+  .rem-xxl-8 {
+    font-size: 8rem;
+  }
+
+  .em-xxl-8 {
+    font-size: 8em;
+  }
+
+  .vw-xxl-9 {
+    font-size: 9vw;
+  }
+
+  .vh-xxl-9 {
+    font-size: 9vh;
+  }
+
+  .vmin-xxl-9 {
     font-size: 9vmin;
   }
 
-  .txt-xxl-10 {
+  .vmax-xxl-9 {
+    font-size: 9vmax;
+  }
+
+  .rem-xxl-9 {
+    font-size: 9rem;
+  }
+
+  .em-xxl-9 {
+    font-size: 9em;
+  }
+
+  .vw-xxl-10 {
+    font-size: 10vw;
+  }
+
+  .vh-xxl-10 {
+    font-size: 10vh;
+  }
+
+  .vmin-xxl-10 {
     font-size: 10vmin;
   }
 
-  .txt-xxl-11 {
+  .vmax-xxl-10 {
+    font-size: 10vmax;
+  }
+
+  .rem-xxl-10 {
+    font-size: 10rem;
+  }
+
+  .em-xxl-10 {
+    font-size: 10em;
+  }
+
+  .vw-xxl-11 {
+    font-size: 11vw;
+  }
+
+  .vh-xxl-11 {
+    font-size: 11vh;
+  }
+
+  .vmin-xxl-11 {
     font-size: 11vmin;
   }
 
-  .txt-xxl-12 {
+  .vmax-xxl-11 {
+    font-size: 11vmax;
+  }
+
+  .rem-xxl-11 {
+    font-size: 11rem;
+  }
+
+  .em-xxl-11 {
+    font-size: 11em;
+  }
+
+  .vw-xxl-12 {
+    font-size: 12vw;
+  }
+
+  .vh-xxl-12 {
+    font-size: 12vh;
+  }
+
+  .vmin-xxl-12 {
     font-size: 12vmin;
+  }
+
+  .vmax-xxl-12 {
+    font-size: 12vmax;
+  }
+
+  .rem-xxl-12 {
+    font-size: 12rem;
+  }
+
+  .em-xxl-12 {
+    font-size: 12em;
   }
 }
