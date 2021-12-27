@@ -17915,11 +17915,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-1 {
-  font-size: 1rem;
+  font-size: 0.5rem;
 }
 
 .em-1 {
-  font-size: 1em;
+  font-size: 0.5em;
 }
 
 .vw-2 {
@@ -17939,11 +17939,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-2 {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .em-2 {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 .vw-3 {
@@ -17963,11 +17963,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-3 {
-  font-size: 3rem;
+  font-size: 1.5rem;
 }
 
 .em-3 {
-  font-size: 3em;
+  font-size: 1.5em;
 }
 
 .vw-4 {
@@ -17987,11 +17987,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-4 {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .em-4 {
-  font-size: 4em;
+  font-size: 2em;
 }
 
 .vw-5 {
@@ -18011,11 +18011,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-5 {
-  font-size: 5rem;
+  font-size: 2.5rem;
 }
 
 .em-5 {
-  font-size: 5em;
+  font-size: 2.5em;
 }
 
 .vw-6 {
@@ -18035,11 +18035,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-6 {
-  font-size: 6rem;
+  font-size: 3rem;
 }
 
 .em-6 {
-  font-size: 6em;
+  font-size: 3em;
 }
 
 .vw-7 {
@@ -18059,11 +18059,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-7 {
-  font-size: 7rem;
+  font-size: 3.5rem;
 }
 
 .em-7 {
-  font-size: 7em;
+  font-size: 3.5em;
 }
 
 .vw-8 {
@@ -18083,11 +18083,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-8 {
-  font-size: 8rem;
+  font-size: 4rem;
 }
 
 .em-8 {
-  font-size: 8em;
+  font-size: 4em;
 }
 
 .vw-9 {
@@ -18107,11 +18107,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-9 {
-  font-size: 9rem;
+  font-size: 4.5rem;
 }
 
 .em-9 {
-  font-size: 9em;
+  font-size: 4.5em;
 }
 
 .vw-10 {
@@ -18131,11 +18131,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-10 {
-  font-size: 10rem;
+  font-size: 5rem;
 }
 
 .em-10 {
-  font-size: 10em;
+  font-size: 5em;
 }
 
 .vw-11 {
@@ -18155,11 +18155,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-11 {
-  font-size: 11rem;
+  font-size: 5.5rem;
 }
 
 .em-11 {
-  font-size: 11em;
+  font-size: 5.5em;
 }
 
 .vw-12 {
@@ -18179,11 +18179,203 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-12 {
-  font-size: 12rem;
+  font-size: 6rem;
 }
 
 .em-12 {
-  font-size: 12em;
+  font-size: 6em;
+}
+
+.vw-13 {
+  font-size: 13vw;
+}
+
+.vh-13 {
+  font-size: 13vh;
+}
+
+.vmin-13 {
+  font-size: 13vmin;
+}
+
+.vmax-13 {
+  font-size: 13vmax;
+}
+
+.rem-13 {
+  font-size: 6.5rem;
+}
+
+.em-13 {
+  font-size: 6.5em;
+}
+
+.vw-14 {
+  font-size: 14vw;
+}
+
+.vh-14 {
+  font-size: 14vh;
+}
+
+.vmin-14 {
+  font-size: 14vmin;
+}
+
+.vmax-14 {
+  font-size: 14vmax;
+}
+
+.rem-14 {
+  font-size: 7rem;
+}
+
+.em-14 {
+  font-size: 7em;
+}
+
+.vw-15 {
+  font-size: 15vw;
+}
+
+.vh-15 {
+  font-size: 15vh;
+}
+
+.vmin-15 {
+  font-size: 15vmin;
+}
+
+.vmax-15 {
+  font-size: 15vmax;
+}
+
+.rem-15 {
+  font-size: 7.5rem;
+}
+
+.em-15 {
+  font-size: 7.5em;
+}
+
+.vw-16 {
+  font-size: 16vw;
+}
+
+.vh-16 {
+  font-size: 16vh;
+}
+
+.vmin-16 {
+  font-size: 16vmin;
+}
+
+.vmax-16 {
+  font-size: 16vmax;
+}
+
+.rem-16 {
+  font-size: 8rem;
+}
+
+.em-16 {
+  font-size: 8em;
+}
+
+.vw-17 {
+  font-size: 17vw;
+}
+
+.vh-17 {
+  font-size: 17vh;
+}
+
+.vmin-17 {
+  font-size: 17vmin;
+}
+
+.vmax-17 {
+  font-size: 17vmax;
+}
+
+.rem-17 {
+  font-size: 8.5rem;
+}
+
+.em-17 {
+  font-size: 8.5em;
+}
+
+.vw-18 {
+  font-size: 18vw;
+}
+
+.vh-18 {
+  font-size: 18vh;
+}
+
+.vmin-18 {
+  font-size: 18vmin;
+}
+
+.vmax-18 {
+  font-size: 18vmax;
+}
+
+.rem-18 {
+  font-size: 9rem;
+}
+
+.em-18 {
+  font-size: 9em;
+}
+
+.vw-19 {
+  font-size: 19vw;
+}
+
+.vh-19 {
+  font-size: 19vh;
+}
+
+.vmin-19 {
+  font-size: 19vmin;
+}
+
+.vmax-19 {
+  font-size: 19vmax;
+}
+
+.rem-19 {
+  font-size: 9.5rem;
+}
+
+.em-19 {
+  font-size: 9.5em;
+}
+
+.vw-20 {
+  font-size: 20vw;
+}
+
+.vh-20 {
+  font-size: 20vh;
+}
+
+.vmin-20 {
+  font-size: 20vmin;
+}
+
+.vmax-20 {
+  font-size: 20vmax;
+}
+
+.rem-20 {
+  font-size: 10rem;
+}
+
+.em-20 {
+  font-size: 10em;
 }
 
 .vw-xs-1 {
@@ -18203,11 +18395,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-1 {
-  font-size: 1rem;
+  font-size: 0.5rem;
 }
 
 .em-xs-1 {
-  font-size: 1em;
+  font-size: 0.5em;
 }
 
 .vw-xs-2 {
@@ -18227,11 +18419,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-2 {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .em-xs-2 {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 .vw-xs-3 {
@@ -18251,11 +18443,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-3 {
-  font-size: 3rem;
+  font-size: 1.5rem;
 }
 
 .em-xs-3 {
-  font-size: 3em;
+  font-size: 1.5em;
 }
 
 .vw-xs-4 {
@@ -18275,11 +18467,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-4 {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .em-xs-4 {
-  font-size: 4em;
+  font-size: 2em;
 }
 
 .vw-xs-5 {
@@ -18299,11 +18491,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-5 {
-  font-size: 5rem;
+  font-size: 2.5rem;
 }
 
 .em-xs-5 {
-  font-size: 5em;
+  font-size: 2.5em;
 }
 
 .vw-xs-6 {
@@ -18323,11 +18515,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-6 {
-  font-size: 6rem;
+  font-size: 3rem;
 }
 
 .em-xs-6 {
-  font-size: 6em;
+  font-size: 3em;
 }
 
 .vw-xs-7 {
@@ -18347,11 +18539,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-7 {
-  font-size: 7rem;
+  font-size: 3.5rem;
 }
 
 .em-xs-7 {
-  font-size: 7em;
+  font-size: 3.5em;
 }
 
 .vw-xs-8 {
@@ -18371,11 +18563,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-8 {
-  font-size: 8rem;
+  font-size: 4rem;
 }
 
 .em-xs-8 {
-  font-size: 8em;
+  font-size: 4em;
 }
 
 .vw-xs-9 {
@@ -18395,11 +18587,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-9 {
-  font-size: 9rem;
+  font-size: 4.5rem;
 }
 
 .em-xs-9 {
-  font-size: 9em;
+  font-size: 4.5em;
 }
 
 .vw-xs-10 {
@@ -18419,11 +18611,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-10 {
-  font-size: 10rem;
+  font-size: 5rem;
 }
 
 .em-xs-10 {
-  font-size: 10em;
+  font-size: 5em;
 }
 
 .vw-xs-11 {
@@ -18443,11 +18635,11 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-11 {
-  font-size: 11rem;
+  font-size: 5.5rem;
 }
 
 .em-xs-11 {
-  font-size: 11em;
+  font-size: 5.5em;
 }
 
 .vw-xs-12 {
@@ -18467,11 +18659,203 @@ readers do not read off random characters that represent icons */
 }
 
 .rem-xs-12 {
-  font-size: 12rem;
+  font-size: 6rem;
 }
 
 .em-xs-12 {
-  font-size: 12em;
+  font-size: 6em;
+}
+
+.vw-xs-13 {
+  font-size: 13vw;
+}
+
+.vh-xs-13 {
+  font-size: 13vh;
+}
+
+.vmin-xs-13 {
+  font-size: 13vmin;
+}
+
+.vmax-xs-13 {
+  font-size: 13vmax;
+}
+
+.rem-xs-13 {
+  font-size: 6.5rem;
+}
+
+.em-xs-13 {
+  font-size: 6.5em;
+}
+
+.vw-xs-14 {
+  font-size: 14vw;
+}
+
+.vh-xs-14 {
+  font-size: 14vh;
+}
+
+.vmin-xs-14 {
+  font-size: 14vmin;
+}
+
+.vmax-xs-14 {
+  font-size: 14vmax;
+}
+
+.rem-xs-14 {
+  font-size: 7rem;
+}
+
+.em-xs-14 {
+  font-size: 7em;
+}
+
+.vw-xs-15 {
+  font-size: 15vw;
+}
+
+.vh-xs-15 {
+  font-size: 15vh;
+}
+
+.vmin-xs-15 {
+  font-size: 15vmin;
+}
+
+.vmax-xs-15 {
+  font-size: 15vmax;
+}
+
+.rem-xs-15 {
+  font-size: 7.5rem;
+}
+
+.em-xs-15 {
+  font-size: 7.5em;
+}
+
+.vw-xs-16 {
+  font-size: 16vw;
+}
+
+.vh-xs-16 {
+  font-size: 16vh;
+}
+
+.vmin-xs-16 {
+  font-size: 16vmin;
+}
+
+.vmax-xs-16 {
+  font-size: 16vmax;
+}
+
+.rem-xs-16 {
+  font-size: 8rem;
+}
+
+.em-xs-16 {
+  font-size: 8em;
+}
+
+.vw-xs-17 {
+  font-size: 17vw;
+}
+
+.vh-xs-17 {
+  font-size: 17vh;
+}
+
+.vmin-xs-17 {
+  font-size: 17vmin;
+}
+
+.vmax-xs-17 {
+  font-size: 17vmax;
+}
+
+.rem-xs-17 {
+  font-size: 8.5rem;
+}
+
+.em-xs-17 {
+  font-size: 8.5em;
+}
+
+.vw-xs-18 {
+  font-size: 18vw;
+}
+
+.vh-xs-18 {
+  font-size: 18vh;
+}
+
+.vmin-xs-18 {
+  font-size: 18vmin;
+}
+
+.vmax-xs-18 {
+  font-size: 18vmax;
+}
+
+.rem-xs-18 {
+  font-size: 9rem;
+}
+
+.em-xs-18 {
+  font-size: 9em;
+}
+
+.vw-xs-19 {
+  font-size: 19vw;
+}
+
+.vh-xs-19 {
+  font-size: 19vh;
+}
+
+.vmin-xs-19 {
+  font-size: 19vmin;
+}
+
+.vmax-xs-19 {
+  font-size: 19vmax;
+}
+
+.rem-xs-19 {
+  font-size: 9.5rem;
+}
+
+.em-xs-19 {
+  font-size: 9.5em;
+}
+
+.vw-xs-20 {
+  font-size: 20vw;
+}
+
+.vh-xs-20 {
+  font-size: 20vh;
+}
+
+.vmin-xs-20 {
+  font-size: 20vmin;
+}
+
+.vmax-xs-20 {
+  font-size: 20vmax;
+}
+
+.rem-xs-20 {
+  font-size: 10rem;
+}
+
+.em-xs-20 {
+  font-size: 10em;
 }
 
 @media (min-width: 576px) {
@@ -18492,11 +18876,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-1 {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   .em-sm-1 {
-    font-size: 1em;
+    font-size: 0.5em;
   }
 
   .vw-sm-2 {
@@ -18516,11 +18900,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .em-sm-2 {
-    font-size: 2em;
+    font-size: 1em;
   }
 
   .vw-sm-3 {
@@ -18540,11 +18924,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-3 {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .em-sm-3 {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 
   .vw-sm-4 {
@@ -18564,11 +18948,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-4 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 
   .em-sm-4 {
-    font-size: 4em;
+    font-size: 2em;
   }
 
   .vw-sm-5 {
@@ -18588,11 +18972,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-5 {
-    font-size: 5rem;
+    font-size: 2.5rem;
   }
 
   .em-sm-5 {
-    font-size: 5em;
+    font-size: 2.5em;
   }
 
   .vw-sm-6 {
@@ -18612,11 +18996,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-6 {
-    font-size: 6rem;
+    font-size: 3rem;
   }
 
   .em-sm-6 {
-    font-size: 6em;
+    font-size: 3em;
   }
 
   .vw-sm-7 {
@@ -18636,11 +19020,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-7 {
-    font-size: 7rem;
+    font-size: 3.5rem;
   }
 
   .em-sm-7 {
-    font-size: 7em;
+    font-size: 3.5em;
   }
 
   .vw-sm-8 {
@@ -18660,11 +19044,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-8 {
-    font-size: 8rem;
+    font-size: 4rem;
   }
 
   .em-sm-8 {
-    font-size: 8em;
+    font-size: 4em;
   }
 
   .vw-sm-9 {
@@ -18684,11 +19068,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-9 {
-    font-size: 9rem;
+    font-size: 4.5rem;
   }
 
   .em-sm-9 {
-    font-size: 9em;
+    font-size: 4.5em;
   }
 
   .vw-sm-10 {
@@ -18708,11 +19092,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-10 {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   .em-sm-10 {
-    font-size: 10em;
+    font-size: 5em;
   }
 
   .vw-sm-11 {
@@ -18732,11 +19116,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-11 {
-    font-size: 11rem;
+    font-size: 5.5rem;
   }
 
   .em-sm-11 {
-    font-size: 11em;
+    font-size: 5.5em;
   }
 
   .vw-sm-12 {
@@ -18756,11 +19140,203 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-sm-12 {
-    font-size: 12rem;
+    font-size: 6rem;
   }
 
   .em-sm-12 {
-    font-size: 12em;
+    font-size: 6em;
+  }
+
+  .vw-sm-13 {
+    font-size: 13vw;
+  }
+
+  .vh-sm-13 {
+    font-size: 13vh;
+  }
+
+  .vmin-sm-13 {
+    font-size: 13vmin;
+  }
+
+  .vmax-sm-13 {
+    font-size: 13vmax;
+  }
+
+  .rem-sm-13 {
+    font-size: 6.5rem;
+  }
+
+  .em-sm-13 {
+    font-size: 6.5em;
+  }
+
+  .vw-sm-14 {
+    font-size: 14vw;
+  }
+
+  .vh-sm-14 {
+    font-size: 14vh;
+  }
+
+  .vmin-sm-14 {
+    font-size: 14vmin;
+  }
+
+  .vmax-sm-14 {
+    font-size: 14vmax;
+  }
+
+  .rem-sm-14 {
+    font-size: 7rem;
+  }
+
+  .em-sm-14 {
+    font-size: 7em;
+  }
+
+  .vw-sm-15 {
+    font-size: 15vw;
+  }
+
+  .vh-sm-15 {
+    font-size: 15vh;
+  }
+
+  .vmin-sm-15 {
+    font-size: 15vmin;
+  }
+
+  .vmax-sm-15 {
+    font-size: 15vmax;
+  }
+
+  .rem-sm-15 {
+    font-size: 7.5rem;
+  }
+
+  .em-sm-15 {
+    font-size: 7.5em;
+  }
+
+  .vw-sm-16 {
+    font-size: 16vw;
+  }
+
+  .vh-sm-16 {
+    font-size: 16vh;
+  }
+
+  .vmin-sm-16 {
+    font-size: 16vmin;
+  }
+
+  .vmax-sm-16 {
+    font-size: 16vmax;
+  }
+
+  .rem-sm-16 {
+    font-size: 8rem;
+  }
+
+  .em-sm-16 {
+    font-size: 8em;
+  }
+
+  .vw-sm-17 {
+    font-size: 17vw;
+  }
+
+  .vh-sm-17 {
+    font-size: 17vh;
+  }
+
+  .vmin-sm-17 {
+    font-size: 17vmin;
+  }
+
+  .vmax-sm-17 {
+    font-size: 17vmax;
+  }
+
+  .rem-sm-17 {
+    font-size: 8.5rem;
+  }
+
+  .em-sm-17 {
+    font-size: 8.5em;
+  }
+
+  .vw-sm-18 {
+    font-size: 18vw;
+  }
+
+  .vh-sm-18 {
+    font-size: 18vh;
+  }
+
+  .vmin-sm-18 {
+    font-size: 18vmin;
+  }
+
+  .vmax-sm-18 {
+    font-size: 18vmax;
+  }
+
+  .rem-sm-18 {
+    font-size: 9rem;
+  }
+
+  .em-sm-18 {
+    font-size: 9em;
+  }
+
+  .vw-sm-19 {
+    font-size: 19vw;
+  }
+
+  .vh-sm-19 {
+    font-size: 19vh;
+  }
+
+  .vmin-sm-19 {
+    font-size: 19vmin;
+  }
+
+  .vmax-sm-19 {
+    font-size: 19vmax;
+  }
+
+  .rem-sm-19 {
+    font-size: 9.5rem;
+  }
+
+  .em-sm-19 {
+    font-size: 9.5em;
+  }
+
+  .vw-sm-20 {
+    font-size: 20vw;
+  }
+
+  .vh-sm-20 {
+    font-size: 20vh;
+  }
+
+  .vmin-sm-20 {
+    font-size: 20vmin;
+  }
+
+  .vmax-sm-20 {
+    font-size: 20vmax;
+  }
+
+  .rem-sm-20 {
+    font-size: 10rem;
+  }
+
+  .em-sm-20 {
+    font-size: 10em;
   }
 }
 @media (min-width: 768px) {
@@ -18781,11 +19357,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-1 {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   .em-md-1 {
-    font-size: 1em;
+    font-size: 0.5em;
   }
 
   .vw-md-2 {
@@ -18805,11 +19381,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .em-md-2 {
-    font-size: 2em;
+    font-size: 1em;
   }
 
   .vw-md-3 {
@@ -18829,11 +19405,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-3 {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .em-md-3 {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 
   .vw-md-4 {
@@ -18853,11 +19429,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-4 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 
   .em-md-4 {
-    font-size: 4em;
+    font-size: 2em;
   }
 
   .vw-md-5 {
@@ -18877,11 +19453,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-5 {
-    font-size: 5rem;
+    font-size: 2.5rem;
   }
 
   .em-md-5 {
-    font-size: 5em;
+    font-size: 2.5em;
   }
 
   .vw-md-6 {
@@ -18901,11 +19477,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-6 {
-    font-size: 6rem;
+    font-size: 3rem;
   }
 
   .em-md-6 {
-    font-size: 6em;
+    font-size: 3em;
   }
 
   .vw-md-7 {
@@ -18925,11 +19501,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-7 {
-    font-size: 7rem;
+    font-size: 3.5rem;
   }
 
   .em-md-7 {
-    font-size: 7em;
+    font-size: 3.5em;
   }
 
   .vw-md-8 {
@@ -18949,11 +19525,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-8 {
-    font-size: 8rem;
+    font-size: 4rem;
   }
 
   .em-md-8 {
-    font-size: 8em;
+    font-size: 4em;
   }
 
   .vw-md-9 {
@@ -18973,11 +19549,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-9 {
-    font-size: 9rem;
+    font-size: 4.5rem;
   }
 
   .em-md-9 {
-    font-size: 9em;
+    font-size: 4.5em;
   }
 
   .vw-md-10 {
@@ -18997,11 +19573,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-10 {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   .em-md-10 {
-    font-size: 10em;
+    font-size: 5em;
   }
 
   .vw-md-11 {
@@ -19021,11 +19597,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-11 {
-    font-size: 11rem;
+    font-size: 5.5rem;
   }
 
   .em-md-11 {
-    font-size: 11em;
+    font-size: 5.5em;
   }
 
   .vw-md-12 {
@@ -19045,11 +19621,203 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-md-12 {
-    font-size: 12rem;
+    font-size: 6rem;
   }
 
   .em-md-12 {
-    font-size: 12em;
+    font-size: 6em;
+  }
+
+  .vw-md-13 {
+    font-size: 13vw;
+  }
+
+  .vh-md-13 {
+    font-size: 13vh;
+  }
+
+  .vmin-md-13 {
+    font-size: 13vmin;
+  }
+
+  .vmax-md-13 {
+    font-size: 13vmax;
+  }
+
+  .rem-md-13 {
+    font-size: 6.5rem;
+  }
+
+  .em-md-13 {
+    font-size: 6.5em;
+  }
+
+  .vw-md-14 {
+    font-size: 14vw;
+  }
+
+  .vh-md-14 {
+    font-size: 14vh;
+  }
+
+  .vmin-md-14 {
+    font-size: 14vmin;
+  }
+
+  .vmax-md-14 {
+    font-size: 14vmax;
+  }
+
+  .rem-md-14 {
+    font-size: 7rem;
+  }
+
+  .em-md-14 {
+    font-size: 7em;
+  }
+
+  .vw-md-15 {
+    font-size: 15vw;
+  }
+
+  .vh-md-15 {
+    font-size: 15vh;
+  }
+
+  .vmin-md-15 {
+    font-size: 15vmin;
+  }
+
+  .vmax-md-15 {
+    font-size: 15vmax;
+  }
+
+  .rem-md-15 {
+    font-size: 7.5rem;
+  }
+
+  .em-md-15 {
+    font-size: 7.5em;
+  }
+
+  .vw-md-16 {
+    font-size: 16vw;
+  }
+
+  .vh-md-16 {
+    font-size: 16vh;
+  }
+
+  .vmin-md-16 {
+    font-size: 16vmin;
+  }
+
+  .vmax-md-16 {
+    font-size: 16vmax;
+  }
+
+  .rem-md-16 {
+    font-size: 8rem;
+  }
+
+  .em-md-16 {
+    font-size: 8em;
+  }
+
+  .vw-md-17 {
+    font-size: 17vw;
+  }
+
+  .vh-md-17 {
+    font-size: 17vh;
+  }
+
+  .vmin-md-17 {
+    font-size: 17vmin;
+  }
+
+  .vmax-md-17 {
+    font-size: 17vmax;
+  }
+
+  .rem-md-17 {
+    font-size: 8.5rem;
+  }
+
+  .em-md-17 {
+    font-size: 8.5em;
+  }
+
+  .vw-md-18 {
+    font-size: 18vw;
+  }
+
+  .vh-md-18 {
+    font-size: 18vh;
+  }
+
+  .vmin-md-18 {
+    font-size: 18vmin;
+  }
+
+  .vmax-md-18 {
+    font-size: 18vmax;
+  }
+
+  .rem-md-18 {
+    font-size: 9rem;
+  }
+
+  .em-md-18 {
+    font-size: 9em;
+  }
+
+  .vw-md-19 {
+    font-size: 19vw;
+  }
+
+  .vh-md-19 {
+    font-size: 19vh;
+  }
+
+  .vmin-md-19 {
+    font-size: 19vmin;
+  }
+
+  .vmax-md-19 {
+    font-size: 19vmax;
+  }
+
+  .rem-md-19 {
+    font-size: 9.5rem;
+  }
+
+  .em-md-19 {
+    font-size: 9.5em;
+  }
+
+  .vw-md-20 {
+    font-size: 20vw;
+  }
+
+  .vh-md-20 {
+    font-size: 20vh;
+  }
+
+  .vmin-md-20 {
+    font-size: 20vmin;
+  }
+
+  .vmax-md-20 {
+    font-size: 20vmax;
+  }
+
+  .rem-md-20 {
+    font-size: 10rem;
+  }
+
+  .em-md-20 {
+    font-size: 10em;
   }
 }
 @media (min-width: 992px) {
@@ -19070,11 +19838,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-1 {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   .em-lg-1 {
-    font-size: 1em;
+    font-size: 0.5em;
   }
 
   .vw-lg-2 {
@@ -19094,11 +19862,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .em-lg-2 {
-    font-size: 2em;
+    font-size: 1em;
   }
 
   .vw-lg-3 {
@@ -19118,11 +19886,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-3 {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .em-lg-3 {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 
   .vw-lg-4 {
@@ -19142,11 +19910,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-4 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 
   .em-lg-4 {
-    font-size: 4em;
+    font-size: 2em;
   }
 
   .vw-lg-5 {
@@ -19166,11 +19934,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-5 {
-    font-size: 5rem;
+    font-size: 2.5rem;
   }
 
   .em-lg-5 {
-    font-size: 5em;
+    font-size: 2.5em;
   }
 
   .vw-lg-6 {
@@ -19190,11 +19958,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-6 {
-    font-size: 6rem;
+    font-size: 3rem;
   }
 
   .em-lg-6 {
-    font-size: 6em;
+    font-size: 3em;
   }
 
   .vw-lg-7 {
@@ -19214,11 +19982,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-7 {
-    font-size: 7rem;
+    font-size: 3.5rem;
   }
 
   .em-lg-7 {
-    font-size: 7em;
+    font-size: 3.5em;
   }
 
   .vw-lg-8 {
@@ -19238,11 +20006,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-8 {
-    font-size: 8rem;
+    font-size: 4rem;
   }
 
   .em-lg-8 {
-    font-size: 8em;
+    font-size: 4em;
   }
 
   .vw-lg-9 {
@@ -19262,11 +20030,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-9 {
-    font-size: 9rem;
+    font-size: 4.5rem;
   }
 
   .em-lg-9 {
-    font-size: 9em;
+    font-size: 4.5em;
   }
 
   .vw-lg-10 {
@@ -19286,11 +20054,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-10 {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   .em-lg-10 {
-    font-size: 10em;
+    font-size: 5em;
   }
 
   .vw-lg-11 {
@@ -19310,11 +20078,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-11 {
-    font-size: 11rem;
+    font-size: 5.5rem;
   }
 
   .em-lg-11 {
-    font-size: 11em;
+    font-size: 5.5em;
   }
 
   .vw-lg-12 {
@@ -19334,11 +20102,203 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-lg-12 {
-    font-size: 12rem;
+    font-size: 6rem;
   }
 
   .em-lg-12 {
-    font-size: 12em;
+    font-size: 6em;
+  }
+
+  .vw-lg-13 {
+    font-size: 13vw;
+  }
+
+  .vh-lg-13 {
+    font-size: 13vh;
+  }
+
+  .vmin-lg-13 {
+    font-size: 13vmin;
+  }
+
+  .vmax-lg-13 {
+    font-size: 13vmax;
+  }
+
+  .rem-lg-13 {
+    font-size: 6.5rem;
+  }
+
+  .em-lg-13 {
+    font-size: 6.5em;
+  }
+
+  .vw-lg-14 {
+    font-size: 14vw;
+  }
+
+  .vh-lg-14 {
+    font-size: 14vh;
+  }
+
+  .vmin-lg-14 {
+    font-size: 14vmin;
+  }
+
+  .vmax-lg-14 {
+    font-size: 14vmax;
+  }
+
+  .rem-lg-14 {
+    font-size: 7rem;
+  }
+
+  .em-lg-14 {
+    font-size: 7em;
+  }
+
+  .vw-lg-15 {
+    font-size: 15vw;
+  }
+
+  .vh-lg-15 {
+    font-size: 15vh;
+  }
+
+  .vmin-lg-15 {
+    font-size: 15vmin;
+  }
+
+  .vmax-lg-15 {
+    font-size: 15vmax;
+  }
+
+  .rem-lg-15 {
+    font-size: 7.5rem;
+  }
+
+  .em-lg-15 {
+    font-size: 7.5em;
+  }
+
+  .vw-lg-16 {
+    font-size: 16vw;
+  }
+
+  .vh-lg-16 {
+    font-size: 16vh;
+  }
+
+  .vmin-lg-16 {
+    font-size: 16vmin;
+  }
+
+  .vmax-lg-16 {
+    font-size: 16vmax;
+  }
+
+  .rem-lg-16 {
+    font-size: 8rem;
+  }
+
+  .em-lg-16 {
+    font-size: 8em;
+  }
+
+  .vw-lg-17 {
+    font-size: 17vw;
+  }
+
+  .vh-lg-17 {
+    font-size: 17vh;
+  }
+
+  .vmin-lg-17 {
+    font-size: 17vmin;
+  }
+
+  .vmax-lg-17 {
+    font-size: 17vmax;
+  }
+
+  .rem-lg-17 {
+    font-size: 8.5rem;
+  }
+
+  .em-lg-17 {
+    font-size: 8.5em;
+  }
+
+  .vw-lg-18 {
+    font-size: 18vw;
+  }
+
+  .vh-lg-18 {
+    font-size: 18vh;
+  }
+
+  .vmin-lg-18 {
+    font-size: 18vmin;
+  }
+
+  .vmax-lg-18 {
+    font-size: 18vmax;
+  }
+
+  .rem-lg-18 {
+    font-size: 9rem;
+  }
+
+  .em-lg-18 {
+    font-size: 9em;
+  }
+
+  .vw-lg-19 {
+    font-size: 19vw;
+  }
+
+  .vh-lg-19 {
+    font-size: 19vh;
+  }
+
+  .vmin-lg-19 {
+    font-size: 19vmin;
+  }
+
+  .vmax-lg-19 {
+    font-size: 19vmax;
+  }
+
+  .rem-lg-19 {
+    font-size: 9.5rem;
+  }
+
+  .em-lg-19 {
+    font-size: 9.5em;
+  }
+
+  .vw-lg-20 {
+    font-size: 20vw;
+  }
+
+  .vh-lg-20 {
+    font-size: 20vh;
+  }
+
+  .vmin-lg-20 {
+    font-size: 20vmin;
+  }
+
+  .vmax-lg-20 {
+    font-size: 20vmax;
+  }
+
+  .rem-lg-20 {
+    font-size: 10rem;
+  }
+
+  .em-lg-20 {
+    font-size: 10em;
   }
 }
 @media (min-width: 1200px) {
@@ -19359,11 +20319,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-1 {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   .em-xl-1 {
-    font-size: 1em;
+    font-size: 0.5em;
   }
 
   .vw-xl-2 {
@@ -19383,11 +20343,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .em-xl-2 {
-    font-size: 2em;
+    font-size: 1em;
   }
 
   .vw-xl-3 {
@@ -19407,11 +20367,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-3 {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .em-xl-3 {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 
   .vw-xl-4 {
@@ -19431,11 +20391,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-4 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 
   .em-xl-4 {
-    font-size: 4em;
+    font-size: 2em;
   }
 
   .vw-xl-5 {
@@ -19455,11 +20415,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-5 {
-    font-size: 5rem;
+    font-size: 2.5rem;
   }
 
   .em-xl-5 {
-    font-size: 5em;
+    font-size: 2.5em;
   }
 
   .vw-xl-6 {
@@ -19479,11 +20439,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-6 {
-    font-size: 6rem;
+    font-size: 3rem;
   }
 
   .em-xl-6 {
-    font-size: 6em;
+    font-size: 3em;
   }
 
   .vw-xl-7 {
@@ -19503,11 +20463,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-7 {
-    font-size: 7rem;
+    font-size: 3.5rem;
   }
 
   .em-xl-7 {
-    font-size: 7em;
+    font-size: 3.5em;
   }
 
   .vw-xl-8 {
@@ -19527,11 +20487,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-8 {
-    font-size: 8rem;
+    font-size: 4rem;
   }
 
   .em-xl-8 {
-    font-size: 8em;
+    font-size: 4em;
   }
 
   .vw-xl-9 {
@@ -19551,11 +20511,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-9 {
-    font-size: 9rem;
+    font-size: 4.5rem;
   }
 
   .em-xl-9 {
-    font-size: 9em;
+    font-size: 4.5em;
   }
 
   .vw-xl-10 {
@@ -19575,11 +20535,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-10 {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   .em-xl-10 {
-    font-size: 10em;
+    font-size: 5em;
   }
 
   .vw-xl-11 {
@@ -19599,11 +20559,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-11 {
-    font-size: 11rem;
+    font-size: 5.5rem;
   }
 
   .em-xl-11 {
-    font-size: 11em;
+    font-size: 5.5em;
   }
 
   .vw-xl-12 {
@@ -19623,11 +20583,203 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xl-12 {
-    font-size: 12rem;
+    font-size: 6rem;
   }
 
   .em-xl-12 {
-    font-size: 12em;
+    font-size: 6em;
+  }
+
+  .vw-xl-13 {
+    font-size: 13vw;
+  }
+
+  .vh-xl-13 {
+    font-size: 13vh;
+  }
+
+  .vmin-xl-13 {
+    font-size: 13vmin;
+  }
+
+  .vmax-xl-13 {
+    font-size: 13vmax;
+  }
+
+  .rem-xl-13 {
+    font-size: 6.5rem;
+  }
+
+  .em-xl-13 {
+    font-size: 6.5em;
+  }
+
+  .vw-xl-14 {
+    font-size: 14vw;
+  }
+
+  .vh-xl-14 {
+    font-size: 14vh;
+  }
+
+  .vmin-xl-14 {
+    font-size: 14vmin;
+  }
+
+  .vmax-xl-14 {
+    font-size: 14vmax;
+  }
+
+  .rem-xl-14 {
+    font-size: 7rem;
+  }
+
+  .em-xl-14 {
+    font-size: 7em;
+  }
+
+  .vw-xl-15 {
+    font-size: 15vw;
+  }
+
+  .vh-xl-15 {
+    font-size: 15vh;
+  }
+
+  .vmin-xl-15 {
+    font-size: 15vmin;
+  }
+
+  .vmax-xl-15 {
+    font-size: 15vmax;
+  }
+
+  .rem-xl-15 {
+    font-size: 7.5rem;
+  }
+
+  .em-xl-15 {
+    font-size: 7.5em;
+  }
+
+  .vw-xl-16 {
+    font-size: 16vw;
+  }
+
+  .vh-xl-16 {
+    font-size: 16vh;
+  }
+
+  .vmin-xl-16 {
+    font-size: 16vmin;
+  }
+
+  .vmax-xl-16 {
+    font-size: 16vmax;
+  }
+
+  .rem-xl-16 {
+    font-size: 8rem;
+  }
+
+  .em-xl-16 {
+    font-size: 8em;
+  }
+
+  .vw-xl-17 {
+    font-size: 17vw;
+  }
+
+  .vh-xl-17 {
+    font-size: 17vh;
+  }
+
+  .vmin-xl-17 {
+    font-size: 17vmin;
+  }
+
+  .vmax-xl-17 {
+    font-size: 17vmax;
+  }
+
+  .rem-xl-17 {
+    font-size: 8.5rem;
+  }
+
+  .em-xl-17 {
+    font-size: 8.5em;
+  }
+
+  .vw-xl-18 {
+    font-size: 18vw;
+  }
+
+  .vh-xl-18 {
+    font-size: 18vh;
+  }
+
+  .vmin-xl-18 {
+    font-size: 18vmin;
+  }
+
+  .vmax-xl-18 {
+    font-size: 18vmax;
+  }
+
+  .rem-xl-18 {
+    font-size: 9rem;
+  }
+
+  .em-xl-18 {
+    font-size: 9em;
+  }
+
+  .vw-xl-19 {
+    font-size: 19vw;
+  }
+
+  .vh-xl-19 {
+    font-size: 19vh;
+  }
+
+  .vmin-xl-19 {
+    font-size: 19vmin;
+  }
+
+  .vmax-xl-19 {
+    font-size: 19vmax;
+  }
+
+  .rem-xl-19 {
+    font-size: 9.5rem;
+  }
+
+  .em-xl-19 {
+    font-size: 9.5em;
+  }
+
+  .vw-xl-20 {
+    font-size: 20vw;
+  }
+
+  .vh-xl-20 {
+    font-size: 20vh;
+  }
+
+  .vmin-xl-20 {
+    font-size: 20vmin;
+  }
+
+  .vmax-xl-20 {
+    font-size: 20vmax;
+  }
+
+  .rem-xl-20 {
+    font-size: 10rem;
+  }
+
+  .em-xl-20 {
+    font-size: 10em;
   }
 }
 @media (min-width: 1400px) {
@@ -19648,11 +20800,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-1 {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   .em-xxl-1 {
-    font-size: 1em;
+    font-size: 0.5em;
   }
 
   .vw-xxl-2 {
@@ -19672,11 +20824,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .em-xxl-2 {
-    font-size: 2em;
+    font-size: 1em;
   }
 
   .vw-xxl-3 {
@@ -19696,11 +20848,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-3 {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .em-xxl-3 {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 
   .vw-xxl-4 {
@@ -19720,11 +20872,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-4 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 
   .em-xxl-4 {
-    font-size: 4em;
+    font-size: 2em;
   }
 
   .vw-xxl-5 {
@@ -19744,11 +20896,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-5 {
-    font-size: 5rem;
+    font-size: 2.5rem;
   }
 
   .em-xxl-5 {
-    font-size: 5em;
+    font-size: 2.5em;
   }
 
   .vw-xxl-6 {
@@ -19768,11 +20920,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-6 {
-    font-size: 6rem;
+    font-size: 3rem;
   }
 
   .em-xxl-6 {
-    font-size: 6em;
+    font-size: 3em;
   }
 
   .vw-xxl-7 {
@@ -19792,11 +20944,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-7 {
-    font-size: 7rem;
+    font-size: 3.5rem;
   }
 
   .em-xxl-7 {
-    font-size: 7em;
+    font-size: 3.5em;
   }
 
   .vw-xxl-8 {
@@ -19816,11 +20968,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-8 {
-    font-size: 8rem;
+    font-size: 4rem;
   }
 
   .em-xxl-8 {
-    font-size: 8em;
+    font-size: 4em;
   }
 
   .vw-xxl-9 {
@@ -19840,11 +20992,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-9 {
-    font-size: 9rem;
+    font-size: 4.5rem;
   }
 
   .em-xxl-9 {
-    font-size: 9em;
+    font-size: 4.5em;
   }
 
   .vw-xxl-10 {
@@ -19864,11 +21016,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-10 {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   .em-xxl-10 {
-    font-size: 10em;
+    font-size: 5em;
   }
 
   .vw-xxl-11 {
@@ -19888,11 +21040,11 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-11 {
-    font-size: 11rem;
+    font-size: 5.5rem;
   }
 
   .em-xxl-11 {
-    font-size: 11em;
+    font-size: 5.5em;
   }
 
   .vw-xxl-12 {
@@ -19912,10 +21064,202 @@ readers do not read off random characters that represent icons */
   }
 
   .rem-xxl-12 {
-    font-size: 12rem;
+    font-size: 6rem;
   }
 
   .em-xxl-12 {
-    font-size: 12em;
+    font-size: 6em;
+  }
+
+  .vw-xxl-13 {
+    font-size: 13vw;
+  }
+
+  .vh-xxl-13 {
+    font-size: 13vh;
+  }
+
+  .vmin-xxl-13 {
+    font-size: 13vmin;
+  }
+
+  .vmax-xxl-13 {
+    font-size: 13vmax;
+  }
+
+  .rem-xxl-13 {
+    font-size: 6.5rem;
+  }
+
+  .em-xxl-13 {
+    font-size: 6.5em;
+  }
+
+  .vw-xxl-14 {
+    font-size: 14vw;
+  }
+
+  .vh-xxl-14 {
+    font-size: 14vh;
+  }
+
+  .vmin-xxl-14 {
+    font-size: 14vmin;
+  }
+
+  .vmax-xxl-14 {
+    font-size: 14vmax;
+  }
+
+  .rem-xxl-14 {
+    font-size: 7rem;
+  }
+
+  .em-xxl-14 {
+    font-size: 7em;
+  }
+
+  .vw-xxl-15 {
+    font-size: 15vw;
+  }
+
+  .vh-xxl-15 {
+    font-size: 15vh;
+  }
+
+  .vmin-xxl-15 {
+    font-size: 15vmin;
+  }
+
+  .vmax-xxl-15 {
+    font-size: 15vmax;
+  }
+
+  .rem-xxl-15 {
+    font-size: 7.5rem;
+  }
+
+  .em-xxl-15 {
+    font-size: 7.5em;
+  }
+
+  .vw-xxl-16 {
+    font-size: 16vw;
+  }
+
+  .vh-xxl-16 {
+    font-size: 16vh;
+  }
+
+  .vmin-xxl-16 {
+    font-size: 16vmin;
+  }
+
+  .vmax-xxl-16 {
+    font-size: 16vmax;
+  }
+
+  .rem-xxl-16 {
+    font-size: 8rem;
+  }
+
+  .em-xxl-16 {
+    font-size: 8em;
+  }
+
+  .vw-xxl-17 {
+    font-size: 17vw;
+  }
+
+  .vh-xxl-17 {
+    font-size: 17vh;
+  }
+
+  .vmin-xxl-17 {
+    font-size: 17vmin;
+  }
+
+  .vmax-xxl-17 {
+    font-size: 17vmax;
+  }
+
+  .rem-xxl-17 {
+    font-size: 8.5rem;
+  }
+
+  .em-xxl-17 {
+    font-size: 8.5em;
+  }
+
+  .vw-xxl-18 {
+    font-size: 18vw;
+  }
+
+  .vh-xxl-18 {
+    font-size: 18vh;
+  }
+
+  .vmin-xxl-18 {
+    font-size: 18vmin;
+  }
+
+  .vmax-xxl-18 {
+    font-size: 18vmax;
+  }
+
+  .rem-xxl-18 {
+    font-size: 9rem;
+  }
+
+  .em-xxl-18 {
+    font-size: 9em;
+  }
+
+  .vw-xxl-19 {
+    font-size: 19vw;
+  }
+
+  .vh-xxl-19 {
+    font-size: 19vh;
+  }
+
+  .vmin-xxl-19 {
+    font-size: 19vmin;
+  }
+
+  .vmax-xxl-19 {
+    font-size: 19vmax;
+  }
+
+  .rem-xxl-19 {
+    font-size: 9.5rem;
+  }
+
+  .em-xxl-19 {
+    font-size: 9.5em;
+  }
+
+  .vw-xxl-20 {
+    font-size: 20vw;
+  }
+
+  .vh-xxl-20 {
+    font-size: 20vh;
+  }
+
+  .vmin-xxl-20 {
+    font-size: 20vmin;
+  }
+
+  .vmax-xxl-20 {
+    font-size: 20vmax;
+  }
+
+  .rem-xxl-20 {
+    font-size: 10rem;
+  }
+
+  .em-xxl-20 {
+    font-size: 10em;
   }
 }

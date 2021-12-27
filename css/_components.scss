@@ -24,7 +24,7 @@
     @extend .simptip-fade;
 }
 
-$v: (1,2,3,4,5,6,7,8,9,10,11,12);
+$v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 
 @each $vi in $v {
     .vw-#{$vi} {
@@ -44,11 +44,11 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12);
     }
 
     .rem-#{$vi} {
-        font-size: #{$vi}rem;
+        font-size: #{$vi/2}rem;
     }
 
     .em-#{$vi} {
-        font-size: #{$vi}em;
+        font-size: #{$vi/2}em;
     }
 }
 
@@ -72,11 +72,11 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12);
             }
 
             .rem-#{$w}-#{$vi} {
-                font-size: #{$vi}rem;
+                font-size: #{$vi/2}rem;
             }
 
             .em-#{$w}-#{$vi} {
-                font-size: #{$vi}em;
+                font-size: #{$vi/2}em;
             }
         }
     }
