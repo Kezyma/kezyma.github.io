@@ -7,7 +7,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Radiant Pillar BC1.jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "NEXT starter ship. Versions 1.5 - current."
             }
         ],
         PreOrder: [
@@ -17,7 +17,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Horizon Omega.jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "PC preorder reward."
             }
         ],
         Expeditions: [
@@ -27,7 +27,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Golden Vector.jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "Final reward from Expedition 1: The Pioneers."
             },
             {
                 File: "/data/nms/Ships/Hadach's Discovery KH3 (Expedition).shp",
@@ -35,7 +35,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Hadach's Discovery KH3 (Expedition).jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "Reward from Expedition 2: Beachhead Phase 2 Completion."
             }
         ],
         Twitch: [
@@ -45,23 +45,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Eokai's Prime Inquirer.jpg",
                 Screenshot: "",
-                Description: ""
-            },
-            {
-                File: "/data/nms/Ships/Hadach's Discovery KH3 (Twitch).shp",
-                Name: "Hadach's Discovery KH3",
-                AltNames: "",
-                StatImage: "/img/nms/Hadach's Discovery KH3 (Twitch).jpg",
-                Screenshot: "",
-                Description: ""
-            },
-            {
-                File: "/data/nms/Ships/Hiwamiha of Destiny.shp",
-                Name: "Hiwamiha of Destiny",
-                AltNames: "",
-                StatImage: "/img/nms/Hiwamiha of Destiny.jpg",
-                Screenshot: "",
-                Description: ""
+                Description: "Twitch Season 1, Day 1 drop."
             },
             {
                 File: "/data/nms/Ships/Hoshis HP7.shp",
@@ -69,15 +53,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Hoshis HP7.jpg",
                 Screenshot: "",
-                Description: ""
-            },
-            {
-                File: "/data/nms/Ships/Jirishi's Prospect.shp",
-                Name: "Jirishi's Prospect",
-                AltNames: "",
-                StatImage: "/img/nms/Jirishi's Prospect.jpg",
-                Screenshot: "",
-                Description: ""
+                Description: "Twitch Season 1, Day 2 drop."
             },
             {
                 File: "/data/nms/Ships/Nemesis of the Kudama.shp",
@@ -85,15 +61,7 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Nemesis of the Kudama.jpg",
                 Screenshot: "",
-                Description: ""
-            },
-            {
-                File: "/data/nms/Ships/Prime Song JZ4.shp",
-                Name: "Prime Song JZ4",
-                AltNames: "",
-                StatImage: "/img/nms/Prime Song JZ4.jpg",
-                Screenshot: "",
-                Description: ""
+                Description: "Twitch Season 1, Day 3 drop."
             },
             {
                 File: "/data/nms/Ships/Ultimate Pride JB2.shp",
@@ -101,15 +69,15 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Ultimate Pride JB2.jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "Twitch Season 1, Day 4 drop."
             },
             {
-                File: "/data/nms/Ships/Ultimate Sleep LO1.shp",
-                Name: "Ultimate Sleep LO1",
+                File: "/data/nms/Ships/Prime Song JZ4.shp",
+                Name: "Prime Song JZ4",
                 AltNames: "",
-                StatImage: "/img/nms/Ultimate Sleep LO1.jpg",
+                StatImage: "/img/nms/Prime Song JZ4.jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "Twitch Season 1, Day 5 drop."
             },
             {
                 File: "/data/nms/Ships/VV5 Ariyaz.shp",
@@ -117,7 +85,39 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/VV5 Ariyaz.jpg",
                 Screenshot: "",
-                Description: ""
+                Description: "Twitch Season 3, Day 1 drop."
+            },
+            {
+                File: "/data/nms/Ships/Hiwamiha of Destiny.shp",
+                Name: "Hiwamiha of Destiny",
+                AltNames: "",
+                StatImage: "/img/nms/Hiwamiha of Destiny.jpg",
+                Screenshot: "",
+                Description: "Twitch Season 3, Day 2 drop."
+            },
+            {
+                File: "/data/nms/Ships/Ultimate Sleep LO1.shp",
+                Name: "Ultimate Sleep LO1",
+                AltNames: "",
+                StatImage: "/img/nms/Ultimate Sleep LO1.jpg",
+                Screenshot: "",
+                Description: "Twitch Season 3, Day 3 drop."
+            },
+            {
+                File: "/data/nms/Ships/Jirishi's Prospect.shp",
+                Name: "Jirishi's Prospect",
+                AltNames: "",
+                StatImage: "/img/nms/Jirishi's Prospect.jpg",
+                Screenshot: "",
+                Description: "Twitch Season 3, Day 4 drop."
+            },
+            {
+                File: "/data/nms/Ships/Hadach's Discovery KH3 (Twitch).shp",
+                Name: "Hadach's Discovery KH3",
+                AltNames: "",
+                StatImage: "/img/nms/Hadach's Discovery KH3 (Twitch).jpg",
+                Screenshot: "",
+                Description: "Twitch Season 3, Day 5 drop."
             }
         ]
     },
@@ -191,8 +191,7 @@ function bindShip(ship, container) {
         template += "<img src=\"/img/nms/" + shipClass + ".png\" height='48' class='d-inline' />";
         template += "<h4 class='d-inline'>" + shipName + "</h4>";
         template += "</div>";
-        template += "<div class='card-body'>";
-        template += "</div>";
+        template += "<div class='card-body'>" + ship.Description + "</div>";
         template += "<table class='table table-sm m-0'>"
         template += "<tbody>";
         if (shipAltName != null && shipAltName != "") {
@@ -201,7 +200,7 @@ function bindShip(ship, container) {
         template += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
         template += "<tr><td>Seed</td><td>" + shipSeed + "</td></tr>";
         template += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
-        template += "<tr><td>Shiled Bonus</td><td>" + shield + "</td></tr>";
+        template += "<tr><td>Shield Bonus</td><td>" + shield + "</td></tr>";
         template += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
         template += "</tbody>";
         template += "</table>";
