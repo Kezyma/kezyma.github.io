@@ -38,7 +38,31 @@ function bindShips(category, data) {
     var container = $("div[data-type='Ships'][data-type='" + category + "']");
     for (var ship in data) {
         var shipJson = $.getJSON(ship.File);
-        var shipClass = shipJson["Ship"]["@Cs"][";l5"]["B@N"]["1o6"];
-        console.log(shipClass);
+        var shipClass = shipJson.responseJSON.Ship["@Cs"][";l5"]["B@N"]["1o6"];
+        var damage = 0, shield = 0, hyperdrive = 0;
+        var shipStats = data.responseJSON.Ship["@Cs"][";l5"]["@bB"];
+        for (var stat in shipStats) {
+            var statVal = stat[">MX"]
+            switch (stat["QL1"]) {
+                case "^SHIP_DAMAGE":
+                    damage = statVal;
+                    break;
+                case "^SHIP_SHIELD":
+                    shield = statVal;
+                    break;
+                case "^SHIP_HYPERDRIVE":
+                    hyperdrive = statVal;
+                    break;
+            }
+        }
+        var template = "<div class='col'>";
+        template += "<div class='card'>";
+        template += "<div class='card-header'>";
+        template += "<img src='/img/nms/" + shipClass + ".png' />";
+        template += "<h5>" + ship.Name + "</h5>";
+        template += "</div>";
+        template += "</div>";
+        template += "</div>";
+        container.append($(template));
     }
 }
