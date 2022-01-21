@@ -78,7 +78,7 @@ function bindShips(category, data) {
             var template = "<div class='col'>";
             template += "<div class='card'>";
             template += "<div class='card-header p-1'>";
-            template += "<img src='/img/nms/" + shipClass + ".png' height='48' class='d-inline' />";
+            template += "<img src=\"/img/nms/" + shipClass + ".png\" height='48' class='d-inline' />";
             template += "<h4 class='d-inline'>" + ship.Name + "</h4>";
             template += "</div>";
             template += "<div class='card-body'>";
