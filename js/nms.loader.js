@@ -186,7 +186,7 @@ function bindShip(ship, container) {
             }
         }
         var template = "<div class='col'>";
-        template += "<div class='card'>";
+        template += "<div class='card mb-2'>";
         template += "<div class='card-header p-1'>";
         template += "<img src=\"/img/nms/" + shipClass + ".png\" height='48' class='d-inline' />";
         template += "<h4 class='d-inline'>" + shipName + "</h4>";
@@ -205,8 +205,8 @@ function bindShip(ship, container) {
         template += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
         template += "</tbody>";
         template += "</table>";
-        template += "<img src=\"" + encodeURIComponent(shipStatImg) + "\" class='w-100' />";
-        template += "<div class='card-footer'><a href=\"" + encodeURIComponent(ship.File) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
+        template += "<img src=\"" + encodeURI(shipStatImg) + "\" class='w-100' />";
+        template += "<div class='card-footer'><a href=\"" + encodeURI(ship.File) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
         template += "</div>";
         template += "</div>";
         container.append($(template));
