@@ -41,7 +41,7 @@ function bindShips(category, data) {
         $.getJSON(ship.File, function (shipJson) {
             var shipClass = shipJson.Ship["@Cs"][";l5"]["B@N"]["1o6"];
             var damage = 0, shield = 0, hyperdrive = 0;
-            var shipStats = data.Ship["@Cs"][";l5"]["@bB"];
+            var shipStats = shipJson.Ship["@Cs"][";l5"]["@bB"];
             for (var stat in shipStats) {
                 var statVal = stat[">MX"]
                 switch (stat["QL1"]) {
@@ -62,6 +62,9 @@ function bindShips(category, data) {
             template += "<img src='/img/nms/" + shipClass + ".png' />";
             template += "<h5>" + ship.Name + "</h5>";
             template += "</div>";
+            template += "<div class='card-body'>";
+            template += "</div>";
+            template += "<img src='" + ship.StatImage + "' class='w-100' />";
             template += "</div>";
             template += "</div>";
             container.append($(template));
