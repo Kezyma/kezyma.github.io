@@ -39,10 +39,9 @@ function bindShips(category, data) {
     for (var ix in data) {
         var ship = data[ix];
         $.getJSON(ship.File, function (shipJson) {
-            console.log(shipJson);
-            var shipClass = shipJson.responseJSON.Ship["@Cs"][";l5"]["B@N"]["1o6"];
+            var shipClass = shipJson.Ship["@Cs"][";l5"]["B@N"]["1o6"];
             var damage = 0, shield = 0, hyperdrive = 0;
-            var shipStats = data.responseJSON.Ship["@Cs"][";l5"]["@bB"];
+            var shipStats = data.Ship["@Cs"][";l5"]["@bB"];
             for (var stat in shipStats) {
                 var statVal = stat[">MX"]
                 switch (stat["QL1"]) {
