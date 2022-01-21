@@ -114,7 +114,7 @@ function bindShip(ship, container) {
         template += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
         template += "</tbody>";
         template += "</table>";
-        template += "<img src='" + encodeURIComponent(shipStatImg) + "' class='w-100' />";
+        template += "<img src=\"" + encodeURIComponent(shipStatImg) + "\" class='w-100' />";
         template += "</div>";
         template += "</div>";
         container.append($(template));
