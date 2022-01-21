@@ -35,7 +35,7 @@ function bindData() {
 }
 
 function bindShips(category, data) {
-    var container = $("div[data-type='Ships'][data-type='" + category + "']");
+    var container = $("div[data-type='Ships'][data-category='" + category + "']");
     for (var ix in data) {
         var ship = data[ix];
         $.getJSON(ship.File, function (shipJson) {
