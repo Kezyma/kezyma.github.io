@@ -36,7 +36,8 @@ function bindData() {
 
 function bindShips(category, data) {
     var container = $("div[data-type='Ships'][data-type='" + category + "']");
-    for (var ship in data) {
+    for (var ix in data) {
+        var ship = data[ix];
         var shipJson = $.getJSON(ship.File);
         var shipClass = shipJson.responseJSON.Ship["@Cs"][";l5"]["B@N"]["1o6"];
         var damage = 0, shield = 0, hyperdrive = 0;
