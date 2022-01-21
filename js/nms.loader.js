@@ -81,8 +81,8 @@ function bindShip(ship, container) {
                 break;
         }
         for (var stat in shipStats) {
-            var statVal = stat[">MX"]
-            switch (stat["QL1"]) {
+            var statVal = shipStats[stat][">MX"]
+            switch (shipStats[stat]["QL1"]) {
                 case "^SHIP_DAMAGE":
                     damage = statVal;
                     break;
