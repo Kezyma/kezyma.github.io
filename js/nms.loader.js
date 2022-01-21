@@ -191,7 +191,7 @@ function bindShip(ship, container) {
         template += "<img src=\"/img/nms/" + shipClass + ".png\" height='48' class='d-inline' />";
         template += "<h4 class='d-inline'>" + shipName + "</h4>";
         template += "</div>";
-        template += "<div class='card-body'>" + ship.Description + "</div>";
+        template += "<div class='card-body'><i>" + ship.Description + "</i></div>";
         template += "<table class='table table-sm m-0'>"
         template += "<tbody>";
         if (shipAltName != null && shipAltName != "") {
