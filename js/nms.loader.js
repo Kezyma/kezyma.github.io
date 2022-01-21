@@ -10,6 +10,16 @@ var data = {
                 Description: ""
             }
         ],
+        PreOrder: [
+            {
+                File: "/data/nms/Ships/Horizon Omega.shp",
+                Name: "Horizon Omega",
+                AltNames: "",
+                StatImage: "/img/nms/Horizon Omega.jpg",
+                Screenshot: "",
+                Description: ""
+            }
+        ],
         Expeditions: [
             {
                 File: "/data/nms/Ships/Golden Vector.shp",
@@ -29,6 +39,86 @@ var data = {
             }
         ],
         Twitch: [
+            {
+                File: "/data/nms/Ships/Eokai's Prime Inquirer.shp",
+                Name: "Eokai's Prime Inquirer",
+                AltNames: "",
+                StatImage: "/img/nms/Eokai's Prime Inquirer.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Hadach's Discovery KH3 (Twitch).shp",
+                Name: "Hadach's Discovery KH3",
+                AltNames: "",
+                StatImage: "/img/nms/Hadach's Discovery KH3 (Twitch).jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Hiwamiha of Destiny.shp",
+                Name: "Hiwamiha of Destiny",
+                AltNames: "",
+                StatImage: "/img/nms/Hiwamiha of Destiny.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Hoshis HP7.shp",
+                Name: "Hoshis HP7",
+                AltNames: "",
+                StatImage: "/img/nms/Hoshis HP7.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Jirishi's Prospect.shp",
+                Name: "Jirishi's Prospect",
+                AltNames: "",
+                StatImage: "/img/nms/Jirishi's Prospect.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Nemesis of the Kudama.shp",
+                Name: "Nemesis of the Kudama",
+                AltNames: "",
+                StatImage: "/img/nms/Nemesis of the Kudama.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Prime Song JZ4.shp",
+                Name: "Prime Song JZ4",
+                AltNames: "",
+                StatImage: "/img/nms/Prime Song JZ4.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Ultimate Pride JB2.shp",
+                Name: "Ultimate Pride JB2",
+                AltNames: "",
+                StatImage: "/img/nms/Ultimate Pride JB2.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/Ultimate Sleep LO1.shp",
+                Name: "Ultimate Sleep LO1",
+                AltNames: "",
+                StatImage: "/img/nms/Ultimate Sleep LO1.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Ships/VV5 Ariyaz.shp",
+                Name: "VV5 Ariyaz",
+                AltNames: "",
+                StatImage: "/img/nms/VV5 Ariyaz.jpg",
+                Screenshot: "",
+                Description: ""
+            }
         ]
     },
     Multitools: {
@@ -48,6 +138,7 @@ $(document).ready(function () {
 
 function bindData() {
     bindShips("Starter", data.Ships.Starter);
+    bindShips("PreOrder", data.Ships.PreOrder);
     bindShips("Expeditions", data.Ships.Expeditions);
     bindShips("Twitch", data.Ships.Twitch);
 }
@@ -115,6 +206,7 @@ function bindShip(ship, container) {
         template += "</tbody>";
         template += "</table>";
         template += "<img src=\"" + encodeURIComponent(shipStatImg) + "\" class='w-100' />";
+        template += "<div class='card-footer'><a href=\"" + encodeURIComponent(ship.File) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
         template += "</div>";
         template += "</div>";
         container.append($(template));
@@ -125,6 +217,6 @@ function bindShips(category, data) {
     var container = $("div[data-type='Ships'][data-category='" + category + "']");
     for (var ix in data) {
         var ship = data[ix];
-        bindShip(ship,container);
+        bindShip(ship, container);
     }
 }
