@@ -59,7 +59,7 @@ function bindShip(ship, container) {
         var shipStatImg = ship.StatImage;
         var shipClass = shipJson.Ship["@Cs"][";l5"]["B@N"]["1o6"];
         var shipSeed = shipJson.Ship["@Cs"]["NTx"]["@EL"][1];
-        var damage = 0, shield = 0, hyperdrive = 0;
+        var damage = 0.0, shield = 0.0, hyperdrive = 0.0;
         var shipStats = shipJson.Ship["@Cs"][";l5"]["@bB"];
         var shipModel = shipJson.Ship["@Cs"]["NTx"]["93M"];
         var shipType = "Unknown";
@@ -114,7 +114,7 @@ function bindShip(ship, container) {
         template += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
         template += "</tbody>";
         template += "</table>";
-        template += "<img src='" + shipStatImg + "' class='w-100' />";
+        template += "<img src='" + encodeURIComponent(shipStatImg) + "' class='w-100' />";
         template += "</div>";
         template += "</div>";
         container.append($(template));
