@@ -125,11 +125,3 @@ function bindShips(category, data) {
         });
     }
 }
-
-
-"Ship": {
-    "4hl": true,
-        "@Cs": {
-        "NKm": "",
-            "NTx": {
-            "93M": "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN",
