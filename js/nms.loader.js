@@ -185,7 +185,7 @@ function bindShip(ship, container) {
                     break;
             }
         }
-        var template = "<div class='col'>";
+        var template = "<div class='col d-flex'>";
         template += "<div class='card mb-2'>";
         template += "<div class='card-header p-1'>";
         template += "<img src=\"/img/nms/" + shipClass + ".png\" height='48' class='d-inline' />";
