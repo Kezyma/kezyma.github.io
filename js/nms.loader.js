@@ -244,13 +244,13 @@ function bindData() {
 }
 
 function bindShip(ship, container) {
-    $.getJSON(ship.File, function (shipJson) {
-        var shipName = ship.Name;
-        if (ship.Missing) {
-            var template = getMissing(ship.Name);
-            container.append($(template));
-        }
-        else {
+    var shipName = ship.Name;
+    if (ship.Missing) {
+        var template = getMissing(ship.Name);
+        container.append($(template));
+    }
+    else {
+        $.getJSON(ship.File, function (shipJson) {
             var shipAltName = ship.AltNames;
             var shipStatImg = ship.StatImage;
             var shipClass = shipJson.Ship["@Cs"][";l5"]["B@N"]["1o6"];
@@ -307,8 +307,8 @@ function bindShip(ship, container) {
             table += "</table>";
             var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File);
             container.append($(template));
-        }
-    });
+        });
+    }
 }
 
 function bindMultitool(multitool, container) {
