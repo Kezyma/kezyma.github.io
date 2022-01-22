@@ -6,7 +6,7 @@ var data = {
                 Name: "Radiant Pillar BC1",
                 AltNames: "",
                 StatImage: "/img/nms/Radiant Pillar BC1.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Radiant Pillar BC1.jpg",
                 Description: "NEXT starter ship. Versions 1.5 - current.",
                 Missing: false
             },
