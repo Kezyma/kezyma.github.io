@@ -296,10 +296,10 @@ function bindMultitool(multitool, container) {
         var toolName = multitool.Name;
         var toolAltName = multitool.AltNames;
         var toolStatImg = multitool.StatImage;
-        var toolClass = toolJson.Multitool["OsQ"]["B@N"]["1o6"];
-        var toolSeed = toolJson.Multitool["CA4"]["@EL"][1];
-        var toolSlots = toolJson.Multitool["OsQ"]["hl?"].length;
-        var toolStats = toolJson.Multitool["OsQ"]["@bB"];
+        var toolClass = toolJson.MultiTool["OsQ"]["B@N"]["1o6"];
+        var toolSeed = toolJson.MultiTool["CA4"]["@EL"][1];
+        var toolSlots = toolJson.MultiTool["OsQ"]["hl?"].length;
+        var toolStats = toolJson.MultiTool["OsQ"]["@bB"];
         var damage = 0.0, mining = 0.0, scan = 0.0;
         for (var stat in toolStats) {
             var statVal = toolStats[stat][">MX"]
