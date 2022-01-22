@@ -388,8 +388,10 @@ function bindShip(ship, container) {
             table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot);
+            var fancyId = shipClass + "_" + shipName.replace(" ", "_").replace("'", "").replace("\"", "");
+            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
             container.append($(template));
+            carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), {});
         });
     }
 }
@@ -435,7 +437,9 @@ function bindMultitool(multitool, container) {
             table += "<tr><td>Scanning Bonus</td><td>" + scan + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            var template = getCard(toolName, toolClass, multitool.Description, table, toolStatImg, multitool.File);
+            
+            var fancyId = toolClass + "_" + toolName.replace(" ", "_").replace("'", "").replace("\"", "");
+            var template = getCard(toolName, toolClass, multitool.Description, table, toolStatImg, multitool.File, multitool.Screenshot, fancyId);
             container.append($(template));
         });
     }
@@ -507,32 +511,35 @@ function bindCompanion(companion, container) {
             table += "<tr><td>Independence</td><td>" + compIndependence + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            var template = getCard(compName, compClass, companion.Description, table, compStatImg, companion.File);
+            var fancyId = compClass + "_" + compName.replace(" ", "_").replace("'", "").replace("\"", "").replace(".", "");
+            var template = getCard(compName, compClass, companion.Description, table, compStatImg, companion.File, companion.Screenshot, fancyId);
             container.append($(template));
         });
     }
 }
 
-function getCard(name, cl, desc, table, img, file, screen) {
+var carousels = { }
+
+function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     var template = "<div class='col d-flex'>";
     template += "<div class='card mb-4 w-100'>";
     template += "<div class='card-header p-1'>";
-    template += "<img src==\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
+    template += "<img src=\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
-    if (img != null && img != "") {
+    if ((img != null && img != "") || (screen != null && screen != "")) {
+        template += "<div class='carousel' id='" + fancyId + "'>";
         if (screen != null && screen != "") {
-            template += "<div class='carousel'>";
-            template += "<a href=\"" + encodeURI(screen) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
-            template += "</a>";
-        }
-        template += "<a href=\"" + encodeURI(img) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
-        template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
-        template += "</a>";
-        if (screen != null && screen != "") {
             template += "</div>";
         }
+        if (img != null && img != "") {
+            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
+            template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
+            template += "</div>";
+        }
+        template += "</div>"
     }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
     template += table;
@@ -545,7 +552,7 @@ function getCard(name, cl, desc, table, img, file, screen) {
 }
 
 function getMissing(name) {
-    return getCard(name, "N", "Missing.", "", "", "");
+    return getCard(name, "N", "Missing.", "", "", "", "", "");
 }
 
 function bindShips(category, data) {
