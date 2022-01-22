@@ -544,12 +544,12 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     if ((img != null && img != "") || (screen != null && screen != "")) {
         template += "<div class='carousel w-100 ratio-16x9' id='" + fancyId + "'>";
         if (screen != null && screen != "") {
-            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='col-12 carousel__item'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
             template += "</div>";
         }
         if (img != null && img != "") {
-            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='col-12 carousel__item'>"
             template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
             template += "</div>";
         }
