@@ -187,32 +187,80 @@ function bindShip(ship, container) {
                     break;
             }
         }
-        var template = "<div class='col d-flex'>";
-        template += "<div class='card mb-4'>";
-        template += "<div class='card-header p-1'>";
-        template += "<img src=\"/img/nms/" + shipClass + ".png\" height='48' class='d-inline' />";
-        template += "<h4 class='d-inline'>" + shipName + "</h4>";
-        template += "</div>";
-        template += "<img src=\"" + encodeURI(shipStatImg) + "\" class='w-100' />";
-        template += "<div class='card-body'><i>" + ship.Description + "</i></div>";
-        template += "<table class='table table-sm m-0'>"
-        template += "<tbody>";
+        var table = "<table class='table table-sm m-0'>"
+        table += "<tbody>";
         if (shipAltName != null && shipAltName != "") {
-            template += "<tr><td>Alt Name</td><td>" + shipAltName + "</td></tr>";
+            table += "<tr><td>Alt Name</td><td>" + shipAltName + "</td></tr>";
         }
-        template += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
-        template += "<tr><td>Seed</td><td>" + shipSeed + "</td></tr>";
-        template += "<tr><td>Slots</td><td>" + inventorySlots + " + " + techSlots + "</td></tr>";
-        template += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
-        template += "<tr><td>Shield Bonus</td><td>" + shield + "</td></tr>";
-        template += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
-        template += "</tbody>";
-        template += "</table>";
-        template += "<div class='card-footer'><a href=\"" + encodeURI(ship.File) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
-        template += "</div>";
-        template += "</div>";
+        table += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
+        table += "<tr><td>Seed</td><td>" + shipSeed + "</td></tr>";
+        table += "<tr><td>Slots</td><td>" + inventorySlots + " + " + techSlots + "</td></tr>";
+        table += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
+        table += "<tr><td>Shield Bonus</td><td>" + shield + "</td></tr>";
+        table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
+        table += "</tbody>";
+        table += "</table>";
+        var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File);
         container.append($(template));
     });
+}
+
+function bindMultitool(multitool, container) {
+    $.getJSON(multitool.File, function (toolJson) {
+        var toolName = multitool.Name;
+        var toolAltName = multitool.AltNames;
+        var toolStatImg = multitool.StatImage;
+        var toolClass = toolJson.Multitool["OsQ"]["B@N"]["1o6"];
+        var toolSeed = toolJson.Multitool["CA4"]["@EL"][1];
+        var toolSlots = toolJson.Multitool["OsQ"]["hl?"].length;
+        var toolStats = toolJson.Multitool["OsQ"]["@bB"];
+        var damage = 0.0, mining = 0.0, scan = 0.0;
+        for (var stat in toolStats) {
+            var statVal = toolStats[stat][">MX"]
+            switch (shipStats[stat]["QL1"]) {
+                case "^WEAPON_DAMAGE":
+                    damage = statVal;
+                    break;
+                case "^WEAPON_MINING":
+                    mining = statVal;
+                    break;
+                case "^WEAPON_SCAN":
+                    scan = statVal;
+                    break;
+            }
+        }
+        var table = "<table class='table table-sm m-0'>"
+        table += "<tbody>";
+        if (toolAltName != null && toolAltName != "") {
+            table += "<tr><td>Alt Name</td><td>" + toolAltName + "</td></tr>";
+        }
+        //table += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
+        table += "<tr><td>Seed</td><td>" + toolSeed + "</td></tr>";
+        table += "<tr><td>Slots</td><td>" + toolSlots + "</td></tr>";
+        table += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
+        table += "<tr><td>Mining Bonus</td><td>" + mining + "</td></tr>";
+        table += "<tr><td>Scanning Bonus</td><td>" + scan + "</td></tr>";
+        table += "</tbody>";
+        table += "</table>";
+        var template = getCard(toolName, toolClas, multitool.Description, table, toolStatImg, multitool.File);
+        container.append($(template));
+    });
+}
+
+function getCard(name, cl, desc, table, img, file) {
+    var template = "<div class='col d-flex'>";
+        template += "<div class='card mb-4'>";
+        template += "<div class='card-header p-1'>";
+        template += "<img src=\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
+        template += "<h4 class='d-inline'>" + name + "</h4>";
+        template += "</div>";
+        template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
+        template += "<div class='card-body'><i>" + desc + "</i></div>";
+        template += "<table class='table table-sm m-0'>"
+        template += table;
+        template += "<div class='card-footer'><a href=\"" + encodeURI(file) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
+        template += "</div>";
+        template += "</div>";
 }
 
 function bindShips(category, data) {
@@ -220,5 +268,13 @@ function bindShips(category, data) {
     for (var ix in data) {
         var ship = data[ix];
         bindShip(ship, container);
+    }
+}
+
+function bindMultitools(category, data) {
+    var container = $("div[data-type='Multitools'][data-category='" + category + "']");
+    for (var ix in data) {
+        var multitool = data[ix];
+        bindMultitool(multitool, container);
     }
 }
