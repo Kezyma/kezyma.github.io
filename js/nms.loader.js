@@ -388,7 +388,7 @@ function bindShip(ship, container) {
             table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            var fancyId = shipClass + "_" + shipName.replace(" ", "_").replace("'", "").replace("\"", "");
+            var fancyId = shipClass + "_" + shipName.replace(" ", "_").replace(" ", "_").replace("'", "").replace("\"", "");
             var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
             container.append($(template));
             carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), {});
