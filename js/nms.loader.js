@@ -176,22 +176,6 @@ var data = {
                 Description: ""
             },
             {
-                File: "/data/nms/Multitools/Hunevar's Dream Charger.mlt",
-                Name: "Hunevar's Dream Charger",
-                AltNames: "",
-                StatImage: "/img/nms/Hunevar's Dream Charger.jpg",
-                Screenshot: "",
-                Description: ""
-            },
-            {
-                File: "/data/nms/Multitools/Imperfect Loop Reflector.mlt",
-                Name: "Imperfect Loop Reflector",
-                AltNames: "",
-                StatImage: "/img/nms/Imperfect Loop Reflector.jpg",
-                Screenshot: "",
-                Description: ""
-            },
-            {
                 File: "/data/nms/Multitools/Loop Scoop Mark IV.mlt",
                 Name: "Loop Scoop Mark IV",
                 AltNames: "",
