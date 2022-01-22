@@ -391,8 +391,8 @@ function bindShip(ship, container) {
             var fancyId = shipClass + "_" + shipName.replace("'", "").replace("\"", "").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
             container.append($(template));
-            carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), {});
-            Fancybox.bind('[data-fancybox="' + shipName + '"]', {
+            carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), { slidesPerPage: 1 });
+            Fancybox.bind('[data-fancybox="' + fancyId + '"]', {
                 Carousel: {
                     on: {
                         change: (that) => {
@@ -541,12 +541,12 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     if ((img != null && img != "") || (screen != null && screen != "")) {
         template += "<div class='carousel w-100 ratio-16x9' id='" + fancyId + "'>";
         if (screen != null && screen != "") {
-            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel__item'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
             template += "</div>";
         }
         if (img != null && img != "") {
-            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel__item'>"
             template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
             template += "</div>";
         }
