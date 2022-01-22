@@ -452,7 +452,7 @@ function bindCompanion(companion, container) {
             var compAltName = companion.AltNames;
             var compStatImg = companion.StatImage;
             var compClass = "N";
-            var compType = compJson.Companion["HbY"]["HbY"];
+            var compBehaviour = compJson.Companion["HbY"]["HbY"];
             var compBiome = compJson.Companion["8jm"]["8jm"];
             var compCreatureSeed = compJson.Companion["WTp"][1];
             var compCreature2ndSeed = compJson.Companion["1p="][1];
@@ -461,13 +461,43 @@ function bindCompanion(companion, container) {
             var compHelpfulness = compJson.Companion["JAy"][0];
             var compGentleness = compJson.Companion["JAy"][1];
             var compIndependence = compJson.Companion["JAy"][2];
-
+            var compType = "Unknown";
+            switch (compJson.Companion["XID"]) {
+                case "^FLYINGSNAKE":
+                    compType = "Flying Snake";
+                    break;
+                case "^FIEND":
+                    compType = "Fiend";
+                    break;
+                case "^TRICERATOPS":
+                    compType = "Triceratops";
+                    break;
+                case "^BLOB":
+                    compType = "Blob";
+                    break;
+                case "^LARGEBUTTERFLY":
+                    compType = "Large Butterfly";
+                    break;
+                case "^BONECAT":
+                    compType = "Bonecat";
+                    break;
+                case "^TREX":
+                    compType = "T-Rex";
+                    break;
+                case "^FLYINGBEETLE":
+                    compType = "Flying Beetle";
+                    break;
+                default:
+                    break;
+            }
             var table = "<table class='table table-sm m-0'>"
             table += "<tbody>";
             if (compAltName != null && compAltName != "") {
                 table += "<tr><td>Alt Name</td><td>" + compAltName + "</td></tr>";
             }
-            table += "<tr><td>Biome-Type</td><td>" + compBiome + " - " + compType + "</td></tr>";
+            table += "<tr><td>Type</td><td>" + compType + "</td></tr>";
+            table += "<tr><td>Biome</td><td>" + compBiome + "</td></tr>";
+            table += "<tr><td>Behaviour</td><td>" + compBehaviour + "</td></tr>";
             table += "<tr><td>Creature Seed</td><td>" + compCreatureSeed + "</td></tr>";
             table += "<tr><td>Creature 2nd Seed</td><td>" + compCreature2ndSeed + "</td></tr>";
             table += "<tr><td>Genus Seed</td><td>" + compGenusSeed + "</td></tr>";
