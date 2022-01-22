@@ -166,7 +166,7 @@ var data = {
             {
                 Name: "Rezosu Z65",
                 Missing: true
-            }, 
+            },
             {
                 Name: "Artios-VI",
                 Missing: true
@@ -388,10 +388,21 @@ function bindShip(ship, container) {
             table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            var fancyId = shipClass + "_" + shipName.replace(" ", "_").replace(" ", "_").replace("'", "").replace("\"", "");
+            var fancyId = shipClass + "_" + shipName.replace("'", "").replace("\"", "").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
             container.append($(template));
             carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), {});
+            Fancybox.bind('[data-fancybox="' + shipName + '"]', {
+                Carousel: {
+                    on: {
+                        change: (that) => {
+                            carousels[fancyId].slideTo(carousels[fancyId].findPageForSlide(that.page), {
+                                friction: 0,
+                            });
+                        },
+                    },
+                },
+            });
         });
     }
 }
@@ -437,7 +448,7 @@ function bindMultitool(multitool, container) {
             table += "<tr><td>Scanning Bonus</td><td>" + scan + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            
+
             var fancyId = toolClass + "_" + toolName.replace(" ", "_").replace("'", "").replace("\"", "");
             var template = getCard(toolName, toolClass, multitool.Description, table, toolStatImg, multitool.File, multitool.Screenshot, fancyId);
             container.append($(template));
@@ -518,7 +529,7 @@ function bindCompanion(companion, container) {
     }
 }
 
-var carousels = { }
+var carousels = {}
 
 function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     var template = "<div class='col d-flex'>";
@@ -528,7 +539,7 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
     if ((img != null && img != "") || (screen != null && screen != "")) {
-        template += "<div class='carousel' id='" + fancyId + "'>";
+        template += "<div class='carousel w-100 ratio-16x9' id='" + fancyId + "'>";
         if (screen != null && screen != "") {
             template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
