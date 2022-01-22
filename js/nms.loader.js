@@ -249,18 +249,19 @@ function bindMultitool(multitool, container) {
 
 function getCard(name, cl, desc, table, img, file) {
     var template = "<div class='col d-flex'>";
-        template += "<div class='card mb-4'>";
-        template += "<div class='card-header p-1'>";
-        template += "<img src=\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
-        template += "<h4 class='d-inline'>" + name + "</h4>";
-        template += "</div>";
-        template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
-        template += "<div class='card-body'><i>" + desc + "</i></div>";
-        template += "<table class='table table-sm m-0'>"
-        template += table;
-        template += "<div class='card-footer'><a href=\"" + encodeURI(file) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
-        template += "</div>";
-        template += "</div>";
+    template += "<div class='card mb-4'>";
+    template += "<div class='card-header p-1'>";
+    template += "<img src=\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
+    template += "<h4 class='d-inline'>" + name + "</h4>";
+    template += "</div>";
+    template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
+    template += "<div class='card-body'><i>" + desc + "</i></div>";
+    template += "<table class='table table-sm m-0'>"
+    template += table;
+    template += "<div class='card-footer'><a href=\"" + encodeURI(file) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
+    template += "</div>";
+    template += "</div>";
+    return template;
 }
 
 function bindShips(category, data) {
