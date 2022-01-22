@@ -389,7 +389,7 @@ function bindShip(ship, container) {
             table += "</tbody>";
             table += "</table>";
             var fancyId = shipClass + "_" + shipName.replace("'", "").replace("\"", "").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
-            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
+            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId, "Ships");
             container.append($(template));
         });
     }
@@ -438,7 +438,7 @@ function bindMultitool(multitool, container) {
             table += "</table>";
 
             var fancyId = toolClass + "_" + toolName.replace(" ", "_").replace("'", "").replace("\"", "");
-            var template = getCard(toolName, toolClass, multitool.Description, table, toolStatImg, multitool.File, multitool.Screenshot, fancyId);
+            var template = getCard(toolName, toolClass, multitool.Description, table, toolStatImg, multitool.File, multitool.Screenshot, fancyId, "Multitools");
             container.append($(template));
         });
     }
@@ -511,7 +511,7 @@ function bindCompanion(companion, container) {
             table += "</tbody>";
             table += "</table>";
             var fancyId = compClass + "_" + compName.replace(" ", "_").replace("'", "").replace("\"", "").replace(".", "");
-            var template = getCard(compName, compClass, companion.Description, table, compStatImg, companion.File, companion.Screenshot, fancyId);
+            var template = getCard(compName, compClass, companion.Description, table, compStatImg, companion.File, companion.Screenshot, fancyId, "Companions");
             container.append($(template));
         });
     }
@@ -519,7 +519,7 @@ function bindCompanion(companion, container) {
 
 var carousels = {}
 
-function getCard(name, cl, desc, table, img, file, screen, fancyId) {
+function getCard(name, cl, desc, table, img, file, screen, fancyId, category) {
     var template = "<div class='col d-flex'>";
     template += "<div class='card mb-4 w-100'>";
     template += "<div class='card-header p-1'>";
@@ -530,7 +530,7 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
         template += "<div class='carousel slide w-100 ratio-16x9' id='" + fancyId + "' data-bs-ride='carousel'>";
         template += "<div class='carousel-inner'>";
         if (screen != null && screen != "") {
-            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item active'>"
+            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + category + "\" data-caption=\"" + name + "\" class='w-100 carousel-item active'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
             template += "</div>";
         }
@@ -539,7 +539,7 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
             if (screen != null && screen != "") {
                 activeString = "";
             }
-            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item" + activeString + "'>"
+            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + category + "\" data-caption=\"" + name + "\" class='w-100 carousel-item" + activeString + "'>"
             template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
             template += "</div>";
         }
