@@ -391,7 +391,10 @@ function bindShip(ship, container) {
             var fancyId = shipClass + "_" + shipName.replace("'", "").replace("\"", "").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
             container.append($(template));
-            carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), { slidesPerPage: 1 });
+            carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), { 
+                center: true,
+                slidesPerPage: 1 
+            });
             Fancybox.bind('[data-fancybox="' + fancyId + '"]', {
                 Carousel: {
                     on: {
