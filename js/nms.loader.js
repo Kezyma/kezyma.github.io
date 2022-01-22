@@ -544,13 +544,15 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
             template += "</div>";
         }
         template += "</div>"
-        template += "<button class='carousel-control-prev' type='button' data-bs-target='#" + fancyId + "' data-bs-slide='prev'>";
-        template += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
-        template += "</button>";
-        template += "<button class='carousel-control-next' type='button' data-bs-target='#" + fancyId + "' data-bs-slide='next'>";
-        template += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
-        template += "</button>"
-        template += "</div>"
+        if (img != null && img != "" && screen != null && screen != "") {
+            template += "<button class='carousel-control-prev' type='button' data-bs-target='#" + fancyId + "' data-bs-slide='prev'>";
+            template += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+            template += "</button>";
+            template += "<button class='carousel-control-next' type='button' data-bs-target='#" + fancyId + "' data-bs-slide='next'>";
+            template += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+            template += "</button>";
+        }
+        template += "</div>";
     }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
     template += table;
