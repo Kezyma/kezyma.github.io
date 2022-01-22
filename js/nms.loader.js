@@ -324,6 +324,9 @@ function bindData() {
     bindMultitools("Twitch", data.Multitools.Twitch);
     bindCompanions("Expeditions", data.Companions.Expeditions);
     bindCompanions("Twitch", data.Companions.Twitch);
+    $(".carousel").each(function (ix, itm) {
+        $()
+    });
     const imageCarousels = new Carousel(document.querySelector(".carousel"), {});
 }
 
@@ -522,10 +525,9 @@ function getCard(name, cl, desc, table, img, file) {
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
     if (img != null && img != "") {
-        template += "<div class='carousel'>";
-        template += "<div class='carousel__slide'>"
+        template += "<a href=\"" + encodeURI(img) + "\" data-fancybox=\"" + name + "\" class='w-100'>"
         template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
-        template += "</div>";
+        template += "</a>";
     }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
     template += table;
