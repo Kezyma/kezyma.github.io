@@ -122,9 +122,92 @@ var data = {
         ]
     },
     Multitools: {
-        Starter: [],
-        Expeditions: [],
-        Twitch: []
+        Starter: [
+            {
+                File: "/data/nms/Multitools/Waveform Focuser N56-P.mlt",
+                Name: "Waveform Focuser N56-P",
+                AltNames: "",
+                StatImage: "/img/nms/Waveform Focuser N56-P.jpg",
+                Screenshot: "",
+                Description: "Starter multitool."
+            }
+        ],
+        Expeditions: [
+            {
+                File: "/data/nms/Multitools/Geometric Dream Inverter.mlt",
+                Name: "Geometric Dream Inverter",
+                AltNames: "",
+                StatImage: "/img/nms/Geometric Dream Inverter.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Surge of Storms B56-K1-6.mlt",
+                Name: "Surge of Storms B56-K1-6",
+                AltNames: "",
+                StatImage: "/img/nms/Surge of Storms B56-K1-6.jpg",
+                Screenshot: "",
+                Description: ""
+            }
+        ],
+        Twitch: [
+            {
+                File: "/data/nms/Multitools/Arc Capacitor W_17I-15P.mlt",
+                Name: "Arc Capacitor W/17I-15P",
+                AltNames: "",
+                StatImage: "/img/nms/Arc Capacitor W_17I-15P.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Hunevar's Dream Charger.mlt",
+                Name: "Hunevar's Dream Charger",
+                AltNames: "",
+                StatImage: "/img/nms/Hunevar's Dream Charger.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Imperfect Loop Reflector.mlt",
+                Name: "Imperfect Loop Reflector",
+                AltNames: "",
+                StatImage: "/img/nms/Imperfect Loop Reflector.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Hunevar's Dream Charger.mlt",
+                Name: "Hunevar's Dream Charger",
+                AltNames: "",
+                StatImage: "/img/nms/Hunevar's Dream Charger.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Imperfect Loop Reflector.mlt",
+                Name: "Imperfect Loop Reflector",
+                AltNames: "",
+                StatImage: "/img/nms/Imperfect Loop Reflector.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Loop Scoop Mark IV.mlt",
+                Name: "Loop Scoop Mark IV",
+                AltNames: "",
+                StatImage: "/img/nms/Loop Scoop Mark IV.jpg",
+                Screenshot: "",
+                Description: ""
+            },
+            {
+                File: "/data/nms/Multitools/Quantum Harmoniser Mark IV.mlt",
+                Name: "Quantum Harmoniser Mark IV",
+                AltNames: "",
+                StatImage: "/img/nms/Quantum Harmoniser Mark IV.jpg",
+                Screenshot: "",
+                Description: ""
+            }
+        ]
     },
     Companions: {
         Expeditions: [],
@@ -141,6 +224,9 @@ function bindData() {
     bindShips("PreOrder", data.Ships.PreOrder);
     bindShips("Expeditions", data.Ships.Expeditions);
     bindShips("Twitch", data.Ships.Twitch);
+    bindMultitools("Starter", data.Multitools.Starter);
+    bindMultitools("Expeditions", data.Multitools.Expeditions);
+    bindMultitools("Twitch", data.Multitools.Twitch);
 }
 
 function bindShip(ship, container) {
