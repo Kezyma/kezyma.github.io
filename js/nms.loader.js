@@ -7,7 +7,16 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Radiant Pillar BC1.jpg",
                 Screenshot: "",
-                Description: "NEXT starter ship. Versions 1.5 - current."
+                Description: "NEXT starter ship. Versions 1.5 - current.",
+                Missing: false
+            },
+            {
+                Name: "Rasamama S36",
+                Missing: true
+            },
+            {
+                Name: "Yakomaku S79",
+                Missing: true
             }
         ],
         PreOrder: [
@@ -17,7 +26,12 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Horizon Omega.jpg",
                 Screenshot: "",
-                Description: "PC preorder reward."
+                Description: "PC preorder reward.",
+                Missing: false
+            },
+            {
+                Name: "Alpha Vector",
+                Missing: true
             }
         ],
         Expeditions: [
@@ -27,7 +41,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Golden Vector.jpg",
                 Screenshot: "",
-                Description: "Final reward from Expedition 1: The Pioneers."
+                Description: "Final reward from Expedition 1: The Pioneers.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Hadach's Discovery KH3 (Expedition).shp",
@@ -35,7 +50,12 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Hadach's Discovery KH3 (Expedition).jpg",
                 Screenshot: "",
-                Description: "Reward from Expedition 2: Beachhead Phase 2 Completion."
+                Description: "Reward from Expedition 2: Beachhead Phase 2 Completion.",
+                Missing: false
+            },
+            {
+                Name: "Honmatan OQ5",
+                Missing: true
             }
         ],
         Twitch: [
@@ -45,7 +65,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Eokai's Prime Inquirer.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 1, Day 1 drop."
+                Description: "Twitch Season 1, Day 1 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Hoshis HP7.shp",
@@ -53,7 +74,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Hoshis HP7.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 1, Day 2 drop."
+                Description: "Twitch Season 1, Day 2 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Nemesis of the Kudama.shp",
@@ -61,7 +83,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Nemesis of the Kudama.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 1, Day 3 drop."
+                Description: "Twitch Season 1, Day 3 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Ultimate Pride JB2.shp",
@@ -69,7 +92,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Ultimate Pride JB2.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 1, Day 4 drop."
+                Description: "Twitch Season 1, Day 4 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Prime Song JZ4.shp",
@@ -77,7 +101,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Prime Song JZ4.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 1, Day 5 drop."
+                Description: "Twitch Season 1, Day 5 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/VV5 Ariyaz.shp",
@@ -85,7 +110,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/VV5 Ariyaz.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 3, Day 1 drop."
+                Description: "Twitch Season 3, Day 1 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Hiwamiha of Destiny.shp",
@@ -93,7 +119,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Hiwamiha of Destiny.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 3, Day 2 drop."
+                Description: "Twitch Season 3, Day 2 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Ultimate Sleep LO1.shp",
@@ -101,7 +128,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Ultimate Sleep LO1.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 3, Day 3 drop."
+                Description: "Twitch Season 3, Day 3 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Jirishi's Prospect.shp",
@@ -109,7 +137,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Jirishi's Prospect.jpg",
                 Screenshot: "",
-                Description: "Twitch Season 3, Day 4 drop."
+                Description: "Twitch Season 3, Day 4 drop.",
+                Missing: false
             },
             {
                 File: "/data/nms/Ships/Hadach's Discovery KH3 (Twitch).shp",
@@ -117,7 +146,8 @@ var data = {
                 AltNames: "",
                 StatImage: "/img/nms/Hadach's Discovery KH3 (Twitch).jpg",
                 Screenshot: "",
-                Description: "Twitch Season 3, Day 5 drop."
+                Description: "Twitch Season 3, Day 5 drop.",
+                Missing: false
             }
         ]
     },
@@ -216,62 +246,68 @@ function bindData() {
 function bindShip(ship, container) {
     $.getJSON(ship.File, function (shipJson) {
         var shipName = ship.Name;
-        var shipAltName = ship.AltNames;
-        var shipStatImg = ship.StatImage;
-        var shipClass = shipJson.Ship["@Cs"][";l5"]["B@N"]["1o6"];
-        var shipSeed = shipJson.Ship["@Cs"]["NTx"]["@EL"][1];
-        var damage = 0.0, shield = 0.0, hyperdrive = 0.0;
-        var shipStats = shipJson.Ship["@Cs"][";l5"]["@bB"];
-        var shipModel = shipJson.Ship["@Cs"]["NTx"]["93M"];
-        var inventorySlots = shipJson.Ship["@Cs"][";l5"]["hl?"].length;
-        var techSlots = shipJson.Ship["@Cs"]["PMT"]["hl?"].length;
-        var shipType = "Unknown";
-        switch (shipModel) {
-            case "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN":
-                shipType = "Fighter";
-                break;
-            case "MODELS/COMMON/SPACECRAFT/SCIENTIFIC/SCIENTIFIC_PROC.SCENE.MBIN":
-                shipType = "Explorer";
-                break;
-            case "MODELS/COMMON/SPACECRAFT/SHUTTLE/SHUTTLE_PROC.SCENE.MBIN":
-                shipType = "Shuttle";
-                break;
-            case "MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN":
-                shipType = "Hauler";
-                break;
-            case "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTERCLASSICGOLD.SCENE.MBIN":
-                shipType = "Unique Fighter";
-                break;
+        if (ship.Missing) {
+            var template = getMissing(ship.Name);
+            container.append($(template));
         }
-        for (var stat in shipStats) {
-            var statVal = shipStats[stat][">MX"]
-            switch (shipStats[stat]["QL1"]) {
-                case "^SHIP_DAMAGE":
-                    damage = statVal;
+        else {
+            var shipAltName = ship.AltNames;
+            var shipStatImg = ship.StatImage;
+            var shipClass = shipJson.Ship["@Cs"][";l5"]["B@N"]["1o6"];
+            var shipSeed = shipJson.Ship["@Cs"]["NTx"]["@EL"][1];
+            var damage = 0.0, shield = 0.0, hyperdrive = 0.0;
+            var shipStats = shipJson.Ship["@Cs"][";l5"]["@bB"];
+            var shipModel = shipJson.Ship["@Cs"]["NTx"]["93M"];
+            var inventorySlots = shipJson.Ship["@Cs"][";l5"]["hl?"].length;
+            var techSlots = shipJson.Ship["@Cs"]["PMT"]["hl?"].length;
+            var shipType = "Unknown";
+            switch (shipModel) {
+                case "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN":
+                    shipType = "Fighter";
                     break;
-                case "^SHIP_SHIELD":
-                    shield = statVal;
+                case "MODELS/COMMON/SPACECRAFT/SCIENTIFIC/SCIENTIFIC_PROC.SCENE.MBIN":
+                    shipType = "Explorer";
                     break;
-                case "^SHIP_HYPERDRIVE":
-                    hyperdrive = statVal;
+                case "MODELS/COMMON/SPACECRAFT/SHUTTLE/SHUTTLE_PROC.SCENE.MBIN":
+                    shipType = "Shuttle";
+                    break;
+                case "MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN":
+                    shipType = "Hauler";
+                    break;
+                case "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTERCLASSICGOLD.SCENE.MBIN":
+                    shipType = "Unique Fighter";
                     break;
             }
+            for (var stat in shipStats) {
+                var statVal = shipStats[stat][">MX"]
+                switch (shipStats[stat]["QL1"]) {
+                    case "^SHIP_DAMAGE":
+                        damage = statVal;
+                        break;
+                    case "^SHIP_SHIELD":
+                        shield = statVal;
+                        break;
+                    case "^SHIP_HYPERDRIVE":
+                        hyperdrive = statVal;
+                        break;
+                }
+            }
+            var table = "<table class='table table-sm m-0'>"
+            table += "<tbody>";
+            if (shipAltName != null && shipAltName != "") {
+                table += "<tr><td>Alt Name</td><td>" + shipAltName + "</td></tr>";
+            }
+            table += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
+            table += "<tr><td>Seed</td><td>" + shipSeed + "</td></tr>";
+            table += "<tr><td>Slots</td><td>" + inventorySlots + " + " + techSlots + "</td></tr>";
+            table += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
+            table += "<tr><td>Shield Bonus</td><td>" + shield + "</td></tr>";
+            table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
+            table += "</tbody>";
+            table += "</table>";
+            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File);
+            container.append($(template));
         }
-        var table = "<table class='table table-sm m-0'>"
-        table += "<tbody>";
-        if (shipAltName != null && shipAltName != "") {
-            table += "<tr><td>Alt Name</td><td>" + shipAltName + "</td></tr>";
-        }
-        table += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
-        table += "<tr><td>Seed</td><td>" + shipSeed + "</td></tr>";
-        table += "<tr><td>Slots</td><td>" + inventorySlots + " + " + techSlots + "</td></tr>";
-        table += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
-        table += "<tr><td>Shield Bonus</td><td>" + shield + "</td></tr>";
-        table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
-        table += "</tbody>";
-        table += "</table>";
-        var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File);
-        container.append($(template));
     });
 }
 
@@ -324,14 +360,21 @@ function getCard(name, cl, desc, table, img, file) {
     template += "<img src=\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
-    template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
+    if (img != null && img != "") {
+        template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
+    }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
-    template += "<table class='table table-sm m-0'>"
     template += table;
-    template += "<div class='card-footer'><a href=\"" + encodeURI(file) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
+    if (file != null && file != "") {
+        template += "<div class='card-footer'><a href=\"" + encodeURI(file) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a></div>";
+    }
     template += "</div>";
     template += "</div>";
     return template;
+}
+
+function getMissing(name) {
+    return getCard(name, "N", "Missing.", "", "", "");
 }
 
 function bindShips(category, data) {
