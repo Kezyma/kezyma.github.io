@@ -153,6 +153,8 @@ function bindShip(ship, container) {
         var damage = 0.0, shield = 0.0, hyperdrive = 0.0;
         var shipStats = shipJson.Ship["@Cs"][";l5"]["@bB"];
         var shipModel = shipJson.Ship["@Cs"]["NTx"]["93M"];
+        var inventorySlots = shipJson["@Cs"][";l5"]["hl?"].length;
+        var techSlots = shipJson["@Cs"]["PMT"]["hl?"].length;
         var shipType = "Unknown";
         switch (shipModel) {
             case "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN":
@@ -200,6 +202,7 @@ function bindShip(ship, container) {
         }
         template += "<tr><td>Type</td><td>" + shipType + "</td></tr>";
         template += "<tr><td>Seed</td><td>" + shipSeed + "</td></tr>";
+        template += "<tr><td>Slots</td><td>" + inventorySlots + " + " + techSlots + "</td></tr>";
         template += "<tr><td>Damage Bonus</td><td>" + damage + "</td></tr>";
         template += "<tr><td>Shield Bonus</td><td>" + shield + "</td></tr>";
         template += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
