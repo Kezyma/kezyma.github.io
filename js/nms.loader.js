@@ -153,8 +153,8 @@ function bindShip(ship, container) {
         var damage = 0.0, shield = 0.0, hyperdrive = 0.0;
         var shipStats = shipJson.Ship["@Cs"][";l5"]["@bB"];
         var shipModel = shipJson.Ship["@Cs"]["NTx"]["93M"];
-        var inventorySlots = shipJson["@Cs"][";l5"]["hl?"].length;
-        var techSlots = shipJson["@Cs"]["PMT"]["hl?"].length;
+        var inventorySlots = shipJson.Ship["@Cs"][";l5"]["hl?"].length;
+        var techSlots = shipJson.Ship["@Cs"]["PMT"]["hl?"].length;
         var shipType = "Unknown";
         switch (shipModel) {
             case "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN":
