@@ -518,14 +518,14 @@ function getCard(name, cl, desc, table, img, file) {
     var template = "<div class='col d-flex'>";
     template += "<div class='card mb-4 w-100'>";
     template += "<div class='card-header p-1'>";
-    template += "<div class='carousel'>";
-    template += "<div class='carousel__slide'>"
     template += "<img data-lazy-src==\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
-    template += "</div>";
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
     if (img != null && img != "") {
+        template += "<div class='carousel'>";
+        template += "<div class='carousel__slide'>"
         template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
+        template += "</div>";
     }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
     template += table;
