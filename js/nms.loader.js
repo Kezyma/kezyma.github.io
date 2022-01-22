@@ -23,9 +23,9 @@ var data = {
             {
                 File: "/data/nms/Ships/Horizon Omega.shp",
                 Name: "Horizon Omega",
-                AltNames: "",
+                AltNames: "Prime Vector, Nojose's Crystal Folly",
                 StatImage: "/img/nms/Horizon Omega.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Horizon Omega.jpg",
                 Description: "PC preorder reward.",
                 Missing: false
             },
@@ -38,9 +38,9 @@ var data = {
             {
                 File: "/data/nms/Ships/Golden Vector.shp",
                 Name: "Golden Vector",
-                AltNames: "",
+                AltNames: "Otanonji RL2",
                 StatImage: "/img/nms/Golden Vector.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Golden Vector.jpg",
                 Description: "Final reward from Expedition 1: The Pioneers.",
                 Missing: false
             },
@@ -49,7 +49,7 @@ var data = {
                 Name: "Hadach's Discovery KH3",
                 AltNames: "",
                 StatImage: "/img/nms/Hadach's Discovery KH3 (Expedition).jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Hadach's Discovery KH3.jpg",
                 Description: "Phase 2 reward from Expedition 2: Beachhead.",
                 Missing: false
             },
@@ -62,9 +62,9 @@ var data = {
             {
                 File: "/data/nms/Ships/Eokai's Prime Inquirer.shp",
                 Name: "Eokai's Prime Inquirer",
-                AltNames: "",
+                AltNames: "Noichi's Tranquil Wings",
                 StatImage: "/img/nms/Eokai's Prime Inquirer.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Eokai's Prime Inquirer.jpg",
                 Description: "Twitch Season 1, Day 1 drop.",
                 Missing: false
             },
@@ -73,7 +73,7 @@ var data = {
                 Name: "Hoshis HP7",
                 AltNames: "",
                 StatImage: "/img/nms/Hoshis HP7.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Hoshis HP7.jpg",
                 Description: "Twitch Season 1, Day 2 drop.",
                 Missing: false
             },
@@ -82,7 +82,7 @@ var data = {
                 Name: "Nemesis of the Kudama",
                 AltNames: "",
                 StatImage: "/img/nms/Nemesis of the Kudama.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Nemesis of the Kudama.jpg",
                 Description: "Twitch Season 1, Day 3 drop.",
                 Missing: false
             },
@@ -91,7 +91,7 @@ var data = {
                 Name: "Ultimate Pride JB2",
                 AltNames: "",
                 StatImage: "/img/nms/Ultimate Pride JB2.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Ultimate Pride JB2.jpg",
                 Description: "Twitch Season 1, Day 4 drop.",
                 Missing: false
             },
@@ -100,7 +100,7 @@ var data = {
                 Name: "Prime Song JZ4",
                 AltNames: "",
                 StatImage: "/img/nms/Prime Song JZ4.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Prime Song JZ4.jpg",
                 Description: "Twitch Season 1, Day 5 drop.",
                 Missing: false
             },
@@ -109,7 +109,7 @@ var data = {
                 Name: "VV5 Ariyaz",
                 AltNames: "",
                 StatImage: "/img/nms/VV5 Ariyaz.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/VV5 Ariyaz.jpg",
                 Description: "Twitch Season 3, Day 1 drop.",
                 Missing: false
             },
@@ -118,7 +118,7 @@ var data = {
                 Name: "Hiwamiha of Destiny",
                 AltNames: "",
                 StatImage: "/img/nms/Hiwamiha of Destiny.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Hiwamiha of Destiny.jpg",
                 Description: "Twitch Season 3, Day 2 drop.",
                 Missing: false
             },
@@ -127,7 +127,7 @@ var data = {
                 Name: "Ultimate Sleep LO1",
                 AltNames: "",
                 StatImage: "/img/nms/Ultimate Sleep LO1.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Ultimate Sleep LO1.jpg",
                 Description: "Twitch Season 3, Day 3 drop.",
                 Missing: false
             },
@@ -136,7 +136,7 @@ var data = {
                 Name: "Jirishi's Prospect",
                 AltNames: "",
                 StatImage: "/img/nms/Jirishi's Prospect.jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Jirishi's Prospect.jpg",
                 Description: "Twitch Season 3, Day 4 drop.",
                 Missing: false
             },
@@ -145,7 +145,7 @@ var data = {
                 Name: "Hadach's Discovery KH3",
                 AltNames: "",
                 StatImage: "/img/nms/Hadach's Discovery KH3 (Twitch).jpg",
-                Screenshot: "",
+                Screenshot: "/img/nms/screenshots/Hadach's Discovery KH3.jpg",
                 Description: "Twitch Season 3, Day 5 drop.",
                 Missing: false
             }
@@ -388,7 +388,7 @@ function bindShip(ship, container) {
             table += "<tr><td>Hyperdrive Bonus</td><td>" + hyperdrive + "</td></tr>";
             table += "</tbody>";
             table += "</table>";
-            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File);
+            var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot);
             container.append($(template));
         });
     }
@@ -513,7 +513,7 @@ function bindCompanion(companion, container) {
     }
 }
 
-function getCard(name, cl, desc, table, img, file) {
+function getCard(name, cl, desc, table, img, file, screen) {
     var template = "<div class='col d-flex'>";
     template += "<div class='card mb-4 w-100'>";
     template += "<div class='card-header p-1'>";
@@ -521,9 +521,18 @@ function getCard(name, cl, desc, table, img, file) {
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
     if (img != null && img != "") {
-        template += "<a href=\"" + encodeURI(img) + "\" data-fancybox=\"" + name + "\" class='w-100'>"
+        if (screen != null && screen != "") {
+            template += "<div class='carousel'>";
+            template += "<a href=\"" + encodeURI(screen) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
+            template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
+            template += "</a>";
+        }
+        template += "<a href=\"" + encodeURI(img) + "\" data-fancybox=\"" + name + "\" class='w-100 carousel__item'>"
         template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
         template += "</a>";
+        if (screen != null && screen != "") {
+            template += "</div>";
+        }
     }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
     template += table;
