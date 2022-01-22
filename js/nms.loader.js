@@ -558,22 +558,6 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     return template;
 }
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  
-</div>
-
-
 function getMissing(name) {
     return getCard(name, "N", "Missing.", "", "", "", "", "");
 }
