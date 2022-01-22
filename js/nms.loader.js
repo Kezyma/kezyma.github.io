@@ -391,21 +391,6 @@ function bindShip(ship, container) {
             var fancyId = shipClass + "_" + shipName.replace("'", "").replace("\"", "").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             var template = getCard(shipName, shipClass, ship.Description, table, shipStatImg, ship.File, ship.Screenshot, fancyId);
             container.append($(template));
-            carousels[fancyId] = new Carousel(document.querySelector("#" + fancyId), { 
-                center: true,
-                slidesPerPage: 1 
-            });
-            Fancybox.bind('[data-fancybox="' + fancyId + '"]', {
-                Carousel: {
-                    on: {
-                        change: (that) => {
-                            carousels[fancyId].slideTo(carousels[fancyId].findPageForSlide(that.page), {
-                                friction: 0,
-                            });
-                        },
-                    },
-                },
-            });
         });
     }
 }
@@ -542,17 +527,25 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     template += "<h4 class='d-inline'>" + name + "</h4>";
     template += "</div>";
     if ((img != null && img != "") || (screen != null && screen != "")) {
-        template += "<div class='carousel w-100 ratio-16x9' id='" + fancyId + "'>";
+        template += "<div class='carousel slide w-100 ratio-16x9' id='" + fancyId + "' data-bs-ride='carousel'>";
+        template += "<div class='carousel-inner'>";
         if (screen != null && screen != "") {
-            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='col-12 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
             template += "</div>";
         }
         if (img != null && img != "") {
-            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='col-12 carousel__item'>"
+            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item'>"
             template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
             template += "</div>";
         }
+        template += "</div>"
+        template += "<button class='carousel-control-prev' type='button' data-bs-target='#" + fancyId + "' data-bs-slide='prev'>";
+        template += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+        template += "</button>";
+        template += "<button class='carousel-control-next' type='button' data-bs-target='#" + fancyId + "' data-bs-slide='next'>";
+        template += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+        template += "</button>"
         template += "</div>"
     }
     template += "<div class='card-body'><i>" + desc + "</i></div>";
@@ -564,6 +557,22 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
     template += "</div>";
     return template;
 }
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+  
+</div>
+
 
 function getMissing(name) {
     return getCard(name, "N", "Missing.", "", "", "", "", "");
