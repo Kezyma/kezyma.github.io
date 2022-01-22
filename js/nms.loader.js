@@ -530,12 +530,16 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId) {
         template += "<div class='carousel slide w-100 ratio-16x9' id='" + fancyId + "' data-bs-ride='carousel'>";
         template += "<div class='carousel-inner'>";
         if (screen != null && screen != "") {
-            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item'>"
+            template += "<div data-src=\"" + encodeURI(screen) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item active'>"
             template += "<img src=\"" + encodeURI(screen) + "\" class='w-100' />";
             template += "</div>";
         }
         if (img != null && img != "") {
-            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item'>"
+            var activeString = " active";
+            if (screen != null && screen != "") {
+                activeString = "";
+            }
+            template += "<div data-src=\"" + encodeURI(img) + "\" data-fancybox=\"" + fancyId + "\" class='w-100 carousel-item" + activeString + "'>"
             template += "<img src=\"" + encodeURI(img) + "\" class='w-100' />";
             template += "</div>";
         }
