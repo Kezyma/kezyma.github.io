@@ -355,7 +355,7 @@ function bindMultitool(multitool, container) {
 
 function getCard(name, cl, desc, table, img, file) {
     var template = "<div class='col d-flex'>";
-    template += "<div class='card mb-4'>";
+    template += "<div class='card mb-4 w-100'>";
     template += "<div class='card-header p-1'>";
     template += "<img src=\"/img/nms/" + cl + ".png\" height='48' class='d-inline' />";
     template += "<h4 class='d-inline'>" + name + "</h4>";
