@@ -303,7 +303,7 @@ function bindMultitool(multitool, container) {
         var damage = 0.0, mining = 0.0, scan = 0.0;
         for (var stat in toolStats) {
             var statVal = toolStats[stat][">MX"]
-            switch (shipStats[stat]["QL1"]) {
+            switch (toolStats[stat]["QL1"]) {
                 case "^WEAPON_DAMAGE":
                     damage = statVal;
                     break;
@@ -328,7 +328,7 @@ function bindMultitool(multitool, container) {
         table += "<tr><td>Scanning Bonus</td><td>" + scan + "</td></tr>";
         table += "</tbody>";
         table += "</table>";
-        var template = getCard(toolName, toolClas, multitool.Description, table, toolStatImg, multitool.File);
+        var template = getCard(toolName, toolClass, multitool.Description, table, toolStatImg, multitool.File);
         container.append($(template));
     });
 }
