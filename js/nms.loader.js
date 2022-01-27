@@ -70,17 +70,21 @@ var data = {
                 Missing: false
             },
             {
-                File: "/data/nms/Ships/Honmatan OQ5.shp",
-                LegacyFile: "",
                 Name: "Honmatan OQ5",
-                AltNames: "",
-                StatImage: "/img/nms/Honmatan OQ5.jpg",
-                Screenshot: "/img/nms/screenshots/Honmatan OQ5.jpg",
-                LegacyStatImage: "",
-                LegacyScreenshot: "",
-                Description: "Phase 4 reward from Expedition 1: The Pioneers.",
-                Missing: false
+                Missing: true
             }
+            //{
+            //    File: "/data/nms/Ships/Honmatan OQ5.shp",
+            //    LegacyFile: "",
+            //    Name: "Honmatan OQ5",
+            //    AltNames: "",
+            //    StatImage: "/img/nms/Honmatan OQ5.jpg",
+            //    Screenshot: "/img/nms/screenshots/Honmatan OQ5.jpg",
+            //    LegacyStatImage: "",
+            //    LegacyScreenshot: "",
+            //    Description: "Phase 4 reward from Expedition 1: The Pioneers.",
+            //    Missing: false
+            //}
         ],
         Twitch: [
             {
@@ -675,7 +679,7 @@ function getCard(name, cl, desc, table, img, file, screen, fancyId, category, le
         template += "<div class='card-footer'>";
         template += "<a href=\"" + encodeURI(file) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Download</a>";
         if (legacyFile != null && legacyFile != "") {
-            template += "<a href=\"" + encodeURI(legacyFile) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Legacy</a>";
+            template += "&nbsp;<a href=\"" + encodeURI(legacyFile) + "\" class='btn btn-sm btn-success'><i class='fa fa-download'></i> Legacy</a>";
         }
         template += "</div>";
     }
