@@ -48,8 +48,8 @@ var data = {
                 File: "/data/nms/Ships/Hadach's Discovery KH3 (Expedition).shp",
                 Name: "Hadach's Discovery KH3",
                 AltNames: "",
-                StatImage: "/img/nms/Hadach's Discovery KH3 (Expedition).jpg",
-                Screenshot: "/img/nms/screenshots/Hadach's Discovery KH3.jpg",
+                StatImage: "/img/nms/Hadachs Discovery KH3 (Expedition).jpg",
+                Screenshot: "/img/nms/screenshots/Hadachs Discovery KH3.jpg",
                 Description: "Phase 2 reward from Expedition 2: Beachhead.",
                 Missing: false
             },
@@ -63,8 +63,8 @@ var data = {
                 File: "/data/nms/Ships/Eokai's Prime Inquirer.shp",
                 Name: "Eokai's Prime Inquirer",
                 AltNames: "Noichi's Tranquil Wings",
-                StatImage: "/img/nms/Eokai's Prime Inquirer.jpg",
-                Screenshot: "/img/nms/screenshots/Eokai's Prime Inquirer.jpg",
+                StatImage: "/img/nms/Eokais Prime Inquirer.jpg",
+                Screenshot: "/img/nms/screenshots/Eokais Prime Inquirer.jpg",
                 Description: "Twitch Season 1, Day 1 drop.",
                 Missing: false
             },
@@ -135,8 +135,8 @@ var data = {
                 File: "/data/nms/Ships/Jirishi's Prospect.shp",
                 Name: "Jirishi's Prospect",
                 AltNames: "",
-                StatImage: "/img/nms/Jirishi's Prospect.jpg",
-                Screenshot: "/img/nms/screenshots/Jirishi's Prospect.jpg",
+                StatImage: "/img/nms/Jirishis Prospect.jpg",
+                Screenshot: "/img/nms/screenshots/Jirishis Prospect.jpg",
                 Description: "Twitch Season 3, Day 4 drop.",
                 Missing: false
             },
@@ -144,8 +144,8 @@ var data = {
                 File: "/data/nms/Ships/Hadach's Discovery KH3 (Twitch).shp",
                 Name: "Hadach's Discovery KH3",
                 AltNames: "",
-                StatImage: "/img/nms/Hadach's Discovery KH3 (Twitch).jpg",
-                Screenshot: "/img/nms/screenshots/Hadach's Discovery KH3.jpg",
+                StatImage: "/img/nms/Hadachs Discovery KH3 (Twitch).jpg",
+                Screenshot: "/img/nms/screenshots/Hadachs Discovery KH3.jpg",
                 Description: "Twitch Season 3, Day 5 drop.",
                 Missing: false
             }
@@ -207,7 +207,7 @@ var data = {
                 File: "/data/nms/Multitools/Hunevar's Dream Charger.mlt",
                 Name: "Hunevar's Dream Charger",
                 AltNames: "",
-                StatImage: "/img/nms/Hunevar's Dream Charger.jpg",
+                StatImage: "/img/nms/Hunevars Dream Charger.jpg",
                 Screenshot: "",
                 Description: "Twitch Season 1, Day 4 drop."
             },
