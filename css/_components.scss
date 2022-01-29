@@ -91,12 +91,12 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 }
 
 .nms-star::before, .nms-planet::before {
-    font-size: 2em;
+    font-size: 1.5em;
     font-style: normal;
 }
 
 .nms-stars {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-style: normal;
 }
 
@@ -106,17 +106,17 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 
 .nms-large-rings::before {
     content: "◉" !important;
-    font-size: 2.25em;
+    font-size: 1.75em;
 }
 
 .nms-medium::before {
     content: "●";
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .nms-medium-rings::before {
     content: "⦿" !important;
-    font-size: 2.25em;
+    font-size: 1.75em;
 }
 
 .nms-small::before {
@@ -125,7 +125,7 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 
 .nms-small-rings::before {
     content: "⊙" !important;
-    font-size: 2.25em;
+    font-size: 1.75em;
 }
 
 .nms-moon::before {
