@@ -21275,6 +21275,7 @@ readers do not read off random characters that represent icons */
 .nms-star::before, .nms-planet::before {
   font-size: 1.5em;
   font-style: normal;
+  line-height: 1em;
 }
 
 .nms-stars {
@@ -21318,7 +21319,7 @@ readers do not read off random characters that represent icons */
   content: "⊙" !important;
 }
 
-.nms-red::before {
+.nms-red::before, .nms-abandoned::before {
   color: #c0392b;
 }
 
@@ -21332,6 +21333,18 @@ readers do not read off random characters that represent icons */
 
 .nms-yellow::before {
   color: #f39c12;
+}
+
+.nms-invert {
+  filter: invert(1) grayscale(1);
+  image-rendering: pixelated;
+  image-rendering: -webkit-optimize-contrast;
+  height: 2em;
+  line-height: 1em;
+}
+
+.nms-abandoned {
+  font-style: normal;
 }
 
 .dynatable-per-page .dynatable-per-page-select {

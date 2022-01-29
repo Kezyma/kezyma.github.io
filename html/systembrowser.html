@@ -12,27 +12,23 @@
 
     <div class="card mt-3">
         <div class="card-header">
-            <h5 class="mb-0">System List</h5>
+            <h5 class="mb-0">Filter</h5>
         </div>
         <div class="card-body">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
                 <div class="col">
                     <label>Aliens</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="aliens">
+                    <select class="system-filter form-control form-control-sm" data-filter="1">
                         <option></option>
                         <option value="Gek">Gek</option>
                         <option value="Vy'keen">Vy'keen</option>
                         <option value="Korvax">Korvax</option>
-                        <option value="Robots">Robots</option>
-                        <option value="Atlas">Atlas</option>
-                        <option value="Diplomats">Diplomats</option>
-                        <option value="Exotics">Exotics</option>
                         <option value="None">None</option>
                     </select>
                 </div>
                 <div class="col">
                     <label>Trading</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="trading">
+                    <select class="system-filter form-control form-control-sm" data-filter="2">
                         <option></option>
                         <option value="Mining">Mining</option>
                         <option value="HighTech">High Tech</option>
@@ -45,7 +41,7 @@
                 </div>
                 <div class="col">
                     <label>Star</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="starTypeRaw">
+                    <select class="system-filter form-control form-control-sm" data-filter="5">
                         <option></option>
                         <option value="Yellow">Yellow</option>
                         <option value="Green">Green</option>
@@ -55,7 +51,7 @@
                 </div>
                 <div class="col">
                     <label>Conflict</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="conflictRaw">
+                    <select class="system-filter form-control form-control-sm" data-filter="3">
                         <option></option>
                         <option value="Low">Low</option>
                         <option value="Default">Default</option>
@@ -64,7 +60,7 @@
                 </div>
                 <div class="col">
                     <label>Wealth</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="wealthRaw">
+                    <select class="system-filter form-control form-control-sm" data-filter="4">
                         <option></option>
                         <option value="Poor">Poor</option>
                         <option value="Average">Average</option>
@@ -73,46 +69,177 @@
                 </div>
                 <div class="col">
                     <label>Planets</label>
-                    <input type="number" max="6" min="2" class="system-filter form-control form-control-sm" data-filter="planetsRaw" />
+                    <input type="number" max="6" min="2" class="system-filter form-control form-control-sm" data-filter="6" />
                 </div>
                 <div class="col">
                     <label>Moons</label>
-                    <input type="number" max="4" min="0" class="system-filter form-control form-control-sm" data-filter="moonsRaw" />
+                    <input type="number" max="4" min="0" class="system-filter form-control form-control-sm" data-filter="7" />
                 </div>
                 <div class="col">
                     <label>Abandoned</label>
-                    <input type="number" max="1" min="0" class="system-filter form-control form-control-sm" data-filter="abandoned" />
+                    <input type="number" max="1" min="0" class="system-filter form-control form-control-sm" data-filter="8" />
                 </div>
-
+                <div class="col">
+                    <label>Biome</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="10">
+                        <option></option>
+                        <option value="Lush">Lush</option>
+                        <option value="Toxic">Toxic</option>
+                        <option value="Scorched">Scorched</option>
+                        <option value="Radioactive">Radioactive</option>
+                        <option value="Frozen">Frozen</option>
+                        <option value="Barren">Barren</option>
+                        <option value="Dead">Dead</option>
+                        <option value="Weird">Weird</option>
+                        <option value="Red">Red</option>
+                        <option value="Green">Green</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Test">Test</option>
+                        <option value="Swamp">Swamp</option>
+                        <option value="Lava">Lava</option>
+                        <option value="Waterworld">Waterworld</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Sub-Biome</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="11">
+                        <option></option>
+                        <option value="None">None</option>
+                        <option value="Standard">Standard</option>
+                        <option value="HighQuality">High Quality</option>
+                        <option value="Structure">Structure</option>
+                        <option value="Beam">Beam</option>
+                        <option value="Hexagon">Hexagon</option>
+                        <option value="FractCube">Fract Cube</option>
+                        <option value="Bubble">Bubble</option>
+                        <option value="Shards">Shards</option>
+                        <option value="Contour">Contour</option>
+                        <option value="Shell">Shell</option>
+                        <option value="BoneSpire">Bone Spire</option>
+                        <option value="WireCell">Wire Cell</option>
+                        <option value="HydroGarden">Hydro Garden</option>
+                        <option value="HugePlant">Huge Plant</option>
+                        <option value="HugeLush">Huge Lush</option>
+                        <option value="HugeRing">Huge Ring</option>
+                        <option value="HugeRock">Huge Rock</option>
+                        <option value="HugeScorch">Huge Scorch</option>
+                        <option value="HugeToxic">Huge Toxic</option>
+                        <option value="LushRoomA">Lush Room A</option>
+                        <option value="LushRoomB">Lush Room B</option>
+                        <option value="LushRocky">Lush Rocky</option>
+                        <option value="LushRockyWeird">Lush Rocky Weird</option>
+                        <option value="ToxicSpores">Toxic Spores</option>
+                        <option value="ToxicEggs">Toxic Eggs</option>
+                        <option value="ToxicRocky">Toxic Rocky</option>
+                        <option value="ToxicTentacles">Toxic Tentacles</option>
+                        <option value="ScorchedShieldTree">Scorched Shield Tree</option>
+                        <option value="ScorchedCoral">Scorched Coral</option>
+                        <option value="RadioactiveGlow">Radioactive Glow</option>
+                        <option value="RadioactiveRuins">Radioactive Ruins</option>
+                        <option value="RadioSpikeCrystal">Radio Spike Crystal</option>
+                        <option value="FrozenPillar">Frozen Pillar</option>
+                        <option value="FrozenRocky">Frozen Rocky</option>
+                        <option value="FrozenRockyWeird">Frozen Rocky Weird</option>
+                        <option value="BarrenHives">Barren Hives</option>
+                        <option value="BarrenRocky">Barren Rocky</option>
+                        <option value="BarrenRockyWeird">Barren Rocky Weird</option>
+                        <option value="BarrenCoral">Barren Coral</option>
+                        <option value="DeadFrozen">Dead Frozen</option>
+                        <option value="DeadFrozenWeird">Dead Frozen Weird</option>
+                        <option value="Infested">Infested</option>
+                        <option value="Swamp">Swamp</option>
+                        <option value="Lava">Lava</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Terrain</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="12">
+                        <option></option>
+                        <option value="FloatingIslands">Floating Islands</option>
+                        <option value="GrandCanyon">Grand Canyon</option>
+                        <option value="MountainRavines">Mountain Ravines</option>
+                        <option value="HugeArches">Huge Arches</option>
+                        <option value="Alien">Alien</option>
+                        <option value="Craters">Craters</option>
+                        <option value="Caverns">Caverns</option>
+                        <option value="Alpine">Alpine</option>
+                        <option value="LilyPad">Lily Pad</option>
+                        <option value="Desert">Desert</option>
+                        <option value="WaterworldPrime">Waterworld Prime</option>
+                        <option value="FloatingIslandsPrime">Floating Islands Prime</option>
+                        <option value="GrandCanyonPrime">Grand Canyon Prime</option>
+                        <option value="MountainRavinesPrime">Mountain Ravines Prime</option>
+                        <option value="HugeArchesPrime">Huge Arches Prime</option>
+                        <option value="AlienPrime">Alien Prime</option>
+                        <option value="CratersPrime">Craters Prime</option>
+                        <option value="CavernsPrime">Caverns Prime</option>
+                        <option value="AlpinePrime">Alpine Prime</option>
+                        <option value="LilyPadPrime">LilyPad Prime</option>
+                        <option value="DesertPrime">Desert Prime</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Flora</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="13">
+                        <option></option>
+                        <option value="Dead">Dead</option>
+                        <option value="Low">Low</option>
+                        <option value="Mid">Mid</option>
+                        <option value="Full">Full</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Fauna</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="14">
+                        <option></option>
+                        <option value="Dead">Dead</option>
+                        <option value="Low">Low</option>
+                        <option value="Mid">Mid</option>
+                        <option value="Full">Full</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Sentinels</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="15">
+                        <option></option>
+                        <option value="Low">Low</option>
+                        <option value="Default">Default</option>
+                        <option value="Aggressive">Aggressive</option>
+                    </select>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="mb-0">Systems</h5>
         </div>
         <div class="card-body p-0 pt-2">
             <table id="systemTable" class="w-100 table table-sm table-hover">
-                <thead>
-                    <tr>
-                        <th>Seed</th>
-                        <th>Aliens</th>
-                        <th>Trading</th>
-                        <th data-dynatable-sorts="conflictRaw">Conflict</th>
-                        <th style="display: none">Conflict Raw</th>
-                        <th data-dynatable-sorts="wealthRaw">Wealth</th>
-                        <th style="display: none">Wealth Raw</th>
-                        <th data-dynatable-sorts="starTypeRaw">Star</th>
-                        <th style="display: none">Star Type Raw</th>
-                        <th data-dynatable-sorts="planetsRaw">Planets</th>
-                        <th style="display: none">Planets Raw</th>
-                        <th data-dynatable-sorts="moonsRaw">Moons</th>
-                        <th style="display: none">Moons Raw</th>
-                        <th>Abandoned</th>
-                        <th>Glyphs</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
             </table>
         </div>
     </div>
-    
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="mb-0">Planets</h5>
+        </div>
+        <div class="card-body p-0 pt-2">
+            <table id="planetTable" class="w-100 table table-sm table-hover">
+            </table>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="mb-0">Creatures</h5>
+        </div>
+        <div class="card-body p-0 pt-2">
+            <table id="creatureTable" class="w-100 table table-sm table-hover">
+            </table>
+        </div>
+    </div>
 </div>
 
 <script src="../js/systembrowser.js"></script>
