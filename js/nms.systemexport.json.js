@@ -47,6 +47,7 @@ function ExportData() {
             var sandworms = false;
             if (parseInt(PlanetTable.rows[30].cells[j].innerText) == 1) { sandworms = true; }
             var planet = {
+                Index: PlanetTable.rows[0].cells[j].innerText.split(" - ")[0],
                 Name: PlanetTable.rows[0].cells[j].innerText.split(" - ")[1],
                 Biome: PlanetTable.rows[1].cells[j].innerText,
                 SubBiome: PlanetTable.rows[2].cells[j].innerText,
