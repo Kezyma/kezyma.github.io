@@ -42,6 +42,16 @@
     {
       "library": "simptip@1.0.4",
       "destination": "lib/simptip/"
+    },
+    {
+      "library": "datatables@1.10.18",
+      "destination": "lib/datatables/"
     }
-  ]
+  ,
+{
+  "provider": "cdnjs",
+  "library": "Dynatable@0.3.1",
+  "destination": "lib/Dynatable/"
+}
+]
 }

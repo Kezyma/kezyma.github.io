@@ -1,0 +1,113 @@
+﻿<div class="container mb-3">
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="mb-0">Select System Export</h5>
+        </div>
+        <div class="card-body">
+            <!--<a class="help" data-tooltip="Select an existing json file from your computer."><i class="far fa-question-circle text-info"></i></a>-->
+            <input type="file" class="form-control form-control-sm" id="systemExportSelect" accept=".json" />
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="mb-0">System List</h5>
+        </div>
+        <div class="card-body">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
+                <div class="col">
+                    <label>Aliens</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="aliens">
+                        <option></option>
+                        <option value="Gek">Gek</option>
+                        <option value="Vy'keen">Vy'keen</option>
+                        <option value="Korvax">Korvax</option>
+                        <option value="Robots">Robots</option>
+                        <option value="Atlas">Atlas</option>
+                        <option value="Diplomats">Diplomats</option>
+                        <option value="Exotics">Exotics</option>
+                        <option value="None">None</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Trading</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="trading">
+                        <option></option>
+                        <option value="Mining">Mining</option>
+                        <option value="HighTech">High Tech</option>
+                        <option value="Trading">Trading</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Fusion">Fusion</option>
+                        <option value="Scientific">Scientific</option>
+                        <option value="PowerGeneration">Power Generation</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Star Type</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="starType">
+                        <option></option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Green">Green</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Red">Red</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Conflict</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="conflict">
+                        <option></option>
+                        <option value="Low">Low</option>
+                        <option value="Default">Default</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Wealth</label>
+                    <select class="system-filter form-control form-control-sm" data-filter="wealth">
+                        <option></option>
+                        <option value="Poor">Poor</option>
+                        <option value="Average">Average</option>
+                        <option value="Wealthy">Wealthy</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Planets</label>
+                    <input type="number" max="6" min="2" class="system-filter form-control form-control-sm" data-filter="planets" />
+                </div>
+                <div class="col">
+                    <label>Moons</label>
+                    <input type="number" max="4" min="0" class="system-filter form-control form-control-sm" data-filter="moons" />
+                </div>
+                <div class="col">
+                    <label>Abandoned</label>
+                    <input type="number" max="1" min="0" class="system-filter form-control form-control-sm" data-filter="abandoned" />
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body p-0 pt-2">
+            <table id="systemTable" class="w-100 table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Seed</th>
+                        <th>Aliens</th>
+                        <th>Trading</th>
+                        <th>Conflict</th>
+                        <th>Wealth</th>
+                        <th>Star Type</th>
+                        <th>Planets</th>
+                        <th>Moons</th>
+                        <th>Abandoned</th>
+                        <th>Glyphs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+<script src="../js/systembrowser.js"></script>

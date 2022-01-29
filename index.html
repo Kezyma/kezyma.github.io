@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/kezyma.github.io.min.css" />
     <link rel="stylesheet" href="lib/fancyapps/dist/fancybox.css" />
+    <!--<link rel="stylesheet" href="lib/datatables/media/css/jquery.dataTables.css" />-->
+    <link rel="stylesheet" href="lib/Dynatable/jquery.dynatable.css" />
     <title></title>
 </head>
 <body class="bg-dark">
@@ -54,6 +56,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" data-page="nomanssky" href="#">No Man's Sky Vault</a></li>
+                            <li><a class="dropdown-item" data-page="systembrowser" href="#">System Browser</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -77,6 +80,8 @@
     <script src="lib/prismjs/plugins/toolbar/prism-toolbar.js"></script>
     <script src="lib/prismjs/plugins/show-language/prism-show-language.js"></script>
     <script src="lib/fancyapps/dist/fancybox.umd.js"></script>
+    <!--<script src="lib/datatables/media/js/jquery.dataTables.js"></script>-->
+    <script src="lib/Dynatable/jquery.dynatable.js"></script>
     <script src="js/kezyma.github.io.js"></script>
     <script>
         $(document).ready(function () {
@@ -95,6 +100,7 @@
             pages.add("bloodchillmanor", "Bloodchill Manor Landscape Fix", "html/bloodchillmanor.html");
             pages.add("modbackup", "Mod Backup Utility", "html/modbackup.html");
             pages.add("nomanssky", "No Man's Sky Vault", "html/nomanssky.html");
+            pages.add("systembrowser", "System Browser", "html/systembrowser.html");
             pages.init("page-content");
         });
     </script>

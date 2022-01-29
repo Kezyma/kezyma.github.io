@@ -2182,7 +2182,7 @@ progress {
   color: #6c757d;
 }
 
-.form-control {
+.form-control, .dynatable-search input, .dynatable-per-page .dynatable-per-page-select {
   display: block;
   width: 100%;
   padding: 0.5rem 1rem;
@@ -2199,35 +2199,35 @@ progress {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control {
+  .form-control, .dynatable-search input, .dynatable-per-page .dynatable-per-page-select {
     transition: none;
   }
 }
-.form-control[type=file] {
+.form-control[type=file], .dynatable-search input[type=file], .dynatable-per-page [type=file].dynatable-per-page-select {
   overflow: hidden;
 }
-.form-control[type=file]:not(:disabled):not([readonly]) {
+.form-control[type=file]:not(:disabled):not([readonly]), .dynatable-search input[type=file]:not(:disabled):not([readonly]), .dynatable-per-page [type=file].dynatable-per-page-select:not(:disabled):not([readonly]) {
   cursor: pointer;
 }
-.form-control:focus {
+.form-control:focus, .dynatable-search input:focus, .dynatable-per-page .dynatable-per-page-select:focus {
   color: #495057;
   background-color: #fff;
   border-color: #9aacf3;
   outline: 0;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 0.25rem rgba(52, 89, 230, 0.25);
 }
-.form-control::-webkit-date-and-time-value {
+.form-control::-webkit-date-and-time-value, .dynatable-search input::-webkit-date-and-time-value, .dynatable-per-page .dynatable-per-page-select::-webkit-date-and-time-value {
   height: 1.5em;
 }
-.form-control::placeholder {
+.form-control::placeholder, .dynatable-search input::placeholder, .dynatable-per-page .dynatable-per-page-select::placeholder {
   color: #6c757d;
   opacity: 1;
 }
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled, .dynatable-search input:disabled, .dynatable-per-page .dynatable-per-page-select:disabled, .form-control[readonly], .dynatable-search input[readonly], .dynatable-per-page [readonly].dynatable-per-page-select {
   background-color: #e9ecef;
   opacity: 1;
 }
-.form-control::file-selector-button {
+.form-control::file-selector-button, .dynatable-search input::file-selector-button, .dynatable-per-page .dynatable-per-page-select::file-selector-button {
   padding: 0.5rem 1rem;
   margin: -0.5rem -1rem;
   margin-inline-end: 1rem;
@@ -2242,14 +2242,14 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::file-selector-button {
+  .form-control::file-selector-button, .dynatable-search input::file-selector-button, .dynatable-per-page .dynatable-per-page-select::file-selector-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button, .dynatable-search input:hover:not(:disabled):not([readonly])::file-selector-button, .dynatable-per-page .dynatable-per-page-select:hover:not(:disabled):not([readonly])::file-selector-button {
   background-color: #ecedee;
 }
-.form-control::-webkit-file-upload-button {
+.form-control::-webkit-file-upload-button, .dynatable-search input::-webkit-file-upload-button, .dynatable-per-page .dynatable-per-page-select::-webkit-file-upload-button {
   padding: 0.5rem 1rem;
   margin: -0.5rem -1rem;
   margin-inline-end: 1rem;
@@ -2264,11 +2264,11 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::-webkit-file-upload-button {
+  .form-control::-webkit-file-upload-button, .dynatable-search input::-webkit-file-upload-button, .dynatable-per-page .dynatable-per-page-select::-webkit-file-upload-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .dynatable-search input:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .dynatable-per-page .dynatable-per-page-select:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
   background-color: #ecedee;
 }
 
@@ -2283,23 +2283,23 @@ progress {
   border: solid transparent;
   border-width: 1px 0;
 }
-.form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
+.form-control-plaintext.form-control-sm, .dynatable-search input.form-control-plaintext, .dynatable-per-page .form-control-plaintext.dynatable-per-page-select, .form-control-plaintext.form-control-lg {
   padding-right: 0;
   padding-left: 0;
 }
 
-.form-control-sm {
+.form-control-sm, .dynatable-search input, .dynatable-per-page .dynatable-per-page-select {
   min-height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.2rem;
 }
-.form-control-sm::file-selector-button {
+.form-control-sm::file-selector-button, .dynatable-search input::file-selector-button, .dynatable-per-page .dynatable-per-page-select::file-selector-button {
   padding: 0.25rem 0.5rem;
   margin: -0.25rem -0.5rem;
   margin-inline-end: 0.5rem;
 }
-.form-control-sm::-webkit-file-upload-button {
+.form-control-sm::-webkit-file-upload-button, .dynatable-search input::-webkit-file-upload-button, .dynatable-per-page .dynatable-per-page-select::-webkit-file-upload-button {
   padding: 0.25rem 0.5rem;
   margin: -0.25rem -0.5rem;
   margin-inline-end: 0.5rem;
@@ -2322,10 +2322,10 @@ progress {
   margin-inline-end: 1rem;
 }
 
-textarea.form-control {
+textarea.form-control, .dynatable-per-page textarea.dynatable-per-page-select {
   min-height: calc(1.5em + 1rem + 2px);
 }
-textarea.form-control-sm {
+textarea.form-control-sm, .dynatable-per-page textarea.dynatable-per-page-select {
   min-height: calc(1.5em + 0.5rem + 2px);
 }
 textarea.form-control-lg {
@@ -2598,7 +2598,7 @@ textarea.form-control-lg {
 .form-floating {
   position: relative;
 }
-.form-floating > .form-control,
+.form-floating > .form-control, .dynatable-search .form-floating > input, .dynatable-per-page .form-floating > .dynatable-per-page-select,
 .form-floating > .form-select {
   height: calc(3.5rem + 2px);
   line-height: 1.25;
@@ -2619,17 +2619,17 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-.form-floating > .form-control {
+.form-floating > .form-control, .dynatable-search .form-floating > input, .dynatable-per-page .form-floating > .dynatable-per-page-select {
   padding: 1rem 1rem;
 }
-.form-floating > .form-control::placeholder {
+.form-floating > .form-control::placeholder, .dynatable-search .form-floating > input::placeholder, .dynatable-per-page .form-floating > .dynatable-per-page-select::placeholder {
   color: transparent;
 }
-.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+.form-floating > .form-control:focus, .dynatable-search .form-floating > input:focus, .dynatable-per-page .form-floating > .dynatable-per-page-select:focus, .form-floating > .form-control:not(:placeholder-shown), .dynatable-search .form-floating > input:not(:placeholder-shown), .dynatable-per-page .form-floating > .dynatable-per-page-select:not(:placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:-webkit-autofill {
+.form-floating > .form-control:-webkit-autofill, .dynatable-search .form-floating > input:-webkit-autofill, .dynatable-per-page .form-floating > .dynatable-per-page-select:-webkit-autofill {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
@@ -2637,13 +2637,15 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:focus ~ label, .dynatable-search .form-floating > input:focus ~ label, .dynatable-per-page .form-floating > .dynatable-per-page-select:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.dynatable-search .form-floating > input:not(:placeholder-shown) ~ label,
+.dynatable-per-page .form-floating > .dynatable-per-page-select:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:-webkit-autofill ~ label {
+.form-floating > .form-control:-webkit-autofill ~ label, .dynatable-search .form-floating > input:-webkit-autofill ~ label, .dynatable-per-page .form-floating > .dynatable-per-page-select:-webkit-autofill ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
@@ -2655,14 +2657,14 @@ textarea.form-control-lg {
   align-items: stretch;
   width: 100%;
 }
-.input-group > .form-control,
+.input-group > .form-control, .dynatable-search .input-group > input, .dynatable-per-page .input-group > .dynatable-per-page-select,
 .input-group > .form-select {
   position: relative;
   flex: 1 1 auto;
   width: 1%;
   min-width: 0;
 }
-.input-group > .form-control:focus,
+.input-group > .form-control:focus, .dynatable-search .input-group > input:focus, .dynatable-per-page .input-group > .dynatable-per-page-select:focus,
 .input-group > .form-select:focus {
   z-index: 3;
 }
@@ -2689,7 +2691,7 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
 }
 
-.input-group-lg > .form-control,
+.input-group-lg > .form-control, .dynatable-search .input-group-lg > input, .dynatable-per-page .input-group-lg > .dynatable-per-page-select,
 .input-group-lg > .form-select,
 .input-group-lg > .input-group-text,
 .input-group-lg > .btn {
@@ -2698,7 +2700,7 @@ textarea.form-control-lg {
   border-radius: 0.3rem;
 }
 
-.input-group-sm > .form-control,
+.input-group-sm > .form-control, .dynatable-search .input-group-sm > input, .dynatable-per-page .input-group-sm > .dynatable-per-page-select,
 .input-group-sm > .form-select,
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn {
@@ -2757,7 +2759,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:valid, .form-control.is-valid {
+.was-validated .form-control:valid, .was-validated .dynatable-search input:valid, .dynatable-search .was-validated input:valid, .was-validated .dynatable-per-page .dynatable-per-page-select:valid, .dynatable-per-page .was-validated .dynatable-per-page-select:valid, .form-control.is-valid, .dynatable-search input.is-valid, .dynatable-per-page .is-valid.dynatable-per-page-select {
   border-color: #2fb380;
   padding-right: calc(1.5em + 1rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%232fb380' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -2765,12 +2767,12 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.25rem) center;
   background-size: calc(0.75em + 0.5rem) calc(0.75em + 0.5rem);
 }
-.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+.was-validated .form-control:valid:focus, .was-validated .dynatable-search input:valid:focus, .dynatable-search .was-validated input:valid:focus, .was-validated .dynatable-per-page .dynatable-per-page-select:valid:focus, .dynatable-per-page .was-validated .dynatable-per-page-select:valid:focus, .form-control.is-valid:focus, .dynatable-search input.is-valid:focus, .dynatable-per-page .is-valid.dynatable-per-page-select:focus {
   border-color: #2fb380;
   box-shadow: 0 0 0 0.25rem rgba(47, 179, 128, 0.25);
 }
 
-.was-validated textarea.form-control:valid, textarea.form-control.is-valid {
+.was-validated textarea.form-control:valid, .was-validated .dynatable-per-page textarea.dynatable-per-page-select:valid, .dynatable-per-page .was-validated textarea.dynatable-per-page-select:valid, textarea.form-control.is-valid, .dynatable-per-page textarea.is-valid.dynatable-per-page-select {
   padding-right: calc(1.5em + 1rem);
   background-position: top calc(0.375em + 0.25rem) right calc(0.375em + 0.25rem);
 }
@@ -2806,12 +2808,12 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group .form-control:valid, .input-group .form-control.is-valid,
+.was-validated .input-group .form-control:valid, .was-validated .input-group .dynatable-search input:valid, .dynatable-search .was-validated .input-group input:valid, .was-validated .input-group .dynatable-per-page .dynatable-per-page-select:valid, .dynatable-per-page .was-validated .input-group .dynatable-per-page-select:valid, .input-group .form-control.is-valid, .input-group .dynatable-search input.is-valid, .dynatable-search .input-group input.is-valid, .input-group .dynatable-per-page .is-valid.dynatable-per-page-select, .dynatable-per-page .input-group .is-valid.dynatable-per-page-select,
 .was-validated .input-group .form-select:valid,
 .input-group .form-select.is-valid {
   z-index: 1;
 }
-.was-validated .input-group .form-control:valid:focus, .input-group .form-control.is-valid:focus,
+.was-validated .input-group .form-control:valid:focus, .was-validated .input-group .dynatable-search input:valid:focus, .dynatable-search .was-validated .input-group input:valid:focus, .was-validated .input-group .dynatable-per-page .dynatable-per-page-select:valid:focus, .dynatable-per-page .was-validated .input-group .dynatable-per-page-select:valid:focus, .input-group .form-control.is-valid:focus, .input-group .dynatable-search input.is-valid:focus, .dynatable-search .input-group input.is-valid:focus, .input-group .dynatable-per-page .is-valid.dynatable-per-page-select:focus, .dynatable-per-page .input-group .is-valid.dynatable-per-page-select:focus,
 .was-validated .input-group .form-select:valid:focus,
 .input-group .form-select.is-valid:focus {
   z-index: 3;
@@ -2846,7 +2848,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid {
+.was-validated .form-control:invalid, .was-validated .dynatable-search input:invalid, .dynatable-search .was-validated input:invalid, .was-validated .dynatable-per-page .dynatable-per-page-select:invalid, .dynatable-per-page .was-validated .dynatable-per-page-select:invalid, .form-control.is-invalid, .dynatable-search input.is-invalid, .dynatable-per-page .is-invalid.dynatable-per-page-select {
   border-color: #da292e;
   padding-right: calc(1.5em + 1rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23da292e'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23da292e' stroke='none'/%3e%3c/svg%3e");
@@ -2854,12 +2856,12 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.25rem) center;
   background-size: calc(0.75em + 0.5rem) calc(0.75em + 0.5rem);
 }
-.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+.was-validated .form-control:invalid:focus, .was-validated .dynatable-search input:invalid:focus, .dynatable-search .was-validated input:invalid:focus, .was-validated .dynatable-per-page .dynatable-per-page-select:invalid:focus, .dynatable-per-page .was-validated .dynatable-per-page-select:invalid:focus, .form-control.is-invalid:focus, .dynatable-search input.is-invalid:focus, .dynatable-per-page .is-invalid.dynatable-per-page-select:focus {
   border-color: #da292e;
   box-shadow: 0 0 0 0.25rem rgba(218, 41, 46, 0.25);
 }
 
-.was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
+.was-validated textarea.form-control:invalid, .was-validated .dynatable-per-page textarea.dynatable-per-page-select:invalid, .dynatable-per-page .was-validated textarea.dynatable-per-page-select:invalid, textarea.form-control.is-invalid, .dynatable-per-page textarea.is-invalid.dynatable-per-page-select {
   padding-right: calc(1.5em + 1rem);
   background-position: top calc(0.375em + 0.25rem) right calc(0.375em + 0.25rem);
 }
@@ -2895,12 +2897,12 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group .form-control:invalid, .input-group .form-control.is-invalid,
+.was-validated .input-group .form-control:invalid, .was-validated .input-group .dynatable-search input:invalid, .dynatable-search .was-validated .input-group input:invalid, .was-validated .input-group .dynatable-per-page .dynatable-per-page-select:invalid, .dynatable-per-page .was-validated .input-group .dynatable-per-page-select:invalid, .input-group .form-control.is-invalid, .input-group .dynatable-search input.is-invalid, .dynatable-search .input-group input.is-invalid, .input-group .dynatable-per-page .is-invalid.dynatable-per-page-select, .dynatable-per-page .input-group .is-invalid.dynatable-per-page-select,
 .was-validated .input-group .form-select:invalid,
 .input-group .form-select.is-invalid {
   z-index: 2;
 }
-.was-validated .input-group .form-control:invalid:focus, .input-group .form-control.is-invalid:focus,
+.was-validated .input-group .form-control:invalid:focus, .was-validated .input-group .dynatable-search input:invalid:focus, .dynatable-search .was-validated .input-group input:invalid:focus, .was-validated .input-group .dynatable-per-page .dynatable-per-page-select:invalid:focus, .dynatable-per-page .was-validated .input-group .dynatable-per-page-select:invalid:focus, .input-group .form-control.is-invalid:focus, .input-group .dynatable-search input.is-invalid:focus, .dynatable-search .input-group input.is-invalid:focus, .input-group .dynatable-per-page .is-invalid.dynatable-per-page-select:focus, .dynatable-per-page .input-group .is-invalid.dynatable-per-page-select:focus,
 .was-validated .input-group .form-select:invalid:focus,
 .input-group .form-select.is-invalid:focus {
   z-index: 3;
@@ -7095,7 +7097,7 @@ textarea.form-control-lg {
   margin: 0.25rem !important;
 }
 
-.m-2 {
+.m-2, .dynatable-search, .dynatable-per-page {
   margin: 0.5rem !important;
 }
 
@@ -21262,4 +21264,18 @@ readers do not read off random characters that represent icons */
   .em-xxl-20 {
     font-size: 10em;
   }
+}
+#systemTable th {
+  color: #000;
+}
+#systemTable th a {
+  color: #000;
+}
+
+.dynatable-per-page .dynatable-per-page-select {
+  max-width: 5em;
+}
+
+.dynatable-search input {
+  max-width: 15em;
 }

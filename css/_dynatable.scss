@@ -1,0 +1,19 @@
+﻿.dynatable-per-page {
+    @extend .m-2;
+
+    .dynatable-per-page-select {
+        @extend .form-control;
+        @extend .form-control-sm;
+        max-width: 5em;
+    }
+}
+
+.dynatable-search {
+    @extend .m-2;
+
+    input {
+        @extend .form-control;
+        @extend .form-control-sm;
+        max-width: 15em;
+    }
+}
