@@ -132,7 +132,7 @@ function getGlyphs(address) {
     var glyphs = "";
     for (var i = 0; i < Array.from(address).length; i++) {
         var char = address[i];
-        glyphs += "<img src='/img/nms/glyphs/" + char + ".png' height='32' style='filter: invert(.2);' />";
+        glyphs += "<img src='/img/nms/glyphs/" + char + ".png' height='34' style='filter: invert(.5);' />";
     }
     return glyphs;
 }
