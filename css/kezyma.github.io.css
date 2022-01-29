@@ -21288,14 +21288,17 @@ readers do not read off random characters that represent icons */
 
 .nms-large-rings::before {
   content: "◉" !important;
+  font-size: 2.25em;
 }
 
 .nms-medium::before {
   content: "●";
+  font-size: 1.5em;
 }
 
 .nms-medium-rings::before {
   content: "⦿" !important;
+  font-size: 2.25em;
 }
 
 .nms-small::before {
@@ -21304,6 +21307,7 @@ readers do not read off random characters that represent icons */
 
 .nms-small-rings::before {
   content: "⊙" !important;
+  font-size: 2.25em;
 }
 
 .nms-moon::before {

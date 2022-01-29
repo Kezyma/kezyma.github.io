@@ -106,14 +106,17 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 
 .nms-large-rings::before {
     content: "◉" !important;
+    font-size: 2.25em;
 }
 
 .nms-medium::before {
     content: "●";
+    font-size: 1.5em;
 }
 
 .nms-medium-rings::before {
     content: "⦿" !important;
+    font-size: 2.25em;
 }
 
 .nms-small::before {
@@ -122,6 +125,7 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 
 .nms-small-rings::before {
     content: "⊙" !important;
+    font-size: 2.25em;
 }
 
 .nms-moon::before {
