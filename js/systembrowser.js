@@ -28,7 +28,7 @@ function bindList(systemList) {
             "wealthRaw": systemItem.Wealth,
             "wealth": getStarIcons(systemItem.Wealth),
             "starTypeRaw": systemItem.StarType,
-            "starType": getStarIcon(systemItem.StarType),
+            "star": getStarIcon(systemItem.StarType),
             "planetsRaw": systemItem.Planets.length - systemItem.Moons,
             "planets": systemItem.Planets.filter(p => p.Size != "Moon").map(function (planetItem) {
                 return getPlanetIcon(planetItem.Size, planetItem.Rings);
