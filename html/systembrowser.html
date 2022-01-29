@@ -45,7 +45,7 @@
                 </div>
                 <div class="col">
                     <label>Star Type</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="starType">
+                    <select class="system-filter form-control form-control-sm" data-filter="starTypeRaw">
                         <option></option>
                         <option value="Yellow">Yellow</option>
                         <option value="Green">Green</option>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col">
                     <label>Conflict</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="conflict">
+                    <select class="system-filter form-control form-control-sm" data-filter="conflictRaw">
                         <option></option>
                         <option value="Low">Low</option>
                         <option value="Default">Default</option>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col">
                     <label>Wealth</label>
-                    <select class="system-filter form-control form-control-sm" data-filter="wealth">
+                    <select class="system-filter form-control form-control-sm" data-filter="wealthRaw">
                         <option></option>
                         <option value="Poor">Poor</option>
                         <option value="Average">Average</option>
@@ -73,11 +73,11 @@
                 </div>
                 <div class="col">
                     <label>Planets</label>
-                    <input type="number" max="6" min="2" class="system-filter form-control form-control-sm" data-filter="planets" />
+                    <input type="number" max="6" min="2" class="system-filter form-control form-control-sm" data-filter="planetsRaw" />
                 </div>
                 <div class="col">
                     <label>Moons</label>
-                    <input type="number" max="4" min="0" class="system-filter form-control form-control-sm" data-filter="moons" />
+                    <input type="number" max="4" min="0" class="system-filter form-control form-control-sm" data-filter="moonsRaw" />
                 </div>
                 <div class="col">
                     <label>Abandoned</label>
@@ -93,11 +93,16 @@
                         <th>Seed</th>
                         <th>Aliens</th>
                         <th>Trading</th>
-                        <th>Conflict</th>
-                        <th>Wealth</th>
-                        <th>Star Type</th>
-                        <th>Planets</th>
-                        <th>Moons</th>
+                        <th data-dynatable-sorts="conflictRaw">Conflict</th>
+                        <th style="display: none">Conflict Raw</th>
+                        <th data-dynatable-sorts="wealthRaw">Wealth</th>
+                        <th style="display: none">Wealth Raw</th>
+                        <th data-dynatable-sorts="starTypeRaw">Star Type</th>
+                        <th style="display: none">Star Type Raw</th>
+                        <th data-dynatable-sorts="planetsRaw">Planets</th>
+                        <th style="display: none">Planets Raw</th>
+                        <th data-dynatable-sorts="moonsRaw">Moons</th>
+                        <th style="display: none">Moons Raw</th>
                         <th>Abandoned</th>
                         <th>Glyphs</th>
                     </tr>

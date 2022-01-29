@@ -89,3 +89,58 @@ $v: (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
         color: #000;
     }
 }
+
+.nms-star::before, .nms-planet::before {
+    font-size: 2em;
+    font-style: normal;
+}
+
+.nms-stars {
+    font-size: 1.5em;
+    font-style: normal;
+}
+
+.nms-large::before, .nms-star::before {
+    content: "⬤";
+}
+
+.nms-large-rings::before {
+    content: "◉" !important;
+}
+
+.nms-medium::before {
+    content: "●";
+}
+
+.nms-medium-rings::before {
+    content: "⦿" !important;
+}
+
+.nms-small::before {
+    content: "•";
+}
+
+.nms-small-rings::before {
+    content: "⊙" !important;
+}
+
+.nms-moon::before {
+    content: "·";
+}
+
+.nms-moon-rings::before {
+    content: "⊙" !important;
+}
+
+.nms-red::before {
+    color: #c0392b;
+}
+.nms-blue::before {
+    color: #2980b9;
+}
+.nms-green::before {
+    color: #27ae60;
+}
+.nms-yellow::before {
+    color: #f39c12;
+}

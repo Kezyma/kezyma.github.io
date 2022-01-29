@@ -23,19 +23,23 @@ function bindList(systemList) {
             "address": systemItem.Address,
             "aliens": systemItem.AlienRace,
             "trading": systemItem.Class,
-            "conflict": systemItem.Conflict,
-            "wealth": systemItem.Wealth,
-            "starType": systemItem.StarType,
-            "planets": systemItem.Planets.length,
-            "moons": systemItem.Moons,
+            "conflictRaw": systemItem.Conflict,
+            "conflict": getStarIcons(systemItem.Conflict),
+            "wealthRaw": systemItem.Wealth,
+            "wealth": getStarIcons(systemItem.Wealth),
+            "starTypeRaw": systemItem.StarType,
+            "starType": getStarIcon(systemItem.StarType),
+            "planetsRaw": systemItem.Planets.length - systemItem.Moons,
+            "planets": systemItem.Planets.filter(p => p.Size != "Moon").map(function (planetItem) {
+                return getPlanetIcon(planetItem.Size, planetItem.Rings);
+            }).join(''),
+            "moonsRaw": systemItem.Moons,
+            "moons": systemItem.Planets.filter(p => p.Size == "Moon").map(function (planetItem) {
+                return getPlanetIcon(planetItem.Size, planetItem.Rings);
+            }).join(''),
             "abandoned": systemItem.Abandoned,
+            "glyphs": getGlyphs(systemItem.Address),
         };
-        var glyphs = "";
-        for (var i = 0; i < Array.from(systemItem.Address).length; i++) {
-            var char = systemItem.Address[i];
-            glyphs += "<img src='/img/nms/glyphs/" + char + ".png' height='32' style='filter: invert(.2);' />";
-        }
-        systemRow["glyphs"] = glyphs;
         return systemRow;
     });
 
@@ -59,16 +63,76 @@ $(".system-filter").change(function () {
 });
 
 
-$("#systemTable .td").click(function () {
-    console.log($(this));
-})
+function getPlanetIcon(size, rings) {
+    var i = "<i class='nms-planet ";
+    switch (size) {
+        case "Large":
+            i += "nms-large";
+            break;
+        case "Medium":
+            i += "nms-medium";
+            break;
+        case "Small":
+            i += "nms-small";
+            break;
+        case "Moon":
+            i += "nms-moon";
+            break;
+        default:
+            i += "";
+            break;
+    }
+    if (rings) {
+        i += "-rings";
+    }
+    return i + "'></i>";
+}
 
-//function generateSystemList(systemList) {
-//    table = "<table>";
-//    table += "<thead>";
+function getStarIcon(colour) {
+    var s = "<i class='nms-star";
+    switch (colour) {
+        case "Yellow":
+            s += " nms-yellow";
+            break;
+        case "Red":
+            s += " nms-red";
+            break;
+        case "Blue":
+            s += " nms-blue";
+            break;
+        case "Green":
+            s += " nms-green";
+            break;
+    }
+    return s + "'></i>";
+}
 
-//    table += "</thead>";
-//    table += "<tbody>";
-//    table += "</tbody>";
-//    table += "</table>";
-//}
+function getStarIcons(input) {
+    var output = "<i class='nms-stars'>";
+    switch (input) {
+        case "Low":
+        case "Poor":
+            output += "★";
+            break;
+        case "Average":
+        case "Default":
+            output += "★★";
+            break;
+        case "High":
+        case "Wealthy":
+            output += "★★★";
+            break;
+        default:
+            break;
+    }
+    return output + "</i>";
+}
+
+function getGlyphs(address) {
+    var glyphs = "";
+    for (var i = 0; i < Array.from(address).length; i++) {
+        var char = address[i];
+        glyphs += "<img src='/img/nms/glyphs/" + char + ".png' height='32' style='filter: invert(.2);' />";
+    }
+    return glyphs;
+}
