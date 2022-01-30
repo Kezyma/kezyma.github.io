@@ -70,21 +70,17 @@ var data = {
                 Missing: false
             },
             {
+                File: "/data/nms/Ships/Honmatan OQ5.shp",
+                LegacyFile: "",
                 Name: "Honmatan OQ5",
-                Missing: true
+                AltNames: "",
+                StatImage: "/img/nms/Honmatan OQ5.jpg",
+                Screenshot: "/img/nms/screenshots/Honmatan OQ5.jpg",
+                LegacyStatImage: "",
+                LegacyScreenshot: "",
+                Description: "Phase 4 reward from Expedition 1: The Pioneers.",
+                Missing: false
             }
-            //{
-            //    File: "/data/nms/Ships/Honmatan OQ5.shp",
-            //    LegacyFile: "",
-            //    Name: "Honmatan OQ5",
-            //    AltNames: "",
-            //    StatImage: "/img/nms/Honmatan OQ5.jpg",
-            //    Screenshot: "/img/nms/screenshots/Honmatan OQ5.jpg",
-            //    LegacyStatImage: "",
-            //    LegacyScreenshot: "",
-            //    Description: "Phase 4 reward from Expedition 1: The Pioneers.",
-            //    Missing: false
-            //}
         ],
         Twitch: [
             {
