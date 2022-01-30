@@ -1,0 +1,41 @@
+﻿<div class="container mb-3">
+    <div class="row">
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Sport Charts</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-3">
+                        <div class="col">
+                            <label>Sport</label>
+                            <select class="form-control form-control-sm" id="sportFilter">
+                                <option value="MMA">MMA</option>
+                                <option value="F1">F1</option>
+                                <option value="MotoGP">MotoGP</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>Category</label>
+                            <select class="form-control form-control-sm" id="categoryFilter">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>Chart</label>
+                            <select class="form-control form-control-sm" id="chartFilter">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="mb-0" id="chartTitle"></h5>
+                    <a href="#" class="btn btn-info btn-sm mt-2" id="chartPost" target="_blank"><i class="fab fa-reddit-alien"></i> Reddit Post</a>
+                    <hr />
+                    <img src="#" id="chartImg" style="max-width: fill-available; max-width: -webkit-fill-available;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/kezyma.sport.charts.js"></script>
