@@ -2,6 +2,12 @@
     "MMA": {
         "Stats": [
             {
+                "Id": "Total_Fights_per_Month_1990_2021",
+                "Title": "Total Fighter per Month (1990-2021)",
+                "Date": new Date(2022, 02, 01),
+                "Url": "https://www.reddit.com/r/MMA/comments/sht471/total_fights_per_month_19902021_visualising_the/"
+            },
+            {
                 "Id": "Betting_Odds_for_every_UFC_title_fight_where_the_champion_lost_their_belt",
                 "Title": "Betting Odds for every UFC title fight where the champion lost their belt",
                 "Date": new Date(2022, 01, 21),
