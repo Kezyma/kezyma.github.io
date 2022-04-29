@@ -80,18 +80,6 @@ var data = {
                 LegacyScreenshot: "",
                 Description: "Phase 4 reward from Expedition 1: The Pioneers.",
                 Missing: false
-            },
-            {
-                File: "/data/nms/Ships/Oshoba's Towering Prize.shp",
-                LegacyFile: "",
-                Name: "Oshoba's Towering Prize",
-                AltNames: "",
-                StatImage: "/img/nms/Oshoba's Towering Prize.jpg",
-                Screenshot: "",
-                LegacyStatImage: "",
-                LegacyScreenshot: "",
-                Description: "Starter ship from Expedition 6: The Blighted.",
-                Missing: false
             }
         ],
         Twitch: [
@@ -267,17 +255,6 @@ var data = {
                 LegacyStatImage: "",
                 LegacyScreenshot: "",
                 Description: "Phase 2 reward from Expedition 1: The Pioneers."
-            },
-            {
-                File: "/data/nms/Multitools/Pillar of the Abyss TY6-X.mlt",
-                LegacyFile: "",
-                Name: "Pillar of the Abyss TY6-X",
-                AltNames: "",
-                StatImage: "/img/nms/Pillar of the Abyss TY6-X.jpg",
-                Screenshot: "",
-                LegacyStatImage: "",
-                LegacyScreenshot: "",
-                Description: "Starter multitool from Expedition 6: The Blighted."
             }
         ],
         Twitch: [
