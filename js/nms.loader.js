@@ -349,6 +349,17 @@ var data = {
                 LegacyStatImage: "",
                 LegacyScreenshot: "",
                 Description: ""
+            },
+            {
+                File: "/data/nms/Companions/Rewired Patrol Unit.cmp",
+                LegacyFile: "",
+                Name: "Rewired Patrol Unit",
+                AltNames: "",
+                StatImage: "/img/nms/Rewired Patrol Unit.jpg",
+                Screenshot: "",
+                LegacyStatImage: "",
+                LegacyScreenshot: "",
+                Description: ""
             }
         ],
         Twitch: [
