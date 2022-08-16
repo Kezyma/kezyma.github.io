@@ -6,7 +6,8 @@ function ExportData() {
         var SystemTable = SystemAttributes.offsetParent.offsetParent;
         try {
         var system = {
-            Seed: SystemAttributes.rows[1].cells[9].innerText,
+            Outlaw: SystemAttributes.rows[1].cells[9].innerText,
+            Seed: SystemAttributes.rows[1].cells[10].innerText,
             Address: SystemAttributes.rows[1].cells[0].innerText,
             Planets: SystemAttributes.rows[1].cells[7].innerText,
             Moons: SystemAttributes.rows[1].cells[8].innerText,
@@ -36,6 +37,8 @@ function ExportData() {
             var tileNums = []
             for (var g = 0; g < tile.length; g++){ tileNums.push(parseInt(tile[g].innerText));}
 
+            var planetSeed = SystemTable.rows[1].cells[0].children[1].rows[0].cells[0].children[0].rows[j].cells[0].innerText.split(':')[1];
+
             var water = false;
             if (parseInt(PlanetTable.rows[20].cells[j].innerText) == 1) { water = true; }
             var prime = false;
@@ -48,6 +51,7 @@ function ExportData() {
             if (parseInt(PlanetTable.rows[30].cells[j].innerText) == 1) { sandworms = true; }
             var planet = {
                 Index: parseInt(PlanetTable.rows[0].cells[j].innerText.split(" - ")[0]),
+                Seed: planetSeed,
                 Name: PlanetTable.rows[0].cells[j].innerText.split(" - ")[1],
                 Biome: PlanetTable.rows[1].cells[j].innerText,
                 SubBiome: PlanetTable.rows[2].cells[j].innerText,
