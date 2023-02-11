@@ -46,7 +46,8 @@
             // Configure jQuery table.
             $('#progress-table').dataTable({
                 "iDisplayLength": 25,
-                "order": [[4, 'desc'], [3, 'desc'], [2, 'desc'], [1, 'asc'], [0, 'asc']]
+                "order": [[4, 'desc'], [3, 'desc'], [2, 'desc'], [1, 'asc'], [0, 'asc']],
+                "responsive": true
             });
         }
     })
