@@ -1,4 +1,16 @@
 ﻿<div class="container mb-3">
+    <style>
+        .dataTables_wrapper .row {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .dataTables_wrapper .dt-row {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    </style>
+
     <div class="row row-cols-1">
         <div class="col text-center mt-3">
             <a href="#intro-col" class="btn btn-sm btn-success m-1"><i class="fas fa-play"></i> Introduction</a>
@@ -24,6 +36,9 @@
                     <h5 class="mb-0"><i class="fas fa-play"></i> Introduction</h5>
                 </div>
                 <div class="card-body">
+                    <p>
+                        Voices of Vvardenfell is a project to fully voice Morrowind using <a href="https://beta.elevenlabs.io/">ElevenAI</a> and <a href="https://github.com/MWSE/MWSE">MWSE</a>. Easily extensible to add compatibility with other mods with no knowledge of scripting or the CS and no additional esp.
+                    </p>
                 </div>
             </div>
         </div>
@@ -33,6 +48,171 @@
                     <h5 class="mb-0"><i class="fas fa-download"></i> Installation</h5>
                 </div>
                 <div class="card-body">
+                    <p>
+                        Voices of Vvardenfell requires the latest version of <a href="https://github.com/MWSE/MWSE/releases">MWSE</a> to run.
+                    </p>
+                    <p>
+                        To install Voices of Vvardenfell, you will first need to download it, either from the Nexus or from the Github releases page for Voices of Vvardenfell. Make sure to download the latest version.
+                    </p>
+                    <p>
+                        <a href="https://www.nexusmods.com/morrowind/mods/52279" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Nexus</a>
+                        <a href="https://github.com/Kezyma/AI-Voices/releases" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        The best way to install Voices of Vvardenfell is through a mod manager, such as <a href="https://www.nexusmods.com/skyrimspecialedition/mods/6194">Mod Organizer 2</a>.
+                    </p>
+                    <p>
+                        If installing manually, unpack the downloaded file. Each folder inside is a separate module which should be installed independently in order. To install, simply extract the contents of each module into the <code>Data Files</code> directory in your Morrowind game folder.
+                    </p>
+                    <h4>Packages</h4>
+                    <h5>00 - Core</h5>
+                    <p>
+                        The core package includes the MWSE script required for the mod to function. It also includes voice lines for Morrowind, Tribunal, Bloodmoon and the Official Plugins.
+                    </p>
+                    <h5>01 - Patch for Purists</h5>
+                    <p>
+                        This package contains voice lines to add support for users of <a href="https://www.nexusmods.com/morrowind/mods/45096">Patch for Purists</a>. Do not install this package if you are not using Patch for Purists.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="support-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cog"></i> Adding Voices</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Voices of Vvardenfell includes a framework that allows voice lines to be added and played without any additional esp. Anyone can add a voice line to Morrowind simply by placing the file in the correct place.
+                    </p>
+                    <h4>File Paths</h4>
+                    <p>
+                        Dialogue should be placed in the following paths depending on each situation.
+                    </p>
+                    <ul>
+                        <li>
+                            <code>Sound\Vo\AIV\[race]\[gender]\[actor id]\[info id].mp3</code>
+                            <ul>
+                                <li>Dialogue specific to a single NPC.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\[race]\[gender]\[info id].mp3</code>
+                            <ul>
+                                <li>Generic dialogue shared by NPCs.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\creature\[actor id]\[info id].mp3</code>
+                            <ul>
+                                <li>Dialogue specific to a single non-NPC.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\creature\[info id].mp3</code>
+                            <ul>
+                                <li>Generic dialogue shared by non-NPCs.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\[race]\[gender]\[actor id]\[faction id]\[player rank]\[info id].mp3</code>
+                            <ul>
+                                <li>Faction dialogue specific to a single NPC.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\[race]\[gender]\[faction id]\[player rank]\[info id].mp3</code>
+                            <ul>
+                                <li>Faction dialogue shared by NPCs.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>
+                        Examples:
+                    </p>
+                    <ul>
+                        <li>
+                            <code>Sound\Vo\AIV\wood elf\f\123456.mp3</code>
+                            <ul>
+                                <li>A generic wood elf female voice line with an info id of 123456.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\imperial\m\caius cosades\123456.mp3</code>
+                            <ul>
+                                <li>A Caius Cosades voice line with an info id of 123456.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\dark elf\m\aryon\Telvanni\1\123456.mp3</code>
+                            <ul>
+                                <li>An Aryon voice line played only for members of Great House Telvanni at the rank of Retainer with an info id of 123456.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>Sound\Vo\AIV\creature\dagoth_ur_1\123456.mp3</code>
+                            <ul>
+                                <li>A Dagoth Ur voice line with an info id of 123456.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h4>Extracting Dialogue</h4>
+                    <p>
+                        To determine the actor id, faction id, info id and player rank, dialogue must first be extracted from an esp or esm file. An optional tool to extract this is available from Github or from the Optional Files section on NexusMods.
+                    </p>
+                    <p>
+                        <a href="https://www.nexusmods.com/morrowind/mods/52279" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Nexus</a>
+                        <a href="https://github.com/Kezyma/AI-Voices/tree/main/LineExtractor" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        This tool uses Greatness7's <a href="https://github.com/Greatness7/tes3conv">tes3conv</a> to extract data from esm/esp files and then exports them to a csv for easy reading and manipulation.
+                    </p>
+                    <p>
+                        <strong>Requires:</strong> <a href="https://dotnet.microsoft.com/en-us/download/dotnet/7.0">.Net 7.0</a> or newer.
+                    </p>
+                    <p>Steps to extract dialogue from esp/esm files:</p>
+                    <ul>
+                        <li>Download and extract <code>Kezyma.MorrowindLineExtractor.exe</code> to a folder.</li>
+                        <li>Run <code>Kezyma.MorrowindLineExtractor.exe</code> once, this will generate the required folders.</li>
+                        <li>Place esp/esm files into the new <code>Esp</code> folder. You must include the esp/esm that contains the dialogue you wish to extract as well as any esp/esm that it depends upon, including the base game esm/esp files.</li>
+                        <li>Run <code>Kezyma.MorrowindLineExtractor.exe</code> a second time, this will generate a set of csv files in the <code>Csv</code> folder.</li>
+                    </ul>
+                    <p>
+                        Each generated csv file will contain the Info Id (with an added prefix of <code>id_</code> to prevent Excel from incorrectly formatting the column), Actor Id, Actor Name, Actor Faction, Actor Faction Rank, Required Player Rank and Dialogue text.
+                    </p>
+                    <p>
+                        Two additional csv files will also be included. <code>NPCs.csv</code> will contain a full list of all NPCs in all of the esp/esm files and <code>Factions.csv</code> will contain a full list of all Factions with Ids and Ranks.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="progress-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trash-alt"></i> Progress</h5>
+                </div>
+                <div class="card-body">
+                    <table id="progress-table" class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">NPC</th>
+                                <th scope="col">Voice</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Done</th>
+                                <th scope="col">Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody id="progress-body">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">Total</th>
+                                <th id="total-total"></th>
+                                <th id="total-done"></th>
+                                <th id="total-progress"></th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
@@ -42,8 +222,16 @@
                     <h5 class="mb-0"><i class="fas fa-trash-alt"></i> Uninstallation</h5>
                 </div>
                 <div class="card-body">
+                    <p>If using a Mod Manager, simply disable Voices of Vvardenfell.</p>
+                    <p>If uninstalling manually, remove the following folders:</p>
+                    <ul>
+                        <li><code>Data Files\Sound\Vo\AIV\</code></li>
+                        <li><code>Data Files\MWSE\mods\AI Voices\</code></li>
+                        <li><code>Data Files\Textures\AI Voices\</code></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="../js/vov.progress.js"></script>
