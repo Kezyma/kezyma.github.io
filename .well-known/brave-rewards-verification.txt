@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: kezyma.github.io
+Token: ca391df2a363c029690eb287cc7570713d91a60283802c473ef14ee82665d88d
