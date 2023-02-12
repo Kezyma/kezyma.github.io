@@ -16889,6 +16889,75 @@ readers do not read off random characters that represent icons */
   -moz-osx-font-smoothing: grayscale;
 }
 
+[class^=icon-], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-steam .path1:before {
+  content: "\e910";
+  color: rgb(0, 0, 0);
+}
+
+.icon-steam .path2:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-twitch .path1:before {
+  content: "\e90e";
+  color: rgb(145, 70, 255);
+}
+
+.icon-twitch .path2:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-youtube .path1:before {
+  content: "\e908";
+  color: rgb(212, 36, 40);
+}
+
+.icon-youtube .path2:before {
+  content: "\e909";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-reddit .path1:before {
+  content: "\e90a";
+  color: rgb(255, 69, 0);
+}
+
+.icon-reddit .path2:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-discord .path1:before {
+  content: "\e90c";
+  color: rgb(88, 101, 242);
+}
+
+.icon-discord .path2:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+
 .icon-paypal .path1:before {
   content: "\e900";
   color: rgb(39, 52, 106);
@@ -16936,6 +17005,10 @@ readers do not read off random characters that represent icons */
 .heading-text, .mod-heading-text, .plugin-heading-text {
   width: 100%;
   background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), transparent);
+}
+
+.p-soc {
+  padding: 0.25rem 0.25rem !important;
 }
 
 .plugin-heading-text {

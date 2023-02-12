@@ -3,6 +3,10 @@
     background-image: linear-gradient(to right, transparent, rgba(0,0,0,0.8), rgba(0,0,0,0.8), transparent);
 }
 
+.p-soc {
+    padding: 0.25rem 0.25rem !important;
+}
+
 .plugin-heading-text {
     @extend .heading-text;
     font-family: Slider;
