@@ -1,0 +1,143 @@
+﻿<div class="container mb-3">
+    <div class="row row-cols-1">
+        <div class="col text-center mt-3">
+            <a href="#intro-col" class="btn btn-sm btn-success m-1"><i class="fas fa-play"></i> Introduction</a>
+            <a href="#intall-col" class="btn btn-sm btn-success m-1"><i class="fas fa-download"></i> Installation</a>
+            <a href="#usage-col" class="btn btn-sm btn-info m-1"><i class="fas fa-book"></i> Usage</a>
+            <a href="#setting-col" class="btn btn-sm btn-info m-1"><i class="fas fa-cog"></i> Settings</a>
+            <a href="#uninst-col" class="btn btn-sm btn-danger m-1"><i class="fas fa-trash-alt"></i> Uninstallation</a>
+        </div>
+        <div class="col">
+            <div class="card border-dark bg-dark mt-3">
+                <img src="img/openmwplayer/background.jpg" class="card-img rounded">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <div class="row plugin-heading-text">
+                        <div class="col-12 p-2 text-center">
+                            <h1 class="vw-10 em-sm-8 em-md-10 em-lg-12 em-xl-16 em-xxl-20 mb-0 text-white">OpenMW Player</h1>
+                            <h1 class="vw-5 em-sm-4 em-md-5 em-lg-6 em-xl-8 em-xxl-10 mb-0 text-white">for Mod Organizer 2</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intro-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-play"></i> Introduction</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        OpenMW Player is a plugin for Mod Organizer 2 that automatically exports your mod list, enabled plugins, and grass mods to OpenMW whenever you run the game through Mod Organizer.
+                    </p>
+                    <p>
+                        Some of the things you can do with OpenMW Player:
+                    </p>
+                    <ul>
+                        <li>Run OpenMW through Mod Organizer with your current mod list and plugins.</li>
+                        <li>Specify Groundcover mods to use with OpenMW with different setups for each profile.</li>
+                        <li>Select the OpenMW.cfg location that you want to update with your mod list.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intall-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-download"></i> Installation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To install OpenMW Player, you will first need to download it, either from the Nexus or from the Github releases page for OpenMW Player. Make sure to download the latest version.
+                    </p>
+                    <p>
+                        <a href="https://www.nexusmods.com/morrowind/mods/52345" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Nexus</a>
+                        <a href="https://github.com/Kezyma/ModOrganizer-Plugins/releases/tag/openmwplayer" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        Once you've downloaded the OpenMW Player zip file, you will need to extract the <code>openmwplayer</code> folder from it and place it in the Mod Organizer plugins folder. If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then the plugins folder is located at <code>C:\Mod Organizer\plugins\</code>
+                    </p>
+                    <p>
+                        If you have done this correctly, inside <code>C:\Mod Organizer\plugins\openmwplayer\</code> you should find two folders, <code>shared</code> and <code>openmwplayer</code> as well as a file called <code>__init__.py</code>
+                    </p>
+                    <p>
+                        OpenMW Player is now installed and will start the next time you run Mod Organizer.
+                    </p>
+                    <p>
+                        You should now add <code>OpenMW.exe</code> and/or <code>OpenMW-Launcher.exe</code> to the list of executables in Mod Organizer 2 and run OpenMW from there. Whenever <code>OpenMW.exe</code>, <code>OpenMw-CS.exe</code> or <code>OpenMW-Launcher.exe</code> are run through Mod Organizer, your mod list and enabled plugins will be automatically applied to OpenMW.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="usage-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-book"></i> Usage</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        OpenMW Player adds a tool to Mod Organizer's menu to open the Shortcutter window.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/openmwplayer/tools_menu.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">OpenMW Player in Mod Organizer's tools menu.</figcaption>
+                    </figure>
+                    <p>
+                        The OpenMW Player window allows you to select the location of your <code>openmw.cfg</code> file, as well as select all of your grass/groundcover mods. Any groundcover/grass mods should be selected here as the plugins should not be enabled when the game runs. The selected groundcover mods are set per-profile, so you can have a different set of groundcover mods for each profile in Mod Organizer.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/openmwplayer/manager_menu.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">The OpenMW Player window.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="setting-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cog"></i> Settings</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th colspan="1">Setting</th>
+                                <th colspan="1">Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>enabled</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Determines whether OpenMW Player is enabled.</td>
+                            </tr>
+                            <tr>
+                                <td>openmwcfgpath</td>
+                                <td>Default OpenMW.cfg Path</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">The path to <code>openmw.cfg</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="uninst-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trash-alt"></i> Uninstallation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To remove OpenMW Player from Mod Organizer, a folder needs to be deleted from Mod Organizer's plugins folder, <code>openmwplayer</code>. Once deleted, OpenMW Player will no longer be installed the next time Mod Organizer starts.
+                    </p>
+                    <p>
+                        If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then this folder is located at <code>C:\Mod Organizer\plugins\openmwplayer\</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
