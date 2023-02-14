@@ -36,6 +36,7 @@
                         <li>Run OpenMW through Mod Organizer with your current mod list and plugins.</li>
                         <li>Specify Groundcover mods to use with OpenMW with different setups for each profile.</li>
                         <li>Select the OpenMW.cfg location that you want to update with your mod list.</li>
+                        <li>Manage omwaddon and omwscripts files using dummy esp files.</li>
                     </ul>
                 </div>
             </div>
@@ -83,6 +84,9 @@
                     </figure>
                     <p>
                         The OpenMW Player window allows you to select the location of your <code>openmw.cfg</code> file, as well as select all of your grass/groundcover mods. Any groundcover/grass mods should be selected here as the plugins should not be enabled when the game runs. The selected groundcover mods are set per-profile, so you can have a different set of groundcover mods for each profile in Mod Organizer.
+                    </p>
+                    <p>
+                        There is an additional option to toggle on the use of dummy esp files for <code>.omwaddon</code> and <code>.omwscripts</code> files. If enabled, matching esp files will be created and can be enabled/disabled and sorted within Mod Organizer. Then, when the game is run, the appropriate <code>.omwaddon</code> and <code>.omwscripts</code> files will be enabled in OpenMW instead of the dummy esp files.
                     </p>
                     <figure class="figure">
                         <img src="../img/openmwplayer/manager_menu.png" class="figure-img img-fluid rounded" />
@@ -134,6 +138,13 @@ stomp intensity = 2
                             </tr>
                             <tr>
                                 <td colspan="2">The path to <code>openmw.cfg</code>.</td>
+                            </tr>
+                            <tr>
+                                <td>dummyesp</td>
+                                <td><code>False</code></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Enables omwaddon and omwscripts support via esp files.</td>
                             </tr>
                         </tbody>
                     </table>
