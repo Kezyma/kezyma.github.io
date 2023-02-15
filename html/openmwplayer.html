@@ -86,12 +86,19 @@
                         The OpenMW Player window allows you to select the location of your <code>openmw.cfg</code> file, as well as select all of your grass/groundcover mods. Any groundcover/grass mods should be selected here as the plugins should not be enabled when the game runs. The selected groundcover mods are set per-profile, so you can have a different set of groundcover mods for each profile in Mod Organizer.
                     </p>
                     <p>
-                        There is an additional option to toggle on the use of dummy esp files for <code>.omwaddon</code> and <code>.omwscripts</code> files. If enabled, matching esp files will be created and can be enabled/disabled and sorted within Mod Organizer. Then, when the game is run, the appropriate <code>.omwaddon</code> and <code>.omwscripts</code> files will be enabled in OpenMW instead of the dummy esp files.
+                        There is an additional option to toggle on the use of dummy esp files for <code>.omwaddon</code> and <code>.omwscripts</code> files. If enabled, matching esp files will be created and can be enabled/disabled and sorted within Mod Organizer. Then, when the game is run, the appropriate <code>.omwaddon</code> and <code>.omwscripts</code> files will be enabled in OpenMW instead of the dummy esp files. If enabled, dummy esp files will be created on the following events:
                     </p>
+                    <ul>
+                        <li>When the setting is enabled, dummy files will be created for all mods.</li>
+                        <li>When Mod Organizer is started, dummy files will be created for all mods.</li>
+                        <li>When a mod is enabled or disabled, dummy files will be created for all mods.</li>
+                        <li>When a mod is installed, dummy files will be created for that mod.</li>
+                    </ul>
                     <figure class="figure">
                         <img src="../img/openmwplayer/manager_menu.png" class="figure-img img-fluid rounded" />
                         <figcaption class="figure-caption">The OpenMW Player window.</figcaption>
                     </figure>
+                    <br>
                     <figure class="figure">
                         <img src="../img/openmwplayer/dummy_plugin.png" class="figure-img img-fluid rounded" />
                         <figcaption class="figure-caption">Dummy plugins to add omwaddon and omwscripts support.</figcaption>
