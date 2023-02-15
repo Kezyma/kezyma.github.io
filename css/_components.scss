@@ -5,6 +5,11 @@
 
 .p-soc {
     padding: 0.25rem 0.25rem !important;
+
+    [class^="icon-"], [class*=" icon-"] {
+        border: 1px solid white;
+        border-radius: 50%;
+    }
 }
 
 .plugin-heading-text {
