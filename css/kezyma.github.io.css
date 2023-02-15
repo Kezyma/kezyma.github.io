@@ -17010,8 +17010,8 @@ readers do not read off random characters that represent icons */
   padding: 0.25rem 0.25rem !important;
 }
 .p-soc [class^=icon-], .p-soc [class*=" icon-"] {
-  border: 1px solid white;
   border-radius: 50%;
+  box-shadow: 0px 0px 3px 0px rgb(0, 0, 0), inset 0px 0px 10px 0px rgb(0, 0, 0);
 }
 
 .plugin-heading-text {
