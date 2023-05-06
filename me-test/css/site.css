@@ -35,7 +35,7 @@ body {
 .popover {
     font-family: Slider;
     background-color: rgba(0,0,0,0.5);
-    border: 1px solid white;
+    border: none; /*1px solid white;*/
     color: white;
 }
 .popover-header {
