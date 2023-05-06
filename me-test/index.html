@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="lib/leaflet.js/leaflet.css">
+        <link rel="stylesheet" href="css/site.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="#">Galaxy Map</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                </li>
+                </ul>
+                <div class="nav-item">
+                    <form class="d-flex mb-0" role="search">
+                        <div class="input-group">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-info" type="submit">Search</button>
+                        </div>
+                    </form>
+                </li>
+            </div>
+            </div>
+        </nav>
+        
+        <div id="page-container" class="container-fluid vh-100">
+            <div id="galaxy-map" class="map-container" style="background-color: black;"></div>
+            <div id="cluster-map" class="map-container" style="background-color: black;display:none;"></div>
+        </div>
+        <script src="lib/jquery/jquery-3.6.4.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/fontawesome/js/all.min.js"></script>
+        <script src="lib/leaflet.js/leaflet.js"></script>
+        <script src="js/site.js"></script>
+    </body>
+</html>
