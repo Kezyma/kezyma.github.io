@@ -2,10 +2,7 @@
 $(document).ready(function () {
     var x = 1;
     for (var i = 8; i < 14; i++) {
-        mapIcons[i] = L.icon({
-            iconUrl: "img/map_pin.png",
-            iconSize: [(i)*x,(i)*x]
-        });
+        mapIcons[i] = [(i)*x,(i)*x];
         x = x*1.4;
     }
 
@@ -98,7 +95,7 @@ L.Control.GalaxyToggleControls = L.Control.extend({
 function initialiseGalaxyMap() {
     galaxyMap = L.map("galaxy-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[0,0],[1,1]] });
     var bounds = [[0,0], [1,1]];
-    galaxyImg = L.imageOverlay('img/galaxy_milky-way.png', bounds);
+    galaxyImg = L.imageOverlay('img/galaxy_milky-way.jpg', bounds);
     galaxyImg.addTo(galaxyMap);
     galaxyMap.fitBounds(bounds);
 
@@ -123,7 +120,8 @@ function initialiseGalaxyMap() {
         var zoomLevel = galaxyMap.getZoom();
         var iconSize = mapIcons[zoomLevel];
         for (var ix in galaxyMarkers) {
-            galaxyMarkers[ix].setIcon(iconSize);
+            var icon = galaxyMarkers[ix].getIcon();
+            galaxyMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
         }
     });
 }
@@ -131,7 +129,7 @@ function initialiseGalaxyMap() {
 function initialiseGalaxyMarkers() {
     for (var ix in clusters) {
         var cluster = clusters[ix];
-        var marker = L.marker([cluster.Y, cluster.X], { icon: mapIcons[galaxyMap.getZoom()], title: cluster.Name, clusterId: cluster.Id });
+        var marker = L.marker([cluster.Y, cluster.X], { icon: L.icon({ iconUrl: cluster.Marker, iconSize: mapIcons[galaxyMap.getZoom()] }), title: cluster.Name, clusterId: cluster.Id });
         marker.on("click", function () {
             var id = this.options.clusterId;
             initialiseClusterMap(id);
@@ -252,7 +250,7 @@ var clusterMarkers = [];
 
 function initialiseClusterMap(clusterId) {
     var cluster = clusters.filter(x => x.Id == clusterId)[0];
-    var clusterImg = "img/cluster_" + clusterId + ".png";
+    var clusterImg = cluster.Image;// "img/cluster_" + clusterId + ".png";
 
     $("#galaxy-map").hide();
     $("#cluster-map").show();
@@ -274,7 +272,8 @@ var clusters = [
     {
         Id: "local-cluster",
         Name: "Local Cluster",
-        Image: "",
+        Marker: "img/marker_local-cluster.png",
+        Image: "img/cluster_local-cluster.png",
         X: 0.46,
         Y: 0.20,
         Systems: [
@@ -282,13 +281,15 @@ var clusters = [
         ],
         Connections: [
             "arcturus-stream",
-            "exodus-cluster"
+            "exodus-cluster",
+            "viper-nebula"
         ]
     },
     {
         Id: "arcturus-stream",
         Name: "Arcturus Stream",
-        Image: "",
+        Marker: "img/marker_arcturus-stream.png",
+        Image: "img/cluster_arcturus-stream.png",
         X: 0.50,
         Y: 0.19,
         Systems: [
@@ -301,7 +302,8 @@ var clusters = [
     {
         Id: "exodus-cluster",
         Name: "Exodus Cluster",
-        Image: "",
+        Marker: "img/marker_exodus-cluster.png",
+        Image: "img/cluster_exodus-cluster.png",
         X: 0.55,
         Y: 0.23,
         Systems: [
@@ -314,9 +316,24 @@ var clusters = [
     {
         Id: "petra-nebula",
         Name: "Petra Nebula",
-        Image: "",
+        Marker: "img/marker_default-cluster.png",
+        Image: "img/cluster_default.png",
         X: 0.58,
         Y: 0.17,
+        Systems: [
+
+        ],
+        Connections: [
+
+        ]
+    },
+    {
+        Id: "viper-nebula",
+        Name: "Viper Nebula",
+        Marker: "img/marker_default-cluster.png",
+        Image: "img/cluster_default.png",
+        X: 0.62,
+        Y: 0.1,
         Systems: [
 
         ],
