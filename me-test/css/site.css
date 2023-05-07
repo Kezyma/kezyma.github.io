@@ -41,3 +41,7 @@ body {
 .popover-header {
     background-color:transparent;
 }
+
+#galaxy-search-group .dropdown-toggle {
+    min-width: 200px !important;
+}
