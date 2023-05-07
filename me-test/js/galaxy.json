@@ -4,7 +4,7 @@
         "Id": "serpent-nebula",
         "Name": "Serpent Nebula",
         "Marker": "img/marker_serpent-nebula.png",
-        "Image": "img/cluster_serpent-nebula.png",
+        "Image": "img/cluster_serpent-nebula.jpg",
         "X": 307,
         "Y": 645,
         "Systems": [
@@ -29,7 +29,7 @@
         "Id": "omega-nebula",
         "Name": "Omega Nebula",
         "Marker": "img/marker_omega-nebula.png",
-        "Image": "img/cluster_omega-nebula.png",
+        "Image": "img/cluster_omega-nebula.jpg",
         "X": 511,
         "Y": 283,
         "Systems": [
@@ -56,7 +56,7 @@
         "Id": "local-cluster",
         "Name": "Local Cluster",
         "Marker": "img/marker_local-cluster.png",
-        "Image": "img/cluster_local-cluster.png",
+        "Image": "img/cluster_local-cluster.jpg",
         "X": 487,
         "Y": 810,
         "Systems": [
@@ -75,7 +75,7 @@
         "Id": "krogan-dmz",
         "Name": "Krogan DMZ",
         "Marker": "img/marker_krogan-dmz.png",
-        "Image": "img/cluster_krogan-dmz.png",
+        "Image": "img/cluster_krogan-dmz.jpg",
         "X": 327,
         "Y": 716,
         "Systems": [
@@ -89,7 +89,7 @@
         "Id": "cluster-34",
         "Name": "Cluster 34",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 200,
         "Y": 653,
         "Systems": [
@@ -104,7 +104,7 @@
         "Id": "crescent-nebula",
         "Name": "Crescent Nebula",
         "Marker": "img/marker_crescent-nebula.png",
-        "Image": "img/cluster_crescent-nebula.png",
+        "Image": "img/cluster_crescent-nebula.jpg",
         "X": 197,
         "Y": 386,
         "Systems": [
@@ -124,7 +124,7 @@
         "Id": "apien-crest",
         "Name": "Apien Crest",
         "Marker": "img/marker_apien-crest.png",
-        "Image": "img/cluster_apien-crest.png",
+        "Image": "img/cluster_apien-crest.jpg",
         "X": 305,
         "Y": 826,
         "Systems": [
@@ -140,7 +140,7 @@
         "Id": "annos basin",
         "Name": "Annos Basin",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 441,
         "Y": 702,
         "Systems": [
@@ -156,7 +156,7 @@
         "Id": "perseus-veil",
         "Name": "Perseus Veil",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 915,
         "Y": 291,
         "Systems": [
@@ -171,7 +171,7 @@
         "Id": "far-rim",
         "Name": "Far Rim",
         "Marker": "img/marker_far-rim.png",
-        "Image": "img/cluster_far-rim.png",
+        "Image": "img/cluster_far-rim.jpg",
         "X": 886,
         "Y": 241,
         "Systems": [
@@ -192,7 +192,7 @@
         "Id": "hawking-eta",
         "Name": "Hawking Eta",
         "Marker": "img/marker_hawking-eta.png",
-        "Image": "img/cluster_hawking-eta.png",
+        "Image": "img/cluster_hawking-eta.jpg",
         "X": 631,
         "Y": 426,
         "Systems": [
@@ -210,7 +210,7 @@
         "Id": "horse-head-nebula",
         "Name": "Horse Head Nebula",
         "Marker": "img/marker_horse-head-nebula.png",
-        "Image": "img/cluster_horse-head-nebula.png",
+        "Image": "img/cluster_horse-head-nebula.jpg",
         "X": 554,
         "Y": 720,
         "Systems": [
@@ -230,7 +230,7 @@
         "Id": "shadow-sea",
         "Name": "Shadow Sea",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 687,
         "Y": 568,
         "Systems": [
@@ -251,7 +251,7 @@
         "Id": "ismar-frontier",
         "Name": "Ismar Frontier",
         "Marker": "img/marker_ismar-frontier.png",
-        "Image": "img/cluster_ismar-frontier.png",
+        "Image": "img/cluster_ismar-frontier.jpg",
         "X": 90,
         "Y": 465,
         "Systems": [
@@ -271,7 +271,7 @@
         "Id": "the-phoenix-massing",
         "Name": "The Phoenix Massing",
         "Marker": "img/marker_the-phoenix-massing.png",
-        "Image": "img/cluster_the-phoenix-massing.png",
+        "Image": "img/cluster_the-phoenix-massing.jpg",
         "X": 780,
         "Y": 343,
         "Systems": [
@@ -290,7 +290,7 @@
         "Id": "nubian-expanse",
         "Name": "Nubian Expanse",
         "Marker": "img/marker_nubian-expanse.png",
-        "Image": "img/cluster_nubian-expanse.png",
+        "Image": "img/cluster_nubian-expanse.jpg",
         "X": 889,
         "Y": 549,
         "Systems": [
@@ -309,7 +309,7 @@
         "Id": "eagle-nebula",
         "Name": "Eagle Nebula",
         "Marker": "img/marker_eagle-nebula.png",
-        "Image": "img/cluster_eagle-nebula.png",
+        "Image": "img/cluster_eagle-nebula.jpg",
         "X": 266,
         "Y": 471,
         "Systems": [
@@ -329,7 +329,7 @@
         "Id": "exodus-cluster",
         "Name": "Exodus Cluster",
         "Marker": "img/marker_exodus-cluster.png",
-        "Image": "img/cluster_exodus-cluster.png",
+        "Image": "img/cluster_exodus-cluster.jpg",
         "X": 573,
         "Y": 789,
         "Systems": [
@@ -351,7 +351,7 @@
         "Id": "rosetta-nebula",
         "Name": "Rosetta Nebula",
         "Marker": "img/marker_rosetta-nebula.png",
-        "Image": "img/cluster_rosetta-nebula.png",
+        "Image": "img/cluster_rosetta-nebula.jpg",
         "X": 658,
         "Y": 101,
         "Systems": [
@@ -367,7 +367,7 @@
         "Id": "hourglass-nebula",
         "Name": "Hourglass Nebula",
         "Marker": "img/marker_hourglass-nebula.png",
-        "Image": "img/cluster_hourglass-nebula.png",
+        "Image": "img/cluster_hourglass-nebula.jpg",
         "X": 321,
         "Y": 257,
         "Systems": [
@@ -385,7 +385,7 @@
         "Id": "titan-nebula",
         "Name": "Titan Nebula",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 465,
         "Y": 83,
         "Systems": [
@@ -400,7 +400,7 @@
         "Id": "vallhallan-threshold",
         "Name": "Vallhallan Threshold",
         "Marker": "img/marker_vallhallan-threshold.png",
-        "Image": "img/cluster_vallhallan-threshold.png",
+        "Image": "img/cluster_vallhallan-threshold.jpg",
         "X": 312,
         "Y": 137,
         "Systems": [
@@ -418,7 +418,7 @@
         "Id": "sigurds-cradle",
         "Name": "Sigurd's Cradle",
         "Marker": "img/marker_sigurds-cradle.png",
-        "Image": "img/cluster_sigurds-cradle.png",
+        "Image": "img/cluster_sigurds-cradle.jpg",
         "X": 522,
         "Y": 195,
         "Systems": [
@@ -435,7 +435,7 @@
         "Id": "caleston-rift",
         "Name": "Caleston Rift",
         "Marker": "img/marker_caleston-rift.png",
-        "Image": "img/cluster_caleston-rift.png",
+        "Image": "img/cluster_caleston-rift.jpg",
         "X": 722,
         "Y": 413,
         "Systems": [
@@ -458,7 +458,7 @@
         "Id": "pylos-nebula",
         "Name": "Pylos Nebula",
         "Marker": "img/marker_pylos-nebula.png",
-        "Image": "img/cluster_pylos-nebula.png",
+        "Image": "img/cluster_pylos-nebula.jpg",
         "X": 652,
         "Y": 287,
         "Systems": [
@@ -476,7 +476,7 @@
         "Id": "hades-nexus",
         "Name": "Hades Nexus",
         "Marker": "img/marker_hades-nexus.png",
-        "Image": "img/cluster_hades-nexus.png",
+        "Image": "img/cluster_hades-nexus.jpg",
         "X": 921,
         "Y": 398,
         "Systems": [
@@ -494,7 +494,7 @@
         "Id": "minos-wasteland",
         "Name": "Minos Wasteland",
         "Marker": "img/marker_minos-wasteland.png",
-        "Image": "img/cluster_minos-wasteland.png",
+        "Image": "img/cluster_minos-wasteland.jpg",
         "X": 143,
         "Y": 563,
         "Systems": [
@@ -512,7 +512,7 @@
         "Id": "the-shrike-abyssal",
         "Name": "The Shrike Abyssal",
         "Marker": "img/marker_the-shrike-abyssal.png",
-        "Image": "img/cluster_the-shrike-abyssal.png",
+        "Image": "img/cluster_the-shrike-abyssal.jpg",
         "X": 180,
         "Y": 223,
         "Systems": [
@@ -530,7 +530,7 @@
         "Id": "cluster-21",
         "Name": "Cluster 21",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 538,
         "Y": 675,
         "Systems": [
@@ -545,7 +545,7 @@
         "Id": "petra-nebula",
         "Name": "Petra Nebula",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 593,
         "Y": 846,
         "Systems": [
@@ -560,7 +560,7 @@
         "Id": "ninmah-cluster",
         "Name": "Ninmah Cluster",
         "Marker": "img/marker_ninmah-cluster.png",
-        "Image": "img/cluster_ninmah-cluster.png",
+        "Image": "img/cluster_ninmah-cluster.jpg",
         "X": 672,
         "Y": 476,
         "Systems": [
@@ -575,7 +575,7 @@
         "Id": "nimbus-cluster",
         "Name": "Nimbus Cluster",
         "Marker": "img/marker_nimbus-cluster.png",
-        "Image": "img/cluster_nimbus-cluster.png",
+        "Image": "img/cluster_nimbus-cluster.jpg",
         "X": 120,
         "Y": 639,
         "Systems": [
@@ -590,7 +590,7 @@
         "Id": "attican-beta",
         "Name": "Attican Beta",
         "Marker": "img/marker_attican-beta.png",
-        "Image": "img/cluster_attican-beta.png",
+        "Image": "img/cluster_attican-beta.jpg",
         "X": 798,
         "Y": 657,
         "Systems": [
@@ -610,7 +610,7 @@
         "Id": "hades-gamma",
         "Name": "Hades Gamma",
         "Marker": "img/marker_hades-gamma.png",
-        "Image": "img/cluster_hades-gamma.png",
+        "Image": "img/cluster_hades-gamma.jpg",
         "X": 798,
         "Y": 743,
         "Systems": [
@@ -629,7 +629,7 @@
         "Id": "gemini-sigma",
         "Name": "Gemini Sigma",
         "Marker": "img/marker_gemini-sigma.png",
-        "Image": "img/cluster_gemini-sigma.png",
+        "Image": "img/cluster_gemini-sigma.jpg",
         "X": 718,
         "Y": 707,
         "Systems": [
@@ -644,7 +644,7 @@
         "Id": "argos-rho",
         "Name": "Argos Rho",
         "Marker": "img/marker_argos-rho.png",
-        "Image": "img/cluster_argos-rho.png",
+        "Image": "img/cluster_argos-rho.jpg",
         "X": 669,
         "Y": 673,
         "Systems": [
@@ -660,7 +660,7 @@
         "Id": "silean-nebula",
         "Name": "Silean Nebula",
         "Marker": "img/marker_silean-nebula.png",
-        "Image": "img/cluster_silean-nebula.png",
+        "Image": "img/cluster_silean-nebula.jpg",
         "X": 203,
         "Y": 718,
         "Systems": [
@@ -675,7 +675,7 @@
         "Id": "kepler-verge",
         "Name": "Kepler Verge",
         "Marker": "img/marker_kepler-verge.png",
-        "Image": "img/cluster_kepler-verge.png",
+        "Image": "img/cluster_kepler-verge.jpg",
         "X": 779,
         "Y": 514,
         "Systems": [
@@ -690,7 +690,7 @@
         "Id": "aethon-cluster",
         "Name": "Aethon Cluster",
         "Marker": "img/marker_aethon-cluster.png",
-        "Image": "img/cluster_aethon-cluster.png",
+        "Image": "img/cluster_aethon-cluster.jpg",
         "X": 386,
         "Y": 865,
         "Systems": [
@@ -705,7 +705,7 @@
         "Id": "kites-nest",
         "Name": "Kite's Nest",
         "Marker": "img/marker_kites-nest.png",
-        "Image": "img/cluster_kites-nest.png",
+        "Image": "img/cluster_kites-nest.jpg",
         "X": 687,
         "Y": 869,
         "Systems": [
@@ -720,7 +720,7 @@
         "Id": "arcturus-stream",
         "Name": "Arcturus Stream",
         "Marker": "img/marker_arcturus-stream.png",
-        "Image": "img/cluster_arcturus-stream.png",
+        "Image": "img/cluster_arcturus-stream.jpg",
         "X": 518,
         "Y": 812,
         "Systems": [
@@ -735,7 +735,7 @@
         "Id": "voyager-cluster",
         "Name": "Voyager Cluster",
         "Marker": "img/marker_voyager-cluster.png",
-        "Image": "img/cluster_voyager-cluster.png",
+        "Image": "img/cluster_voyager-cluster.jpg",
         "X": 889,
         "Y": 699,
         "Systems": [
@@ -749,7 +749,7 @@
         "Id": "cluster-42",
         "Name": "Cluster 42",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 640,
         "Y": 375,
         "Systems": [
@@ -763,7 +763,7 @@
         "Id": "cluster-43",
         "Name": "Cluster 43",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 525,
         "Y": 440,
         "Systems": [
@@ -778,7 +778,7 @@
         "Id": "sentry-omega",
         "Name": "Sentry Omega",
         "Marker": "img/marker_sentry-omega.png",
-        "Image": "img/cluster_sentry-omega.png",
+        "Image": "img/cluster_sentry-omega.jpg",
         "X": 865,
         "Y": 435,
         "Systems": [
@@ -793,7 +793,7 @@
         "Id": "athena-nebula",
         "Name": "Athena Nebula",
         "Marker": "img/marker_athena-nebula.png",
-        "Image": "img/cluster_athena-nebula.png",
+        "Image": "img/cluster_athena-nebula.jpg",
         "X": 200,
         "Y": 653,
         "Systems": [
@@ -809,7 +809,7 @@
         "Id": "armstrong-nebula",
         "Name": "Armstrong Nebula",
         "Marker": "img/marker_armstrong-nebula.png",
-        "Image": "img/cluster_armstrong-nebula.png",
+        "Image": "img/cluster_armstrong-nebula.jpg",
         "X": 894,
         "Y": 612,
         "Systems": [
@@ -824,7 +824,7 @@
         "Id": "artemis-tau",
         "Name": "Artemis Tau",
         "Marker": "img/marker_artemis-tau.png",
-        "Image": "img/cluster_artemis-tau.png",
+        "Image": "img/cluster_artemis-tau.jpg",
         "X": 767,
         "Y": 839,
         "Systems": [
@@ -838,7 +838,7 @@
         "Id": "cluster-48",
         "Name": "Cluster 48",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 705,
         "Y": 508,
         "Systems": [
@@ -852,7 +852,7 @@
         "Id": "cluster-49",
         "Name": "Cluster 49",
         "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.png",
+        "Image": "img/cluster_default.jpg",
         "X": 752,
         "Y": 595,
         "Systems": [
