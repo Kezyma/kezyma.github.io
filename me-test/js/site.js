@@ -21,6 +21,7 @@ $(document).ready(function () {
 
 // Shared
 var mapIcons = {};
+var mapType = null;
 
 // Map Data
 var clusters = null;
@@ -114,10 +115,15 @@ L.Control.GalaxyToggleControls = L.Control.extend({
 });
 
 function initialiseGalaxyMap() {
+    mapType = "galaxy";
     var url = new URL(window.location.href);
     url.searchParams.delete("cluster"); 
     var newUrl = url.href; 
     window.history.pushState("", "Milky Way", newUrl);
+
+    $(".leaflet-marker-icon").popover("hide");
+    showPopovers = false;
+    
     $("#galaxy-map").show();
     $("#cluster-map").hide();
 
@@ -320,6 +326,7 @@ var showClusterMarkers = false;
 var clusterMarkers = [];
 
 function initialiseClusterMap(clusterId) {
+    mapType = "cluster";
     var reloadChart = false;
     if (!currentCluster || currentCluster.Id != clusterId) {
         currentCluster = clusters.filter(x => x.Id == clusterId)[0];
@@ -334,16 +341,15 @@ function initialiseClusterMap(clusterId) {
     var newUrl = url.href; 
     window.history.pushState("", cluster.Name, newUrl);
 
+    $(".leaflet-marker-icon").popover("hide");
+    showPopovers = false;
+
     if (reloadChart && clusterMap) {
         clusterMap.remove();
     }
-
     $("#galaxy-map").hide();
     $("#cluster-map").show();
-    if (showPopovers) {
-        $(".leaflet-marker-icon").popover("hide");
-        showPopovers = false;
-    }
+    
     if (reloadChart) {
         clusterMap = L.map("cluster-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[-1,-1],[1,1]] });
         var bounds = [[-1,-1], [1,1]];
@@ -364,7 +370,7 @@ function initialiseClusterMarkers(cluster) {
             { 
                 icon: L.icon({ iconUrl: system.Marker, iconSize: mapIcons[clusterMap.getZoom()] }), 
                 title: system.Name, 
-                clusterId: system.Id,
+                systemId: system.Id,
                 riseOnHover: true
             });
         clusterMarkers.push(marker);
@@ -445,7 +451,7 @@ function initialiseSearchFunction() {
                 var sl = c.Systems.sort(sortFunc);
                 for (var si in sl) {
                     var s = sl[si];
-                    var sItm = $("<option value='" + s.Id + "' data-content='" + s.Name + "<span class=\"d-none\">" + r + " " + c.Name + "</span>' data-group='system'></option>");
+                    var sItm = $("<option value='" + s.Id + "' data-content='" + s.Name + "<span class=\"d-none\">" + r + " " + c.Name + "</span>' data-cluster='" + c.Id + "' data-group='system'></option>");
                     systemGrp.append(sItm);
                 }
                 systemGroups.push(systemGrp);
@@ -458,14 +464,6 @@ function initialiseSearchFunction() {
         $("#galaxy-search").append(sg);
     }
     
-    var systemGroup = $("<optgroup label='System'></optgroup>");
-    for (var ci in clusters) {
-        for (var si in clusters[ci].Systems) {
-            var s = clusters[ci].Systems[si];
-
-        }
-    }
-    
     $("#galaxy-search").selectpicker();
     $("#galaxy-search-btn").click(function () {
         var val = $('#galaxy-search :selected').val();
@@ -474,7 +472,29 @@ function initialiseSearchFunction() {
         }
         var group = $('#galaxy-search :selected').attr('data-group');
         if (group == "cluster") {
-            initialiseClusterMap(val);
+            if (mapType != "galaxy") {
+                initialiseGalaxyMap();
+            }
+            var marker = galaxyMarkers.filter(x => x.options.clusterId == val)[0];
+            var mCoord = marker.getLatLng();
+            var mBounds = [mCoord.lat, mCoord.lng];
+            galaxyMap.flyTo(mBounds, 12);
+
+            var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
+            icon.popover("show");
+        }
+        if (group == "system") {
+            var clusterId = $('#galaxy-search :selected').attr('data-cluster');
+            if (!currentCluster || currentCluster.Id != clusterId || mapType != "cluster") {
+                initialiseClusterMap(clusterId);
+            }
+            var marker = clusterMarkers.filter(x => x.options.systemId == val)[0];
+            var mCoord = marker.getLatLng();
+            var mBounds = [mCoord.lat, mCoord.lng];
+            clusterMap.flyTo(mBounds, 12);
+
+            var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
+            icon.popover("show");
         }
     });
 }
