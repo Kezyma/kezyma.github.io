@@ -86,20 +86,6 @@
         ]
     },
     {
-        "Id": "cluster-34",
-        "Name": "Cluster 34",
-        "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.jpg",
-        "X": 200,
-        "Y": 653,
-        "Systems": [
-
-        ],
-        "Connections": [
-
-        ]
-    },
-    {
         "GameNum": 36,
         "Id": "crescent-nebula",
         "Name": "Crescent Nebula",

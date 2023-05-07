@@ -7,7 +7,6 @@ $(document).ready(function () {
     }
 
     $.getJSON("./js/galaxy.json", function (data) {
-        console.log(data);
         clusters = data;
         var query = getUrlVars();
         if (query["cluster"]) {
