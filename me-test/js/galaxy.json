@@ -513,17 +513,17 @@
         ]
     },
     {
-        "Id": "cluster-21",
-        "Name": "Cluster 21",
+        "Id": "viper-nebula",
+        "Name": "Viper Nebula",
         "Marker": "img/marker_default-cluster.png",
         "Image": "img/cluster_default.jpg",
-        "X": 538,
-        "Y": 675,
+        "X": 640,
+        "Y": 910,
         "Systems": [
 
         ],
         "Connections": [
-
+            "local-cluster"
         ]
     },
     {
@@ -732,22 +732,24 @@
         ]
     },
     {
-        "Id": "cluster-42",
-        "Name": "Cluster 42",
-        "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.jpg",
+        "GameNum": 42,
+        "Id": "pangaea-expanse",
+        "Name": "Pangaea Expanse",
+        "Marker": "img/marker_pangaea-expanse.png",
+        "Image": "img/cluster_pangaea-expanse.jpg",
         "X": 640,
         "Y": 375,
         "Systems": [
 
         ],
         "Connections": [
-
+            "hawking-eta"
         ]
     },
     {
-        "Id": "cluster-43",
-        "Name": "Cluster 43",
+        "GameNum": 43,
+        "Id": "galactic-core",
+        "Name": "Galactic Core",
         "Marker": "img/marker_default-cluster.png",
         "Image": "img/cluster_default.jpg",
         "X": 525,
@@ -756,7 +758,7 @@
 
         ],
         "Connections": [
-
+            "omega-nebula"
         ]
     },
     {
@@ -821,31 +823,33 @@
         ]
     },
     {
-        "Id": "cluster-48",
-        "Name": "Cluster 48",
-        "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.jpg",
+        "GameNum": 48,
+        "Id": "styx-theta",
+        "Name": "Styx Theta",
+        "Marker": "img/marker_styx-theta.png",
+        "Image": "img/cluster_styx-theta.jpg",
         "X": 705,
         "Y": 508,
         "Systems": [
 
         ],
         "Connections": [
-
+            "horse-head-nebula"
         ]
     },
     {
-        "Id": "cluster-49",
-        "Name": "Cluster 49",
-        "Marker": "img/marker_default-cluster.png",
-        "Image": "img/cluster_default.jpg",
+        "GameNum": 49,
+        "Id": "maroon-sea",
+        "Name": "Maroon Sea",
+        "Marker": "img/marker_maroon-sea.png",
+        "Image": "img/cluster_maroon-sea.jpg",
         "X": 752,
         "Y": 595,
         "Systems": [
 
         ],
         "Connections": [
-
+            "attican-beta"
         ]
     }
 ]
