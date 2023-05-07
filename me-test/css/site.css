@@ -13,6 +13,7 @@
 
 body {
     font-family: Slider;
+    overflow: hidden;
 }
 
 #page-container {

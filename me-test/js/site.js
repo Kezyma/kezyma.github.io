@@ -229,7 +229,6 @@ function initialiseGalaxyMarkers() {
            $(this).popover("show");
         }
     });
-
 }
 
 function toggleGalaxyMarkers() {
@@ -346,12 +345,64 @@ function initialiseClusterMap(clusterId) {
         showPopovers = false;
     }
     if (reloadChart) {
-        clusterMap = L.map("cluster-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[0,0],[1,1]] });
-        var bounds = [[0,0], [1,1]];
+        clusterMap = L.map("cluster-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[-1,-1],[1,1]] });
+        var bounds = [[-1,-1], [1,1]];
         clusterImg = L.imageOverlay(clusterImg, bounds);
         clusterImg.addTo(clusterMap);
         clusterMap.fitBounds(bounds);
+
+        initialiseClusterMarkers(cluster);
     }
+}
+
+function initialiseClusterMarkers(cluster) {
+    for (var ix in cluster.Systems) {
+        var system = cluster.Systems[ix];
+        var cx = calcX(system.X);
+        var cy = calcY(system.Y);
+        var marker = L.marker([cy, cx], 
+            { 
+                icon: L.icon({ iconUrl: system.Marker, iconSize: mapIcons[clusterMap.getZoom()] }), 
+                title: system.Name, 
+                clusterId: system.Id,
+                riseOnHover: true
+            });
+        clusterMarkers.push(marker);
+        marker.addTo(clusterMap);
+    }
+    showClusterMarkers = true;
+
+    clusterMap.on("movestart", function () {
+            
+    });
+
+    clusterMap.on("moveend", function () {
+        $(".leaflet-marker-icon").popover("update");
+    });
+
+    clusterMap.on("zoomstart", function () {
+        
+    });
+
+    clusterMap.on("zoomend", function () {
+        $(".leaflet-marker-icon").popover("update");
+        var zoomLevel = clusterMap.getZoom();
+        var iconSize = mapIcons[zoomLevel];
+        for (var ix in clusterMarkers) {
+            var icon = clusterMarkers[ix].getIcon();
+            clusterMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
+        }
+    });
+
+    $(".leaflet-marker-icon").popover({
+        trigger: "hover"
+    });
+
+    $(".leaflet-marker-icon").on("hidden.bs.popover", function () {
+        if (showPopovers) {
+           $(this).popover("show");
+        }
+    });
 }
 
 function returnToGalaxy() {
@@ -361,15 +412,60 @@ function returnToGalaxy() {
 }
 
 // Search
-function initialiseSearchFunction() {
-    
-    var clusterGrp = $("<optgroup label='Clusters'></optgroup>");
-    for (var ci in clusters) {
-        var c = clusters[ci];
-        var cItm = $("<option value='" + c.Id + "' data-group='cluster'>" + c.Name + "</option>");
-        clusterGrp.append(cItm);
+function sortFunc(x,y) {
+    if (x.Name < y.Name) {
+        return -1;
     }
-    $("#galaxy-search").append(clusterGrp);
+    if (x.Name > y.Name) {
+        return 1;
+    }
+    return 0;
+}
+
+function initialiseSearchFunction() {
+    var regions = {
+        "attican-traverse": "Attican Traverse",
+        "earth-alliance-space": "Earth Alliance Space",
+        "inner-council-space": "Inner Council Space",
+        "outer-council-space": "Outer Council Space",
+        "terminus-systems": "Terminus Systems"
+    };
+    var systemGroups = [];
+    for (var ri in regions) {
+        var r = regions[ri];
+        var cl = clusters.filter(x => x.Region == ri).sort(sortFunc);
+        var clusterGrp = $("<optgroup label='" + r + "'></optgroup>");
+        for (var ci in cl) {
+            var c = cl[ci];
+            var cItm = $("<option value='" + c.Id + "' data-content='" + c.Name + "<span class=\"d-none\">" + r + "</span>' data-group='cluster'>" + c.Name + "</option>");
+            clusterGrp.append(cItm);
+
+            if (c.Systems.length > 0) {
+                var systemGrp = $("<optgroup label='" + c.Name + "'></optgroup>");
+                var sl = c.Systems.sort(sortFunc);
+                for (var si in sl) {
+                    var s = sl[si];
+                    var sItm = $("<option value='" + s.Id + "' data-content='" + s.Name + "<span class=\"d-none\">" + r + " " + c.Name + "</span>' data-group='system'></option>");
+                    systemGrp.append(sItm);
+                }
+                systemGroups.push(systemGrp);
+            }
+        }
+        $("#galaxy-search").append(clusterGrp);
+    }
+    for (var sgi in systemGroups) {
+        var sg = systemGroups[sgi];
+        $("#galaxy-search").append(sg);
+    }
+    
+    var systemGroup = $("<optgroup label='System'></optgroup>");
+    for (var ci in clusters) {
+        for (var si in clusters[ci].Systems) {
+            var s = clusters[ci].Systems[si];
+
+        }
+    }
+    
     $("#galaxy-search").selectpicker();
     $("#galaxy-search-btn").click(function () {
         var val = $('#galaxy-search :selected').val();
