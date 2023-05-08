@@ -13,15 +13,108 @@
                 "Id": "widow",
                 "Name": "Widow",
                 "Marker": "img/marker_default-system.png",
-                "X": 578,
-                "Y": 481
+                "Image": "img/system_widow.png",
+                "X": 434,
+                "Y": 446,
+                "Objects": [
+                    {
+                        "Id": "widow-star",
+                        "Name": "Star",
+                        "Type": "star",
+                        "Marker": "img/object_star-default.png",
+                        "X": 500,
+                        "Y": 500
+                    },
+                    {
+                        "Id": "citadel",
+                        "Name": "Citadel",
+                        "ME3": "Supposedly constructed by the long-extinct Protheans, this colossal deep-space station serves as the capital of the Citadel Council. Gravity is simulated through rotation, and is a comfortable 1.02 standard G's on the Wards and a light 0.3 standard G's on the Presidium Ring.\n\nTotal Length (Open): 44.7 km\nDiameter (Open): 12.8 km\nPopulation: 13.2 million (not including keepers)\nGross Weight: 7.11 billion metric tons",
+                        "Type": "station",
+                        "Marker": "img/object_citadel.png",
+                        "X": 578,
+                        "Y": 481
+                    },
+                    {
+                        "Id": "widow-mass-relay",
+                        "Name": "Widow Relay",
+                        "Type": "mass-relay",
+                        "Marker": "img/object_mass-relay.png",
+                        "X": 715,
+                        "Y": 496
+                    },
+                    {
+                        "Id": "unknown-object-01",
+                        "Name": "Unknown",
+                        "Type": "unknown",
+                        "Marker": "img/map_pin.png",
+                        "X": 404,
+                        "Y": 646
+                    }
+                ]
             },
             {
                 "Id": "boltzmann",
                 "Name": "Boltzmann",
                 "Marker": "img/marker_default-system.png",
+                "Image": "img/cluster_default.jpg",
                 "X": 629,
-                "Y": 646
+                "Y": 646,
+                "Objects": [
+                    {
+                        "Id": "boltzmann-star",
+                        "Name": "Star",
+                        "Type": "star",
+                        "Marker": "img/object_star-default.png",
+                        "X": 500,
+                        "Y": 500
+                    },
+                    {
+                        "Id": "bekenstein",
+                        "Name": "Bekenstein",
+                        "ME3": "The recipient of the first wave of Earth's colonization efforts, Bekenstein's founders had a decidedly less agrarian plan than Eden Prime. The mission of Bekenstein's first colony was to become Earth's off-planet manufacturing base, ingratiating humanity into galactic culture by producing needed goods. Meeting with mixed success for the first generation, Bekenstein then leapfrogged its competition by producing high-quality luxury goods that went straight to nearby markets via the Citadel. Today, Bekenstein is known as 'the humans' Illium,' a place where new-money tycoons flaunt their wealth and the have-nots are rarely spoken of.\n\nColony Founded: 2158\nPopulation: 5.4 million\nCapital: Milgrom\n\nOrbital Distance: 1.8 AU\nOrbital Period: 2.4 Earth Years\nRadius: 6,050 km\nDay Length: 21.3 Earth Hours\nAtmospheric Pressure: 1.17 Earth Atmospheres\nSurface Temperature: 43 Celsius (mean) 25 Celsius (habitable zone)\nSurface Gravity: 0.9 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 493,
+                        "Y": 726
+                    },
+                    {
+                        "Id": "wheeler",
+                        "Name": "Wheeler",
+                        "ME3": "Wheeler is a sizable rock planet. Its atmosphere is a hostile mix of hydrogen and carbon monoxide, which poses little hazard to remote robo-mining. Modern equipment can easily tolerate the planet's temperatures and gravity. Wheeler's crust is rich in bauxite and other light metals used in fabricators the galaxy over.\n\nOrbital Distance: 0.85 AU\nOrbital Period: 0.8 Earth Years\nRadius: 7,894 km\nDay Length: 60.5 Earth Hours\nAtmospheric Pressure: 2.35 Earth Atmospheres\nSurface Temperature: 165 Celsius\nSurface Gravity: 1.9 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 589,
+                        "Y": 430
+                    },
+                    {
+                        "Id": "thooft",
+                        "Name": "Thooft",
+                        "ME3": "Technically named T'hooft (Dutch for 'the head'), Thooft is a dwarf planet with a moderate carbon dioxide atmosphere and rich deposits of periclase. Originally put on the star charts when a human scout ship needed to discharge its drive core and wasn't able to reach the system's gas giants in time, Thooft has seen some development by Hoshichiri Heavy Industries. Periclase from the asteroid can be found in common industrial products, such as industrial cable insulation and fire-resistant prefab housing walls.\n\nOrbital Distance: 3.6 AU\nOrbital Period: 6.8 Earth Years\nRadius: 3,247 km\nDay Length: 34.2 Earth Hours\nAtmospheric Pressure: 1.88 Earth Atmospheres\nSurface Temperature: -5 Celsius\nSurface Gravity: 0.2 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 825,
+                        "Y": 634
+                    },
+                    {
+                        "Id": "feynman",
+                        "Name": "Feynman",
+                        "ME3": "A hydrogen-methane gas giant, Feynman is of far less interest to the colonists of Bekenstein than its moons. All 24 are under heavy development by three rival firms, Hoshichiri Heavy Industries, Guanghui Solutions, and the Dynamis Corporation. These three firms are under ironclad contracts to sell their raw materials exclusively to corporations based on or orbiting around Bekenstein, a situation which has led to heavy investment on Bekenstein from manufacturing corporations looking to get a piece of the action. Feynman itself has been relatively untouched by the mining concerns as its strong magnetosphere and great dark storm cells create a barrier to all but the newest generation of scanners.\n\n\nOrbital Distance: 15.2 AU\nOrbital Period: 59.4 Earth Years\nRadius: 40,196 km\nDay Length: 16.9 Earth Hours",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 186,
+                        "Y": 47
+                    },
+                    {
+                        "Id": "veltman",
+                        "Name": "Veltman",
+                        "ME3": "A hydrogen-helium gas giant, Veltman is home to the koshiroten, enormous storm cells that appear as whitish spots and are visible as far away as Bekenstein. As with most other colonized gas giants, Veltman's orbital space sports a variety of helium-3 refueling stations for merchant vessels. Of particular note among the orbital stations is the Dynamis Corporation's facility for manufacturing metastable metallic hydrogen, despite the risks involved in manipulating the powerful mass effect fields needed to do so. Citadel warships, which use the substance in their thrusters, can frequently be seen docking at Veltman as a result. This makes the Boltzmann system one of the most heavily patrolled in Citadel space.\n\nOrbital Distance: 7.1 AU\nOrbital Period: 19.0 Earth Years\nRadius: 61,755 km\nDay Length: 14.0 Earth Hours",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 512,
+                        "Y": 944
+                    }
+                ]
+                
             }
         ],
         "Connections": [
@@ -48,7 +141,86 @@
         "X": 511,
         "Y": 283,
         "Systems": [
-
+            {
+                "Id": "fathar",
+                "Name": "Fathar",
+                "Marker": "img/marker_default-system.png",
+                "Image": "img/cluster_default.jpg",
+                "X": 510,
+                "Y": 204,
+                "Objects": [
+                    {
+                        "Id": "fathar-star",
+                        "Name": "Star",
+                        "Type": "star",
+                        "Marker": "img/object_star-default.png",
+                        "X": 500,
+                        "Y": 500
+                    },
+                    {
+                        "Id": "lorek",
+                        "Name": "Lorek",                        
+                        "ME3": "Lorek is a rare example of a habitable world circling a red dwarf star. The planet is tidally locked to Fathar, with a sunward hot pole and shadowed cold pole. Water on the sunward side evaporates quickly, bringing massive, fast-moving thunderstorms over the habitable terminator zone that finally settle as snow on the frozen dark side.\n\nOriginally an independent asari colony, Lorek was annexed by the Batarian Hegemony in 1913. But like most remote colonies in the Traverse and Terminus, it retains a degree of freedom that the Hegemony resents. Asari, salarian, and human corporations have investments on the world, and now that Hegemony space has been cut off by the Reapers, Lorek is poised to rebel against its former masters. Mercenaries, private intelligence corporations, and worse have begun to arrive on Lorek, smelling violence in the air.\n\n\nColony Founded: 1764 CE\nPopulation: 4.7 million\nCapital: Jalnor\n\n\nOrbital Distance: 0.2 AU\nOrbital Period: 59.6 Earth Days\nRadius: 6,754 km\nAtmospheric Pressure: 0.4 Earth Atmospheres\nSurface Temperature: 40 Celsius\nSurface Gravity: 0.6 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 427,
+                        "Y": 478
+                    },
+                    {
+                        "Id": "korar",
+                        "Name": "Korar",                        
+                        "ME3": "Korar is a small, lifeless rock blessed with significant deposits of thorium, used in radiation shielding and the manufacture of space frame alloys. A small population of miners eke out an existence on the surface, selling their ore at Lorek and praying that the intermittent raids by the Terminus pirate clans will pass their homestead by.\n\nThere have been no children born on Korar since the infamous pirate raid of 2047, when every child on the planet was rounded up and taken as a slave. Any couple finding itself pregnant preemptively moves off-world.\n\nPopulation: 2,400\n\nOrbital Distance: 0.32 AU\nOrbital Period: 0.3 Earth Years\nRadius: 1,919 km\nAtmospheric Pressure: Trace\nSurface Temperature: -40 Celsius\nSurface Gravity: 0.19 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 603,
+                        "Y": 475
+                    },
+                    {
+                        "Id": "dorgal",
+                        "Name": "Dorgal",                        
+                        "ME3": "The surface of Dorgal is an ethane-soaked mush. The planet hovers near the boiling point of the hydrocarbon, and supports a diverse, if simple and slow-moving, carbon-based ecology. The planet's gravity is strong enough to retain an atmosphere of molecular nitrogen and carbon monoxide, but the methane that dominated billions of years ago has long since been lost.\n\nOrbital Distance: 0.54 AU\nOrbital Period: 0.7 Earth Years\nRadius: 3,521 km\nDay Length: 51.4 Earth Hours\nAtmospheric Pressure: 0.43 Earth Atmospheres\nSurface Temperature: -88 Celsius\nSurface Gravity: 0.44 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 582,
+                        "Y": 681
+                    }
+                ]
+            },
+            {
+                "Id": "amada",
+                "Name": "Amada",
+                "Marker": "img/marker_default-system.png",
+                "X": 723,
+                "Y": 213
+            },
+            {
+                "Id": "sahrabarik",
+                "Name": "Sahrabarik",
+                "Marker": "img/marker_default-system.png",
+                "X": 543,
+                "Y": 400
+            },
+            {
+                "Id": "batalla",
+                "Name": "Batalla",
+                "Marker": "img/marker_default-system.png",
+                "X": 352,
+                "Y": 514
+            },
+            {
+                "Id": "arinlarkan",
+                "Name": "Arinlarkan",
+                "Marker": "img/marker_default-system.png",
+                "X": 700,
+                "Y": 576
+            },
+            {
+                "Id": "kairavamori",
+                "Name": "Kairavamori",
+                "Marker": "img/marker_default-system.png",
+                "X": 796,
+                "Y": 435
+            }
         ],
         "Connections": [
             "caleston-rift",
@@ -80,8 +252,124 @@
                 "Id": "sol",
                 "Name": "Sol",
                 "Marker": "img/marker_default-system.png",
+                "Image": "img/cluster_default.jpg",
                 "X": 310,
-                "Y": 335
+                "Y": 335,
+                "Objects": [
+                    {
+                        "Id": "sol-star",
+                        "Name": "Star",                        
+                        "Type": "star",
+                        "Marker": "img/object_star-default.png",
+                        "X": 500,
+                        "Y": 500
+                    },
+                    {
+                        "Id": "mercury",
+                        "Name": "Mercury",                        
+                        "ME3": "A handful of solar power stations exist on \"peaks of eternal light\" at the north and south poles of Mercury. The difficulties imposed by the planet's proximity to the sun and high orbital velocity have limited development.\n\nPopulation: 340\n\nOrbital Distance: 0.39 AU\nOrbital Period: 88 Earth Days\nRadius: 2,240 km\nDay Length: 58.7 Earth Days\nAtmospheric Pressure: Trace\nSurface Temperature: 430 Celsius\nSurface Gravity: 0.38 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 479,
+                        "Y": 569
+                    },
+                    {
+                        "Id": "venus",
+                        "Name": "Venus",                        
+                        "ME3": "With its molten temperatures, sulfuric acid clouds, and crushing carbon dioxide atmosphere, Venus has only a handful of aerostat research outposts.\n\nPopulation: 800\n\nOrbital Distance: 0.72 AU\nOrbital Period: 224.7 Earth Days\nRadius: 6,052 km\nDay Length: 243 Earth Days\nAtmospheric Pressure: 90 Earth Atmospheres\nSurface Temperature: 465 Celsius\nSurface Gravity: 0.88 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 484,
+                        "Y": 412
+                    },
+                    {
+                        "Id": "earth",
+                        "Name": "Earth",                        
+                        "ME3": "For detailed information, please refer to the standard issue Alliance Galactic Codex. Earth's orbit is riddled with debris generated by \"bootstrap\" space development; use of kinetic barriers is recommended at altitudes over 85 km.\n\nPopulation (Surface): 11.4 billion\nPopulation (L4 and L5 stations): 250,000\n\nOrbital Distance: 1 AU\nOrbital Period: 1 Earth Year\nRadius: 6,378 km\nDay Length: 23.9 Earth Hours\nAtmospheric Pressure: 1 Earth Atmosphere\nSurface Temperature: 23 Celsius\nSurface Gravity: 1.0 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 606,
+                        "Y": 385
+                    },
+                    {
+                        "Id": "mars",
+                        "Name": "Mars",                        
+                        "ME3": "Once considered a prospect for terraforming and colonization, the discovery of faster than light travel turned Mars into a quiet backwater. Its southern pole is a historical preserve centered on the Prothean ruins found there. Immigration and development are restricted as the search for Prothean artifacts continues.\n\nOrbital Distance: 1.52 AU\nOrbital Period: 1.88 Earth Years\nRadius: 3,402 km\nDay Length: 24.6 Earth Hours\nAtmospheric Pressure: Trace\nSurface Temperature: -138 Celsius\nSurface Gravity: 0.38 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 365,
+                        "Y": 345
+                    },
+                    {
+                        "Id": "jupiter",
+                        "Name": "Jupiter",                        
+                        "ME3": "Jupiter's deep gravity well and lethal radiation have kept its moons from being significantly exploited. The largest outpost is Binary Helix Corporation's Nautilus facility, attached to the underside of Europa's ice sheet.\n\nPopulation (all moons): 9,100\n\nOrbital Distance: 5.2 AU\nOrbital Period: 11.7 Earth Years\nRadius: 71,492 km\nDay Length: 9.93 Earth Hours",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 710,
+                        "Y": 824
+                    },
+                    {
+                        "Id": "unknown-object-02",
+                        "Name": "Unknown",                        
+                        "Type": "unknown",
+                        "Marker": "img/map_pin.png",
+                        "X": 526,
+                        "Y": 243
+                    },
+                    {
+                        "Id": "saturn",
+                        "Name": "Saturn",                        
+                        "ME3": "Saturn has been a major source of helium-3 fuel for fusion plants since the 2150s. The moon of Titan is mined for hydrocarbons, and used as a hostile environment training facility for Alliance marines.\n\nPopulation (orbitals and Titan): 117,000\nCapital: Huygens Dome\n\nOrbital Distance: 9.5 AU\nOrbital Period: 29.5 Earth Years\nRadius: 60,268 km\nDay Length: 10.3 Earth Hours",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 71,
+                        "Y": 563
+                    },
+                    {
+                        "Id": "uranus",
+                        "Name": "Uranus",                        
+                        "ME3": "After the development of mass effect FTL drive, distant Uranus was the target of a \"land rush\" to exploit its combination of plentiful helium-3 fuel and shallow (for a gas giant) gravity well. Today Uranus is the largest producer of He-3 in Alliance space.\n\nPopulation: 371,000\nCapital: Sakharov Station\n\nOrbital Distance: 19.2 AU\nOrbital Period: 84.3 Earth Years\nRadius: 25,559 km\nDay Length: 17.3 Earth Hours",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 970,
+                        "Y": 274
+                    },
+                    {
+                        "Id": "neptune",
+                        "Name": "Neptune",                        
+                        "ME3": "Though Neptune, like Uranus, has plentiful helium, its remoteness made it an unpromising target for mining before the development of mass effect drive. With Uranus cheaper to exploit, it has never seen extensive development. The only permanent human presence is a small research facility on Triton.\n\nPopulation (Triton): 70\n\nOrbital Distance: 29.1 AU\nOrbital Period: 164.8 Earth Years\nRadius: 24,764 km\nDay Length: 16.1 Earth Hours",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 1087,
+                        "Y": 559
+                    },
+                    {
+                        "Id": "pluto",
+                        "Name": "Pluto",                        
+                        "ME3": "Pluto is one of Sol's numerous \"ice dwarf\" worlds. It is mainly of note for being the gravitational \"anchor\" for the mass relay to Arcturus. Pluto and the Charon Relay (formerly encased in ice, and considered a moon) orbit each other. Pluto's orbit was circularized in 2157 as a side effect of the Charon Mass Relay recovery operations.\n\nPopulation (gateway stations): 9,300\n\nOrbital Distance: 39.5 AU\nOrbital Period: 247.7 Earth Years\nRadius: 1,151 km\nDay Length: 9.4 Earth Hours\nAtmospheric Pressure: Trace\nSurface Temperature: -229 Celsius\nSurface Gravity: 0.06 G",
+                        "Type": "planet",
+                        "Marker": "img/map_pin.png",
+                        "X": 1149,
+                        "Y": 465
+                    },
+                    {
+                        "Id": "sol-fuel-depot",
+                        "Name": "Fuel Depot",                        
+                        "Type": "fuel-depot",
+                        "Marker": "img/map_pin.png",
+                        "X": 1028,
+                        "Y": 665
+                    },
+                    {
+                        "Id": "charon-relay",
+                        "Name": "Charon Relay",                        
+                        "Type": "mass-relay",
+                        "Marker": "img/object_mass-relay.png",
+                        "X": 1246,
+                        "Y": 512
+                    }
+                ]
             }
         ],
         "Connections": [
@@ -211,7 +499,41 @@
         "X": 631,
         "Y": 426,
         "Systems": [
-
+            {
+                "Id": "verr",
+                "Name": "Verr",
+                "Marker": "img/marker_default-system.png",
+                "X": 649,
+                "Y": 415
+            },
+            {
+                "Id": "century",
+                "Name": "Century",
+                "Marker": "img/marker_default-system.png",
+                "X": 466,
+                "Y": 409
+            },
+            {
+                "Id": "chandrasekhar",
+                "Name": "Chandrasekhar",
+                "Marker": "img/marker_default-system.png",
+                "X": 365,
+                "Y": 512
+            },
+            {
+                "Id": "schwarzschild",
+                "Name": "Schwarzschild",
+                "Marker": "img/marker_default-system.png",
+                "X": 307,
+                "Y": 672
+            },
+            {
+                "Id": "thorne",
+                "Name": "Thorne",
+                "Marker": "img/marker_default-system.png",
+                "X": 564,
+                "Y": 629
+            }
         ],
         "Connections": [
             "caleston-rift",
@@ -230,7 +552,34 @@
         "X": 554,
         "Y": 720,
         "Systems": [
-
+            {
+                "Id": "anadius",
+                "Name": "Anadius",
+                "Marker": "img/marker_default-system.png",
+                "X": 317,
+                "Y": 671
+            },
+            {
+                "Id": "fortuna",
+                "Name": "Fortuna",
+                "Marker": "img/marker_default-system.png",
+                "X": 304,
+                "Y": 454
+            },
+            {
+                "Id": "strenuus",
+                "Name": "Strenuus",
+                "Marker": "img/marker_default-system.png",
+                "X": 637,
+                "Y": 409
+            },
+            {
+                "Id": "pax",
+                "Name": "Pax",
+                "Marker": "img/marker_default-system.png",
+                "X": 610,
+                "Y": 649
+            }
         ],
         "Connections": [
             "annos-basin",
@@ -251,7 +600,13 @@
         "X": 687,
         "Y": 568,
         "Systems": [
-
+            {
+                "Id": "iera",
+                "Name": "Iera",
+                "Marker": "img/marker_default-system.png",
+                "X": 497,
+                "Y": 344
+            }
         ],
         "Connections": [
             "argos-rho",
@@ -273,7 +628,27 @@
         "X": 90,
         "Y": 465,
         "Systems": [
-
+        {
+            "Id": "faia",
+            "Name": "Faia",
+            "Marker": "img/marker_default-system.png",
+            "X": 390,
+            "Y": 405
+        },
+        {
+            "Id": "elysta",
+            "Name": "Elysta",
+            "Marker": "img/marker_default-system.png",
+            "X": 692,
+            "Y": 421
+        },
+        {
+            "Id": "aquila",
+            "Name": "Aquila",
+            "Marker": "img/marker_default-system.png",
+            "X": 464,
+            "Y": 617
+        }
         ],
         "Connections": [
             "crescent-nebula",
@@ -813,8 +1188,10 @@
         "Name": "Galactic Core",
         "Marker": "img/marker_default-cluster.png",
         "Image": "img/cluster_default.jpg",
-        "X": 525,
-        "Y": 440,
+        "OldX": 525,
+        "OldY": 440,
+        "X": 510,
+        "Y": 500,
         "Systems": [
 
         ],

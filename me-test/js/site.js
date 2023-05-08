@@ -3,14 +3,24 @@ $(document).ready(function () {
     var x = 1;
     for (var i = 8; i < 14; i++) {
         mapIcons[i] = [(i)*x,(i)*x];
-        x = x*1.8;
+        x = x*1.9;
+    }
+    x = 1;
+    for (var i = 8; i < 14; i++) {
+        objIcons[i] = [(i)*x,(i)*x];
+        x = x*1.9;
     }
 
     $.getJSON("./js/galaxy.json", function (data) {
         clusters = data;
         var query = getUrlVars();
         if (query["cluster"]) {
-            initialiseClusterMap(query["cluster"]);
+            if (query["system"]) {
+                initialiseSystemMap(query["cluster"], query["system"]);
+            }
+            else {
+                initialiseClusterMap(query["cluster"]);
+            }
         }
         else {
             initialiseGalaxyMap();
@@ -21,6 +31,7 @@ $(document).ready(function () {
 
 // Shared
 var mapIcons = {};
+var objIcons = {};
 var mapType = null;
 
 // Map Data
@@ -126,6 +137,7 @@ function initialiseGalaxyMap() {
     
     $("#galaxy-map").show();
     $("#cluster-map").hide();
+    $("#system-map").hide();
 
     if (!galaxyMap) {
         var mapBounds = [[-1,-1],[1,1]];
@@ -217,7 +229,7 @@ function initialiseGalaxyMarkers() {
                     [cy1, cx1],
                     [cy2, cx2]
                 ];
-                var newLine = L.polyline(coords, { color: "white", noClip: true });
+                var newLine = L.polyline(coords, { color: "white", noClip: true, weight: 1 });
                 galaxyConnections.push(newLine);
                 newLine.addTo(galaxyMap);
                 }
@@ -252,7 +264,6 @@ function toggleGalaxyMarkers() {
         showMarkers = true;
     }
 }
-
 function toggleGalaxyRegions() {
     if (showRegions) {
         galaxyRegionImg.remove();
@@ -267,7 +278,6 @@ function toggleGalaxyRegions() {
         showRegions = true;
     }
 }
-
 function toggleGalaxyColours() {
     if (showColours) {
         galaxyColoursImg.remove();
@@ -282,7 +292,6 @@ function toggleGalaxyColours() {
         }
     }
 }
-
 function toggleGalaxyLabels() {
     if (showLabels) {
         galaxyLabelsImg.remove();
@@ -297,7 +306,6 @@ function toggleGalaxyLabels() {
         }
     }
 }
-
 function toggleGalaxyConnections() {
     if (showConnections) {
         for (var ix in galaxyConnections) {
@@ -325,6 +333,41 @@ var clusterLabelsImg = null;
 var showClusterMarkers = false;
 var clusterMarkers = [];
 
+L.Control.ClusterToggleControls = L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+    onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+
+        var backBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
+        backBtn.innerHTML = "<i class='fa-solid fa-angles-left'></i>";
+        backBtn.title = "Back";
+        L.DomEvent.disableClickPropagation(backBtn);
+        L.DomEvent.on(backBtn, 'click', function(){
+            initialiseGalaxyMap();
+        });
+
+        var labelToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
+        labelToggleBtn.innerHTML = "<i class='fa-solid fa-tag'></i>";
+        labelToggleBtn.title = "Toggle Labels";
+        L.DomEvent.disableClickPropagation(labelToggleBtn);
+        L.DomEvent.on(labelToggleBtn, 'click', function(){
+            if (showPopovers) {
+                $(".leaflet-marker-icon").popover("hide");
+                showPopovers = false;
+            }
+            else {
+                $(".leaflet-marker-icon").popover("show");
+                showPopovers = true;
+            }
+        });
+
+        return container;
+    },
+    onRemove: function(map) {},
+});
+
 function initialiseClusterMap(clusterId) {
     mapType = "cluster";
     var reloadChart = false;
@@ -348,6 +391,7 @@ function initialiseClusterMap(clusterId) {
         clusterMap.remove();
     }
     $("#galaxy-map").hide();
+    $("#system-map").hide();
     $("#cluster-map").show();
     
     if (reloadChart) {
@@ -358,6 +402,7 @@ function initialiseClusterMap(clusterId) {
         clusterMap.fitBounds(bounds);
 
         initialiseClusterMarkers(cluster);
+        new L.Control.ClusterToggleControls().addTo(clusterMap);
     }
 }
 
@@ -373,6 +418,10 @@ function initialiseClusterMarkers(cluster) {
                 systemId: system.Id,
                 riseOnHover: true
             });
+        marker.on("click", function () {
+            var id = this.options.systemId;
+            initialiseSystemMap(currentCluster.Id, id);
+        });
         clusterMarkers.push(marker);
         marker.addTo(clusterMap);
     }
@@ -417,6 +466,184 @@ function returnToGalaxy() {
     $("#cluster-map").hide();
 }
 
+// System Map
+var currentSystem = null;
+
+var systemMap = null;
+var systemImg = null;
+
+var showSystemLabels = false;
+var systemLabelsImg = null;
+
+var showSystemMarkers = false;
+var systemMarkers = [];
+var showSystemOrbits = false;
+var systemOrbits = [];
+
+L.Control.SystemToggleControls = L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+    onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+
+        var backBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
+        backBtn.innerHTML = "<i class='fa-solid fa-angles-left'></i>";
+        backBtn.title = "Back";
+        L.DomEvent.disableClickPropagation(backBtn);
+        L.DomEvent.on(backBtn, 'click', function(){
+            initialiseClusterMap(getUrlVars()["cluster"]);
+        });
+
+        var labelToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
+        labelToggleBtn.innerHTML = "<i class='fa-solid fa-tag'></i>";
+        labelToggleBtn.title = "Toggle Labels";
+        L.DomEvent.disableClickPropagation(labelToggleBtn);
+        L.DomEvent.on(labelToggleBtn, 'click', function(){
+            if (showPopovers) {
+                $(".leaflet-marker-icon").popover("hide");
+                showPopovers = false;
+            }
+            else {
+                $(".leaflet-marker-icon").popover("show");
+                showPopovers = true;
+            }
+        });
+
+        var orbitToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
+        orbitToggleBtn.innerHTML = "<i class='fa-regular fa-circle'></i>";
+        orbitToggleBtn.title = "Toggle Orbits";
+        L.DomEvent.disableClickPropagation(orbitToggleBtn);
+        L.DomEvent.on(orbitToggleBtn, 'click', function(){
+            toggleSystemOrbits();
+        });
+        return container;
+    },
+    onRemove: function(map) {},
+});
+
+function initialiseSystemMap(clusterId, systemId) {
+    mapType = "system";
+    var reloadChart = false;
+    if (!currentSystem || currentSystem.Id != systemId) {
+        currentSystem = clusters.filter(x => x.Id == clusterId)[0].Systems.filter(x => x.Id == systemId)[0];
+        reloadChart = true;
+    }
+    var system = currentSystem;
+    var systemImage = null;
+    if (Object.hasOwn(system, "Image")) {
+        systemImage = system.Image;
+    }
+
+    var url = new URL(window.location.href);
+    url.searchParams.set("system", systemId);
+    url.searchParams.set("cluster", clusterId);
+    var newUrl = url.href; 
+    window.history.pushState("", system.Name, newUrl);
+
+    $(".leaflet-marker-icon").popover("hide");
+    showPopovers = false;
+
+    if (reloadChart && systemMap) {
+        systemMap.remove();
+    }
+    $("#galaxy-map").hide();
+    $("#cluster-map").hide();
+    $("#system-map").show();
+    
+    if (reloadChart) {
+        systemMap = L.map("system-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[-2,-2],[2,2]] });
+        var bounds = [[-1,-1], [1,1]];
+        if (systemImage) {
+            systemImg = L.imageOverlay(systemImage, bounds);
+            systemImg.addTo(systemMap);
+        }
+        systemMap.fitBounds(bounds);
+
+        initialiseSystemMarkers(system);
+        new L.Control.SystemToggleControls().addTo(systemMap);
+    }
+}
+
+function initialiseSystemMarkers(system) {
+    systemMarkers = [];
+    systemOrbits = [];
+    for (var ix in system.Objects) {
+        var obj = system.Objects[ix];
+        var cx = calcX(obj.X);
+        var cy = calcY(obj.Y);
+        var marker = L.marker([cy, cx], 
+            { 
+                icon: L.icon({ iconUrl: obj.Marker, iconSize: objIcons[systemMap.getZoom()] }), 
+                title: obj.Name, 
+                objectId: obj.Id,
+                riseOnHover: true
+            });
+        systemMarkers.push(marker);
+        marker.addTo(systemMap);
+
+        var center = L.latLng(0,0);
+        var planet = marker.getLatLng();
+        var distance = center.distanceTo(planet);
+        var orbit = L.circle([0,0], distance, {
+            color: "#fff",
+            weight: 1,
+            fill: false
+        });
+        systemOrbits.push(orbit);
+        orbit.addTo(systemMap);
+    }
+    showClusterMarkers = true;
+    showSystemOrbits = true;
+
+    systemMap.on("movestart", function () {
+            
+    });
+
+    systemMap.on("moveend", function () {
+        $(".leaflet-marker-icon").popover("update");
+    });
+
+    systemMap.on("zoomstart", function () {
+        
+    });
+
+    systemMap.on("zoomend", function () {
+        $(".leaflet-marker-icon").popover("update");
+        var zoomLevel = systemMap.getZoom();
+        var iconSize = objIcons[zoomLevel];
+        for (var ix in systemMarkers) {
+            var icon = systemMarkers[ix].getIcon();
+            systemMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
+        }
+    });
+
+    $(".leaflet-marker-icon").popover({
+        trigger: "hover"
+    });
+
+    $(".leaflet-marker-icon").on("hidden.bs.popover", function () {
+        if (showPopovers) {
+           $(this).popover("show");
+        }
+    });
+}
+
+function toggleSystemOrbits() {
+    if (showSystemOrbits) {
+        for (var ix in systemOrbits) {
+            systemOrbits[ix].remove();
+        }
+        showSystemOrbits = false;
+    }
+    else {
+        for (var ix in systemOrbits) {
+            systemOrbits[ix].addTo(systemMap);
+        }
+        showSystemOrbits = true;
+    }
+}
+
 // Search
 function sortFunc(x,y) {
     if (x.Name < y.Name) {
@@ -437,6 +664,7 @@ function initialiseSearchFunction() {
         "terminus-systems": "Terminus Systems"
     };
     var systemGroups = [];
+    var objGroups = [];
     for (var ri in regions) {
         var r = regions[ri];
         var cl = clusters.filter(x => x.Region == ri).sort(sortFunc);
@@ -453,6 +681,19 @@ function initialiseSearchFunction() {
                     var s = sl[si];
                     var sItm = $("<option value='" + s.Id + "' data-content='" + s.Name + "<span class=\"d-none\">" + r + " " + c.Name + "</span>' data-cluster='" + c.Id + "' data-group='system'></option>");
                     systemGrp.append(sItm);
+
+                    if (Object.hasOwn(s, "Objects")) {
+                        var objGroup = $("<optgroup = label='" + s.Name + "'></optgroup>");
+                        var ol = s.Objects.sort(sortFunc);
+                        for (var oi in ol) {
+                            var o = ol[oi];
+                            if (o.Type == "planet" || o.Type == "mass-relay" || o.Type == "station") {
+                                var oItm = $("<option value='" + o.Id + "' data-content='" + o.Name + "<span class=\"d-none\">" + r + " " + c.Name + " " + s.Name + "</span>' data-cluster='" + c.Id + "' data-system='" + s.Id + "' data-group='object'></option>")
+                                objGroup.append(oItm);
+                            }
+                        } 
+                        objGroups.push(objGroup);
+                    }
                 }
                 systemGroups.push(systemGrp);
             }
@@ -462,6 +703,10 @@ function initialiseSearchFunction() {
     for (var sgi in systemGroups) {
         var sg = systemGroups[sgi];
         $("#galaxy-search").append(sg);
+    }
+    for (var ogi in objGroups) {
+        var og = objGroups[ogi];
+        $("#galaxy-search").append(og);
     }
     
     $("#galaxy-search").selectpicker();
@@ -492,6 +737,20 @@ function initialiseSearchFunction() {
             var mCoord = marker.getLatLng();
             var mBounds = [mCoord.lat, mCoord.lng];
             clusterMap.flyTo(mBounds, 12);
+
+            var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
+            icon.popover("show");
+        }
+        if (group == "object") {
+            var clusterId = $('#galaxy-search :selected').attr('data-cluster');
+            var systemId = $('#galaxy-search :selected').attr('data-system');
+            if (!currentSystem || currentSystem.Id != systemId || mapType != "system") {
+                initialiseSystemMap(clusterId, systemId);
+            }
+            var marker = systemMarkers.filter(x => x.options.objectId == val)[0];
+            var mCoord = marker.getLatLng();
+            var mBounds = [mCoord.lat, mCoord.lng];
+            systemMap.flyTo(mBounds, 12);
 
             var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
             icon.popover("show");
