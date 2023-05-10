@@ -27,6 +27,10 @@ $(document).ready(function () {
         }
         initialiseSearchFunction();
     });
+
+    $("#object-close-btn").click(function () {
+        $("#object-pane").hide();
+    });
 });
 
 // Shared
@@ -401,6 +405,7 @@ function initialiseClusterMap(clusterId) {
         clusterImg = L.imageOverlay(clusterImg, bounds);
         clusterImg.addTo(clusterMap);
         clusterMap.fitBounds(bounds);
+        clusterMap.zoomIn();
 
         initialiseClusterMarkers(cluster);
         new L.Control.ClusterToggleControls().addTo(clusterMap);
@@ -526,8 +531,9 @@ L.Control.SystemToggleControls = L.Control.extend({
 function initialiseSystemMap(clusterId, systemId) {
     mapType = "system";
     var reloadChart = false;
+    var cluster = clusters.filter(x => x.Id == clusterId)[0];
     if (!currentSystem || currentSystem.Id != systemId) {
-        currentSystem = clusters.filter(x => x.Id == clusterId)[0].Systems.filter(x => x.Id == systemId)[0];
+        currentSystem = cluster.Systems.filter(x => x.Id == systemId)[0];
         reloadChart = true;
     }
     var system = currentSystem;
@@ -553,20 +559,21 @@ function initialiseSystemMap(clusterId, systemId) {
     $("#system-map").show();
     
     if (reloadChart) {
-        systemMap = L.map("system-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[-2,-2],[2,2]] });
+        var imgBounds = [[-2,-2],[2,2]];
+        systemMap = L.map("system-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: imgBounds });
         var bounds = [[-1,-1], [1,1]];
         if (systemImage) {
-            systemImg = L.imageOverlay(systemImage, bounds);
+            systemImg = L.imageOverlay(systemImage, imgBounds);
             systemImg.addTo(systemMap);
         }
         systemMap.fitBounds(bounds);
 
-        initialiseSystemMarkers(system);
+        initialiseSystemMarkers(system, cluster);
         new L.Control.SystemToggleControls().addTo(systemMap);
     }
 }
 
-function initialiseSystemMarkers(system) {
+function initialiseSystemMarkers(system, cluster) {
     systemMarkers = [];
     systemOrbits = [];
     for (var ix in system.Objects) {
@@ -580,9 +587,17 @@ function initialiseSystemMarkers(system) {
                 icon: L.icon({ iconUrl: obj.Marker, iconSize: [ size[0] * scale, size[1] * scale ] }), 
                 title: obj.Name, 
                 objectId: obj.Id,
+                systemId: system.Id,
+                clusterId: cluster.Id,
                 scale: scale,
                 riseOnHover: true
             });
+        marker.on("click", function () {
+            var id = this.options.objectId;
+            var sId = this.options.systemId;
+            var cId = this.options.clusterId;
+            bindObjectInfo(id, sId, cId);
+        });
         systemMarkers.push(marker);
         marker.addTo(systemMap);
 
@@ -647,6 +662,40 @@ function toggleSystemOrbits() {
         }
         showSystemOrbits = true;
     }
+}
+
+// Object Info
+function bindObjectInfo(objectId, systemId, clusterId) {
+    var c = clusters.filter(x => x.Id == clusterId)[0];
+    var s = c.Systems.filter(x => x.Id == systemId)[0];
+    var o = s.Objects.filter(x => x.Id == objectId)[0];
+    if (Object.hasOwn(o, "PlanetType")) {
+        $("#object-type").html(o.PlanetType);
+    }
+    else {
+        if (o.Type == "mass-relay") {$("#object-type").html("Mass Relay");}
+        else if (o.Type == "station") {$("#object-type").html("Station");}
+        else if (o.Type == "fuel-depot") {$("#object-type").html("Fuel Depot");}
+        else if (o.Type == "star") {$("#object-type").html("Star");}
+        else {$("#object-type").html("");}
+    }
+    if (Object.hasOwn(o, "Image")) {
+        $("#object-img").attr("src", o.Image);
+    }
+    else {
+        $("#object-img").attr("src", "");
+    }
+    
+    $("#object-title").html(o.Name);
+    if (Object.hasOwn(o, "ME3")) {
+        var parts = o.ME3.split("\n").join("<br/>");
+        $("#object-content").html(parts);
+    }
+    else {
+        $("#object-content").html("No information.");
+    }
+    
+    $("#object-pane").show();
 }
 
 // Search
@@ -775,3 +824,5 @@ function getUrlVars()
         }
         return vars;
     }
+
+    

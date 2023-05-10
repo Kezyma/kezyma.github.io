@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/site.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md">
+        <nav class="navbar navbar-expand-md bg-dark">
             <div class="container-fluid">
             <a class="navbar-brand" href="">Galaxy Map</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,34 @@
             <div id="galaxy-map" class="map-container" style="background-color: black;"></div>
             <div id="cluster-map" class="map-container" style="background-color: black;display:none;"></div>
             <div id="system-map" class="map-container" style="background-color: black;display:none;"></div>
+            <div id="object-pane" class="info-container container-fluid" style="display: none;">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        <div class="card mt-3">
+                            <img src="img/cluster/cluster_default.jpg" class="card-img">
+                            <div class="card-img-overlay">
+                                <img id="object-img" class="w-100">
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mt-3 mb-3">
+                            <div class="card-header">
+                                <h3 id="object-title" class="mb-0 d-inline-block"></h3>
+                                <button id="object-close-btn" class="float-end btn btn-sm btn-outline-danger d-inline-block float-right">
+                                    <i class="fa fa-solid fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <h5 id="object-type" class="mb-0"></h5>
+                            </div>
+                            <div class="card-body">
+                                <p id="object-content"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="lib/jquery/jquery-3.6.4.min.js"></script>
         <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>

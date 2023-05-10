@@ -13,7 +13,8 @@
 
 body {
     font-family: Slider;
-    overflow: hidden;
+    overflow-x: hidden;
+    background-color: black;
 }
 
 #page-container {
@@ -45,4 +46,18 @@ body {
 
 #galaxy-search-group .dropdown-toggle {
     min-width: 200px !important;
+}
+
+.info-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 56px;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+}
+
+nav {
+    z-index: 99999;
 }
