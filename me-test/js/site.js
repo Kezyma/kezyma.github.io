@@ -604,7 +604,15 @@ function initialiseSystemMarkers(system, cluster) {
         var center = L.latLng(0,0);
         var planet = marker.getLatLng();
         var distance = center.distanceTo(planet);
-        var orbit = L.circle([0,0], distance, {
+        if (Object.hasOwn(obj, "Orbit")) {
+            var orb = obj.Orbit;
+            var cen = system.Objects.filter(x => x.Id == orb)[0];
+            var ox = calcX(cen.X);
+            var oy = calcY(cen.Y);
+            center = L.latLng(oy,ox);
+            distance = center.distanceTo(planet);
+        }
+        var orbit = L.circle(center, distance, {
             color: "#fff",
             weight: 1,
             fill: false
