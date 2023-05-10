@@ -129,6 +129,7 @@ function initialiseGalaxyMap() {
     mapType = "galaxy";
     var url = new URL(window.location.href);
     url.searchParams.delete("cluster"); 
+    url.searchParams.delete("system"); 
     var newUrl = url.href; 
     window.history.pushState("", "Milky Way", newUrl);
 
@@ -142,19 +143,19 @@ function initialiseGalaxyMap() {
     if (!galaxyMap) {
         var mapBounds = [[-1,-1],[1,1]];
         galaxyMap = L.map("galaxy-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: mapBounds });
-        galaxyImg = L.imageOverlay('img/galaxy_milky-way.jpg', mapBounds);
+        galaxyImg = L.imageOverlay('img/galaxy/galaxy_milky-way.jpg', mapBounds);
         galaxyImg.addTo(galaxyMap);
         galaxyMap.fitBounds(mapBounds);
 
-        galaxyRegionImg = L.imageOverlay('img/galaxy_milky-way-regions.png', mapBounds);
+        galaxyRegionImg = L.imageOverlay('img/galaxy/galaxy_milky-way-regions.png', mapBounds);
         galaxyRegionImg.addTo(galaxyMap);
         showRegions = true;
         
-        galaxyColoursImg = L.imageOverlay('img/galaxy_milky-way-colours.png', mapBounds);
+        galaxyColoursImg = L.imageOverlay('img/galaxy/galaxy_milky-way-colours.png', mapBounds);
         galaxyColoursImg.addTo(galaxyMap);
         showColours = true;
         
-        galaxyLabelsImg = L.imageOverlay('img/galaxy_milky-way-labels.png', mapBounds);
+        galaxyLabelsImg = L.imageOverlay('img/galaxy/galaxy_milky-way-labels.png', mapBounds);
         galaxyLabelsImg.addTo(galaxyMap);
         showLabels = false;
 
@@ -453,11 +454,11 @@ function initialiseClusterMarkers(cluster) {
         trigger: "hover"
     });
 
-    $(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-        if (showPopovers) {
-           $(this).popover("show");
-        }
-    });
+    //$(".leaflet-marker-icon").on("hidden.bs.popover", function () {
+    //    if (showPopovers) {
+    //       $(this).popover("show");
+    //    }
+    //});
 }
 
 function returnToGalaxy() {
@@ -572,11 +573,14 @@ function initialiseSystemMarkers(system) {
         var obj = system.Objects[ix];
         var cx = calcX(obj.X);
         var cy = calcY(obj.Y);
+        var scale = (((Object.hasOwn(obj, "Scale") ? obj.Scale: 1) - 1)/2) + 1;
+        var size = objIcons[systemMap.getZoom()];
         var marker = L.marker([cy, cx], 
             { 
-                icon: L.icon({ iconUrl: obj.Marker, iconSize: objIcons[systemMap.getZoom()] }), 
+                icon: L.icon({ iconUrl: obj.Marker, iconSize: [ size[0] * scale, size[1] * scale ] }), 
                 title: obj.Name, 
                 objectId: obj.Id,
+                scale: scale,
                 riseOnHover: true
             });
         systemMarkers.push(marker);
@@ -614,7 +618,8 @@ function initialiseSystemMarkers(system) {
         var iconSize = objIcons[zoomLevel];
         for (var ix in systemMarkers) {
             var icon = systemMarkers[ix].getIcon();
-            systemMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
+            var scale = systemMarkers[ix].options.scale;
+            systemMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: [ iconSize[0] * scale, iconSize[1] * scale ]}));
         }
     });
 
@@ -622,11 +627,11 @@ function initialiseSystemMarkers(system) {
         trigger: "hover"
     });
 
-    $(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-        if (showPopovers) {
-           $(this).popover("show");
-        }
-    });
+    //$(".leaflet-marker-icon").on("hidden.bs.popover", function () {
+    //   if (showPopovers) {
+    //       $(this).popover("show");
+    //    }
+    //});
 }
 
 function toggleSystemOrbits() {
