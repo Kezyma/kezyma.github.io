@@ -3,12 +3,12 @@ $(document).ready(function () {
     var x = 1;
     for (var i = 8; i < 14; i++) {
         mapIcons[i] = [(i)*x,(i)*x];
-        x = x*1.9;
+        x = x*mapItemZoomVal;
     }
     x = 1;
     for (var i = 8; i < 14; i++) {
         objIcons[i] = [(i)*x,(i)*x];
-        x = x*1.9;
+        x = x*sysItemZoomVal;
     }
 
     $.getJSON("./js/galaxy.json", function (data) {
@@ -26,6 +26,7 @@ $(document).ready(function () {
             initialiseGalaxyMap();
         }
         initialiseSearchFunction();
+        initialiseTableSearch();
     });
 
     $("#object-close-btn").click(function () {
@@ -38,647 +39,56 @@ var mapIcons = {};
 var objIcons = {};
 var mapType = null;
 
+function imageOrDefault(image_url, default_url) {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', image_url, false);
+    http.send();
+    if (http.status != 404) {
+        return image_url;
+    }
+    else {
+        return default_url;
+    }
+}
+
+var zoomLevel = 1;
+var mapItemZoomVal = 1.9;
+var sysItemZoomVal = 1.6;
+function mapItemZoom(zoomLevel) {
+    mapItemZoomVal = mapItemZoomVal + (zoomLevel/10);
+    sysItemZoomVal = sysItemZoomVal + (zoomLevel/10);
+    var x = 1;
+    for (var i = 8; i < 14; i++) {
+        mapIcons[i] = [(i)*x,(i)*x];
+        x = x*mapItemZoomVal;
+    }
+    x = 1;
+    for (var i = 8; i < 14; i++) {
+        objIcons[i] = [(i)*x,(i)*x];
+        x = x*sysItemZoomVal;
+    }
+    if (mapType == "galaxy") {
+        resizeGalaxyMarkers();
+    }
+    if (mapType == "cluster") {
+        resizeClusterMarkers();
+    }
+    if (mapType == "system") {
+        resizeSystemMarkers();
+    }
+}
+
+
 // Map Data
 var clusters = null;
-
-// Galaxy Map
-var galaxyMap = null;
-var galaxyImg = null;
-
-var showRegions = false;
-var galaxyRegionImg = null;
-
-var showColours = false;
-var galaxyColoursImg = null;
-
-var showLabels = false;
-var galaxyLabelsImg = null;
-
-var showPopovers = false;
-var showMarkers = false;
-var galaxyMarkers = [];
-
-var showConnections = false;
-var galaxyConnections = [];
-
-L.Control.GalaxyToggleControls = L.Control.extend({
-    options: {
-        position: 'topleft'
-    },
-    onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-
-        var labelToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        labelToggleBtn.innerHTML = "<i class='fa-solid fa-tag'></i>";
-        labelToggleBtn.title = "Toggle Labels";
-        L.DomEvent.disableClickPropagation(labelToggleBtn);
-        L.DomEvent.on(labelToggleBtn, 'click', function(){
-            if (showPopovers) {
-                $(".leaflet-marker-icon").popover("hide");
-                showPopovers = false;
-            }
-            else {
-                $(".leaflet-marker-icon").popover("show");
-                showPopovers = true;
-            }
-        });
-
-        var markerToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        markerToggleBtn.innerHTML = "<i class='fa-solid fa-location-dot'></i>";
-        markerToggleBtn.title = "Toggle Markers";
-        L.DomEvent.disableClickPropagation(markerToggleBtn);
-        L.DomEvent.on(markerToggleBtn, 'click', function(){
-            toggleGalaxyMarkers();
-        });
-
-        var connectionToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        connectionToggleBtn.innerHTML = "<i class='fa-solid fa-arrows-up-down'></i>";
-        connectionToggleBtn.title = "Toggle Connections";
-        L.DomEvent.disableClickPropagation(connectionToggleBtn);
-        L.DomEvent.on(connectionToggleBtn, 'click', function(){
-            toggleGalaxyConnections();
-        });
-
-        var regionToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        regionToggleBtn.innerHTML = "<i class='fa-regular fa-circle'></i>";
-        regionToggleBtn.title = "Toggle Region Outline";
-        L.DomEvent.disableClickPropagation(regionToggleBtn);
-        L.DomEvent.on(regionToggleBtn, 'click', function(){
-            toggleGalaxyRegions();
-        });
-
-        var coloursToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        coloursToggleBtn.innerHTML = "<i class='fa-solid fa-circle'></i>";
-        coloursToggleBtn.title = "Toggle Region Colours";
-        L.DomEvent.disableClickPropagation(coloursToggleBtn);
-        L.DomEvent.on(coloursToggleBtn, 'click', function(){
-            toggleGalaxyColours();
-        });
-
-        var labelsToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        labelsToggleBtn.innerHTML = "<i class='fa-solid fa-font'></i>";
-        labelsToggleBtn.title = "Toggle Region Labels";
-        L.DomEvent.disableClickPropagation(labelsToggleBtn);
-        L.DomEvent.on(labelsToggleBtn, 'click', function(){
-            toggleGalaxyLabels();
-        });
-
-
-        return container;
-    },
-    onRemove: function(map) {},
-});
-
-function initialiseGalaxyMap() {
-    mapType = "galaxy";
-    var url = new URL(window.location.href);
-    url.searchParams.delete("cluster"); 
-    url.searchParams.delete("system"); 
-    var newUrl = url.href; 
-    window.history.pushState("", "Milky Way", newUrl);
-
-    $(".leaflet-marker-icon").popover("hide");
-    showPopovers = false;
-    
-    $("#galaxy-map").show();
-    $("#cluster-map").hide();
-    $("#system-map").hide();
-
-    if (!galaxyMap) {
-        var mapBounds = [[-1,-1],[1,1]];
-        galaxyMap = L.map("galaxy-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: mapBounds });
-        galaxyImg = L.imageOverlay('img/galaxy/galaxy_milky-way.jpg', mapBounds);
-        galaxyImg.addTo(galaxyMap);
-        galaxyMap.fitBounds(mapBounds);
-
-        galaxyRegionImg = L.imageOverlay('img/galaxy/galaxy_milky-way-regions.png', mapBounds);
-        galaxyRegionImg.addTo(galaxyMap);
-        showRegions = true;
-        
-        galaxyColoursImg = L.imageOverlay('img/galaxy/galaxy_milky-way-colours.png', mapBounds);
-        galaxyColoursImg.addTo(galaxyMap);
-        showColours = true;
-        
-        galaxyLabelsImg = L.imageOverlay('img/galaxy/galaxy_milky-way-labels.png', mapBounds);
-        galaxyLabelsImg.addTo(galaxyMap);
-        showLabels = false;
-
-        initialiseGalaxyMarkers();
-
-        new L.Control.GalaxyToggleControls().addTo(galaxyMap);
-
-        galaxyMap.on("movestart", function () {
-            
-        });
-
-        galaxyMap.on("moveend", function () {
-            $(".leaflet-marker-icon").popover("update");
-        });
-
-        galaxyMap.on("zoomstart", function () {
-            
-        });
-
-        galaxyMap.on("zoomend", function () {
-            $(".leaflet-marker-icon").popover("update");
-            var zoomLevel = galaxyMap.getZoom();
-            var iconSize = mapIcons[zoomLevel];
-            for (var ix in galaxyMarkers) {
-                var icon = galaxyMarkers[ix].getIcon();
-                galaxyMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
-            }
-        });
-    }
-}
-
-function calcX(x) {
-    return ((x / 1000) * 2) - 1;
-}
-function calcY(x) {
-    return (1 - ((x / 1000) * 2));
-}
-
-function initialiseGalaxyMarkers() {
-    for (var ix in clusters) {
-        var cluster = clusters[ix];
-        var cx = calcX(cluster.X);
-        var cy = calcY(cluster.Y);
-        var marker = L.marker([cy, cx], 
-            { 
-                icon: L.icon({ iconUrl: cluster.Marker, iconSize: mapIcons[galaxyMap.getZoom()] }), 
-                title: cluster.Name, 
-                clusterId: cluster.Id,
-                riseOnHover: true
-            });
-        marker.on("click", function () {
-            var id = this.options.clusterId;
-            initialiseClusterMap(id);
-        });
-        galaxyMarkers.push(marker);
-        marker.addTo(galaxyMap);
-    }
-    showMarkers = true;
-
-    for (var ix in clusters) {
-        var cluster = clusters[ix];
-        if (cluster.Connections.length > 0) {
-            for (var cix in cluster.Connections) {
-                var connectionId = cluster.Connections[cix];
-                var connection = clusters.filter(x => x.Id == connectionId)[0];
-                if (connection) {
-                var cx1 = calcX(cluster.X);
-                var cy1 = calcY(cluster.Y);
-                var cx2 = calcX(connection.X);
-                var cy2 = calcY(connection.Y);
-                var coords = [
-                    [cy1, cx1],
-                    [cy2, cx2]
-                ];
-                var newLine = L.polyline(coords, { color: "white", noClip: true, weight: 1 });
-                galaxyConnections.push(newLine);
-                newLine.addTo(galaxyMap);
-                }
-            }
-        }
-    }
-    showConnections = true;
-
-    $(".leaflet-marker-icon").popover({
-        trigger: "hover"
-    });
-
-    $(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-        if (showPopovers) {
-           $(this).popover("show");
-        }
-    });
-}
-
-function toggleGalaxyMarkers() {
-    if (showMarkers) {
-        for (var ix in galaxyMarkers) {
-            $(".leaflet-marker-icon").popover("hide");
-            galaxyMarkers[ix].remove();
-        }
-        showMarkers = false;
-    }
-    else {
-        for (var ix in galaxyMarkers) {
-            galaxyMarkers[ix].addTo(galaxyMap);
-        }
-        showMarkers = true;
-    }
-}
-function toggleGalaxyRegions() {
-    if (showRegions) {
-        galaxyRegionImg.remove();
-        showRegions = false;
-        galaxyColoursImg.remove();
-        showColours = false;
-        galaxyLabelsImg.remove();
-        showLabels = false;
-    }
-    else {
-        galaxyRegionImg.addTo(galaxyMap);
-        showRegions = true;
-    }
-}
-function toggleGalaxyColours() {
-    if (showColours) {
-        galaxyColoursImg.remove();
-        showColours = false;
-    }
-    else {
-        galaxyColoursImg.addTo(galaxyMap);
-        showColours = true;
-        if (!showRegions) {
-            galaxyRegionImg.addTo(galaxyMap);
-            showRegions = true;
-        }
-    }
-}
-function toggleGalaxyLabels() {
-    if (showLabels) {
-        galaxyLabelsImg.remove();
-        showLabels = false;
-    }
-    else {
-        galaxyLabelsImg.addTo(galaxyMap);
-        showLabels = true;
-        if (!showRegions) {
-            galaxyRegionImg.addTo(galaxyMap);
-            showRegions = true;
-        }
-    }
-}
-function toggleGalaxyConnections() {
-    if (showConnections) {
-        for (var ix in galaxyConnections) {
-            galaxyConnections[ix].remove();
-        }
-        showConnections = false;
-    }
-    else {
-        for (var ix in galaxyConnections) {
-            galaxyConnections[ix].addTo(galaxyMap);
-        }
-        showConnections = true;
-    }
-}
-
-// Cluster Map
-var currentCluster = null;
-
-var clusterMap = null;
-var clusterImg = null;
-
-var showClusterLabels = false;
-var clusterLabelsImg = null;
-
-var showClusterMarkers = false;
-var clusterMarkers = [];
-
-L.Control.ClusterToggleControls = L.Control.extend({
-    options: {
-        position: 'topleft'
-    },
-    onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-
-        var backBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        backBtn.innerHTML = "<i class='fa-solid fa-angles-left'></i>";
-        backBtn.title = "Back";
-        L.DomEvent.disableClickPropagation(backBtn);
-        L.DomEvent.on(backBtn, 'click', function(){
-            initialiseGalaxyMap();
-        });
-
-        var labelToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        labelToggleBtn.innerHTML = "<i class='fa-solid fa-tag'></i>";
-        labelToggleBtn.title = "Toggle Labels";
-        L.DomEvent.disableClickPropagation(labelToggleBtn);
-        L.DomEvent.on(labelToggleBtn, 'click', function(){
-            if (showPopovers) {
-                $(".leaflet-marker-icon").popover("hide");
-                showPopovers = false;
-            }
-            else {
-                $(".leaflet-marker-icon").popover("show");
-                showPopovers = true;
-            }
-        });
-
-        return container;
-    },
-    onRemove: function(map) {},
-});
-
-function initialiseClusterMap(clusterId) {
-    mapType = "cluster";
-    var reloadChart = false;
-    if (!currentCluster || currentCluster.Id != clusterId) {
-        currentCluster = clusters.filter(x => x.Id == clusterId)[0];
-        reloadChart = true;
-    }
-    var cluster = currentCluster;
-    var clusterImg = cluster.Image;
-
-    var url = new URL(window.location.href);
-    url.searchParams.set("cluster", clusterId); 
-    url.searchParams.delete("system"); 
-    var newUrl = url.href; 
-    window.history.pushState("", cluster.Name, newUrl);
-
-    $(".leaflet-marker-icon").popover("hide");
-    showPopovers = false;
-
-    if (reloadChart && clusterMap) {
-        clusterMap.remove();
-    }
-    $("#galaxy-map").hide();
-    $("#system-map").hide();
-    $("#cluster-map").show();
-    
-    if (reloadChart) {
-        clusterMap = L.map("cluster-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[-1,-1],[1,1]] });
-        var bounds = [[-1,-1], [1,1]];
-        clusterImg = L.imageOverlay(clusterImg, bounds);
-        clusterImg.addTo(clusterMap);
-        clusterMap.fitBounds(bounds);
-        clusterMap.zoomIn();
-
-        initialiseClusterMarkers(cluster);
-        new L.Control.ClusterToggleControls().addTo(clusterMap);
-    }
-}
-
-function initialiseClusterMarkers(cluster) {
-    for (var ix in cluster.Systems) {
-        var system = cluster.Systems[ix];
-        var cx = calcX(system.X);
-        var cy = calcY(system.Y);
-        var marker = L.marker([cy, cx], 
-            { 
-                icon: L.icon({ iconUrl: system.Marker, iconSize: mapIcons[clusterMap.getZoom()] }), 
-                title: system.Name, 
-                systemId: system.Id,
-                riseOnHover: true
-            });
-        marker.on("click", function () {
-            var id = this.options.systemId;
-            initialiseSystemMap(currentCluster.Id, id);
-        });
-        clusterMarkers.push(marker);
-        marker.addTo(clusterMap);
-    }
-    showClusterMarkers = true;
-
-    clusterMap.on("movestart", function () {
-            
-    });
-
-    clusterMap.on("moveend", function () {
-        $(".leaflet-marker-icon").popover("update");
-    });
-
-    clusterMap.on("zoomstart", function () {
-        
-    });
-
-    clusterMap.on("zoomend", function () {
-        $(".leaflet-marker-icon").popover("update");
-        var zoomLevel = clusterMap.getZoom();
-        var iconSize = mapIcons[zoomLevel];
-        for (var ix in clusterMarkers) {
-            var icon = clusterMarkers[ix].getIcon();
-            clusterMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
-        }
-    });
-
-    $(".leaflet-marker-icon").popover({
-        trigger: "hover"
-    });
-
-    //$(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-    //    if (showPopovers) {
-    //       $(this).popover("show");
-    //    }
-    //});
-}
-
-function returnToGalaxy() {
-    clusterMap.remove();
-    $("#galaxy-map").show();
-    $("#cluster-map").hide();
-}
-
-// System Map
-var currentSystem = null;
-
-var systemMap = null;
-var systemImg = null;
-
-var showSystemLabels = false;
-var systemLabelsImg = null;
-
-var showSystemMarkers = false;
-var systemMarkers = [];
-var showSystemOrbits = false;
-var systemOrbits = [];
-
-L.Control.SystemToggleControls = L.Control.extend({
-    options: {
-        position: 'topleft'
-    },
-    onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-
-        var backBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        backBtn.innerHTML = "<i class='fa-solid fa-angles-left'></i>";
-        backBtn.title = "Back";
-        L.DomEvent.disableClickPropagation(backBtn);
-        L.DomEvent.on(backBtn, 'click', function(){
-            initialiseClusterMap(getUrlVars()["cluster"]);
-        });
-
-        var labelToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        labelToggleBtn.innerHTML = "<i class='fa-solid fa-tag'></i>";
-        labelToggleBtn.title = "Toggle Labels";
-        L.DomEvent.disableClickPropagation(labelToggleBtn);
-        L.DomEvent.on(labelToggleBtn, 'click', function(){
-            if (showPopovers) {
-                $(".leaflet-marker-icon").popover("hide");
-                showPopovers = false;
-            }
-            else {
-                $(".leaflet-marker-icon").popover("show");
-                showPopovers = true;
-            }
-        });
-
-        var orbitToggleBtn = L.DomUtil.create('a', 'leaflet-control-button label-toggle-btn', container);
-        orbitToggleBtn.innerHTML = "<i class='fa-regular fa-circle'></i>";
-        orbitToggleBtn.title = "Toggle Orbits";
-        L.DomEvent.disableClickPropagation(orbitToggleBtn);
-        L.DomEvent.on(orbitToggleBtn, 'click', function(){
-            toggleSystemOrbits();
-        });
-        return container;
-    },
-    onRemove: function(map) {},
-});
-
-function initialiseSystemMap(clusterId, systemId) {
-    mapType = "system";
-    var reloadChart = false;
-    var cluster = clusters.filter(x => x.Id == clusterId)[0];
-    if (!currentSystem || currentSystem.Id != systemId) {
-        currentSystem = cluster.Systems.filter(x => x.Id == systemId)[0];
-        reloadChart = true;
-    }
-    var system = currentSystem;
-    var systemImage = null;
-    if (Object.hasOwn(system, "Image")) {
-        systemImage = system.Image;
-    }
-
-    var url = new URL(window.location.href);
-    url.searchParams.set("system", systemId);
-    url.searchParams.set("cluster", clusterId);
-    var newUrl = url.href; 
-    window.history.pushState("", system.Name, newUrl);
-
-    $(".leaflet-marker-icon").popover("hide");
-    showPopovers = false;
-
-    if (reloadChart && systemMap) {
-        systemMap.remove();
-    }
-    $("#galaxy-map").hide();
-    $("#cluster-map").hide();
-    $("#system-map").show();
-    
-    if (reloadChart) {
-        var imgBounds = [[-2,-2],[2,2]];
-        systemMap = L.map("system-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: imgBounds });
-        var bounds = [[-1,-1], [1,1]];
-        if (systemImage) {
-            systemImg = L.imageOverlay(systemImage, imgBounds);
-            systemImg.addTo(systemMap);
-        }
-        systemMap.fitBounds(bounds);
-
-        initialiseSystemMarkers(system, cluster);
-        new L.Control.SystemToggleControls().addTo(systemMap);
-    }
-}
-
-function initialiseSystemMarkers(system, cluster) {
-    systemMarkers = [];
-    systemOrbits = [];
-    for (var ix in system.Objects) {
-        var obj = system.Objects[ix];
-        var cx = calcX(obj.X);
-        var cy = calcY(obj.Y);
-        var scale = (((Object.hasOwn(obj, "Scale") ? obj.Scale: 1) - 1)/2) + 1;
-        var size = objIcons[systemMap.getZoom()];
-        var marker = L.marker([cy, cx], 
-            { 
-                icon: L.icon({ iconUrl: obj.Marker, iconSize: [ size[0] * scale, size[1] * scale ] }), 
-                title: obj.Name, 
-                objectId: obj.Id,
-                systemId: system.Id,
-                clusterId: cluster.Id,
-                scale: scale,
-                riseOnHover: true
-            });
-        marker.on("click", function () {
-            var id = this.options.objectId;
-            var sId = this.options.systemId;
-            var cId = this.options.clusterId;
-            bindObjectInfo(id, sId, cId);
-        });
-        systemMarkers.push(marker);
-        marker.addTo(systemMap);
-
-        var center = L.latLng(0,0);
-        var planet = marker.getLatLng();
-        var distance = center.distanceTo(planet);
-        if (Object.hasOwn(obj, "Orbit")) {
-            var orb = obj.Orbit;
-            var cen = system.Objects.filter(x => x.Id == orb)[0];
-            var ox = calcX(cen.X);
-            var oy = calcY(cen.Y);
-            center = L.latLng(oy,ox);
-            distance = center.distanceTo(planet);
-        }
-        var orbit = L.circle(center, distance, {
-            color: "#fff",
-            weight: 1,
-            fill: false
-        });
-        systemOrbits.push(orbit);
-        orbit.addTo(systemMap);
-    }
-    showClusterMarkers = true;
-    showSystemOrbits = true;
-
-    systemMap.on("movestart", function () {
-            
-    });
-
-    systemMap.on("moveend", function () {
-        $(".leaflet-marker-icon").popover("update");
-    });
-
-    systemMap.on("zoomstart", function () {
-        
-    });
-
-    systemMap.on("zoomend", function () {
-        $(".leaflet-marker-icon").popover("update");
-        var zoomLevel = systemMap.getZoom();
-        var iconSize = objIcons[zoomLevel];
-        for (var ix in systemMarkers) {
-            var icon = systemMarkers[ix].getIcon();
-            var scale = systemMarkers[ix].options.scale;
-            systemMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: [ iconSize[0] * scale, iconSize[1] * scale ]}));
-        }
-    });
-
-    $(".leaflet-marker-icon").popover({
-        trigger: "hover"
-    });
-
-    //$(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-    //   if (showPopovers) {
-    //       $(this).popover("show");
-    //    }
-    //});
-}
-
-function toggleSystemOrbits() {
-    if (showSystemOrbits) {
-        for (var ix in systemOrbits) {
-            systemOrbits[ix].remove();
-        }
-        showSystemOrbits = false;
-    }
-    else {
-        for (var ix in systemOrbits) {
-            systemOrbits[ix].addTo(systemMap);
-        }
-        showSystemOrbits = true;
-    }
-}
 
 // Object Info
 function bindObjectInfo(objectId, systemId, clusterId) {
     var c = clusters.filter(x => x.Id == clusterId)[0];
     var s = c.Systems.filter(x => x.Id == systemId)[0];
-    var o = s.Objects.filter(x => x.Id == objectId)[0];
-    if (Object.hasOwn(o, "PlanetType")) {
-        $("#object-type").html(o.PlanetType);
+    var o = s.Planets.filter(x => x.Id == objectId)[0];
+    if (Object.hasOwn(o, "Type")) {
+        $("#object-type").html(o.Type);
     }
     else {
         if (o.Type == "mass-relay") {$("#object-type").html("Mass Relay");}
@@ -688,16 +98,15 @@ function bindObjectInfo(objectId, systemId, clusterId) {
         else {$("#object-type").html("");}
     }
     if (Object.hasOwn(o, "Image")) {
-        $("#object-img").attr("src", o.Image);
+        $("#object-img").attr("src", imageOrDefault("img/" + o.Image, "img/object/default.png"));
     }
     else {
         $("#object-img").attr("src", "");
     }
     
     $("#object-title").html(o.Name);
-    if (Object.hasOwn(o, "ME3")) {
-        var parts = o.ME3.split("\n").join("<br/>");
-        $("#object-content").html(parts);
+    if (Object.hasOwn(o, "Description")) {
+        $("#object-content").html(o.Description);
     }
     else {
         $("#object-content").html("No information.");
@@ -718,18 +127,12 @@ function sortFunc(x,y) {
 }
 
 function initialiseSearchFunction() {
-    var regions = {
-        "attican-traverse": "Attican Traverse",
-        "earth-alliance-space": "Earth Alliance Space",
-        "inner-council-space": "Inner Council Space",
-        "outer-council-space": "Outer Council Space",
-        "terminus-systems": "Terminus Systems"
-    };
+    var regions = ["Attican Traverse","Earth Alliance Space","Inner Council Space","Outer Council Space","Terminus Systems","Unknown"];
     var systemGroups = [];
     var objGroups = [];
     for (var ri in regions) {
         var r = regions[ri];
-        var cl = clusters.filter(x => x.Region == ri).sort(sortFunc);
+        var cl = clusters.filter(x => x.Region == r).sort(sortFunc);
         var clusterGrp = $("<optgroup label='" + r + "'></optgroup>");
         for (var ci in cl) {
             var c = cl[ci];
@@ -744,14 +147,14 @@ function initialiseSearchFunction() {
                     var sItm = $("<option value='" + s.Id + "' data-content='" + s.Name + "<span class=\"d-none\">" + r + " " + c.Name + "</span>' data-cluster='" + c.Id + "' data-group='system'></option>");
                     systemGrp.append(sItm);
 
-                    if (Object.hasOwn(s, "Objects")) {
+                    if (Object.hasOwn(s, "Planets")) {
                         var objGroup = $("<optgroup = label='" + s.Name + "'></optgroup>");
-                        var ol = s.Objects.sort(sortFunc);
+                        var ol = s.Planets.sort(sortFunc);
                         for (var oi in ol) {
                             var o = ol[oi];
-                            if (o.Type == "planet" || o.Type == "mass-relay" || o.Type == "station") {
-                                var oItm = $("<option value='" + o.Id + "' data-content='" + o.Name + "<span class=\"d-none\">" + r + " " + c.Name + " " + s.Name + "</span>' data-cluster='" + c.Id + "' data-system='" + s.Id + "' data-group='object'></option>")
-                                objGroup.append(oItm);
+                            if (o.Type != "Star" && o.Type != "Asteroid Belt" && o.Name != null && o.Name != "null") {
+                            var oItm = $("<option value='" + o.Id + "' data-content='" + o.Name + "<span class=\"d-none\">" + r + " " + c.Name + " " + s.Name + "</span>' data-cluster='" + c.Id + "' data-system='" + s.Id + "' data-group='object'></option>")
+                            objGroup.append(oItm);
                             }
                         } 
                         objGroups.push(objGroup);
@@ -774,50 +177,63 @@ function initialiseSearchFunction() {
     $("#galaxy-search").selectpicker();
     $("#galaxy-search-btn").click(function () {
         var val = $('#galaxy-search :selected').val();
-        if (val == "") {
+        var group = $('#galaxy-search :selected').attr('data-group');
+        var clusterId = $('#galaxy-search :selected').attr('data-cluster');
+        var systemId = $('#galaxy-search :selected').attr('data-system');
+        goToItem(val, group, clusterId, systemId);
+    });
+}
+
+function goToItem(val, group, clusterId, systemId) {
+    if (val == "") {
+        initialiseGalaxyMap();
+    }
+    if (group == "cluster") {
+        if (mapType != "galaxy") {
             initialiseGalaxyMap();
         }
-        var group = $('#galaxy-search :selected').attr('data-group');
-        if (group == "cluster") {
-            if (mapType != "galaxy") {
-                initialiseGalaxyMap();
-            }
-            var marker = galaxyMarkers.filter(x => x.options.clusterId == val)[0];
-            var mCoord = marker.getLatLng();
-            var mBounds = [mCoord.lat, mCoord.lng];
-            galaxyMap.flyTo(mBounds, 12);
+        var marker = galaxyMarkers.filter(x => x.options.clusterId == val)[0];
+        var mCoord = marker.getLatLng();
+        var mBounds = [mCoord.lat, mCoord.lng];
+        galaxyMap.flyTo(mBounds, 12);
 
-            var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
-            icon.popover("show");
+        var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
+        icon.popover("show");
+    }
+    if (group == "system") {
+        if (!currentCluster || currentCluster.Id != clusterId || mapType != "cluster") {
+            initialiseClusterMap(clusterId);
         }
-        if (group == "system") {
-            var clusterId = $('#galaxy-search :selected').attr('data-cluster');
-            if (!currentCluster || currentCluster.Id != clusterId || mapType != "cluster") {
-                initialiseClusterMap(clusterId);
-            }
-            var marker = clusterMarkers.filter(x => x.options.systemId == val)[0];
-            var mCoord = marker.getLatLng();
-            var mBounds = [mCoord.lat, mCoord.lng];
-            clusterMap.flyTo(mBounds, 12);
+        var marker = clusterMarkers.filter(x => x.options.systemId == val)[0];
+        var mCoord = marker.getLatLng();
+        var mBounds = [mCoord.lat, mCoord.lng];
+        clusterMap.flyTo(mBounds, 12);
 
-            var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
-            icon.popover("show");
+        var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
+        icon.popover("show");
+    }
+    if (group == "object") {
+        if (!currentSystem || currentSystem.Id != systemId || mapType != "system") {
+            initialiseSystemMap(clusterId, systemId);
         }
-        if (group == "object") {
-            var clusterId = $('#galaxy-search :selected').attr('data-cluster');
-            var systemId = $('#galaxy-search :selected').attr('data-system');
-            if (!currentSystem || currentSystem.Id != systemId || mapType != "system") {
-                initialiseSystemMap(clusterId, systemId);
-            }
-            var marker = systemMarkers.filter(x => x.options.objectId == val)[0];
-            var mCoord = marker.getLatLng();
-            var mBounds = [mCoord.lat, mCoord.lng];
-            systemMap.flyTo(mBounds, 12);
+        var marker = systemMarkers.filter(x => x.options.objectId == val)[0];
+        var mCoord = marker.getLatLng();
+        var mBounds = [mCoord.lat, mCoord.lng];
+        systemMap.flyTo(mBounds, 12);
 
-            var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
-            icon.popover("show");
-        }
-    });
+        var icon = $(".leaflet-marker-icon[data-bs-original-title='" + marker.options.title + "']");
+        icon.popover("show");
+    }
+}
+
+function onVisitClick(btn) {
+    toggleTableSearch();
+    console.log(btn);
+    var val = $(btn).data("val");
+    var group = $(btn).data("group");
+    var clusterId = $(btn).data("cluster");
+    var systemId = $(btn).data("system");
+    goToItem(val, group, clusterId, systemId);
 }
 
 function getUrlVars()
@@ -833,4 +249,145 @@ function getUrlVars()
         return vars;
     }
 
+// Table
+function initialiseTableSearch() {
+    var columns = [
+        { title: "Image" },
+        { title: "Name" },
+        { title: "Type" },
+        { title: "System" },
+        { title: "Cluster" },
+        { title: "Region" },
+        { title: "Visit" }
+    ];
+
+    var dataSet = [];
+    for (var c in clusters) 
+    {
+        var cluster = clusters[c];
+        dataSet.push([
+            "<object data='img/" + cluster.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='img/cluster_marker/default.png' style='width:28px;height:28px;'/></object>",
+            cluster.Name,
+            "Cluster",
+            "",
+            "",
+            cluster.Region,
+            "<button class='btn btn-sm btn-outline-info' onclick='onVisitClick(this);' data-val='" + cluster.Id + "' data-group='cluster' data-cluster='' data-system=''>Visit</button>"
+        ]);
+
+        for (var s in cluster.Systems) 
+        {
+            var system = cluster.Systems[s];
+            dataSet.push([
+                "<object data='img/" + system.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='img/system_marker/default.png' style='width:28px;height:28px;'/></object>",
+                system.Name,
+                "System",
+                "",
+                cluster.Name,
+                cluster.Region,
+                "<button class='btn btn-sm btn-outline-info' onclick='onVisitClick(this);' data-val='" + system.Id + "' data-group='system' data-cluster='" + cluster.Id + "' data-system=''>Visit</button>"
+            ]);
+
+            for (var p in system.Planets) 
+            {
+                var planet = system.Planets[p];
+                if (planet.Type != "Asteroid Belt" && planet.Type != "") {
+                    dataSet.push([
+                        "<object data='img/" + planet.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='img/object_marker/default.png' style='width:28px;height:28px;'/></object>",
+                        planet.Name,
+                        planet.Type,
+                        system.Name,
+                        cluster.Name,
+                        cluster.Region,
+                        "<button class='btn btn-sm btn-outline-info' onclick='onVisitClick(this);' data-val='" + planet.Id + "' data-group='object' data-cluster='" + cluster.Id + "' data-system='" + system.Id + "'>Visit</button>"
+                    ]);
+                }
+            }
+        }
+    }
+
+    var table = $("#table-obj").DataTable({
+        data: dataSet,
+        columns: columns,
+        responsive: true
+    });
+    
+    $('#table-obj thead th').each( function (i) {
+        var title = $('#table-obj thead th').eq($(this).index()).text();
+        if (title != "Image" && title != "Visit") {
+            var filter = null;
+            if (title == "Type") {
+                filter = $("<select id='type-table-filter' class='form-control form-control-sm col m-1 selectpicker' data-index='" + i + "' data-live-search='true' data-style='btn-outline-secondary bg-dark'></select>");
+                filter.append($("<option value=''>Type</option>"));
+                var typeOpts = dataSet.map(function (d) { return d[2]; }).filter(onlyUnique).filter(x => x != "" && x != null);
+                for (var t in typeOpts) {
+                    filter.append($("<option value='" + typeOpts[t] + "'>" + typeOpts[t] + "</option>"));
+                }
+                filter.on('change', function () {
+                    table.column($(this).data('index')).search(this.value).draw();
+                });
+            }
+            else if (title == "System") {
+                filter = $("<select id='system-table-filter' class='form-control form-control-sm col m-1 selectpicker' data-index='" + i + "' data-live-search='true' data-style='btn-outline-secondary bg-dark'></select>");
+                filter.append($("<option value=''>System</option>"));
+                var typeOpts = dataSet.map(function (d) { return d[3]; }).filter(onlyUnique).filter(x => x != "" && x != null);
+                for (var t in typeOpts) {
+                    filter.append($("<option value='" + typeOpts[t] + "'>" + typeOpts[t] + "</option>"));
+                }
+                filter.on('change', function () {
+                    table.column($(this).data('index')).search(this.value).draw();
+                });
+            }
+            else if (title == "Cluster") {
+                filter = $("<select id='cluster-table-filter' class='form-control form-control-sm col m-1 selectpicker' data-index='" + i + "' data-live-search='true' data-style='btn-outline-secondary bg-dark'></select>");
+                filter.append($("<option value=''>Cluster</option>"));
+                var typeOpts = dataSet.map(function (d) { return d[4]; }).filter(onlyUnique).filter(x => x != "" && x != null);
+                for (var t in typeOpts) {
+                    filter.append($("<option value='" + typeOpts[t] + "'>" + typeOpts[t] + "</option>"));
+                }
+                filter.on('change', function () {
+                    table.column($(this).data('index')).search(this.value).draw();
+                });
+            }
+            else if (title == "Region") {
+                filter = $("<select id='region-table-filter' class='form-control form-control-sm col m-1 selectpicker' data-index='" + i + "' data-live-search='true' data-style='btn-outline-secondary bg-dark'></select>");
+                filter.append($("<option value=''>Region</option>"));
+                var typeOpts = dataSet.map(function (d) { return d[5]; }).filter(onlyUnique).filter(x => x != "" && x != null);
+                for (var t in typeOpts) {
+                    filter.append($("<option value='" + typeOpts[t] + "'>" + typeOpts[t] + "</option>"));
+                }
+                filter.on('change', function () {
+                    table.column($(this).data('index')).search(this.value).draw();
+                });
+            }
+            else {
+                filter = $('<input class="form-control form-control-sm col m-1" type="text" placeholder="'+title+'" data-index="'+i+'" />');
+                filter.on('keyup', function () {
+                    table.column($(this).data('index')).search(this.value).draw();
+                });
+            }
+            $("#table-filter").append(filter);
+            if (title == "Type") {
+                $("#type-table-filter").selectpicker();
+            } 
+            if (title == "System") {
+                $("#system-table-filter").selectpicker();
+            } 
+            if (title == "Cluster") {
+                $("#cluster-table-filter").selectpicker();
+            } 
+            if (title == "Region") {
+                $("#region-table-filter").selectpicker();
+            } 
+        }
+    } );
+}
+
+function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index;
+  }
+
+function toggleTableSearch() {
+    $("#table-pane").toggle();
+}
     

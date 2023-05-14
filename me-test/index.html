@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="lib/leaflet.js/leaflet.css">
         <link rel="stylesheet" href="lib/bootstrap-select/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="lib/jquery.dataTables/datatables.min.css">
         <link rel="stylesheet" href="css/site.css">
     </head>
     <body>
@@ -18,8 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    &nbsp;
-                    <!--<a class="nav-link" aria-current="page" href="index.html">Home</a>-->
+                    <a class="nav-link" aria-current="page" onclick="toggleTableSearch();">Browse</a>
                 </li>
                 </ul>
                 <div class="nav-item">
@@ -40,30 +40,48 @@
             <div id="galaxy-map" class="map-container" style="background-color: black;"></div>
             <div id="cluster-map" class="map-container" style="background-color: black;display:none;"></div>
             <div id="system-map" class="map-container" style="background-color: black;display:none;"></div>
-            <div id="object-pane" class="info-container container-fluid" style="display: none;">
-                <div class="row row-cols-1 row-cols-md-2">
-                    <div class="col">
-                        <div class="card mt-3">
-                            <img src="img/cluster/cluster_default.jpg" class="card-img">
-                            <div class="card-img-overlay">
-                                <img id="object-img" class="w-100">
+            <div id="object-pane" class="info-container w-100" style="display: none;">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col">
+                            <div class="card mt-3">
+                                <img src="img/system/default.jpg" class="card-img">
+                                <div class="card-img-overlay">
+                                    <img id="object-img" class="w-100">
+                                </div>
                             </div>
-                          </div>
+                        </div>
+                        <div class="col">
+                            <div class="card mt-3 mb-3">
+                                <div class="card-header">
+                                    <h3 id="object-title" class="mb-0 d-inline-block"></h3>
+                                    <button id="object-close-btn" class="float-end btn btn-sm btn-outline-danger d-inline-block float-right">
+                                        <i class="fa fa-solid fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <h5 id="object-type" class="mb-0"></h5>
+                                </div>
+                                <div class="card-body">
+                                    <p id="object-content"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <div class="card mt-3 mb-3">
-                            <div class="card-header">
-                                <h3 id="object-title" class="mb-0 d-inline-block"></h3>
-                                <button id="object-close-btn" class="float-end btn btn-sm btn-outline-danger d-inline-block float-right">
-                                    <i class="fa fa-solid fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="card-body">
-                                <h5 id="object-type" class="mb-0"></h5>
-                            </div>
-                            <div class="card-body">
-                                <p id="object-content"></p>
-                            </div>
+                </div>
+            </div>
+            <div id="table-pane" class="info-container w-100" style="display: none;">
+                <div class="container">
+                    <div class="card mt-3">
+                        <div id="table-header" class="card-header">
+                            <h3 class="mb-0 d-inline-block">Galaxy Browser</h3>
+                            <button onclick="toggleTableSearch();" class="float-end btn btn-sm btn-outline-danger d-inline-block float-right">
+                                <i class="fa fa-solid fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="table-filter" class="card-body row"></div>
+                        <div id="table-body" class="card-body table-responsive">
+                            <table id="table-obj" class="table table-striped w-100"></table>
                         </div>
                     </div>
                 </div>
@@ -72,8 +90,12 @@
         <script src="lib/jquery/jquery-3.6.4.min.js"></script>
         <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <script src="lib/jquery.dataTables/datatables.min.js"></script>
         <script src="lib/fontawesome/js/all.min.js"></script>
         <script src="lib/leaflet.js/leaflet.js"></script>
+        <script src="js/galaxy_galaxyMap.js"></script>
+        <script src="js/galaxy_clusterMap.js"></script>
+        <script src="js/galaxy_systemMap.js"></script>
         <script src="js/site.js"></script>
     </body>
 </html>
