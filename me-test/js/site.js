@@ -118,10 +118,10 @@ function getDefaultImagePath(type, item, marker) {
                     def = path + "planet" + mark + "\\default_desert.png";
                     break;
                 case "Tidal Lock":
-                    def = path + "planet" + mark + "\\default.png";
+                    def = path + "planet" + mark + "\\default_tidal.png";
                     break;
                 case "Ocean Planet":
-                    def = path + "planet" + mark + "\\default.png";
+                    def = path + "planet" + mark + "\\default_ocean.png";
                     break;
                 case "Brown Dwarf":
                 case "Giant Pegasid Planet":
@@ -173,11 +173,23 @@ function bindObjectInfo(objectId, systemId, clusterId) {
     }
     
     $("#object-title").html(o.Name);
+    $("#info-table").remove();
     if (Object.hasOwn(o, "Description")) {
         $("#object-content").html(o.Description);
     }
     else {
         $("#object-content").html("No information.");
+    }
+
+    if (Object.hasOwn(o, "Stats") && o.Stats) {
+        var statTable = $("<table id='info-table' class='table w-100'></table>");
+        var statRows = $("<tbody></tbody>");
+        for (var k in o.Stats) {
+            var headRow = $("<tr><td>" + k + "</td><td>" + o.Stats[k] + "</td></tr>");
+            statRows.append(headRow);
+        }
+        statTable.append(statRows);
+        $("#info-body").append(statTable);
     }
     
     $("#object-pane").show();
@@ -459,3 +471,29 @@ function toggleTableSearch() {
     $("#table-pane").toggle();
 }
     
+// Breadcrumbs
+function setBreadcrumb(galaxy, galaxyName, cluster, clusterName, system, systemName) {
+    var container = $("<div class='d-inline-block m-3 text-white' style='font-size:1.6rem;'></div>");
+    if (galaxy != null && galaxyName != null) {
+        var galContainer = $("<a class='d-inline btn btn-lg text-white' onclick='onVisitClick(this);' data-val='' data-group='galaxy' data-cluster='' data-system=''>" + galaxyName + "</a>");
+        if (cluster != null && clusterName != null) {
+            var clusterArrow = $("<i class='fas fa-angle-right'></i>");
+            galContainer.append(clusterArrow);
+        }
+        container.append(galContainer);
+    }
+    if (cluster != null && clusterName != null) {
+        var galContainer = $("<a class='d-inline btn btn-lg text-white' onclick='onVisitClick(this);' data-val='" + cluster + "' data-group='cluster' data-cluster='' data-system=''>" + clusterName + "</a>");
+        if (system != null && systemName != null) {
+            var clusterArrow = $("<i class='fas fa-angle-right'></i>");
+            galContainer.append(clusterArrow);
+        }
+        container.append(galContainer);
+    }
+    if (system != null && systemName != null) {
+        var galContainer = $("<a class='d-inline btn btn-lg text-white' onclick='onVisitClick(this);' data-val='" + system + "' data-group='system' data-cluster='" + cluster + "' data-system=''>" + systemName + "</a>");
+        container.append(galContainer);
+    }
+
+    $(".leaflet-top.leaflet-left").append(container);
+}
