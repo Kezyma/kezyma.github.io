@@ -66,7 +66,7 @@ function initialiseSystemMap(clusterId, systemId) {
     if (Object.hasOwn(system, "Image")) {
         systemImage = system.Image;
     }
-    systemImage = imageOrDefault(systemImage, "img/system/default.jpg");
+    systemImage = objectImagePath("system", system, false);
 
     var url = new URL(window.location.href);
     url.searchParams.set("system", systemId);
@@ -86,7 +86,7 @@ function initialiseSystemMap(clusterId, systemId) {
     
     if (reloadChart) {
         var imgBounds = [[-2,-2],[2,2]];
-        systemMap = L.map("system-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: imgBounds });
+        systemMap = L.map("system-map", { minZoom: minZoom, maxZoom: maxZoom, crd: L.CRS.Simple, maxBounds: imgBounds });
         var bounds = [[-1,-1], [1,1]];
         if (systemImage) {
             systemImg = L.imageOverlay(systemImage, imgBounds);
@@ -99,6 +99,18 @@ function initialiseSystemMap(clusterId, systemId) {
     }
 }
 
+function scaleIcon(scale, isStar) 
+{
+    var multi = ((scale - 1) / 3) + 1;
+
+    if (isStar) {
+        //multi *= 2;
+        multi = scale + 1;
+    }
+
+    return multi;
+}
+
 function initialiseSystemMarkers(system, cluster) {
     systemMarkers = [];
     systemOrbits = [];
@@ -108,16 +120,10 @@ function initialiseSystemMarkers(system, cluster) {
         var isBelt = obj.AsteroidBelt == true;
         var cx = calcX(obj.X);
         var cy = calcY(obj.Y);
-        var scale = ((((Object.hasOwn(obj, "Scale") ? obj.Scale: 1) - 1)/2) + 1) * (isStar ? 2 : 1);
-        var size = objIcons[systemMap.getZoom()];
+        var scale = scaleIcon((Object.hasOwn(obj, "Scale") ? obj.Scale : 1), isStar); //((((Object.hasOwn(obj, "Scale") ? obj.Scale : 1) - 1)/2) + 1) * (isStar ? 2 : 1);
+        var size = mapIcons[systemMap.getZoom()];
         if (obj.Scale > 0) {
-            var marker = "";
-            if (isStar) {
-                marker = imageOrDefault("img/" + obj.Marker, "img/star_marker/default.png")
-            }
-            else {
-                marker = imageOrDefault("img/" + obj.Marker, "img/planet_marker/default.png");
-            }
+            var marker = objectImagePath("planet", obj, true);
             var marker = L.marker([cy, cx], 
                 { 
                     icon: L.icon({ iconUrl: marker, iconSize: [ size[0] * scale, size[1] * scale ] }), 
@@ -152,7 +158,7 @@ function initialiseSystemMarkers(system, cluster) {
                 distance = center.distanceTo(planet);
             }
             var orbit = L.circle(center, distance, {
-                color: "#fff",
+                color: "#666",
                 weight: 1,
                 fill: false,
                 dashArray: isBelt ? "50 25" : null
@@ -164,42 +170,33 @@ function initialiseSystemMarkers(system, cluster) {
     showClusterMarkers = true;
     showSystemOrbits = true;
 
-    systemMap.on("movestart", function () {
-            
-    });
-
     systemMap.on("moveend", function () {
         $(".leaflet-marker-icon").popover("update");
     });
 
-    systemMap.on("zoomstart", function () {
-        
-    });
-
     systemMap.on("zoomend", function () {
+        if (systemMap.getZoom() == minZoom) {
+            zoomFromSystem();
+            systemMap.zoomIn();
+        }
         resizeSystemMarkers();
     });
 
     $(".leaflet-marker-icon").popover({
         trigger: "hover"
     });
-
-    //$(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-    //   if (showPopovers) {
-    //       $(this).popover("show");
-    //    }
-    //});
 }
 
 function resizeSystemMarkers()
 {
     $(".leaflet-marker-icon").popover("update");
     var zoomLevel = systemMap.getZoom();
-    var iconSize = objIcons[zoomLevel];
+    var iconSize = mapIcons[zoomLevel];
     for (var ix in systemMarkers) {
         var icon = systemMarkers[ix].getIcon();
         var scale = systemMarkers[ix].options.scale;
-        systemMarkers[ix].setIcon(L.icon({ iconUrl: imageOrDefault(icon.options.iconUrl, "img/object_marker/default.png"), iconSize: [ iconSize[0] * scale, iconSize[1] * scale ]}));
+        icon.options.iconSize = [iconSize[0] * scale, iconSize[1] * scale];
+        systemMarkers[ix].setIcon(icon);
     }
 }
 
@@ -216,4 +213,8 @@ function toggleSystemOrbits() {
         }
         showSystemOrbits = true;
     }
+}
+
+function zoomFromSystem() {
+    initialiseClusterMap(getUrlVars()["cluster"]);
 }

@@ -71,9 +71,9 @@ function initialiseClusterMap(clusterId) {
     $("#cluster-map").show();
     
     if (reloadChart) {
-        clusterMap = L.map("cluster-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: [[-1,-1],[1,1]] });
+        clusterMap = L.map("cluster-map", { minZoom: minZoom, maxZoom: maxZoom, crd: L.CRS.Simple, maxBounds: [[-1,-1],[1,1]] });
         var bounds = [[-1,-1], [1,1]];
-        clusterImg = L.imageOverlay(imageOrDefault("img/" + clusterImg, "img/cluster/default.jpg"), bounds);
+        clusterImg = L.imageOverlay(objectImagePath("cluster", cluster, false), bounds);
         clusterImg.addTo(clusterMap);
         clusterMap.fitBounds(bounds);
         clusterMap.zoomIn();
@@ -84,13 +84,14 @@ function initialiseClusterMap(clusterId) {
 }
 
 function initialiseClusterMarkers(cluster) {
+    clusterMarkers = [];
     for (var ix in cluster.Systems) {
         var system = cluster.Systems[ix];
         var cx = calcX(system.X);
         var cy = calcY(system.Y);
         var marker = L.marker([cy, cx], 
             { 
-                icon: L.icon({ iconUrl: imageOrDefault("img/" + system.Marker, "img/system_marker/default.png"), iconSize: mapIcons[clusterMap.getZoom()] }), 
+                icon: L.icon({ iconUrl: objectImagePath("system", system, true), iconSize: mapIcons[clusterMap.getZoom()] }), 
                 title: system.Name, 
                 systemId: system.Id,
                 riseOnHover: true
@@ -104,31 +105,25 @@ function initialiseClusterMarkers(cluster) {
     }
     showClusterMarkers = true;
 
-    clusterMap.on("movestart", function () {
-            
-    });
-
     clusterMap.on("moveend", function () {
         $(".leaflet-marker-icon").popover("update");
     });
 
-    clusterMap.on("zoomstart", function () {
-        
-    });
-
     clusterMap.on("zoomend", function () {
+        if (clusterMap.getZoom() == maxZoom) {
+            zoomToSystem();
+            clusterMap.zoomOut();
+        }
+        if (clusterMap.getZoom() == minZoom) {
+            zoomToGalaxy();
+            clusterMap.zoomIn();
+        }
         resizeClusterMarkers();
     });
 
     $(".leaflet-marker-icon").popover({
         trigger: "hover"
     });
-
-    //$(".leaflet-marker-icon").on("hidden.bs.popover", function () {
-    //    if (showPopovers) {
-    //       $(this).popover("show");
-    //    }
-    //});
 }
 
 function resizeClusterMarkers() {
@@ -137,7 +132,8 @@ function resizeClusterMarkers() {
     var iconSize = mapIcons[zoomLevel];
     for (var ix in clusterMarkers) {
         var icon = clusterMarkers[ix].getIcon();
-        clusterMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
+        icon.options.iconSize = iconSize;
+        clusterMarkers[ix].setIcon(icon);
     }
 }
 
@@ -145,4 +141,27 @@ function returnToGalaxy() {
     clusterMap.remove();
     $("#galaxy-map").show();
     $("#cluster-map").hide();
+}
+
+function zoomToGalaxy() {
+    initialiseGalaxyMap();
+}
+
+function zoomToSystem() {
+    initialiseSystemMap(currentCluster.Id, findClusterCenter());
+}
+
+function findClusterCenter() {
+    var closest = 1000000;
+    var center = clusterMap.getBounds();
+    var mid = [ (center.getNorth() + center.getSouth())/2, (center.getEast() + center.getWest())/2 ];
+    var bestMarker = null;
+    for (var m in clusterMarkers) {
+        var dist = clusterMarkers[m].getLatLng().distanceTo(mid);
+        if (dist < closest) {
+            closest = dist;
+            bestMarker = clusterMarkers[m];
+        }
+    }
+    return bestMarker.options.systemId;
 }

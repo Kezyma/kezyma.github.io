@@ -1,17 +1,33 @@
+// Settings
+var zoomLevel = 1;
+var mapItemZoomVal = 1.9;
+var minZoom = 8;
+var maxZoom = 14;
+var minIconSize = 32;
+var maxIconSize = 128;
+var galaxyJson = "./js/galaxy.json";
+var lineColour = "#777";
+var missingImages = [];
+
+// Map Data
+var clusters = null;
+
 // Page Init
 $(document).ready(function () {
     var x = 1;
-    for (var i = 8; i < 14; i++) {
-        mapIcons[i] = [(i)*x,(i)*x];
+    for (var i = minZoom; i < maxZoom; i++) {
+        var w = i * x;
+        if (w < minIconSize) {
+            w = minIconSize;
+        }
+        if (w > maxIconSize) {
+            w = maxIconSize;
+        }
+        mapIcons[i] = [w,w];
         x = x*mapItemZoomVal;
     }
-    x = 1;
-    for (var i = 8; i < 14; i++) {
-        objIcons[i] = [(i)*x,(i)*x];
-        x = x*sysItemZoomVal;
-    }
 
-    $.getJSON("./js/galaxy.json", function (data) {
+    $.getJSON(galaxyJson, function (data) {
         clusters = data;
         var query = getUrlVars();
         if (query["cluster"]) {
@@ -36,10 +52,12 @@ $(document).ready(function () {
 
 // Shared
 var mapIcons = {};
-var objIcons = {};
 var mapType = null;
 
 function imageOrDefault(image_url, default_url) {
+    if (missingImages.includes(image_url)) {
+        return default_url;
+    }
     var http = new XMLHttpRequest();
     http.open('HEAD', image_url, false);
     http.send();
@@ -47,26 +65,80 @@ function imageOrDefault(image_url, default_url) {
         return image_url;
     }
     else {
+        missingImages.push(image_url);
         return default_url;
     }
 }
 
-var zoomLevel = 1;
-var mapItemZoomVal = 1.9;
-var sysItemZoomVal = 1.6;
+function objectImagePath(type, item, marker) {
+    var path = "img\\";
+    var dPath = path + (marker ? item.Marker : item.Image);
+    var def = getDefaultImagePath(type, item, marker);
+        
+    if ((marker && item.Marker != null) || (!marker && item.Image != null)) {
+        return imageOrDefault(dPath, def);
+    }
+    return def;
+}
+
+function getDefaultImagePath(type, item, marker) {
+    var path = "img\\";
+    var mark = marker ? "_marker" : "";
+    var def = path + "object" + mark + "\\default.png";
+    switch (type) {
+        case "cluster":
+            def = path + "cluster" + mark + "\\default." + (marker ? "png" : "jpg");
+            break;
+        case "system":
+            def = path + "system" + mark + "\\default." + (marker ? "png" : "jpg");
+            break;
+        case "planet":
+            switch (item.Type) {
+                case "Star":
+                    def = path + "star" + mark + "\\default.png";
+                    break;
+                case "Garden Planet":
+                    def = path + "planet" + mark + "\\default_garden.png";
+                    break;
+                case "Giant Ice Planet":
+                    def = path + "planet" + mark + "\\default_ice.png";
+                    break;
+                case "Moon":
+                case "Planet":
+                case "Rock Planet":
+                    def = path + "planet" + mark + "\\default_rocky.png";
+                    break;
+                case "Giant Jovian Planet":
+                    def = path + "planet" + mark + "\\default_jovian.png";
+                    break;
+                case "Post Garden":
+                    def = path + "planet" + mark + "\\default_post.png";
+                    break;
+                case "Desert Planet":
+                    def = path + "planet" + mark + "\\default_desert.png";
+                    break;
+                case "Tidal Lock":
+                    def = path + "planet" + mark + "\\default.png";
+                    break;
+                case "Ocean Planet":
+                    def = path + "planet" + mark + "\\default.png";
+                    break;
+                case "Brown Dwarf":
+                case "Giant Pegasid Planet":
+                    def = path + "planet" + mark + "\\default_dwarf.png";
+                    break;
+                default:
+                    def = path + "object" + mark + "\\default.png";
+                    break;
+            }
+            break;
+    }
+    return def;
+}
+
 function mapItemZoom(zoomLevel) {
     mapItemZoomVal = mapItemZoomVal + (zoomLevel/10);
     sysItemZoomVal = sysItemZoomVal + (zoomLevel/10);
-    var x = 1;
-    for (var i = 8; i < 14; i++) {
-        mapIcons[i] = [(i)*x,(i)*x];
-        x = x*mapItemZoomVal;
-    }
-    x = 1;
-    for (var i = 8; i < 14; i++) {
-        objIcons[i] = [(i)*x,(i)*x];
-        x = x*sysItemZoomVal;
-    }
     if (mapType == "galaxy") {
         resizeGalaxyMarkers();
     }
@@ -77,10 +149,6 @@ function mapItemZoom(zoomLevel) {
         resizeSystemMarkers();
     }
 }
-
-
-// Map Data
-var clusters = null;
 
 // Object Info
 function bindObjectInfo(objectId, systemId, clusterId) {
@@ -98,7 +166,7 @@ function bindObjectInfo(objectId, systemId, clusterId) {
         else {$("#object-type").html("");}
     }
     if (Object.hasOwn(o, "Image")) {
-        $("#object-img").attr("src", imageOrDefault("img/" + o.Image, "img/object/default.png"));
+        $("#object-img").attr("src", objectImagePath("planet", o, false));
     }
     else {
         $("#object-img").attr("src", "");
@@ -237,17 +305,17 @@ function onVisitClick(btn) {
 }
 
 function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
     {
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
     }
+    return vars;
+}
 
 // Table
 function initialiseTableSearch() {
@@ -266,7 +334,7 @@ function initialiseTableSearch() {
     {
         var cluster = clusters[c];
         dataSet.push([
-            "<object data='img/" + cluster.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='img/cluster_marker/default.png' style='width:28px;height:28px;'/></object>",
+            "<object data='img/" + cluster.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='" + getDefaultImagePath("cluster", cluster, true) + "' style='width:28px;height:28px;'/></object>",
             cluster.Name,
             "Cluster",
             "",
@@ -279,7 +347,7 @@ function initialiseTableSearch() {
         {
             var system = cluster.Systems[s];
             dataSet.push([
-                "<object data='img/" + system.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='img/system_marker/default.png' style='width:28px;height:28px;'/></object>",
+                "<object data='img/" + system.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='" + getDefaultImagePath("system", system, true) + "' style='width:28px;height:28px;'/></object>",
                 system.Name,
                 "System",
                 "",
@@ -293,7 +361,7 @@ function initialiseTableSearch() {
                 var planet = system.Planets[p];
                 if (planet.Type != "Asteroid Belt" && planet.Type != "") {
                     dataSet.push([
-                        "<object data='img/" + planet.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='img/object_marker/default.png' style='width:28px;height:28px;'/></object>",
+                        "<object data='img/" + planet.Marker + "' type='image/png' class='d-block' style='width:28px;height:28px;'><img src='" + getDefaultImagePath("planet", planet, true) + "' style='width:28px;height:28px;'/></object>",
                         planet.Name,
                         planet.Type,
                         system.Name,

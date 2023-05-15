@@ -102,7 +102,7 @@ function initialiseGalaxyMap() {
 
     if (!galaxyMap) {
         var mapBounds = [[-1,-1],[1,1]];
-        galaxyMap = L.map("galaxy-map", { minZoom: 8, maxZoom: 13, crd: L.CRS.Simple, maxBounds: mapBounds });
+        galaxyMap = L.map("galaxy-map", { minZoom: minZoom, maxZoom: maxZoom, crd: L.CRS.Simple, maxBounds: mapBounds });
         galaxyImg = L.imageOverlay('img/galaxy.jpg', mapBounds);
         galaxyImg.addTo(galaxyMap);
         galaxyMap.fitBounds(mapBounds);
@@ -123,19 +123,15 @@ function initialiseGalaxyMap() {
 
         new L.Control.GalaxyToggleControls().addTo(galaxyMap);
 
-        galaxyMap.on("movestart", function () {
-            
-        });
-
         galaxyMap.on("moveend", function () {
             $(".leaflet-marker-icon").popover("update");
         });
 
-        galaxyMap.on("zoomstart", function () {
-            
-        });
-
         galaxyMap.on("zoomend", function () {
+            if (galaxyMap.getZoom() == maxZoom) {
+                zoomToCluster();
+                galaxyMap.zoomOut();
+            }
             resizeGalaxyMarkers();
         });
     }
@@ -147,25 +143,28 @@ function resizeGalaxyMarkers() {
     var iconSize = mapIcons[zoomLevel];
     for (var ix in galaxyMarkers) {
         var icon = galaxyMarkers[ix].getIcon();
-        galaxyMarkers[ix].setIcon(L.icon({ iconUrl: icon.options.iconUrl, iconSize: iconSize}));
+        icon.options.iconSize = iconSize;
+        galaxyMarkers[ix].setIcon(icon);
     }
 }
 
 function calcX(x) {
     return ((x / 1000) * 2) - 1;
 }
+
 function calcY(x) {
     return (1 - ((x / 1000) * 2));
 }
 
 function initialiseGalaxyMarkers() {
+    galaxyMarkers = [];
     for (var ix in clusters) {
         var cluster = clusters[ix];
         var cx = calcX(cluster.X);
         var cy = calcY(cluster.Y);
         var marker = L.marker([cy, cx], 
             { 
-                icon: L.icon({ iconUrl: imageOrDefault("img/" + cluster.Marker, "img/cluster_marker/default.png"), iconSize: mapIcons[galaxyMap.getZoom()] }), 
+                icon: L.icon({ iconUrl: objectImagePath("cluster", cluster, true), iconSize: mapIcons[galaxyMap.getZoom()], className: "galaxy-marker" }), 
                 title: cluster.Name, 
                 clusterId: cluster.Id,
                 riseOnHover: true
@@ -194,7 +193,7 @@ function initialiseGalaxyMarkers() {
                     [cy1, cx1],
                     [cy2, cx2]
                 ];
-                var newLine = L.polyline(coords, { color: "white", noClip: true, weight: 1 });
+                var newLine = L.polyline(coords, { color: "#FFF", noClip: true, weight: 1 });
                 galaxyConnections.push(newLine);
                 newLine.addTo(galaxyMap);
                 }
@@ -229,6 +228,7 @@ function toggleGalaxyMarkers() {
         showMarkers = true;
     }
 }
+
 function toggleGalaxyRegions() {
     if (showRegions) {
         galaxyRegionImg.remove();
@@ -243,6 +243,7 @@ function toggleGalaxyRegions() {
         showRegions = true;
     }
 }
+
 function toggleGalaxyColours() {
     if (showColours) {
         galaxyColoursImg.remove();
@@ -257,6 +258,7 @@ function toggleGalaxyColours() {
         }
     }
 }
+
 function toggleGalaxyLabels() {
     if (showLabels) {
         galaxyLabelsImg.remove();
@@ -271,6 +273,7 @@ function toggleGalaxyLabels() {
         }
     }
 }
+
 function toggleGalaxyConnections() {
     if (showConnections) {
         for (var ix in galaxyConnections) {
@@ -284,4 +287,24 @@ function toggleGalaxyConnections() {
         }
         showConnections = true;
     }
+}
+
+function findGalaxyCenter() {
+    var closest = 1000000;
+    var center = galaxyMap.getBounds();
+    var mid = [ (center.getNorth() + center.getSouth())/2, (center.getEast() + center.getWest())/2 ];
+    var bestMarker = null;
+    for (var m in galaxyMarkers) {
+        var dist = galaxyMarkers[m].getLatLng().distanceTo(mid);
+        if (dist < closest) {
+            closest = dist;
+            bestMarker = galaxyMarkers[m];
+        }
+    }
+    return bestMarker.options.clusterId;
+}
+
+function zoomToCluster() {
+    var bestFit = findGalaxyCenter();
+    initialiseClusterMap(bestFit);
 }
