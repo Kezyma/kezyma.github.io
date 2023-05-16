@@ -182,7 +182,7 @@ function bindObjectInfo(objectId, systemId, clusterId) {
     }
 
     if (Object.hasOwn(o, "Stats") && o.Stats) {
-        var statTable = $("<table id='info-table' class='table w-100'></table>");
+        var statTable = $("<table id='info-table' class='table card-body w-100 m-0'></table>");
         var statRows = $("<tbody></tbody>");
         for (var k in o.Stats) {
             var headRow = $("<tr><td>" + k + "</td><td>" + o.Stats[k] + "</td></tr>");
@@ -213,18 +213,18 @@ function initialiseSearchFunction() {
     for (var ri in regions) {
         var r = regions[ri];
         var cl = clusters.filter(x => x.Region == r).sort(sortFunc);
-        var clusterGrp = $("<optgroup label='" + r + "'></optgroup>");
+        var clusterGrp = $("<optgroup label=\"" + r + "\"></optgroup>");
         for (var ci in cl) {
             var c = cl[ci];
-            var cItm = $("<option value='" + c.Id + "' data-content='" + c.Name + "<span class=\"d-none\">" + r + "</span>' data-group='cluster'>" + c.Name + "</option>");
+            var cItm = $("<option value='" + c.Id + "' data-content=\"" + c.Name + "<span class='d-none'>" + r + "</span>\" data-group='cluster'>" + c.Name + "</option>");
             clusterGrp.append(cItm);
 
             if (c.Systems.length > 0) {
-                var systemGrp = $("<optgroup label='" + c.Name + "'></optgroup>");
+                var systemGrp = $("<optgroup label=\"" + c.Name + "\"></optgroup>");
                 var sl = c.Systems.sort(sortFunc);
                 for (var si in sl) {
                     var s = sl[si];
-                    var sItm = $("<option value='" + s.Id + "' data-content='" + s.Name + "<span class=\"d-none\">" + r + " " + c.Name + "</span>' data-cluster='" + c.Id + "' data-group='system'></option>");
+                    var sItm = $("<option value='" + s.Id + "' data-content=\"" + s.Name + "<span class='d-none'>" + r + " " + c.Name + "</span>\" data-cluster='" + c.Id + "' data-group='system'></option>");
                     systemGrp.append(sItm);
 
                     if (Object.hasOwn(s, "Planets")) {
@@ -233,7 +233,7 @@ function initialiseSearchFunction() {
                         for (var oi in ol) {
                             var o = ol[oi];
                             if (o.Type != "Star" && o.Type != "Asteroid Belt" && o.Name != null && o.Name != "null") {
-                            var oItm = $("<option value='" + o.Id + "' data-content='" + o.Name + "<span class=\"d-none\">" + r + " " + c.Name + " " + s.Name + "</span>' data-cluster='" + c.Id + "' data-system='" + s.Id + "' data-group='object'></option>")
+                            var oItm = $("<option value='" + o.Id + "' data-content=\"" + o.Name + "<span class='d-none'>" + r + " " + c.Name + " " + s.Name + "</span>\" data-cluster='" + c.Id + "' data-system='" + s.Id + "' data-group='object'></option>")
                             objGroup.append(oItm);
                             }
                         } 
@@ -471,6 +471,9 @@ function toggleTableSearch() {
     $("#table-pane").toggle();
 }
     
+// Table 2
+// Table
+
 // Breadcrumbs
 function setBreadcrumb(galaxy, galaxyName, cluster, clusterName, system, systemName) {
     var container = $("<div class='d-inline-block m-3 text-white' style='font-size:1.6rem;'></div>");
