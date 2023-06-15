@@ -13,8 +13,8 @@
                 var fval = csvData.filter(x => x["Race"] == race && x["Gender"] == "Female");
                 var mtotal = mval.length;
                 var ftotal = fval.length;
-                var mdone = mval.filter(x => x["Done"] == "TRUE").length;
-                var fdone = fval.filter(x => x["Done"] == "TRUE").length;
+                var mdone = mval.filter(x => x["Done"] == "TRUE" || x["Done"] == "True" || x["Done"] == "true").length;
+                var fdone = fval.filter(x => x["Done"] == "TRUE" || x["Done"] == "True" || x["Done"] == "true").length;
                 var mper = Number(mdone / mtotal).toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2 });
                 var fper = Number(fdone / ftotal).toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2 });
                 var mcss = "table-danger";
