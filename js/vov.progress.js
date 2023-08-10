@@ -33,6 +33,19 @@
                 td += mdone + fdone;
             }
 
+            var cval = csvData.filter(x => x["Race"] == "" && x["Gender"] == "");
+            var ctotal = cval.length;
+            var cdone = cval.filter(x => x["Done"] == "TRUE" || x["Done"] == "True" || x["Done"] == "true").length;
+            var cper = Number(cdone / ctotal).toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2 });
+            var ccss = "table-danger";
+            if (cdone > 0) ccss = "table-warning";
+            if (cdone == ctotal) ccss = "table-success";
+            var ccontent = "<tr class='" + mcss + "'><td>Creature</td><td>" + ctotal + "</td><td>" + cdone + "</td><td>" + cper + "</td></tr>";
+            var chtml = $(ccontent);
+            $("#generic-body").append(ccontent);
+            tt += ctotal;
+            td += cdone;
+
             var pp = Number(td / tt).toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2 });
             $("#generic-total").text(tt);
             $("#generic-done").text(td);
