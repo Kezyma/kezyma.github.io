@@ -79,14 +79,21 @@
                 </div>
                 <div class="card-body">
                     <p>
-                        OpenMW Player adds a tool to Mod Organizer's menu to open the Shortcutter window.
+                        OpenMW Player takes a copy of your <code>openmw.cfg</code> and <code>settings.cfg</code> for your current OpenMW setup and stores them in the current profile in Mod Organizer 2. Each profile has a separate configuration.
+                    </p>
+                    <ul>
+                        <li>When <code>openmw.exe</code> is launched through Mod Organizer 2, it uses the config files located in the current profile. If profile-specific save games are enabled, OpenMW will save to the current profile, <code>openmw.exe</code> must be launched directly from Mod Organizer 2 and not through the OpenMW Launcher for this to function.</li>
+                        <li>When any other OpenMW executable is launched, the existing <code>openmw.cfg</code> and <code>settings.cfg</code> will be backed up and replaced with the ones from the profile. When the executable closes, they will be moved back and the original files are restored.</li>
+                    </ul>
+                    <p>
+                        OpenMW Player adds a tool to Mod Organizer's menu to open the OpenMW Player window.
                     </p>
                     <figure class="figure">
                         <img src="../img/openmwplayer/tools_menu.png" class="figure-img img-fluid rounded" />
                         <figcaption class="figure-caption">OpenMW Player in Mod Organizer's tools menu.</figcaption>
                     </figure>
                     <p>
-                        The OpenMW Player window allows you to select the location of your <code>openmw.cfg</code> file, as well as select all of your grass/groundcover mods. Any groundcover/grass mods should be selected here as the plugins should not be enabled when the game runs. The selected groundcover mods are set per-profile, so you can have a different set of groundcover mods for each profile in Mod Organizer.
+                        The OpenMW Player window allows you to select the location of your <code>openmw.cfg</code> file and import it to the current profile.
                     </p>
                     <p>
                         There is an additional option to toggle on the use of dummy esp files for <code>.omwaddon</code> and <code>.omwscripts</code> files. If enabled, matching esp files will be created and can be enabled/disabled and sorted within Mod Organizer. Then, when the game is run, the appropriate <code>.omwaddon</code> and <code>.omwscripts</code> files will be enabled in OpenMW instead of the dummy esp files. If enabled, dummy esp files will be created on the following events:
@@ -98,30 +105,44 @@
                         <li>When a mod is installed, dummy files will be created for that mod.</li>
                     </ul>
                     <figure class="figure">
-                        <img src="../img/openmwplayer/manager_menu.png" class="figure-img img-fluid rounded" />
-                        <figcaption class="figure-caption">The OpenMW Player window.</figcaption>
-                    </figure>
-                    <br>
-                    <figure class="figure">
                         <img src="../img/openmwplayer/dummy_plugin.png" class="figure-img img-fluid rounded" />
                         <figcaption class="figure-caption">Dummy plugins to add omwaddon and omwscripts support.</figcaption>
                     </figure>
                     <p>
-                        Please note, you will still need to add lines to OpenMW's <code>settings.cfg</code> to enable groundcover. The following are an example of what you may need to add, taken from <a href="https://www.nexusmods.com/morrowind/mods/46733">Remiros' Groundcover</a>:
+                        The Groundcover tab allows you to select which esp files should be used for groundcover. These should not be enabled in the normal plugins panel and instead be selected here. You will still need to enable groundcover in <code>settings.cfg</code> for this to work.
                     </p>
-                    <pre>
-                        <code>
-[Groundcover]
-enabled = true
-density = 1.0
-min chunk size = 0.5
-stomp mode = 2
-stomp intensity = 2
-                        </code>
-                    </pre>
+                    <figure class="figure">
+                        <img src="../img/openmwplayer/groundcover_tab.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">The Groundcover tab.</figcaption>
+                    </figure>
                     <p>
-                        OpenMW Player also has rudimentary Bsa exporting. Any Bsa files found in the game folder or any enabled mods in Mod Organizer will also be exported to <code>openmw.cfg</code>.
+                        The Archives tab allows you to select which Bsa archives should be used as well as in what order they should be loaded.
                     </p>
+                    <figure class="figure">
+                        <img src="../img/openmwplayer/archives_tab.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">The Archives tab.</figcaption>
+                    </figure>
+                    <p>
+                        The Settings tab allows you to manage all of the other settings from <code>openmw.cfg</code>.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/openmwplayer/settings_tab.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">The Settings tab.</figcaption>
+                    </figure>
+                    <p>
+                        The Engine tab allows you to manage all of the settings from <code>settings.cfg</code>, these are all of the settings handled by the OpenMW Launcher.
+                    </p>
+                    <figure class="figure">
+                        <img src="../img/openmwplayer/engine_tab.png" class="figure-img img-fluid rounded" />
+                        <figcaption class="figure-caption">The Engine tab.</figcaption>
+                    </figure>
+                    <p>
+                        There are also two tools added to the menu. 
+                    </p>
+                    <ul>
+                        <li>Export will overwrite the current <code>openmw.cfg</code> and <code>settings.cfg</code> with the ones from this profile. This allows you to launch OpenMW from outside of Mod Organizer with the current setup.</li>
+                        <li>Import will overwrite this profile's <code>openmw.cfg</code> and <code>settings.cfg</code> with the one selected in the OpenMW Player menu.</li>
+                    </ul>
                 </div>
             </div>
         </div>
