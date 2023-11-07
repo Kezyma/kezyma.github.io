@@ -88,10 +88,10 @@ $(document).ready(function () {
                 if (fdone == ftotal) fcss = "table-success";
                 var mcontent = "<tr class='" + mcss + "'><td>" + race + " (Male)</td><td>" + mtotal + "</td><td>" + mdone + "</td><td>" + mper + "</td></tr>";
                 var mhtml = $(mcontent);
-                $("#generic-body").append(mhtml);
+                $("#pfp-body").append(mhtml);
                 var fcontent = "<tr class='" + fcss + "'><td>" + race + " (Female)</td><td>" + ftotal + "</td><td>" + fdone + "</td><td>" + fper + "</td></tr>";
                 var fhtml = $(fcontent);
-                $("#generic-body").append(fhtml);
+                $("#pfp-body").append(fhtml);
                 tt += mtotal + ftotal;
                 td += mdone + fdone;
             }
