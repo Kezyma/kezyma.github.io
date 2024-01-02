@@ -1,0 +1,342 @@
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+<script>
+    var results = {
+        "2022-06-04": {
+            "Stakes": "N/A",
+            "Ranking": [ "Linkus", "Atrioc", "Aspecticor" ],
+            "Contracts": [
+                {
+                    "Id": "1-24-8120671-52",
+                    "Author": "Atrioc",
+                    "Map": "New York",
+                    "Name": "The Atrioc Special",
+                    "Times": {
+                        "Atrioc": "01:54",
+                        "Linkus": "01:42",
+                        "Aspecticor": "DNF"
+                    }
+                },
+                {
+                    "Id": "1-13-8400701-29",
+                    "Author": "Linkus",
+                    "Map": "Mumbai",
+                    "Name": "Kill Order: 1-13-8400701-29",
+                    "Times": {
+                        "Atrioc": "00:50",
+                        "Linkus": "00:49",
+                        "Aspecticor": "01:32"
+                    }
+                },
+                {
+                    "Id": "1-01-9961305-76",
+                    "Author": "Aspecticor",
+                    "Map": "ICA Facility",
+                    "Name": "AtriocAtrioc",
+                    "Times": {
+                        "Atrioc": "00:15",
+                        "Linkus": "00:15",
+                        "Aspecticor": "00:47"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=twLE0h1gy0Y",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2022-06-18": {
+            "Stakes": "2nd and 3rd must perform as Agent 47 and Diana respectively.",
+            "Ranking": [ "Atrioc", "Linkus", "Aspecticor" ],
+            "Contracts": [
+                {
+                    "Id": "1-27-7824272-52",
+                    "Author": "Atrioc",
+                    "Map": "Dubai",
+                    "Name": "Top Chef",
+                    "Times": {
+                        "Atrioc": "01:48",
+                        "Linkus": "02:22",
+                        "Aspecticor": "DNF"
+                    }
+                },
+                {
+                    "Id": "1-11-4877468-29",
+                    "Author": "Linkus",
+                    "Map": "Miami",
+                    "Name": "Kill Order: 1-11-4877468-29",
+                    "Times": {
+                        "Atrioc": "02:11",
+                        "Linkus": "01:51",
+                        "Aspecticor": "02:53"
+                    }
+                },
+                {
+                    "Id": "1-03-3859888-76",
+                    "Author": "Aspecticor",
+                    "Map": "Sapienza",
+                    "Name": "Okay But FR This Time",
+                    "Times": {
+                        "Atrioc": "00:29",
+                        "Linkus": "DNF",
+                        "Aspecticor": "00:28"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=0j4tbmrjB8s",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2022-07-07": {
+            "Stakes": "2nd and 3rd place are required to eat a lettuce.",
+            "Rankings": [ "Atrioc", "Linkus", "Aspecticor" ],
+            "Contracts": [
+                {
+                    "Id": "1-10-6483122-52",
+                    "Author": "Atrioc",
+                    "Map": "Hokkaido",
+                    "Name": "Easy Mode Baby",
+                    "Times": {
+                        "Atrioc": "02:08",
+                        "Linkus": "02:24",
+                        "Aspecticor": "03:27"
+                    }
+                },
+                {
+                    "Id": "1-26-8916896-29",
+                    "Author": "Linkus",
+                    "Map": "Haven Island",
+                    "Name": "Kill Order: 1-26-8916896-29",
+                    "Times": {
+                        "Atrioc": "01:29",
+                        "Linkus": "01:38",
+                        "Aspecticor": "DNF"
+                    }
+                },
+                {
+                    "Id": "1-31-2746795-76",
+                    "Author": "Aspecticor",
+                    "Map": "Mendoza",
+                    "Name": "Kill Order: 1-31-2746795-76",
+                    "Times": {
+                        "Atrioc": "01:29",
+                        "Linkus": "01:27",
+                        "Aspecticor": "01:09"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=6xV5pyu1QAw",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2022-08-28": {
+            "Stakes": "",
+            "Rankings": ["Linkus", "Atrioc", "Aspecticor"],
+            "Contracts": [
+                {
+                    "Id": "1-02-185335-23",
+                    "Author": "MandoGB",
+                    "Map": "Paris",
+                    "Name": "Hitman Horse 8.28 Paris",
+                    "Times": {
+                        "Atrioc": "00:54",
+                        "Linkus": "00:59",
+                        "Aspecticor": "01:26"
+                    }
+                },
+                {
+                    "Id": "1-34-5779937-23",
+                    "Author": "MandoGB",
+                    "Map": "Ambrose Island",
+                    "Name": "Hitman Horse 8.28 Ambrose Island",
+                    "Times": {
+                        "Atrioc": "02:02",
+                        "Linkus": "01:52",
+                        "Aspecticor": "01:51"
+                    }
+                },
+                {
+                    "Id": "1-28-3329494-89",
+                    "Author": "Joats",
+                    "Map": "Dartmoor",
+                    "Name": "APA - Hitman Horse 3",
+                    "Times": {
+                        "Atrioc": "00:50",
+                        "Linkus": "00:48",
+                        "Aspecticor": "00:51"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=gDNHtf-3z1U",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2023-08-03": {
+            "Stakes": "N/A",
+            "Rankings": [ "Linkus", "Aspecticor", "Atrioc" ],
+            "Contracts": [
+                {
+                    "Id": "1-31-6873638-52",
+                    "Author": "Atrioc",
+                    "Map": "Mendoza",
+                    "Name": "This Time For Real Hitman Horstrioc 8/3",
+                    "Times": {
+                        "Atrioc": "01:37",
+                        "Linkus": "01:21",
+                        "Aspecticor": "01:36"
+                    }
+                },
+                {
+                    "Id": "1-09-9013314-29",
+                    "Author": "Linkus",
+                    "Map": "Colorado",
+                    "Name": "Pretty Solid Horse",
+                    "Times": {
+                        "Atrioc": "02:39",
+                        "Linkus": "01:10",
+                        "Aspecticor": "DNF"
+                    }
+                },
+                {
+                    "Id": "1-22-2202597-76",
+                    "Author": "Aspecticor",
+                    "Map": "Whittleton Creek",
+                    "Name": "Whittleton Freaks",
+                    "Times": {
+                        "Atrioc": "DNF",
+                        "Linkus": "01:29",
+                        "Aspecticor": "00:37"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=J_MNKp97NUY",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2023-09-28": {
+            "Stakes": "N/A",
+            "Rankings": [ "Atrioc", "Aspecticor", "Linkus" ],
+            "Contracts": [
+                {
+                    "Id": "1-06-8813912-89",
+                    "Author": "Joats",
+                    "Map": "Marrakesh",
+                    "Name": "Hitman Horse - Marrakesh",
+                    "Times": {
+                        "Atrioc": "04:03",
+                        "Linkus": "DNF",
+                        "Aspecticor": "DNF"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=ZoXDVW3Sf6c",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2023-08-13": {
+            "Stakes": "2nd and 3rd place will wear a horse mask.",
+            "Rankings": ["Atrioc", "Aspecticor", "Linkus"],
+            "Contracts": [
+                {
+                    "Id": "1-28-3929124-52",
+                    "Author": "Atrioc",
+                    "Map": "Dartmoor",
+                    "Name": "Atrioc Murder Mystery Hitman Horse",
+                    "Times": {
+                        "Atrioc": "01:19",
+                        "Linkus": "03:18",
+                        "Aspecticor": "DNF"
+                    }
+                },
+                {
+                    "Id": "1-27-0182211-29",
+                    "Author": "Linkus",
+                    "Map": "Dubai",
+                    "Name": "Accidental Horse",
+                    "Times": {
+                        "Atrioc": "02:39",
+                        "Linkus": "01:34",
+                        "Aspecticor": "01:41"
+                    }
+                },
+                {
+                    "Id": "1-21-8069342-76",
+                    "Author": "Aspecticor",
+                    "Map": "Isle of Sgail",
+                    "Name": "The Sgail Struggle",
+                    "Times": {
+                        "Atrioc": "00:40",
+                        "Linkus": "DNF",
+                        "Aspecticor": "00:37"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=Ope-bYE-xOk",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        },
+        "2023-10-06": {
+            "Stakes": "",
+            "Rankings": ["Atrioc", "Aspecticor", "Linkus"],
+            "Contracts": [
+                {
+                    "Id": "1-13-8149656-89",
+                    "Author": "Joats",
+                    "Map": "Mumbai",
+                    "Name": "Hitman Horse APA: Mumbai",
+                    "Times": {
+                        "Atrioc": "01:19",
+                        "Linkus": "DNF",
+                        "Aspecticor": "01:29"
+                    }
+                }
+            ],
+            "Recordings": {
+                "Atrioc": "https://www.youtube.com/watch?v=TVhR11QhvXY",
+                "Linkus": "",
+                "Aspecticor": ""
+            }
+        }
+    };
+
+    $(document).ready(function () {
+        var container = $("<div></div>");
+        container.addClass("container");
+
+        for (dt in results) {
+            console.log(dt);
+
+            var rankings = $("<div></div>");
+            rankings.addClass("card");
+
+            container.append(rankings);
+        }
+
+        $("body").append(container);
+    });
+</script>
