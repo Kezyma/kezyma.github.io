@@ -36,6 +36,8 @@
             padding: 0;
             z-index: 1;
             background: #000;
+            background-image: url(error_tile.png);
+            background-size: 12px;
         }
 
         #slider {
@@ -55,7 +57,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md bg-secondary">
         <div class="container-fluid">
             <a class="navbar-brand" href="">Morrowind Map</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -92,45 +94,59 @@
         var maps = {
             "morrowind": {
                 mapExtent: [0.00000000, -12288.00000000, 13568.00000000, 0.00000000],
+                tileSize: 256,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 2
             },
             "arktwend": {
                 mapExtent: [0.00000000, -21504.00000000, 13056.00000000, 0.00000000],
+                tileSize: 512,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 1
             },
             "myar_aranath": {
                 mapExtent: [0.00000000, -12288.00000000, 16640.00000000, 0.00000000],
+                tileSize: 512,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 2
             },
             "tamriel_rebuilt": {
                 mapExtent: [0.00000000, -17152.00000000, 20224.00000000, 0.00000000],
+                tileSize: 512,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 2
             },
             "project_tamriel": {
                 mapExtent: [0.00000000, -22528.00000000, 48896.00000000, 0.00000000],
+                tileSize: 1024,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 1
             },
             "tamriel_rebuilt_preview": {
                 mapExtent: [0.00000000, -23808.00000000, 24832.00000000, 0.00000000],
+                tileSize: 512,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 2
             },
             "project_tamriel_tr_preview": {
                 mapExtent: [0.00000000, -23808.00000000, 50944.00000000, 0.00000000],
+                tileSize: 1024,
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
-                mapMaxResolution: 2.00000000
+                mapMaxResolution: 2.00000000,
+                defaultZoom: 1
             }
         };
 
@@ -153,11 +169,13 @@
                 return Math.log(scale * mapMinResolution) / Math.LN2;
             };
             currentMap = new L.Map('map', {
-                maxZoom: map.mapMaxZoom + 3,
+                maxZoom: map.mapMaxZoom + 5,
                 minZoom: map.mapMinZoom,
                 crs: crs
             });
             currentTiles = L.tileLayer(mapId + '/{z}/{x}/{y}.png', {
+                tileSize: L.point(map.tileSize, map.tileSize),
+                //errorTileUrl: 'error_tile.png',
                 minZoom: map.mapMinZoom,
                 maxZoom: map.mapMaxZoom + 3,
                 maxNativeZoom: map.mapMaxZoom,
@@ -168,6 +186,7 @@
                 crs.unproject(L.point(map.mapExtent[2], map.mapExtent[3])),
                 crs.unproject(L.point(map.mapExtent[0], map.mapExtent[1]))
             ]);
+            currentMap.setView([map.mapExtent[1]/2, map.mapExtent[2]/2], map.defaultZoom);
             L.control.mousePosition().addTo(currentMap)
         }
         $("#map-select").change(function () {
