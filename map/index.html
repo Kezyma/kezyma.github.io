@@ -168,7 +168,7 @@
                 crs.unproject(L.point(map.mapExtent[2], map.mapExtent[3])),
                 crs.unproject(L.point(map.mapExtent[0], map.mapExtent[1]))
             ]);
-            L.control.mousePosition().addTo(map)
+            L.control.mousePosition().addTo(currentMap)
         }
         $("#map-select").change(function () {
             var newMap = $("#map-select option:selected").val();
