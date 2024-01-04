@@ -98,7 +98,8 @@
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
                 mapMaxResolution: 2.00000000,
-                defaultZoom: 2
+                defaultZoom: 2,
+                iconOffset: [1.5, -0.5]
             },
             "arktwend": {
                 mapExtent: [0.00000000, -21504.00000000, 13056.00000000, 0.00000000],
@@ -106,7 +107,8 @@
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
                 mapMaxResolution: 2.00000000,
-                defaultZoom: 1
+                defaultZoom: 2,
+                iconOffset: [0.5, -0.5]
             },
             "myar_aranath": {
                 mapExtent: [0.00000000, -12288.00000000, 16640.00000000, 0.00000000],
@@ -122,7 +124,8 @@
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
                 mapMaxResolution: 2.00000000,
-                defaultZoom: 2
+                defaultZoom: 2,
+                iconOffset: [1.5, -0.5]
             },
             "project_tamriel": {
                 mapExtent: [0.00000000, -22528.00000000, 48896.00000000, 0.00000000],
@@ -130,7 +133,8 @@
                 mapMinZoom: 0,
                 mapMaxZoom: 5,
                 mapMaxResolution: 2.00000000,
-                defaultZoom: 1
+                defaultZoom: 2,
+                iconOffset: [0.5, -0.5]
             },
             "tamriel_rebuilt_preview": {
                 mapExtent: [0.00000000, -23808.00000000, 24832.00000000, 0.00000000],
@@ -152,6 +156,10 @@
 
         var currentMap = null;
         var currentTiles = null;
+        var mapMarkerIcon = L.icon({
+            iconUrl: "marker.png",
+            iconSize: [12, 12]
+        })
 
         function loadMap(mapId) {
             if (currentMap != null) {
@@ -186,6 +194,45 @@
                 crs.unproject(L.point(map.mapExtent[2], map.mapExtent[3])),
                 crs.unproject(L.point(map.mapExtent[0], map.mapExtent[1]))
             ]);
+
+            var cellPath = mapId + "/cells.json"
+            $.get({
+                url: cellPath,
+                success: function (data) {
+                    console.log(data);
+                    var minX = 0;
+                    var minY = 0;
+                    var maxX = 0;
+                    var maxY = 0;
+                    for (var ix in data) {
+                        var cell = data[ix];
+                        if (cell.Grid[0] < minX) {
+                            minX = cell.Grid[0]
+                        }
+                        if (cell.Grid[1] < minY) {
+                            minY = cell.Grid[1]
+                        }
+                        if (cell.Grid[0] > maxX) {
+                            maxX = cell.Grid[0]
+                        }
+                        if (cell.Grid[1] > maxY) {
+                            maxY = cell.Grid[1]
+                        }
+                    }
+
+                    for (var ix in data) {
+                        var cell = data[ix];
+                        console.log(cell);
+                        if (cell.Id != "") {
+                            var marker = new L.Marker([(cell.Grid[1]-maxY + map.iconOffset[1]) * 256, (cell.Grid[0] - minX + map.iconOffset[0]) * 256], { icon: mapMarkerIcon });
+                            marker.bindPopup(cell.Id);
+                            marker.addTo(currentMap);
+                            console.log(marker);
+                        }
+                    }
+                }
+            })
+
             currentMap.setView([map.mapExtent[1]/2, map.mapExtent[2]/2], map.defaultZoom);
             L.control.mousePosition().addTo(currentMap)
         }
