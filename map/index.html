@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Morrowind</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+    <link rel="stylesheet"
+        href="https://cdn.rawgit.com/ardhi/Leaflet.MousePosition/master/src/L.Control.MousePosition.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" type="text/javascript"></script>
+    <script src="https://cdn.rawgit.com/ardhi/Leaflet.MousePosition/master/src/L.Control.MousePosition.js"
+        type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+        integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        html,
+        body,
+        #map {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+            background: #ffffff;
+        }
+
+        #slider {
+            position: absolute;
+            top: 66px;
+            right: 10px;
+            z-index: 5;
+        }
+
+        #page-container {
+            margin-top:-56px;
+            padding-top:56px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">Morrowind Map</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="nav-item">
+                    <div class="d-flex mb-0" role="search">
+                        <div id="galaxy-search-group" class="input-group">
+                            <select id="map-select" class="form-control" data-live-search="true"
+                                data-style="btn-outline-secondary">
+                                <option value="morrowind">Morrowind</option>
+                                <option value="arktwend">Arktwend</option>
+                                <option value="myar_aranath">Myar Aranath</option>
+                                <option value="tamriel_rebuilt">Tamriel Rebuilt</option>
+                                <option value="project_tamriel">Project Tamriel + Tamriel Rebuilt</option>
+                                <option value="tamriel_rebuilt_preview">Tamriel Rebuilt Preview</option>
+                                <option value="project_tamriel_tr_preview">Project Tamriel + Tamriel Rebuilt Preview</option>
+                            </select>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="page-container" class="container-fluid vh-100">
+        <div id="map"></div>
+        <!--<input id="slider" type="range" min="0" max="1" step="0.1" value="1" oninput="currentTiles.setOpacity(this.value)">-->
+    </div>
+    
+
+    <script type="text/javascript">
+        var maps = {
+            "morrowind": {
+                mapExtent: [0.00000000, -12288.00000000, 13568.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            },
+            "arktwend": {
+                mapExtent: [0.00000000, -21504.00000000, 13056.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            },
+            "myar_aranath": {
+                mapExtent: [0.00000000, -12288.00000000, 16640.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            },
+            "tamriel_rebuilt": {
+                mapExtent: [0.00000000, -17152.00000000, 20224.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            },
+            "project_tamriel": {
+                mapExtent: [0.00000000, -22528.00000000, 48896.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            },
+            "tamriel_rebuilt_preview": {
+                mapExtent: [0.00000000, -23808.00000000, 24832.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            },
+            "project_tamriel_tr_preview": {
+                mapExtent: [0.00000000, -23808.00000000, 50944.00000000, 0.00000000],
+                mapMinZoom: 0,
+                mapMaxZoom: 5,
+                mapMaxResolution: 2.00000000
+            }
+        };
+
+        var currentMap = null;
+        var currentTiles = null;
+
+        function loadMap(mapId) {
+            if (currentMap != null) {
+                currentMap.off();
+                currentMap.remove();
+            }
+            var map = maps[mapId]
+            var mapMinResolution = Math.pow(2, map.mapMaxZoom) * map.mapMaxResolution;
+            var crs = L.CRS.Simple;
+            crs.transformation = new L.Transformation(1, -map.mapExtent[0], -1, map.mapExtent[3]);
+            crs.scale = function (zoom) {
+                return Math.pow(2, zoom) / mapMinResolution;
+            };
+            crs.zoom = function (scale) {
+                return Math.log(scale * mapMinResolution) / Math.LN2;
+            };
+            currentMap = new L.Map('map', {
+                maxZoom: map.mapMaxZoom + 3,
+                minZoom: map.mapMinZoom,
+                crs: crs
+            });
+            currentTiles = L.tileLayer(mapId + '/{z}/{x}/{y}.png', {
+                minZoom: map.mapMinZoom,
+                maxZoom: map.mapMaxZoom + 3,
+                maxNativeZoom: map.mapMaxZoom,
+                noWrap: true,
+                tms: false
+            }).addTo(currentMap);
+            currentMap.fitBounds([
+                crs.unproject(L.point(map.mapExtent[2], map.mapExtent[3])),
+                crs.unproject(L.point(map.mapExtent[0], map.mapExtent[1]))
+            ]);
+            L.control.mousePosition().addTo(map)
+        }
+        $("#map-select").change(function () {
+            var newMap = $("#map-select option:selected").val();
+            loadMap(newMap);
+        });
+        loadMap("morrowind");
+    </script>
+
+</body>
+</html>
+
+
+
+
