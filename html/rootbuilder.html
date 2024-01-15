@@ -1,0 +1,212 @@
+<span id="k-title-tag">Root Builder</span>
+<div class="container pb-3">
+    <div class="card mt-3">
+        <img class="card-img" src="../img/nexus/rootbuilder.png" />
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h4>Root Builder is a plugin for Mod Organiser 2 that allows you to manage files in the base game directory.</h4>
+        </div>
+        <div class="card-body">
+            <p>Mod Organizer 2 doesn't support managing the base game folder for many games, instead managing a folder specific to modding. In the case of Bethesda games, this is the <code>Data</code> (or <code>Data Files</code> for Morrowind) folder.</p>
+            <p>Some mods also don't work with the virtual file system used by Mod Organizer 2 and need to be copied to the game folder directly. This is also not possible with Mod Organizer 2.</p>
+            <p>Root Builder solves these problems, allowing you to manage the base game folder by looking for a <code>Root</code> folder inside the one managed by Mod Organizer 2 and mapping it to the game folder.</p>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Installation</h2>
+        </div>
+        <div class="card-body">
+            <p>To install Root Builder, you first need to download it. The plugin is available both on NexusMods and Github.</p>
+            <a href="https://www.nexusmods.com/skyrimspecialedition/mods/31720" class="btn btn-primary" target="_blank">
+                <i class="fa-solid fa-download"></i> NexusMods
+            </a>
+            <a href="https://github.com/Kezyma/ModOrganizer-Plugins/releases/tag/rootbuilder" class="btn btn-primary" target="_blank">
+                <i class="fa-solid fa-download"></i> Github
+            </a>
+            <p class="mt-3">Once it is downloaded, browse to where Mod Organizer is installed and open the <code>plugins</code> folder. 
+                Extract the <code>rootbuilder</code> folder from zip file into <code>plugins</code> to install Root Builder.</p>
+            <p>To confirm that Root Builder has been installed correctly, launch Mod Organizer, click on <code>Tools</code> and then <code>Tool Plugins</code>. 
+                Root Builder should be listed here.</p>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Root Mods</h2>
+        </div>
+        <div class="card-body">
+            <p>Root Builder looks for a folder called <code>Root</code> within each mod installed and enabled in Mod Organizer, as well as the overwrite folder.
+            Any files found inside these folders will be mapped to the game folder when an application is launched through Mod Organizer.</p>
+            <p>Since most mods requiring Root Builder are not packaged in this way, they will need to be rearranged when installing them.</p>
+            <h3>Installing Mods</h3>
+            <p>If the mod was downloaded manually, move it to the <code>downloads</code> folder for your current Mod Organizer instance.</p>
+            <ul>
+                <li>For portable Mod Organizer instances, the <code>downloads</code> folder is inside the Mod Organizer folder.</li>
+                <li>For global Mod Organizer instances, launch Mod Organizer, click on <code>Tools</code> and then <code>Settings</code>, go to the <code>Paths</code> tab and the instance folder is listed here as the Base Directory, the <code>downloads</code> folder will be located inside here.</li>
+            </ul>
+            <p>In Mod Organizer, go to the <code>Downloads</code> tab and double-click the mod to start installing it.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/root_mods_1.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Skyrim Script Extender when installing through Mod Organizer.</figcaption>
+            </figure>
+            <p>Right click on <code>&lt;data&gt;</code>, then <code>Create Directory...</code>, name it <code>Root</code> and click OK. 
+                Drag any files that need to be installed directly to the game folder inside the <code>Root</code> folder you just made.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/root_mods_2.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Skyrim Script Extender with a Root folder, both the files that need to be installed to the game folder have been moved into it.</figcaption>
+            </figure>
+            <p>If there are any other files in the mod that can be managed by Mod Organizer normally, you can also move them to sit next to the <code>Root</code> folder and they will be handled by Mod Organizer as normal. 
+                Any files that aren't needed can also be unchecked so that they wont be installed.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/root_mods_3.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Skyrim Script Extender with a Root folder, the Scripts folder can be managed by Mod Organizer, so it has been moved next to the Root folder.</figcaption>
+            </figure>
+            <p>If the mod only contains a <code>Root</code> folder, Mod Organizer will continue to warn you that <code>The content of &lt;data&gt; does not look valid</code> but this can be safely ignored.
+                Once your mod is installed, you can right click on it and use <code>Ignore missing data</code> to stop Mod Organizer from warning you about it.</p>
+            <h3>Running Applications</h3>
+            <p>If the mod you installed contains an <code>exe</code> file in the <code>Root</code> folder that needs to be launched from the game folder, you can add the executable to Mod Organizer from the mod folder itself.
+                Root Builder will detect that you are trying to launch a file from a <code>Root</code> folder and redirect it to launch from the game folder when it is run through Mod Organizer.</p>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Functions</h2>
+        </div>
+        <div class="card-body">
+            <h3>Build, Sync & Clear</h3>
+            <p>Root Builder has three primary functions that run automatically at different times. 
+                Each can be triggered manually from the Tools menu in Mod Organizer or from the Root Builder configuration menu.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/tools_menu.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder in the Tools menu.</figcaption>
+            </figure>
+            <p>This section lists what each function does with default settings, however this is heavily customisable with Root Builder's configuration options.</p>
+            <h4>Build</h4>
+            <p>By default, a build is run every time an application is launched through Mod Organizer.</p>
+            <ul>
+                <li>If no cache of the game files exists, the game files will be hashed and then stored in the cache.</li>
+                <li>If no backup of the game files exists, the game files will be backed up.</li>
+                <li>Files in <code>Root</code> folders are copied to the game folder.</li>
+                <li>The list of files copied to the game folder is recorded and saved.</li>
+            </ul>
+            <h4>Sync</h4>
+            <ul>
+                <li>Any game files that came from <code>Root</code> folders and that have changed are copied back to the <code>Root</code> folder.</li>
+                <li>Any game files that are part of the base game and that have changed are copied to Mod Organizer's <code>overwrite</code> folder.</li>
+                <li>Any game files that are newly generated are copied to Mod Organizer's <code>overwrite</code> folder.</li>
+            </ul>
+            <h4>Clear</h4>
+            <p>By default, a clear is run every time Mod Organizer unlocks after running an application.</p>
+            <ul>
+                <li>A sync is run.</li>
+                <li>Any game files that came from <code>Root</code> folders are deleted.</li>
+                <li>Any game files that are part of the base game and that have changed are restored from the backup.</li>
+                <li>Any game files that are newly generated are deleted.</li>
+                <li>The list of files copied to the game folder is deleted.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Configuration</h2>
+        </div>
+        <div class="card-body">
+            <p>Root Builder has many different configuration options to customise how it functions. 
+                To access Root Builder's settings, launch Mod Organizer, click on <code>Tools</code>, <code>Tool Plugins</code>, <code>Root Builder</code> and then <code>Root Builder</code>.
+                This will open the Root Builder management menu.</p>
+            <h3>Mode</h3>
+            <p>Modes determine how Root Builder maps files from the <code>Root</code> folder to the game folder. By default, Root Builder uses Copy mode and this should generally not be changed without a specific reason.</p>
+            <table class="table table-sm table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Copy</td><td>Files are copied from <code>Root</code> folders to the game folder. Copied files are moved back to Mod Organizer when
+                    Root Builder clears.</td></tr>
+                    <tr><td>Link</td><td>Files are linked from <code>Root</code> folders to the game folder. Links are deleted when Root Builder clears.</td></tr>
+                    <tr><td>USVFS</td><td><code>Root</code> folders are mapped using Mod Organizer's virtual file system. <em>This is incompatible with many
+                        mods.</em></td></tr>
+                    <tr><td>USVFS + Link</td><td><code>Root</code> folders are mapped using Mod Organizer's virtual file system while <code>exe</code> and
+                    <code>dll</code> files are linked to the game folder.</td></tr>
+                    <tr><td>Custom</td><td>User specified rules to determine which files are copied, have links created or are mapped by Mod Organizer's virtual
+                    file system.</td></tr>
+                </tbody>
+            </table>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/mode_tab.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder's Mode configuration panel.</figcaption>
+            </figure>
+            <h3>Custom Mode</h3>
+            <p>Custom mode allows you to specify which mode Root Builder should use for each different file. This allows you to build custom configurations for almost any mod setup.</p>
+            <p>Each mode contains a list of files or folders that Root Builder should map from <code>Root</code> folders to the game folder.
+                Any files or folders that match anything included in the list will be handled by that mode. If a file or folder matches an item in multiple lists, the one with the lowest priority is used.</p>
+            <p>The custom mode settings support <a href="https://en.wikipedia.org/wiki/Glob_(programming)" target="_blank">glob wildcards</a> such as <code>**</code>, <code>*</code> and <code>?</code>.
+                These settings also support <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">regular expressions</a> if you apply a prefix of <code>r:</code> to your patterns.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/custom_tab.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder's Custom mode configuration panel.</figcaption>
+            </figure>
+            <h3>Settings</h3>
+            <p>Root Builder contains a variety of settings that can be toggled on or off. The purpose of each one is described below. 
+                There are generally very few reasons to change from the default options.</p>
+            <table class="table table-sm table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cache</td><td>File names (and hashes if applicable) are generated once and reused in future builds. If disabled, this is generated on every build.</td></tr>
+                    <tr><td>Backup</td><td>A backup of the entire game (minus exclusions) is taken and used to restore files that change while a build is in place. 
+                        If disabled, only files that are due to be overwritten are backed up during a build.</td></tr>
+                    <tr><td>Hash</td><td>Enables file hashing as the method to determine when files have been modified. If disabled, file size and modified date will be used instead.</td></tr>
+                    <tr><td>Autobuild</td><td>Root Builder will build whenever an application runs through Mod Organizer and clear whenever Mod Organizer is unlocked. If disabled, manual build and clear are required.</td></tr>
+                    <tr><td>Redirect</td><td>Enables redirection of <code>exe</code> files in <code>Root</code> folders so that they are run from the game folder instead.</td></tr>
+                    <tr><td>Installer</td><td>Enables an installer that attempts to detect when you install a mod with files that require Root Builder and repackage it automatically for you.</td></tr>
+                    <tr><td>Debug</td><td>Sets the log level for Root Builder logging. This has no effect unless you also modify the log level of Mod Organizer as well.</td></tr>
+                </tbody>
+            </table>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/settings_tab.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder's Settings configuration panel.</figcaption>
+            </figure>
+            <h3>Exclusions</h3>
+            <p>Files or folders can be listed in exclusions to have them entirely ignored by Root Builder. 
+                Any files or folders listed in exclusions will not be mapped from <code>Root</code> folders and will not be included in any backup or cache.</p>
+            <p>Exclusions support <a href="https://en.wikipedia.org/wiki/Glob_(programming)" target="_blank">glob wildcards</a> such as <code>**</code>, <code>*</code> and <code>?</code>.
+                These settings also support <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">regular expressions</a> if you apply a prefix of <code>r:</code> to your patterns.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/exclusions_tab.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder's Exclusions configuration panel.</figcaption>
+            </figure>
+            <h3>Actions</h3>
+            <p>The Actions tab at the bottom of the Root Builder configuration menu contains options to run a Build, Sync or Clear, for more information, see the Tools section.</p>
+            <p>This tab also contains options to delete or recreate the backup and/or cache for the current game. Deleting the backup and cache are usually the first option when troubleshooting issues.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/actions_tab.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder's Actions panel.</figcaption>
+            </figure>
+            <h3>Export</h3>
+            <p>The Export tab at the bottom of the Root Builder configuration menu allows you to export or import Root Builder
+                configurations, making it easy to share or back up custom settings for your game.</p>
+            <p>You can also reset Root Builder to default settings if you encounter issues with your configuration.</p>
+            <figure class="figure">
+                <img src="../img/pages/rootbuilder/export_tab.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Root Builder's Export panel.</figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Uninstall</h2>
+        </div>
+        <div class="card-body">
+            <p>To uninstall Root Builder, delete <code>rootbuilder</code> and <code>data\rootbuilder</code> from Mod Organizer's <code>plugins</code> folder.</p>
+        </div>
+    </div>
+</div>

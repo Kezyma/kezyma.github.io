@@ -1,0 +1,14 @@
+/* Hides the tag used to set page titles. */
+#k-title-tag {
+    display: none;
+}
+
+/* Hides the Leaflet attribution section in the corner. */
+a[href='https://leafletjs.com'] {
+    display: none;
+}
+
+/* Adds the click pointer to things that wouldn't otherwise have them. */
+.k-click {
+    cursor: pointer;
+}

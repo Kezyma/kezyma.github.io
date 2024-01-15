@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' />
+        <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+        <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+        <style>
+            .leaflet-tooltip { background-color: black; border: 1px solid #caa560; border-radius: 0; color: #caa560; }
+            .leaflet-tooltip::before { display: none; }
+        </style>
+    </head>
+    <body style='margin:0;padding:0;height:100vh;width:100vw;'>
+        <div id='map' style='height:100%;width:100%;background-color:#1e1c18;'></div>
+        <script>
+            
+$(document).ready(() => createMap('map', ''));
+
+// Stores whether the map markers are toggled on.
+var markerToggleOn = true;
+
+// Stores the leaflet map object.
+var map = null;
+
+// Function to create a map, requires the id of a div to create the map in and the path to the tiles (an empty string if the tile folders are located next to this file).
+function createMap(divId, tilePath) {
+
+    // Create the map using the tile images in folders.
+    var mapExtent = [0, -12032, 16384, 0];
+    var mapMinZoom = 0;
+    var mapMaxZoom = 6;
+    var mapMinResolution = Math.pow(2, mapMaxZoom);
+    var crs = L.CRS.Simple;
+    crs.transformation = new L.Transformation(1, -mapExtent[0], -1, mapExtent[3]);
+    crs.scale=function(zoom){return Math.pow(2, zoom)/mapMinResolution;};
+    crs.zoom=function(scale){return Math.log(scale*mapMinResolution)/Math.LN2;};
+    map = new L.Map(divId,{maxZoom: mapMaxZoom*2,minZoom: mapMinZoom,crs: crs,attributionControl: false});
+    var layer = L.tileLayer(tilePath + '{z}/{x}/{y}.png',{minZoom:mapMinZoom,maxNativeZoom:mapMaxZoom,maxZoom:mapMaxZoom*2,noWrap:true,tms:false}).addTo(map);
+    map.fitBounds([crs.unproject(L.point(mapExtent[2], mapExtent[3])),crs.unproject(L.point(mapExtent[0], mapExtent[1]))]);
+          
+    // Prepare layers and the icon to use for map markers.
+    var mwIcon = L.icon({
+        iconUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAO0lEQVQokWP8//8/AymAhYGBgWHb/ByidHklTmFkIsl4mA1IgBGHOrgLSLZhOGhADyWC8UGyDYykJg0AvqIMFsgeioQAAAAASUVORK5CYII=',
+        shadowUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGElEQVQokWNkYGD4z0ACYCJF8aiGkaQBAGOyARfDSz7hAAAAAElFTkSuQmCC',
+        iconSize: [12,12],
+        shadowSize: [12,12]
+    });
+    var doorMarkers = new L.FeatureGroup();
+    var cellMarkers = new L.FeatureGroup();
+
+    try {
+
+        // If cell data is present, add cell markers to the layer.
+        if (mapCells != null) {
+            for (var ix in mapCells) {
+                L.marker([((mapCells[ix].Grid[1])*256)-128, ((mapCells[ix].Grid[0])*256)+128], {icon: mwIcon}).addTo(cellMarkers).bindTooltip(mapCells[ix].Name);
+            }
+        }
+
+        // If door data is present, add door markers to the layer.
+        if (mapDoors != null) {
+            for (var ix in mapDoors) {
+                L.marker([((mapDoors[ix].Grid[1])*256)-256, ((mapDoors[ix].Grid[0])*256)], {icon: mwIcon}).addTo(doorMarkers).bindTooltip(mapDoors[ix].Name);
+            }
+        }
+
+        // Add appropriate markers to the map for the current zoom level.
+        if (map.getZoom() >= mapMaxZoom) { doorMarkers.addTo(map); }
+        else { cellMarkers.addTo(map); }
+
+        // Trigger switch between markers when zoom level changes.
+        map.on('zoomend', function () {
+            if (markerToggleOn) {
+                if (map.getZoom() >= mapMaxZoom) { map.addLayer(doorMarkers); map.removeLayer(cellMarkers); }
+                else { map.addLayer(cellMarkers); map.removeLayer(doorMarkers); }
+            }
+        });
+
+        // Add a toggle option to show or hide the map markers.
+        L.Control.MarkerToggle = L.Control.extend({
+            options: {position: 'topleft'},
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                container.style.fontSize = '1rem';
+                container.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
+                container.style.backgroundColor = 'white';
+                container.style.width = '30px';
+                container.style.height = '30px';
+                container.style.lineHeight = '30px';
+                container.style.textAlign = 'center';
+                container.onclick = function () {
+                    if (markerToggleOn == true) { map.removeLayer(cellMarkers); map.removeLayer(doorMarkers); markerToggleOn = false; }
+                    else if (map.getZoom() >= mapMaxZoom) { map.addLayer(doorMarkers); markerToggleOn = true; }
+                    else { map.addLayer(cellMarkers); markerToggleOn = true; }
+                }
+                return container;
+            }
+        });
+        var markerToggle = new L.Control.MarkerToggle({position:'topleft'}).addTo(map);
+    }
+    catch {}
+}
+
+        </script>
+        <script>var mapCells = null;</script>
+        <script>var mapDoors = null;</script>
+    </body>
+</html>

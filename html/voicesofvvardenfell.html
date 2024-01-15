@@ -1,0 +1,158 @@
+<span id="k-title-tag">Voices of Vvardenfell</span>
+<div class="container pb-3">
+    <div class="card mt-3">
+        <img class="card-img" src="../img/nexus/voicesofvvardenfell.png" />
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h4>Voices of Vvardenfell adds fully voiced dialogue to Morrowind, generated using <a
+                    href='https://elevenlabs.io/' target="_blank">ElevenAI</a>.</h4>
+        </div>
+        <div class="card-body">
+            <p>Morrowind contained some small dialogue lines that are heard as the player walks around, however it lacks
+                voiced dialogue for conversations, leading to a lot of reading being required.
+                Not only is this less immersive than having voiced dialogue, but also makes the game hard or impossible
+                to play for those who struggle with reading.</p>
+            <p>Voices of Vvardenfell is a project that aims to voice every dialogue line in Morrowind as well as
+                Tribunal, Bloodmoon and the Official Plugins.
+                It also contains a framework that allows modders to add voices to dialogue with no scripting or modding
+                experience required.</p>
+
+            <iframe style="height: 50vw; max-height: 600px; width: 100%;" src="https://www.youtube.com/embed/xZX5ML6YvJo?si=jirM46cAd3K-bikQ" title="Voices of Vvardenfell Demo" frameborder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Installation</h2>
+        </div>
+        <div class="card-body">
+            <p>To install Voices of Vvardenfell, you first need to download it. The mod is available on NexusMods.</p>
+            <a href="https://www.nexusmods.com/morrowind/mods/52279" class="btn btn-primary mb-3" target="_blank">
+                <i class="fa-solid fa-download"></i> NexusMods
+            </a>
+            <h3>Requirements</h3>
+            <p>Voices of Vvardenfell requires the following mods to function, ensure they are all installed before
+                proceeding.</p>
+            <ul>
+                <li><a href='https://www.nexusmods.com/morrowind/mods/41102'>MGE XE</a></li>
+                <li><a href='https://github.com/MWSE/MWSE/releases'>MWSE</a></li>
+            </ul>
+            <h3>Mod Manager Install</h3>
+            <p>It is best to install Voices of Vvardenfell through a mod manager, as it is packaged as a FOMOD installer.
+            </p>
+            <figure class="figure">
+                <img src="../img/pages/voicesofvvardenfell/fomod_installer.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Voices of Vvardenfell's FOMOD installer.</figcaption>
+            </figure>
+            <p>The <strong>Voices of Vvardenfell</strong> option in the <strong>Core</strong> section contains the
+                script and all voice files for Morrowind.</p>
+            <p>The <strong>Patch for Purists</strong> option in the <strong>Patches</strong> section contains extra
+                voice files to support <a href='https://www.nexusmods.com/morrowind/mods/45096' target="_blank">Patch
+                    for Purists</a>.</p>
+            <p>The options in the <strong>Extras</strong> section contain voice files with alternative voices for
+                Almalexia and Neloth, created by <a href='https://www.nexusmods.com/morrowind/users/174053001'
+                    target="_blank">FurbyZones</a>.</p>
+            <h3>Manual Install</h3>
+            <p>It is not suggested to install Voices of Vvardenfell manually, however it can still be done.</p>
+            <p>Open the Voices of Vvardenfell zip file, each folder within it corresponds to one of the options in the
+                FOMOD installer.
+                Open the folders for each option you wish to install and copy the contents to Morrowind's
+                <code>Data Files</code> folder.</p>
+            <h3>Greetings Mode</h3>
+            <p>Voices of Vvardenfell has an optional greetings only mode. This can be enabled from the mod configuration menu.
+                If enabled, only the initial line of dialogue when speaking to an NPC will be played.
+            </p>
+            <figure class="figure">
+                <img src="../img/pages/voicesofvvardenfell/mod_configuration.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Voices of Vvardenfell's mod configuration menu.</figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Progress</h2>
+        </div>
+        <div class="card-body">
+            <h3>Morrowind Progress</h3>
+            <table id="vov-mw-progress" class="table table-striped table-sm table-dark w-100"></table>
+            <h3 class="mt-3">Patch for Purists Progress</h3>
+            <table id="vov-pfp-progress" class="table table-striped table-sm table-dark w-100"></table>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Adding Voices</h2>
+        </div>
+        <div class="card-body">
+            <h3>File Structure</h3>
+            <p>Lines are searched for in a priority order, so each voice can have a generic line, with specific NPCs, factions and faction ranks having further lines that can override them.
+                Placing a file in the appropriate location for dialogue in the game will result in it being played whenever that dialogue is triggered.</p>
+            <p>Voices of Vvardenfell's plugin searches for voices in Morrowind's <code>Data Files</code> folder. The
+                first file found is the one that is played, searching in the following locations.</p>
+            <ul>
+                <li><code>Sound\Vo\AIV\{race}\{sex}\{actor_id}\{faction_id}\{faction_rank}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\{race}\{sex}\{actor_id}\{faction_id}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\{race}\{sex}\{actor_id}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\{race}\{sex}\{faction_id}\{faction_rank}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\{race}\{sex}\{faction_id}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\{race}\{sex}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\creature\{actor_id}\{faction_id}\{faction_rank}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\creature\{actor_id}\{faction_id}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\creature\{actor_id}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\creature\{faction_id}\{faction_rank}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\creature\{faction_id}\{info_id}.mp3</code></li>
+                <li><code>Sound\Vo\AIV\creature\{info_id}.mp3</code></li>
+            </ul>
+            <p>Below are some examples for where a voice file for a line with an <code>info_id</code> of 123456.</p>
+            <ul>
+                <li><code>Sound\Vo\AIV\wood elf\f\123456.mp3</code>
+                    <ul>
+                        <li>A generic voice line played by any female Wood Elf.</li>
+                    </ul>
+                </li>
+                <li><code>Sound\Vo\AIV\imperial\m\caius cosades\123456.mp3</code>
+                    <ul>
+                        <li>A voice line played by Caius Cosades.</li>
+                    </ul>
+                </li>
+                <li><code>Sound\Vo\AIV\dark elf\m\aryon\Telvanni\1\123456.mp3</code>
+                    <ul>
+                        <li>A voice line played by Aryon, exclusively for members of Great House Telvanni at the rank of Retainer.</li>
+                    </ul>
+                </li>
+                <li><code>Sound\Vo\AIV\creature\dagoth_ur_1\123456.mp3</code>
+                    <ul>
+                        <li>A voice line played by Dagoth Ur.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Extracting Lines</h3>
+            <p>A tool is available to extract dialogue (including every required part of the file path) from <code>esp</code> and <code>esm</code> files and save it as a <code>csv</code> for easy browsing. The latest version is available on Github.</p>
+            <p>The Line Extraction tool requires <a href='https://dotnet.microsoft.com/en-us/download/dotnet/7.0'>.NET 7.0</a> to be installed or it will not run.
+                An active internet connection is also required to download <a href='https://github.com/Greatness7/tes3conv'>tes3conv</a>.</p>
+            <a href="https://github.com/Kezyma/AI-Voices/tree/main/Tools/LineExtractor" class="btn btn-primary mb-3" target="_blank">
+                <i class="fa-solid fa-download"></i> Github
+            </a>
+            <p>To use the tool, create a folder called <code>Esp</code> next to <code>Kezyma.MorrowindLineExtractor.exe</code> and place the <code>esp</code> and/or <code>esm</code> files you want to extract inside it. You must also include any dependencies of these mods or the extraction will fail.</p>
+            <p>Run <code>Kezyma.MorrowindLineExtractor.exe</code> and a <code>Csv</code> folder will be created with a <code>csv</code> file for each <code>esp</code> or <code>esm</code> that was extracted. 
+                Please note, the InfoId of each row has <code>_</code> added to the start to prevent Excel from formatting the column incorrectly, this should not be included in the file's name.</p>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Uninstall</h2>
+        </div>
+        <div class="card-body">
+            <p>To uninstall Voices of Vvardenfell, delete it from your mod manager, or in the case of a manual install,
+                remove the following files/folders from Morrowind's <code>Data Files</code> folder.</p>
+            <ul>
+                <li><code>Textures\AI Voices\</code></li>
+                <li><code>Sound\Vo\AIV\</code></li>
+                <li><code>MWSE\mods\AI Voices\</code></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="../js/page.voicesofvvardenfell.js"></script>

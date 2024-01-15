@@ -1,0 +1,99 @@
+<span id="k-title-tag">Map Builder</span>
+<div class="container pb-3">
+    <div class="card mt-3">
+        <img class="card-img" src="../img/nexus/mapbuilder.png" />
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h4>Map Builder is a tool that allows you to build an interactive map of Morrowind for a specific mod list.</h4>
+        </div>
+        <div class="card-body">
+            <p>Morrowind has a console command called <code>CreateMaps</code> which can be used to generate images of every local map in the game using the current list of mods.</p>
+            <p>Map Builder is able to take these local maps and generate an interactive web map complete with world and local map markers that is specific to an individual mod list.
+                It can also optionally stitch the local maps together to create one large map image.</p>
+            <p>A selection of demo maps generated with Map Builder can be explored below.</p>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Instructions</h2>
+        </div>
+        <div class="card-body">
+            <h3>Generating Map Tiles</h3>
+            <p>Before you can use Map Builder to create an interactive map, you first need to generate local map tiles in Morrowind for it to use. 
+                The following steps will allow you to use the <code>CreateMaps</code> console command to create them.</p>
+            <ol> 
+                <li><strong>Install <a href='https://www.nexusmods.com/morrowind/mods/19510'>Morrowind Code Patch</a></strong>, by default <code>CreateMaps</code> will load all cells in the game, including interiors, this patch contains a fix so that only exterior cells will be loaded.</li>
+                <li><strong>Remove <a href='https://www.nexusmods.com/morrowind/mods/41102'>MGE XE</a> from your game entirely</strong>, <code>CreateMaps</code> requires Morrowind's pixel shader to properly render water, this mod disables it. If you get an error that MGE XE is missing when launching the game, you left some files behind.</li>
+                <li><strong>(Optional) Disable mods that don't affect the worldspace</strong>, if loading any cell in the game causes a crash due to mod issues, you won't be able to completely generate maps and disabling them will improve performance regardless. 
+                    Only mods listed below should be enabled.
+                <ul>
+                    <li>New lands mods, which add new areas to the world map.</li>
+                    <li>Location overhauls, which modify the layout or buildings in exterior locations.</li>
+                    <li>Texture and mesh replacers, any that alter trees, landscape or architecture will show on the map.</li>
+                </ul></li>
+                <li><strong>Update <code>Morrowind.ini</code> and set <code>Create Maps Enable=2</code></strong>, this enables the <code>CreateMaps</code> console command and sets it to export maps for exteriors.</li>
+                <li><strong>Create a <code>Maps</code> folder inside Morrowind</strong>, <code>CreateMaps</code> saves images to the <code>Maps</code> folder, but it will not create the folder if it isn't already there.</li>
+                <li><strong>Enable the pixel shader in the Morrowind Launcher</strong>, this is required for water to render properly in the images generated. Without it, water will be a flat white colour.</li>
+                <li><strong>(Optional) Set the resolution to 640x480 and switch to Window mode</strong>, while in the Morrowind Launcher, making these changes will speed things up and also allow you to alt-tab out of the game while maps are generating.</li>
+                <li><strong>Launch Morrowind and start a new game</strong>, a new game will have fewer scripts running and therefore fewer chances to crash.</li>
+                <li><strong>Open the console with <code>`</code> before the prompt to enter your name</strong>, this minimises the number of scripts running, it's not important however and you can do this after entering your name.</li>
+                <li><strong>Run the console command <code>CreateMaps "Morrowind.esm"</code></strong>, this will teleport the player to every external cell in the game and export an image of the local map to the <code>Maps</code> folder.</li>
+                <li><strong>Exit the game when new cells stop loading</strong>, you will normally be sitting in the sea when it's complete, just close the game and check the tiles are in your <code>Maps</code> folder.</li>
+            </ol>
+            <h3>Using Map Builder</h3>
+            <p>Once you have all the map tiles generated from Morrowind, you will need to download Map Builder, it is available on NexusMods.</p>
+            <a href="https://www.nexusmods.com/morrowind/mods/53963" class="btn btn-primary" target="_blank">
+                <i class="fa-solid fa-download"></i> NexusMods
+            </a>
+            <ol class="mt-3">
+                <li><strong>Run <code>MapGenerator.exe</code></strong>, if you are using <a href="https://github.com/ModOrganizer2/modorganizer" target="_blank">Mod Organizer</a>, run
+                <code>MapGenerator.exe</code> through Mod Organizer.</li>
+                <li><strong>Select the path to your Morrowind game folder</strong>, if your <code>Maps</code> folder hasn't been moved, it will be automatically detected, if not, please select it separately.</li>
+                <li><strong>Select a path where you would like the final map to be saved</strong>, this can be any folder that exists, preferably somewhere with a reasonable amount of storage space available.</li>
+                <li><strong>(Optional) Check the box to generate a fill-size image of the map</strong>, if enabled, this will export a large <code>png</code> file with all the tiles stitched together. It may be scaled down if your map is too large.</li>
+                <li><strong>(Optional) Check the box to export coordinates from your mod list</strong>, if enabled, map markers and door markers will be exported from your mod list and added to the final map.</li>
+                <li><strong>(Optional) Check the box to compress images</strong>, this takes significantly longer, but will reduce the size of the final map by a lot. This is ideal if you intend to publish the map online, but is otherwise not needed.</li>
+                <li><strong>Click on <code>Generate Map</code> and wait for it to complete</strong>, it can and will take a long time, Map Builder may stop responding but it is almost certainly still running.</li>
+                <li><strong>Open <code>map.html</code> to view the demo</strong>, the final map is generated in your output folder.</li>
+            </ol>
+            <h3>Command Line Arguments</h3>
+            <p><code>MapGenerator.exe</code> can be called from the command line instead of through the GUI if desired.</p>
+            <p>The first two arguments are the path to the Morrowind game folder and the path to your output folder. If you have moved the <code>Maps</code> folder, it should be passed as the third argument.</p>
+            <p><code>MapGenerator.exe "path\to\morrowind" "path\to\output"</code><br/>
+            <code>MapGenerator.exe "path\to\morrowind" "path\to\output" "path\to\maps"</code></p>
+            <p>To enable the other settings, further arguments should be added to the end.</p>
+            <p><code>MapGenerator.exe "path\to\morrowind" "path\to\output" bigmap markers compress</code></p>
+            <ul>
+                <li><code>bigmap</code> enables generation of the full-size map image.</li>
+                <li><code>markers</code> enables exporting coordiantes from the mod list.</li>
+                <li><code>compress</code> enables image compression of the generated map.</li>
+            </ul>
+            <h3>Generated Files</h3>
+            <ul>
+                <li>A series of numbered folders, each folder represents a zoom level on the map, the folder with the largest number contains the images generated by <code>CreateMaps</code>.</li>
+                <li><strong><code>map.html</code></strong>, a demo webpage with the generated map, can be opened in your browser of choice.</li>
+                <li><strong><code>map.png</code></strong>, if you generated a full-size map image, this will be that image.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-body">
+            <select id="mb-map-select" class="form-control bg-secondary text-light">
+                <option value="morrowind">Morrowind</option>
+                <option value="morrowind_rebirth">Morrowind Rebirth</option>
+                <option value="tamriel_rebuilt">Tamriel Rebuilt</option>
+                <option value="project_tamriel">Tamriel Rebuilt + Project Tamriel</option>
+                <option value="tamriel_rebuilt_preview">Tamriel Rebuilt (Preview)</option>
+                <option value="project_tamriel_tr_preview">Tamriel Rebuilt (Preview) + Project Tamriel</option>
+                <option value="arktwend">Arktwend</option>
+                <option value="myar_aranath">Myar Aranath</option>
+            </select>
+        </div>
+        <iframe id="mb-map-frame" src="../map/morrowind/map.html" class="card-img"
+            style="height:50vmax;max-height: 1140px;"></iframe>
+    </div>
+</div>
+<script src="../js/page.mapbuilder.js"></script>
+
+

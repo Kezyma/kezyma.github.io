@@ -1,0 +1,118 @@
+<span id="k-title-tag">Mechanics Remastered</span>
+<div class="container pb-3">
+    <div class="card mt-3">
+        <img class="card-img" src="../img/nexus/mechanicsremastered.png" />
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h4>Mechanics Remastered reworks and introduces modern mechanics for Morrowind while keeping in the spirit of the original game.</h4>
+        </div>
+        <div class="card-body">
+            <p>Players coming from later entries in The Elder Scrolls series often have complaints about some of the mechanics in Morrowind and many people avoid playing the game as a result.</p>
+            <p>Mechanics Remastered aims to modernise those systems while retaining the original calculations in the game to prevent gameplay from being significantly different.</p>
+            <p>This mod contains the following optional features;</p>
+            <ul>
+                <li><strong>Always Hit</strong>, causing all weapon attacks to hit.</li>
+                <li><strong>Always Cast</strong>, preventing any failed spell casting attempts.</li>
+                <li><strong>Health Regeneration</strong>, adding passive health regeneration when outside combat.</li>
+                <li><strong>Magicka Regeneration</strong>, adding passive magicka regeneration (except for the Atronach).</li>
+                <li><strong>Uncapped Attribute Bonuses</strong>, eliminating the temptation to min-max skills each time you level up.</li>
+                <li><strong>Persist Skill Increase Bonuses</strong>, stopping unused skill increases from being wasted each time you level up.</li>
+                <li><strong>State-Based Health Increase</strong>, preveneting the need to always increase endurance early in the game to maximise total health.</li>
+                <li><strong>Fast Travel</strong>, enabling modern fast travel from the world map, similar to later games in the series.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Installation</h2>
+        </div>
+        <div class="card-body">
+            <p>To install Mechanics Remastered, you first need to download it. The mod is available on NexusMods.</p>
+            <a href="https://www.nexusmods.com/morrowind/mods/53606" class="btn btn-primary mb-3" target="_blank">
+                <i class="fa-solid fa-download"></i> NexusMods
+            </a>
+            <h3>Requirements</h3>
+            <p>Mechanics Remastered requires <a href='https://github.com/MWSE/MWSE/releases'>MWSE</a> to function, ensure the latest release is installed before continuing.</p>
+            <h3>Install</h3>
+            <p>Install Mechanics Remastered using your mod manager. If installing manually, extract Mechanics Remastered to Morrowind's <code>Data Files</code> folder.</p>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Features</h2>
+        </div>
+        <div class="card-body">
+            <p>Mechanics Remastered contains a selection of features that can be toggled on or off depending on user preference.
+                These settings can be accessed from the mod configuration menu.
+            </p>
+            <figure class="figure">
+                <img src="../img/pages/mechanicsremastered/mod_configuration.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Mechanics Remastered's configuration menu.</figcaption>
+            </figure>
+            <h3>Always Hit</h3>
+            <p>The 'Always Hit' module converts the initial hit chance of attacks into damage modifiers. This preserves the average DPS of attacks, while making combat more consistent.<br />
+                <em>e.g. An attack with a 50% chance to hit will always land, but the attack will inflict 50% of the damage that it would in the base game.</em></p>
+            <p>To prevent stum locking due to hits always causing stagger, the original dice roll to hit will be used to determine if the attack causes staggering, matching the base game.<br/>
+                <em>e.g. An attack with a 50% chance to hit will always land, but will only cause a stagger 50% of the time.</em></p>
+            <p>To prevent on-strike enchanted weapons from being overpowered, the charge cost of enchanted weapons is scaled to the hit chance.<br />
+                <em>e.g. An attack with a 50% chance to hit will consume 2x the total charges from any on-strike enchantment.</em></p>
+            <p>To prevent weapon and armour skills increasing faster. The amount of skill gain is also scaled based on the hit chance of the attack.<br />
+                <em>e.g. An attack with a 50% chance to hit will increase the weapon skill (or armour skill if the attack targets the player) 50% as much.</em></p>
+            <h3>Always Cast</h3>
+            <p>The 'Always Cast' module converts the initial cast chance of spells into a magicka cost modifier. This preserves the average magicka cost to cast each spell.<br/>
+                <em>e.g. A spell with a 50% chance to cast will always cast, but will cost 2x the original magicka.</em></p>
+            <p>To prevent spamming of high powered spells in combat, the casting animation time also scales based on cast chance (up to a maximum of 5x the original cast time).<br/>
+                <em>e.g. A spell with a 50% chance to cast will take 2x longer for the casting animation to play.</em></p>
+            <p>The spell list menu is updated to display the current and minimum cost to cast a given spell as opposed to the original cost and chance.</p>
+            <figure class="figure">
+                <img src="../img/pages/mechanicsremastered/magic_menu.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Updated magic menu displaying the current cast cost and the minimum possible cost.</figcaption>
+            </figure>
+            <h3>Health Regeneration</h3>
+            <p>The 'Health Regeneration' module enables passive health regeneration at the same rate as when resting (10% of Endurance per hour by default). Health regeneration does not happen while in combat.</p>
+            <h3>Magicka Regeneration</h3>
+            <p>The 'Magicka Regeneration' module enables passive magicka regeneration at the same rate as when resting (15% of Intelligence per hour by default).</p>
+            <h3>Uncapped Attribute Bonuses</h3>
+            <p>The 'Uncapped Attribute Bonuses' module allows stacking of attribute bonuses during level up to allow for catching up if the player didn't min-max.<br />
+                <em>e.g. If you have 15 skill increases in Strength skills, you will recieve the bonus for 10 increases (+5) as well as the bonus for 5 increases (+3) for a total bonus of +8.</em></p>
+            <p>To prevent overleveling of attributes, bonuses are limited to the maximum possible for your current level.<br/>
+                <em>e.g. If you started with 50 Strength, when you reach level 2, you cannot raise your Strength higher than 55 with bonuses. When you reach level 3, you cannot raise your Strength higher than 60 with bonuses.</em></p>
+            <figure class="figure">
+                <img src="../img/pages/mechanicsremastered/level_up.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Updated level up menu showing uncapped attribute bonuses.</figcaption>
+            </figure>
+            <h3>Persist Skill Increase Bonuses</h3>
+            <p>The 'Persist Skill Increase Bonuses' module causes any excess skill increases that didn't count towards attribute increases to persist through to the next level.<br/>
+                <em>e.g. If you had 10 skill increases in Strength skills, but did not pick Strength when leveling up, those 10 increases will count during the next level up. 
+                    If you had 15 skill increases in Strength skills and you did pick Strength when leveling up, 5 of those increases will count during the next level up.</em></p>
+            <h3>State-Based Health Increase</h3>
+            <p>The 'State-Based Health Increase' module retroactively calculates your health each level up as though you had optimally increased your Endurance (+5 each level). 
+                This prevents the need to increase Endurance early in the game to maximise potential health.</p>
+            <h3>Fast Travel</h3>
+            <p>The 'Fast Travel' module adds fast travel to the world map. If the player is not in combat, not over-encumbered and is not in an interior, clicking an icon on the world map gives the option to travel to that location. 
+            Time passes equivalent to the player traveling there directly at their walking speed.</p>
+            <p>Travel destination is picked from the first valid spot on this list;</p>
+            <ul>
+                <li>Silt Strider, Boat, or Gondolier location.</li>
+                <li>Divine Intervention location.</li>
+                <li>Almsivi Intervention location.</li>
+                <li>Any door above water level.</li>
+                <li>The center of the cell.</li>
+            </ul>
+            <figure class="figure">
+                <img src="../img/pages/mechanicsremastered/fast_travel.png" class="figure-img img-fluid rounded" />
+                <figcaption class="figure-caption">Fast travel using the map.</figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="card text-light mt-3">
+        <div class="card-header">
+            <h2>Uninstall</h2>
+        </div>
+        <div class="card-body">
+            <p>To uninstall Mechanics Remastered, delete it from your mod manager, or in the case of a manual install,
+                remove <code>MWSE\mods\MechanicsRemastered\</code> from Morrowind's <code>Data Files</code> folder.</p>
+        </div>
+    </div>
+</div>
