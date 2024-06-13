@@ -58,7 +58,7 @@
     </style>
 
     <div class="container-fluid text-center">
-        <div id="share-card" class="card p-0 mt-3 text-dark" style="max-width:1280px;margin:0 auto;">
+        <div id="share-card" class="card p-0 mt-3 text-dark d-none" style="max-width:1280px;margin:0 auto;">
             <div class="card-header">
                 <h4 id="share-title" class="m-0"></h4>
             </div>
@@ -221,6 +221,7 @@
         function bindShared() {
             var urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has("s") && urlParams.has("r")) {
+                $("#share-card").removeClass("d-none");
                 var s = urlParams.get("s");
                 var r = urlParams.get("r");
                 var season = raceList.filter(x => x.Key == s)[0];
