@@ -42,6 +42,12 @@
             z-index: 12;
         }
 
+        #share-btn {
+            background-size: 101% 101% !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+
         #share-btn-icon {
             color: red;
             font-size: 125px;
@@ -224,7 +230,7 @@
                 var flag = `flags/${findFlag(round.Code)}`;
 
                 if (round.Url != "") {
-                    var button = $(`<a href='${round.Url}' class='btn' target='_blank' style='background: url(${flag});background-size:cover;width:270px;height:180px;max-width:95vw;${goodStyle}'><i id="share-btn-icon" class="bi bi-play-fill"></i></a>`);
+                    var button = $(`<a id="share-btn" href='${round.Url}' class='btn' target='_blank' style='background: url(${flag});width:270px;height:180px;max-width:95vw;${goodStyle}'><i id="share-btn-icon" class="bi bi-play-fill"></i></a>`);
                     $("#share-button-col").append(button);
 
                     var text = `Someone has shared the ${season.Key} ${round.Name} with you. Please click the flag to open the full race on YouTube.`;
@@ -291,7 +297,7 @@
             },
             {
                 "Key": "AME",
-                "Value": "Flag_of_the_United_States_(DoS_ECA_Color_Standard).svg.png"
+                "Value": "Flag_of_the_United_States_DoS_ECA_Color_Standard.svg.png"
             },
             {
                 "Key": "AND",
@@ -311,7 +317,7 @@
             },
             {
                 "Key": "AUS",
-                "Value": "Flag_of_Australia_(converted).svg.png"
+                "Value": "Flag_of_Australia_converted.svg.png"
             },
             {
                 "Key": "AUT",
@@ -351,7 +357,7 @@
             },
             {
                 "Key": "EML",
-                "Value": "Flag_of_Emilia-Romagna_(de_facto).svg.png"
+                "Value": "Flag_of_Emilia-Romagna_de_facto.svg.png"
             },
             {
                 "Key": "ESP",
@@ -371,7 +377,7 @@
             },
             {
                 "Key": "GBR",
-                "Value": "Flag_of_the_United_Kingdom_(1-2).svg.png"
+                "Value": "Flag_of_the_United_Kingdom_1-2.svg.png"
             },
             {
                 "Key": "HUN",
@@ -423,7 +429,7 @@
             },
             {
                 "Key": "PHI",
-                "Value": "Flag_of_Australia_(converted).svg.png"
+                "Value": "Flag_of_Australia_converted.svg.png"
             },
             {
                 "Key": "POR",
@@ -439,7 +445,7 @@
             },
             {
                 "Key": "ROM",
-                "Value": "Flag_of_Emilia-Romagna_(de_facto).svg.png"
+                "Value": "Flag_of_Emilia-Romagna_de_facto.svg.png"
             },
             {
                 "Key": "SEP",
@@ -459,7 +465,7 @@
             },
             {
                 "Key": "TER",
-                "Value": "Flag_of_Teruel_(province).svg.png"
+                "Value": "Flag_of_Teruel_province.svg.png"
             },
             {
                 "Key": "THA",
@@ -471,15 +477,15 @@
             },
             {
                 "Key": "USA",
-                "Value": "Flag_of_the_United_States_(DoS_ECA_Color_Standard).svg.png"
+                "Value": "Flag_of_the_United_States_DoS_ECA_Color_Standard.svg.png"
             },
             {
                 "Key": "VAL",
-                "Value": "Flag_of_the_Land_of_Valencia_(official).svg.png"
+                "Value": "Flag_of_the_Land_of_Valencia_official.svg.png"
             },
             {
                 "Key": "YUG",
-                "Value": "Flag_of_Yugoslavia_(1946-1992).svg.png"
+                "Value": "Flag_of_Yugoslavia_1946-1992.svg.png"
             },
             {
                 "Key": "ZAF",
@@ -487,7 +493,7 @@
             },
             {
                 "Key": "KAZ",
-                "Value": "Flag_of_Kazakhstan_(President_of_Kazakhstan_website).svg.png"
+                "Value": "Flag_of_Kazakhstan_President_of_Kazakhstan_website.svg.png"
             },
             {
                 "Key": "FIN",
