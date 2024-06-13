@@ -11,6 +11,8 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cyborg/bootstrap.min.css"
         integrity="sha384-nEnU7Ae+3lD52AK+RGNzgieBWMnEfgTbRHIwEvp1XXPdqdO6uLTd/NwXbzboqjc2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
 </head>
 
 <body>
@@ -39,9 +41,29 @@
             top: 0;
             z-index: 12;
         }
+
+        #share-btn-icon {
+            color: red;
+            font-size: 125px;
+            top: -7px;
+            position: relative;
+            text-shadow: 0px 0px 3px darkred;
+        }
     </style>
 
-    <div class="container-fluid text-center"> 
+    <div class="container-fluid text-center">
+        <div id="share-card" class="card p-0 mt-3 text-dark" style="max-width:1280px;margin:0 auto;">
+            <div class="card-header">
+                <h4 id="share-title" class="m-0"></h4>
+            </div>
+            <div id="share-body" class="card-body">
+                <div class="row">
+                    <div id="share-button-col" class="col-12 col-xs-7 col-sm-6 col-md-5 col-lg-4">
+                    </div>
+                    <div id="share-text-col" class="col-12 col-xs-5 col-sm-6 col-md-7 col-lg-8"></div>
+                </div>
+            </div>
+        </div>
         <div class="card p-0 mt-3 mb-3 text-dark" style="max-width:1280px;margin:0 auto;">
             <div class="card-header">
                 <h3 class="m-0">MotoGP Races on YouTube</h3>
@@ -54,6 +76,31 @@
                 <p>If you find a race on YouTube that is missing from this list, or if you find an issue with a race
                     listed here, such as being the incorrect or incomplete race, or a broken link, please report it
                     using this <a href="https://forms.gle/G29SxrkNyZ4Qbspq8" target="_blank">Google form</a>.</p>
+            </div>
+            <div class="card-body">
+                You can generate a link to share any race from a specific season using the dropdowns below.
+                <br />
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+<div class="input-group mt-1" style="margin:0 auto;">
+    <span class="input-group-text">Select Race</span>
+    <select id="season-select" class="form-control bg-light text-dark" style="max-width:80px;border:none;"></select>
+    <select id="race-select" class="form-control bg-light text-dark" style="border:none;"></select>
+</div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+<div class="input-group mt-1" style="margin:0 auto;">
+    <span class="input-group-text">Share URL</span>
+    <input id="race-url" type="text" class="form-control bg-light text-dark" disabled />
+    <button id="url-copy-btn" type="button" class="btn btn-sm btn-light"><i class="bi bi-copy"></i></button>
+</div>
+                    </div>
+                </div>
+                
+                <br />
+                
+                
+                
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive-xxl">
@@ -103,17 +150,103 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script>
+        var goodStyle = "filter:drop-shadow(2px 2px 2px black);";
+        var badStyle = "filter: opacity(0.2) grayscale(1);";
+
         $(document).ready(function () {
+            bindGrid();
+            bindShared();
+            bindSeasonSelect();
+            bindUrlCopy();
+            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        });
+
+        function bindUrlCopy() {
+            $("#url-copy-btn").click(function () {
+                var url = $("#race-url").val();
+                navigator.clipboard.writeText(url);
+                alert("Copied!");
+            });
+        }
+
+        function bindSeasonSelect() {
+            for (var ix in raceList) {
+                var season = raceList[ix];
+                $("#season-select").append($(`<option value='${season.Key}'>${season.Key}</option>`));
+
+                $("#season-select").change(function () {
+                    var val = $("#season-select").val();
+                    bindRaceSelect(val);
+                });
+
+                bindRaceSelect($("#season-select").val());
+            }
+        }
+
+        function generateShareUrl() {
+            var baseUrl = "https://kezyma.github.io/motogp";
+            var season = $("#season-select").val();
+            var round = $("#race-select").val();
+            round++;
+            $("#race-url").val(`${baseUrl}?s=${season}&r=${round}`);
+        }
+
+        function bindRaceSelect(season) {
+            var races = raceList.filter(x => x.Key == season)[0];
+            $("#race-select").html("");
+            for (var ix in races.Value) {
+                var race = races.Value[ix];
+                var rnd = ix;
+                rnd++;
+                $("#race-select").append($(`<option value='${ix}'>${(rnd)} ${race.Name}</option>`));
+
+                $("#race-select").change(function () {
+                    generateShareUrl();
+                });
+            }
+
+            generateShareUrl();
+        }
+
+
+        function bindShared() {
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has("s") && urlParams.has("r")) {
+                var s = urlParams.get("s");
+                var r = urlParams.get("r");
+                var season = raceList.filter(x => x.Key == s)[0];
+                var round = season.Value[r - 1];
+
+                $("#share-title").append(`${s} ${round.Name}`);
+                var flag = `flags/${findFlag(round.Code)}`;
+
+                if (round.Url != "") {
+                    var button = $(`<a href='${round.Url}' class='btn' target='_blank' style='background: url(${flag});background-size:cover;width:270px;height:180px;max-width:95vw;${goodStyle}'><i id="share-btn-icon" class="bi bi-play-fill"></i></a>`);
+                    $("#share-button-col").append(button);
+
+                    var text = `Someone has shared the ${season.Key} ${round.Name} with you. Please click the flag to open the full race on YouTube.`;
+                    $("#share-text-col").append($(`<h5>${text}</h5>`));
+                }
+                else {
+                    var button = $(`<img src='${flag}' style='width:270px;height:180px;${badStyle}' />`);
+                    $("#share-button-col").append(button);
+
+                    var text = `Someone has shared the ${season.Key} ${round.Name} with you. Unfortunately this race is not available on YouTube.`;
+                    $("#share-text-col").append($(`<h5>${text}</h5>`));
+                }
+            }
+        }
+
+        function bindGrid() {
             var t = 0;
             for (var ix in raceList) {
                 var season = raceList[ix];
-                console.log(season);
                 var raceTable = $("#raceTable tbody");
                 var seasonRow = $("<tr></tr>");
                 seasonRow.append($(`<th style='vertical-align:middle;'>${season.Key}</th>`));
                 var imageStyle = "width:48px;height:32px;padding:0px;";
-                var goodStyle = "filter:drop-shadow(2px 2px 2px black);";
-                var badStyle = "filter: opacity(0.2) grayscale(1);";
+
                 for (var i = 0; i < 20; i++) {
                     var race = season.Value[i];
                     if (race != null) {
@@ -137,10 +270,7 @@
             }
 
             $("#race-total").append(`${t} Full Races`);
-
-            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-        });
+        }
 
         function findFlag(code) {
             for (var ix in raceIcons) {
