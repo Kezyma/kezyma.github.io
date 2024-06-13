@@ -2,7 +2,11 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <title>MotoGP Races on YouTube</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/site.webmanifest">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cyborg/bootstrap.min.css"
@@ -10,21 +14,81 @@
 </head>
 
 <body>
-    <div class="container-fluid text-center">
+    <style>
+        table.sticky thead tr:nth-child(1) th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        table.sticky-x tr td:nth-child(1) {
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+
+        table.sticky-x tr th:nth-child(1) {
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+
+        table.sticky-x thead tr th:nth-child(1) {
+            position: sticky;
+            left: 0;
+            top: 0;
+            z-index: 12;
+        }
+    </style>
+
+    <div class="container-fluid text-center"> 
         <div class="card p-0 mt-3 mb-3 text-dark" style="max-width:1280px;margin:0 auto;">
             <div class="card-header">
-                <h3>MotoGP Races on YouTube</h3>
+                <h3 class="m-0">MotoGP Races on YouTube</h3>
             </div>
             <div class="card-body">
-                <p>This table lists every MotoGP or 500cc full race that can be found on YouTube, sorted into seasons and rounds. Greyed out races are currently missing from YouTube. Wherever possible, races are taken from the official MotoGP YouTube channel, otherwise the best quality alternative is used. All races listed are with English commentary and non-English videos are not listed.</p>
-                <p>If you find a race on YouTube that is missing from this list, or if you find an issue with a race listed here, such as being the incorrect or incomplete race, or a broken link, please report it using this <a href="https://forms.gle/G29SxrkNyZ4Qbspq8" target="_blank">Google form</a>.</p>
+                <p>This table lists every MotoGP or 500cc full race that can be found on YouTube, sorted into seasons
+                    and rounds. Greyed out races are currently missing from YouTube. Wherever possible, races are taken
+                    from the official MotoGP YouTube channel, otherwise the best quality alternative is used. All races
+                    listed are with English commentary and non-English videos are not listed.</p>
+                <p>If you find a race on YouTube that is missing from this list, or if you find an issue with a race
+                    listed here, such as being the incorrect or incomplete race, or a broken link, please report it
+                    using this <a href="https://forms.gle/G29SxrkNyZ4Qbspq8" target="_blank">Google form</a>.</p>
             </div>
-            <div class="card-body p-0" style="overflow-x: auto;">
-                <table id="raceTable" class="table table-sm table-striped table-dark bg-light mb-0">
-                    <tr>
-                        <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
-                    </tr>
-                </table>
+            <div class="card-body p-0">
+                <div class="table-responsive-xxl">
+                    <table id="raceTable"
+                        class="table table-main table-sm table-striped table-dark bg-light mb-0 sticky sticky-x">
+                        <thead class="">
+                            <tr>
+                                <th></th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                                <th>13</th>
+                                <th>14</th>
+                                <th>15</th>
+                                <th>16</th>
+                                <th>17</th>
+                                <th>18</th>
+                                <th>19</th>
+                                <th>20</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -40,24 +104,24 @@
             for (var ix in raceList) {
                 var season = raceList[ix];
                 console.log(season);
-                var raceTable = $("#raceTable");
+                var raceTable = $("#raceTable tbody");
                 var seasonRow = $("<tr></tr>");
                 seasonRow.append($(`<th style='vertical-align:middle;'>${season.Key}</th>`));
                 var imageStyle = "width:48px;height:32px;padding:0px;";
-                var goodStyle = "filter:drop-shadow(2px 4px 6px black);";
+                var goodStyle = "filter:drop-shadow(2px 2px 2px black);";
                 var badStyle = "filter: opacity(0.2) grayscale(1);";
                 for (var i = 0; i < 20; i++) {
                     var race = season.Value[i];
                     if (race != null) {
-                    var flag = findFlag(race.Code);
-                    if (race.Url != "") {
-                        var raceCell = $(`<td><a href='${race.Url}' target='_blank' style='padding:0px;'><img data-bs-toggle="tooltip" data-bs-title="${race.Name}" src='flags/${flag}' style='${imageStyle}${goodStyle}' /></a></td>`);
-                        seasonRow.append(raceCell);
-                    }
-                    else {
-                        var raceCell = $(`<td><img src='flags/${flag}' data-bs-toggle="tooltip" data-bs-title="${race.Name}" style='${imageStyle}${badStyle}' /></td>`);
-                        seasonRow.append(raceCell);
-                    }
+                        var flag = findFlag(race.Code);
+                        if (race.Url != "") {
+                            var raceCell = $(`<td><a href='${race.Url}' target='_blank' style='padding:0px;'><img data-bs-toggle="tooltip" data-bs-title="${race.Name}" src='flags/${flag}' style='${imageStyle}${goodStyle}' /></a></td>`);
+                            seasonRow.append(raceCell);
+                        }
+                        else {
+                            var raceCell = $(`<td><img src='flags/${flag}' data-bs-toggle="tooltip" data-bs-title="${race.Name}" style='${imageStyle}${badStyle}' /></td>`);
+                            seasonRow.append(raceCell);
+                        }
                     }
                     else {
                         var raceCell = $(`<td></td>`);
@@ -66,8 +130,8 @@
                 }
                 raceTable.append(seasonRow);
             }
-            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
         });
 
         function findFlag(code) {
