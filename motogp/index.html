@@ -11,9 +11,13 @@
 
 <body>
     <div class="container-fluid text-center">
-        <div class="card p-0 mt-3 mb-3" style="max-width:1280px;margin:0 auto;">
-            <div class="card-header text-dark">
+        <div class="card p-0 mt-3 mb-3 text-dark" style="max-width:1280px;margin:0 auto;">
+            <div class="card-header">
                 <h3>MotoGP Races on YouTube</h3>
+            </div>
+            <div class="card-body">
+                <p>This table lists every MotoGP or 500cc full race that can be found on YouTube, sorted into seasons and rounds. Greyed out races are currently missing from YouTube. Wherever possible, races are taken from the official MotoGP YouTube channel, otherwise the best quality alternative is used. All races listed are with English commentary and non-English videos are not listed.</p>
+                <p>If you find a race on YouTube that is missing from this list, or if you find an issue with a race listed here, such as being the incorrect or incomplete race, or a broken link, please report it using this <a href="https://forms.gle/G29SxrkNyZ4Qbspq8" target="_blank">Google form</a>.</p>
             </div>
             <div class="card-body p-0" style="overflow-x: auto;">
                 <table id="raceTable" class="table table-sm table-striped table-dark bg-light mb-0">
@@ -38,7 +42,7 @@
                 console.log(season);
                 var raceTable = $("#raceTable");
                 var seasonRow = $("<tr></tr>");
-                seasonRow.append($(`<th>${season.Key}</th>`));
+                seasonRow.append($(`<th style='vertical-align:middle;'>${season.Key}</th>`));
                 var imageStyle = "width:48px;height:32px;padding:0px;";
                 var goodStyle = "filter:drop-shadow(2px 4px 6px black);";
                 var badStyle = "filter: opacity(0.2) grayscale(1);";
