@@ -90,6 +90,9 @@
                     </table>
                 </div>
             </div>
+            <div id="race-total" class="card-footer">
+
+            </div>
         </div>
     </div>
 
@@ -101,6 +104,7 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
+            var t = 0;
             for (var ix in raceList) {
                 var season = raceList[ix];
                 console.log(season);
@@ -115,6 +119,7 @@
                     if (race != null) {
                         var flag = findFlag(race.Code);
                         if (race.Url != "") {
+                            t++;
                             var raceCell = $(`<td><a href='${race.Url}' target='_blank' style='padding:0px;'><img data-bs-toggle="tooltip" data-bs-title="${race.Name}" src='flags/${flag}' style='${imageStyle}${goodStyle}' /></a></td>`);
                             seasonRow.append(raceCell);
                         }
@@ -130,6 +135,9 @@
                 }
                 raceTable.append(seasonRow);
             }
+
+            $("#race-total").append(`${t} Full Races`);
+
             var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
             var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
         });
