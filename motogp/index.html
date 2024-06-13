@@ -82,25 +82,28 @@
                 <br />
                 <div class="row">
                     <div class="col-12 col-lg-6">
-<div class="input-group mt-1" style="margin:0 auto;">
-    <span class="input-group-text">Select Race</span>
-    <select id="season-select" class="form-control bg-light text-dark" style="max-width:80px;border:none;"></select>
-    <select id="race-select" class="form-control bg-light text-dark" style="border:none;"></select>
-</div>
+                        <div class="input-group mt-1" style="margin:0 auto;">
+                            <span class="input-group-text">Select Race</span>
+                            <select id="season-select" class="form-control bg-light text-dark"
+                                style="max-width:80px;border:none;"></select>
+                            <select id="race-select" class="form-control bg-light text-dark"
+                                style="border:none;"></select>
+                        </div>
                     </div>
                     <div class="col-12 col-lg-6">
-<div class="input-group mt-1" style="margin:0 auto;">
-    <span class="input-group-text">Share URL</span>
-    <input id="race-url" type="text" class="form-control bg-light text-dark" disabled />
-    <button id="url-copy-btn" type="button" class="btn btn-sm btn-light"><i class="bi bi-copy"></i></button>
-</div>
+                        <div class="input-group mt-1" style="margin:0 auto;">
+                            <span class="input-group-text">Share URL</span>
+                            <input id="race-url" type="text" class="form-control bg-light text-dark" disabled />
+                            <button id="url-copy-btn" type="button" class="btn btn-sm btn-light"><i
+                                    class="bi bi-copy"></i></button>
+                        </div>
                     </div>
                 </div>
-                
+
                 <br />
-                
-                
-                
+
+
+
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive-xxl">
@@ -166,7 +169,6 @@
             $("#url-copy-btn").click(function () {
                 var url = $("#race-url").val();
                 navigator.clipboard.writeText(url);
-                alert("Copied!");
             });
         }
 
