@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
-<body  data-bs-theme="dark">
+
+<body data-bs-theme="dark">
     <div class="container">
 
         <h1 class="text-center mt-3">FightPicks League</h1>
@@ -14,25 +16,63 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                <table id="league-table" class="table table-striped table-sm mb-0 text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Player</th>
-                            <th>Correct</th>
-                            <th>Methods</th>
-                            <th>Rounds</th>
-                            <th>Trebles</th>
-                            <th>Points</th>
-                            <th>Titles</th>
-                            <th>Profit</th>
-                        </tr>
-                    </thead>
-                    <tbody><tr><td>Alex</td><td>30</td><td>18</td><td>14</td><td>14</td><td>335</td><td>1</td><td>£10.49</td></tr>
-<tr><td>Jake</td><td>28</td><td>15</td><td>12</td><td>12</td><td>308</td><td>1</td><td>£7.32</td></tr>
-<tr><td>Rob</td><td>26</td><td>15</td><td>13</td><td>12</td><td>288</td><td>1</td><td>£3.37</td></tr>
-<tr><td>Kieran</td><td>24</td><td>14</td><td>8</td><td>7</td><td>219</td><td>0</td><td>£-1.18</td></tr>
-                    </tbody>
-                </table></div>
+                    <table id="league-table" class="table table-striped table-sm mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Correct</th>
+                                <th>Methods</th>
+                                <th>Rounds</th>
+                                <th>Trebles</th>
+                                <th>Points</th>
+                                <th>Titles</th>
+                                <th>Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alex</td>
+                                <td>30</td>
+                                <td>18</td>
+                                <td>14</td>
+                                <td>14</td>
+                                <td>335</td>
+                                <td>1</td>
+                                <td>£10.49</td>
+                            </tr>
+                            <tr>
+                                <td>Jake</td>
+                                <td>28</td>
+                                <td>15</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>308</td>
+                                <td>1</td>
+                                <td>£7.32</td>
+                            </tr>
+                            <tr>
+                                <td>Rob</td>
+                                <td>26</td>
+                                <td>15</td>
+                                <td>13</td>
+                                <td>12</td>
+                                <td>288</td>
+                                <td>1</td>
+                                <td>£3.37</td>
+                            </tr>
+                            <tr>
+                                <td>Kieran</td>
+                                <td>24</td>
+                                <td>14</td>
+                                <td>8</td>
+                                <td>7</td>
+                                <td>219</td>
+                                <td>0</td>
+                                <td>-£1.18</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -42,30 +82,1091 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                <table id="title-table" class="table table-striped table-sm mb-0 text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Card</th>
-                            <th>Max Pts.</th>
-                            <th>Alex</th>
-                            <th>Kieran</th>
-                            <th>Rob</th>
-                            <th>Jake</th>
-                            <th>Champion</th>
-                            <th>% Pts.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>2024-04-13</td><td>UFC 300: Pereira vs Hill</td><td>240</td><td>133</td><td>95</td><td>137</td><td>121</td><td>Rob</td><td>57.08%</td></tr>
-<tr><td>2024-07-27</td><td>UFC 304: Edwards vs Muhammad</td><td>240</td><td>117</td><td>93</td><td>86</td><td>122</td><td>Jake</td><td>50.83%</td></tr>
-<tr><td>2025-02-01</td><td>UFC Fight Night: Adesanya vs Imavov</td><td>180</td><td>85</td><td>31</td><td>65</td><td>65</td><td>Alex</td><td>47.22%</td></tr>
-                    </tbody>
-                </table></div>
+                    <table id="title-table" class="table table-striped table-sm mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Card</th>
+                                <th>Max Pts.</th>
+                                <th>Alex</th>
+                                <th>Kieran</th>
+                                <th>Rob</th>
+                                <th>Jake</th>
+                                <th>Champion</th>
+                                <th>% Pts.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-04-13</td>
+                                <td>UFC 300: Pereira vs Hill</td>
+                                <td>240</td>
+                                <td>133</td>
+                                <td>95</td>
+                                <td>137</td>
+                                <td>121</td>
+                                <td>Rob</td>
+                                <td>57.08%</td>
+                            </tr>
+                            <tr>
+                                <td>2024-07-27</td>
+                                <td>UFC 304: Edwards vs Muhammad</td>
+                                <td>240</td>
+                                <td>117</td>
+                                <td>93</td>
+                                <td>86</td>
+                                <td>122</td>
+                                <td>Jake</td>
+                                <td>50.83%</td>
+                            </tr>
+                            <tr>
+                                <td>2025-02-01</td>
+                                <td>UFC Fight Night: Adesanya vs Imavov</td>
+                                <td>180</td>
+                                <td>85</td>
+                                <td>31</td>
+                                <td>65</td>
+                                <td>65</td>
+                                <td>Alex</td>
+                                <td>47.22%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3 mb-3">
+            <div class="card-header">
+                <select id="card-select" class="form-control">
+                    <option value="card-3">[2025-02-01] UFC Fight Night: Adesanya vs Imavov</option>
+                    <option value="card-2">[2024-07-27] UFC 304: Edwards vs Muhammad</option>
+                    <option value="card-1">[2024-04-13] UFC 300: Pereira vs Hill</option>
+                </select>
+            </div>
+            <div class="card-body p-0">
+                <div id="card-1" class="card-table">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm mb-0 text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th colspan="3"></th>
+                                    <th colspan="4" class="text-center">Alex</th>
+                                    <th colspan="4" class="text-center">Kieran</th>
+                                    <th colspan="4" class="text-center">Rob</th>
+                                    <th colspan="4" class="text-center">Jake</th>
+                                </tr>
+                                <tr>
+                                    <th>Fight</th>
+                                    <th>Winner</th>
+                                    <th>Result</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Figueiredo vs. Garbrandt</td>
+                                    <td>Figueiredo</td>
+                                    <td>Sub R2</td>
+                                    <td class='table-info'>Figueiredo</td>
+                                    <td class='table-info'>KO R1</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-success'>Figueiredo</td>
+                                    <td class='table-success'>KO R1</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-warning'>Garbrandt</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-danger'>Figueiredo</td>
+                                    <td class='table-danger'>Sub R2</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Green vs. Miller</td>
+                                    <td>Green</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Green</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>20</td>
+                                    <td class='table-success'>Green</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>20</td>
+                                    <td class='table-warning'>Green</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-danger'>Miller</td>
+                                    <td class='table-danger'>Sub R2</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Andrade vs. Rodriguez</td>
+                                    <td>Andrade</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Andrade</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>35</td>
+                                    <td class='table-success'>Rodriguez</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>20</td>
+                                    <td class='table-warning'>Andrade</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>30</td>
+                                    <td class='table-danger'>Andrade</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>30</td>
+                                </tr>
+                                <tr>
+                                    <td>Turner vs. Moicano</td>
+                                    <td>Turner</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Turner</td>
+                                    <td class='table-info'>KO R3</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>40</td>
+                                    <td class='table-success'>Turner</td>
+                                    <td class='table-success'>KO R1</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>25</td>
+                                    <td class='table-warning'>Turner</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>45</td>
+                                    <td class='table-danger'>Turner</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>45</td>
+                                </tr>
+                                <tr>
+                                    <td>Yusuff vs. Lopes</td>
+                                    <td>Lopes</td>
+                                    <td>KO R1</td>
+                                    <td class='table-info'>Yusuff</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>40</td>
+                                    <td class='table-success'>Lopes</td>
+                                    <td class='table-success'>KO R1</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>40</td>
+                                    <td class='table-warning'>Lopes</td>
+                                    <td class='table-warning'>KO R1</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>60</td>
+                                    <td class='table-danger'>Lopes</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>50</td>
+                                </tr>
+                                <tr>
+                                    <td>Holm vs. Harrison</td>
+                                    <td>Harrison</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Harrison</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>55</td>
+                                    <td class='table-success'>Harrison</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>55</td>
+                                    <td class='table-warning'>Harrison</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>75</td>
+                                    <td class='table-danger'>Harrison</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>65</td>
+                                </tr>
+                                <tr>
+                                    <td>Kattar vs. Sterling</td>
+                                    <td>Sterling</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Sterling</td>
+                                    <td class='table-info'>Sub R2</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>60</td>
+                                    <td class='table-success'>Sterling</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>70</td>
+                                    <td class='table-warning'>Sterling</td>
+                                    <td class='table-warning'>KO R2</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>80</td>
+                                    <td class='table-danger'>Sterling</td>
+                                    <td class='table-danger'>KO R2</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>70</td>
+                                </tr>
+                                <tr>
+                                    <td>Prochazka vs. Rakic</td>
+                                    <td>Prochazka</td>
+                                    <td>KO R2</td>
+                                    <td class='table-info'>Prochazka</td>
+                                    <td class='table-info'>KO R1</td>
+                                    <td class='table-info'>7</td>
+                                    <td class='table-info'>67</td>
+                                    <td class='table-success'>Prochazka</td>
+                                    <td class='table-success'>KO R1</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-success'>77</td>
+                                    <td class='table-warning'>Prochazka</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>85</td>
+                                    <td class='table-danger'>Rakic</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>70</td>
+                                </tr>
+                                <tr>
+                                    <td>Nickal vs. Brundage</td>
+                                    <td>Nickal</td>
+                                    <td>Sub R2</td>
+                                    <td class='table-info'>Nickal</td>
+                                    <td class='table-info'>Sub R1</td>
+                                    <td class='table-info'>7</td>
+                                    <td class='table-info'>74</td>
+                                    <td class='table-success'>Nickal</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>8</td>
+                                    <td class='table-success'>85</td>
+                                    <td class='table-warning'>Nickal</td>
+                                    <td class='table-warning'>KO R2</td>
+                                    <td class='table-warning'>8</td>
+                                    <td class='table-warning'>93</td>
+                                    <td class='table-danger'>Nickal</td>
+                                    <td class='table-danger'>Sub R1</td>
+                                    <td class='table-danger'>7</td>
+                                    <td class='table-danger'>77</td>
+                                </tr>
+                                <tr>
+                                    <td>Oliveira vs. Tsarukyan</td>
+                                    <td>Tsarukyan</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Tsarukyan</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>89</td>
+                                    <td class='table-success'>Oliveira</td>
+                                    <td class='table-success'>Sub R2</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>85</td>
+                                    <td class='table-warning'>Oliveira</td>
+                                    <td class='table-warning'>Sub R2</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>93</td>
+                                    <td class='table-danger'>Oliveira</td>
+                                    <td class='table-danger'>KO R2</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>77</td>
+                                </tr>
+                                <tr>
+                                    <td>Gaethje vs. Holloway</td>
+                                    <td>Holloway</td>
+                                    <td>KO R5</td>
+                                    <td class='table-info'>Gaethje</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>89</td>
+                                    <td class='table-success'>Gaethje</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>85</td>
+                                    <td class='table-warning'>Gaethje</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>93</td>
+                                    <td class='table-danger'>Gaethje</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>77</td>
+                                </tr>
+                                <tr>
+                                    <td>Weili vs. Xiaonan</td>
+                                    <td>Weili</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Weili</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>30</td>
+                                    <td class='table-info'>119</td>
+                                    <td class='table-success'>Weili</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>10</td>
+                                    <td class='table-success'>95</td>
+                                    <td class='table-warning'>Weili</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>30</td>
+                                    <td class='table-warning'>123</td>
+                                    <td class='table-danger'>Weili</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>30</td>
+                                    <td class='table-danger'>107</td>
+                                </tr>
+                                <tr>
+                                    <td>Pereira vs. Hill</td>
+                                    <td>Pereira</td>
+                                    <td>KO R1</td>
+                                    <td class='table-info'>Pereira</td>
+                                    <td class='table-info'>KO R2</td>
+                                    <td class='table-info'>14</td>
+                                    <td class='table-info'>133</td>
+                                    <td class='table-success'>Hill</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>95</td>
+                                    <td class='table-warning'>Pereira</td>
+                                    <td class='table-warning'>KO R3</td>
+                                    <td class='table-warning'>14</td>
+                                    <td class='table-warning'>137</td>
+                                    <td class='table-danger'>Pereira</td>
+                                    <td class='table-danger'>KO R2</td>
+                                    <td class='table-danger'>14</td>
+                                    <td class='table-danger'>121</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="card-2" class="card-table">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm mb-0 text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th colspan="3"></th>
+                                    <th colspan="4" class="text-center">Alex</th>
+                                    <th colspan="4" class="text-center">Kieran</th>
+                                    <th colspan="4" class="text-center">Rob</th>
+                                    <th colspan="4" class="text-center">Jake</th>
+                                </tr>
+                                <tr>
+                                    <th>Fight</th>
+                                    <th>Winner</th>
+                                    <th>Result</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bannon vs. Ardelean</td>
+                                    <td>Bannon</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Bannon</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-success'>Bannon</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-warning'>Ardelean</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-danger'>Bannon</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Parkin vs. Brzeski</td>
+                                    <td>Parkin</td>
+                                    <td>KO R1</td>
+                                    <td class='table-info'>Parkin</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>20</td>
+                                    <td class='table-success'>Parkin</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>20</td>
+                                    <td class='table-warning'>Parkin</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-danger'>Parkin</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Patterson vs. Crosbie</td>
+                                    <td>Patterson</td>
+                                    <td>Sub R1</td>
+                                    <td class='table-info'>Patterson</td>
+                                    <td class='table-info'>Sub R2</td>
+                                    <td class='table-info'>7</td>
+                                    <td class='table-info'>27</td>
+                                    <td class='table-success'>Patterson</td>
+                                    <td class='table-success'>Sub R2</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-success'>27</td>
+                                    <td class='table-warning'>Patterson</td>
+                                    <td class='table-warning'>Sub R2</td>
+                                    <td class='table-warning'>7</td>
+                                    <td class='table-warning'>12</td>
+                                    <td class='table-danger'>Patterson</td>
+                                    <td class='table-danger'>Sub R2</td>
+                                    <td class='table-danger'>7</td>
+                                    <td class='table-danger'>27</td>
+                                </tr>
+                                <tr>
+                                    <td>Bukauskas vs. Prachnio</td>
+                                    <td>Bukauskas</td>
+                                    <td>Sub R3</td>
+                                    <td class='table-info'>Bukauskas</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>32</td>
+                                    <td class='table-success'>Bukauskas</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>32</td>
+                                    <td class='table-warning'>Bukauskas</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>17</td>
+                                    <td class='table-danger'>Bukauskas</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>32</td>
+                                </tr>
+                                <tr>
+                                    <td>Elliott vs. Parsons</td>
+                                    <td>Elliott</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Elliott</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>47</td>
+                                    <td class='table-success'>Parsons</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>32</td>
+                                    <td class='table-warning'>Elliott</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>32</td>
+                                    <td class='table-danger'>Elliott</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>47</td>
+                                </tr>
+                                <tr>
+                                    <td>Mokaev vs. Kape</td>
+                                    <td>Mokaev</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Mokaev</td>
+                                    <td class='table-info'>Sub R1</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>52</td>
+                                    <td class='table-success'>Mokaev</td>
+                                    <td class='table-success'>Sub R3</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>37</td>
+                                    <td class='table-warning'>Mokaev</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>47</td>
+                                    <td class='table-danger'>Mokaev</td>
+                                    <td class='table-danger'>Sub R3</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>52</td>
+                                </tr>
+                                <tr>
+                                    <td>Loughran vs. Hadley</td>
+                                    <td>Hadley</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Loughran</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>52</td>
+                                    <td class='table-success'>Loughran</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>37</td>
+                                    <td class='table-warning'>Loughran</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>47</td>
+                                    <td class='table-danger'>Hadley</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>67</td>
+                                </tr>
+                                <tr>
+                                    <td>McCann vs. Brasil</td>
+                                    <td>Brasil</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>McCann</td>
+                                    <td class='table-info'>KO R2</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>52</td>
+                                    <td class='table-success'>McCann</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>37</td>
+                                    <td class='table-warning'>McCann</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>47</td>
+                                    <td class='table-danger'>McCann</td>
+                                    <td class='table-danger'>Sub R1</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>67</td>
+                                </tr>
+                                <tr>
+                                    <td>Wood vs. Pineda</td>
+                                    <td>Wood</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Wood</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>67</td>
+                                    <td class='table-success'>Wood</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>52</td>
+                                    <td class='table-warning'>Wood</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>62</td>
+                                    <td class='table-danger'>Wood</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>82</td>
+                                </tr>
+                                <tr>
+                                    <td>Allen vs. Chikadze</td>
+                                    <td>Allen</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Allen</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>82</td>
+                                    <td class='table-success'>Allen</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>15</td>
+                                    <td class='table-success'>67</td>
+                                    <td class='table-warning'>Allen</td>
+                                    <td class='table-warning'>KO R2</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>67</td>
+                                    <td class='table-danger'>Allen</td>
+                                    <td class='table-danger'>KO R1</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>87</td>
+                                </tr>
+                                <tr>
+                                    <td>Duncan vs. Rodrigues</td>
+                                    <td>Rodrigues</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Duncan</td>
+                                    <td class='table-info'>KO R2</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>82</td>
+                                    <td class='table-success'>Rodrigues</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>72</td>
+                                    <td class='table-warning'>Duncan</td>
+                                    <td class='table-warning'>KO R3</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>67</td>
+                                    <td class='table-danger'>Duncan</td>
+                                    <td class='table-danger'>KO R2</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>87</td>
+                                </tr>
+                                <tr>
+                                    <td>Green vs. Pimblett</td>
+                                    <td>Pimblett</td>
+                                    <td>Sub R1</td>
+                                    <td class='table-info'>Pimblett</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>87</td>
+                                    <td class='table-success'>Pimblett</td>
+                                    <td class='table-success'>Sub R2</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-success'>79</td>
+                                    <td class='table-warning'>Pimblett</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>72</td>
+                                    <td class='table-danger'>Pimblett</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>92</td>
+                                </tr>
+                                <tr>
+                                    <td>Aspinall vs. Blaydes</td>
+                                    <td>Aspinall</td>
+                                    <td>KO R1</td>
+                                    <td class='table-info'>Aspinall</td>
+                                    <td class='table-info'>KO R1</td>
+                                    <td class='table-info'>30</td>
+                                    <td class='table-info'>117</td>
+                                    <td class='table-success'>Aspinall</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>14</td>
+                                    <td class='table-success'>93</td>
+                                    <td class='table-warning'>Aspinall</td>
+                                    <td class='table-warning'>KO R2</td>
+                                    <td class='table-warning'>14</td>
+                                    <td class='table-warning'>86</td>
+                                    <td class='table-danger'>Aspinall</td>
+                                    <td class='table-danger'>KO R1</td>
+                                    <td class='table-danger'>30</td>
+                                    <td class='table-danger'>122</td>
+                                </tr>
+                                <tr>
+                                    <td>Edwards vs. Muhammad</td>
+                                    <td>Muhammad</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Edwards</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>117</td>
+                                    <td class='table-success'>Edwards</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>93</td>
+                                    <td class='table-warning'>Edwards</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>86</td>
+                                    <td class='table-danger'>Edwards</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>122</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="card-3" class="card-table">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm mb-0 text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th colspan="3"></th>
+                                    <th colspan="4" class="text-center">Alex</th>
+                                    <th colspan="4" class="text-center">Kieran</th>
+                                    <th colspan="4" class="text-center">Rob</th>
+                                    <th colspan="4" class="text-center">Jake</th>
+                                </tr>
+                                <tr>
+                                    <th>Fight</th>
+                                    <th>Winner</th>
+                                    <th>Result</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Abdelwahab vs. Pogues</td>
+                                    <td>Abdelwahab</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Abdelwahab</td>
+                                    <td class='table-info'>KO R1</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-success'>Pogues</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-warning'>Abdelwahab</td>
+                                    <td class='table-warning'>KO R3</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-danger'>Abdelwahab</td>
+                                    <td class='table-danger'>KO R1</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Grad vs. Alexander</td>
+                                    <td>Grad</td>
+                                    <td>KO R2</td>
+                                    <td class='table-info'>Grad</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>10</td>
+                                    <td class='table-success'>Grad</td>
+                                    <td class='table-success'>KO R1</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-warning'>Grad</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>10</td>
+                                    <td class='table-danger'>Grad</td>
+                                    <td class='table-danger'>KO R2</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Jasudavicius vs. Silva</td>
+                                    <td>Jasudavicius</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Jasudavicius</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>25</td>
+                                    <td class='table-success'>Jasudavicius</td>
+                                    <td class='table-success'>Sub R3</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>12</td>
+                                    <td class='table-warning'>Silva</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>10</td>
+                                    <td class='table-danger'>Jasudavicius</td>
+                                    <td class='table-danger'>Sub R3</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>25</td>
+                                </tr>
+                                <tr>
+                                    <td>McKinney vs. Hadzovic</td>
+                                    <td>McKinney</td>
+                                    <td>KO R1</td>
+                                    <td class='table-info'>McKinney</td>
+                                    <td class='table-info'>KO R1</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>40</td>
+                                    <td class='table-success'>McKinney</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-success'>19</td>
+                                    <td class='table-warning'>McKinney</td>
+                                    <td class='table-warning'>KO R1</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>25</td>
+                                    <td class='table-danger'>McKinney</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>30</td>
+                                </tr>
+                                <tr>
+                                    <td>Gaziev vs. Petersen</td>
+                                    <td>Gaziev</td>
+                                    <td>KO R1</td>
+                                    <td class='table-info'>Gaziev</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>45</td>
+                                    <td class='table-success'>Gaziev</td>
+                                    <td class='table-success'>KO R2</td>
+                                    <td class='table-success'>7</td>
+                                    <td class='table-success'>26</td>
+                                    <td class='table-warning'>Gaziev</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>30</td>
+                                    <td class='table-danger'>Gaziev</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>35</td>
+                                </tr>
+                                <tr>
+                                    <td>Naimov vs. Ofli</td>
+                                    <td>Naimov</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Naimov</td>
+                                    <td class='table-info'>KO R2</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>50</td>
+                                    <td class='table-success'>Ofli</td>
+                                    <td class='table-success'>Sub R2</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>26</td>
+                                    <td class='table-warning'>Naimov</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>45</td>
+                                    <td class='table-danger'>Naimov</td>
+                                    <td class='table-danger'>KO R1</td>
+                                    <td class='table-danger'>5</td>
+                                    <td class='table-danger'>40</td>
+                                </tr>
+                                <tr>
+                                    <td>Ziam vs. Davis</td>
+                                    <td>Ziam</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Ziam</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>65</td>
+                                    <td class='table-success'>Davis</td>
+                                    <td class='table-success'>Sub R2</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>26</td>
+                                    <td class='table-warning'>Davis</td>
+                                    <td class='table-warning'>KO R3</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>45</td>
+                                    <td class='table-danger'>Davis</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>40</td>
+                                </tr>
+                                <tr>
+                                    <td>Nurmagomedov vs. Oliveira</td>
+                                    <td>Oliveira</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Nurmagomedov</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>65</td>
+                                    <td class='table-success'>Nurmagomedov</td>
+                                    <td class='table-success'>Sub R2</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>26</td>
+                                    <td class='table-warning'>Oliveira</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>15</td>
+                                    <td class='table-warning'>60</td>
+                                    <td class='table-danger'>Nurmagomedov</td>
+                                    <td class='table-danger'>Sub R1</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>40</td>
+                                </tr>
+                                <tr>
+                                    <td>Pavlovic vs. Rozenstruik</td>
+                                    <td>Pavlovic</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Pavlovic</td>
+                                    <td class='table-info'>KO R1</td>
+                                    <td class='table-info'>5</td>
+                                    <td class='table-info'>70</td>
+                                    <td class='table-success'>Pavlovic</td>
+                                    <td class='table-success'>KO R1</td>
+                                    <td class='table-success'>5</td>
+                                    <td class='table-success'>31</td>
+                                    <td class='table-warning'>Pavlovic</td>
+                                    <td class='table-warning'>KO R1</td>
+                                    <td class='table-warning'>5</td>
+                                    <td class='table-warning'>65</td>
+                                    <td class='table-danger'>Pavlovic</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>15</td>
+                                    <td class='table-danger'>55</td>
+                                </tr>
+                                <tr>
+                                    <td>Magomedov vs. Page</td>
+                                    <td>Page</td>
+                                    <td>Dec</td>
+                                    <td class='table-info'>Page</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>15</td>
+                                    <td class='table-info'>85</td>
+                                    <td class='table-success'>Magomedov</td>
+                                    <td class='table-success'>KO R3</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>31</td>
+                                    <td class='table-warning'>Magomedov</td>
+                                    <td class='table-warning'>Dec</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>65</td>
+                                    <td class='table-danger'>Magomedov</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>0</td>
+                                    <td class='table-danger'>55</td>
+                                </tr>
+                                <tr>
+                                    <td>Adesanya vs. Imavov</td>
+                                    <td>Imavov</td>
+                                    <td>KO R2</td>
+                                    <td class='table-info'>Adesanya</td>
+                                    <td class='table-info'>Dec</td>
+                                    <td class='table-info'>0</td>
+                                    <td class='table-info'>85</td>
+                                    <td class='table-success'>Adesanya</td>
+                                    <td class='table-success'>Dec</td>
+                                    <td class='table-success'>0</td>
+                                    <td class='table-success'>31</td>
+                                    <td class='table-warning'>Adesanya</td>
+                                    <td class='table-warning'>KO R2</td>
+                                    <td class='table-warning'>0</td>
+                                    <td class='table-warning'>65</td>
+                                    <td class='table-danger'>Imavov</td>
+                                    <td class='table-danger'>Dec</td>
+                                    <td class='table-danger'>10</td>
+                                    <td class='table-danger'>65</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="card-4" class="card-table">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm mb-0 text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th colspan="3"></th>
+                                    <th colspan="4" class="text-center">Alex</th>
+                                    <th colspan="4" class="text-center">Kieran</th>
+                                    <th colspan="4" class="text-center">Rob</th>
+                                    <th colspan="4" class="text-center">Jake</th>
+                                </tr>
+                                <tr>
+                                    <th>Fight</th>
+                                    <th>Winner</th>
+                                    <th>Result</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                    <th>Pick</th>
+                                    <th>Result</th>
+                                    <th>Pts</th>
+                                    <th>Ttl</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="card-chart">
+                    <canvas id="card-canvas" style="min-height:640px;"></canvas>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const CHART_COLORS = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+
+        var cardData = {
+            "card-1": { labels: ['Figueiredo vs. Garbrandt', 'Green vs. Miller', 'Andrade vs. Rodriguez', 'Turner vs. Moicano', 'Yusuff vs. Lopes', 'Holm vs. Harrison', 'Kattar vs. Sterling', 'Prochazka vs. Rakic', 'Nickal vs. Brundage', 'Oliveira vs. Tsarukyan', 'Gaethje vs. Holloway', 'Weili vs. Xiaonan', 'Pereira vs. Hill'], datasets: [{ label: 'Alex', data: [5, 20, 35, 40, 40, 55, 60, 67, 74, 89, 89, 119, 133], borderColor: CHART_COLORS.blue, backgroundColor: CHART_COLORS.blue }, { label: 'Kieran', data: [5, 20, 20, 25, 40, 55, 70, 77, 85, 85, 85, 95, 95], borderColor: CHART_COLORS.green, backgroundColor: CHART_COLORS.green }, { label: 'Rob', data: [0, 15, 30, 45, 60, 75, 80, 85, 93, 93, 93, 123, 137], borderColor: CHART_COLORS.yellow, backgroundColor: CHART_COLORS.yellow }, { label: 'Jake', data: [15, 15, 30, 45, 50, 65, 70, 70, 77, 77, 77, 107, 121], borderColor: CHART_COLORS.red, backgroundColor: CHART_COLORS.red }] },
+            "card-2": { labels: ['Bannon vs. Ardelean', 'Parkin vs. Brzeski', 'Patterson vs. Crosbie', 'Bukauskas vs. Prachnio', 'Elliott vs. Parsons', 'Mokaev vs. Kape', 'Loughran vs. Hadley', 'McCann vs. Brasil', 'Wood vs. Pineda', 'Allen vs. Chikadze', 'Duncan vs. Rodrigues', 'Green vs. Pimblett', 'Aspinall vs. Blaydes', 'Edwards vs. Muhammad'], datasets: [{ label: 'Alex', data: [15, 20, 27, 32, 47, 52, 52, 52, 67, 82, 82, 87, 117, 117], borderColor: CHART_COLORS.blue, backgroundColor: CHART_COLORS.blue }, { label: 'Kieran', data: [15, 20, 27, 32, 32, 37, 37, 37, 52, 67, 72, 79, 93, 93], borderColor: CHART_COLORS.green, backgroundColor: CHART_COLORS.green }, { label: 'Rob', data: [0, 5, 12, 17, 32, 47, 47, 47, 62, 67, 67, 72, 86, 86], borderColor: CHART_COLORS.yellow, backgroundColor: CHART_COLORS.yellow }, { label: 'Jake', data: [15, 20, 27, 32, 47, 52, 67, 67, 82, 87, 87, 92, 122, 122], borderColor: CHART_COLORS.red, backgroundColor: CHART_COLORS.red }] },
+            "card-3": { labels: ['Abdelwahab vs. Pogues', 'Grad vs. Alexander', 'Jasudavicius vs. Silva', 'McKinney vs. Hadzovic', 'Gaziev vs. Petersen', 'Naimov vs. Ofli', 'Ziam vs. Davis', 'Nurmagomedov vs. Oliveira', 'Pavlovic vs. Rozenstruik', 'Magomedov vs. Page', 'Adesanya vs. Imavov'], datasets: [{ label: 'Alex', data: [5, 10, 25, 40, 45, 50, 65, 65, 70, 85, 85], borderColor: CHART_COLORS.blue, backgroundColor: CHART_COLORS.blue }, { label: 'Kieran', data: [0, 7, 12, 19, 26, 26, 26, 26, 31, 31, 31], borderColor: CHART_COLORS.green, backgroundColor: CHART_COLORS.green }, { label: 'Rob', data: [5, 10, 10, 25, 30, 45, 45, 60, 65, 65, 65], borderColor: CHART_COLORS.yellow, backgroundColor: CHART_COLORS.yellow }, { label: 'Jake', data: [5, 20, 25, 30, 35, 40, 40, 40, 55, 55, 65], borderColor: CHART_COLORS.red, backgroundColor: CHART_COLORS.red }] },
+        };
+    </script>
+    <script>
+
+        var cardChart = new Chart(document.getElementById("card-canvas"), {
+            type: 'line',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            maxRotation: 90,
+                            minRotation: 90
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        $(document).ready(function () {
+            showCardGrid();
+        });
+
+        $("#card-select").change(function () {
+            showCardGrid();
+        });
+
+        function showCardGrid() {
+            var gridId = $("#card-select").val();
+            $(".card-table").hide();
+            $("#" + gridId).show();
+            cardChart.data = cardData[gridId];
+            cardChart.update();
+        }
+    </script>
 </body>
