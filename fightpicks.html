@@ -118,6 +118,17 @@
             </div>
         </div>
 
+        <div class="card mt-3 mb-3">
+            <div class="card-header">
+                <h3 class="text-center">Player Records</h3>
+            </div>
+            <div class="card-body p-0 text-nowrap">
+                <div class="table-responsive">
+                    <table id="player-records" class="table table-sm table-striped m-0"></table>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -233,6 +244,8 @@
             }
         });
 
+        var playerRecords = [];
+
         function generateLeagueTable() {
             // Generate a record for each player.
             var playerInfo = {};
@@ -286,10 +299,48 @@
                 ]
             }
 
+            var winStreakRecord = {
+                Record: 'Longest Correct Streak',
+                Event: '',
+                Player: '',
+                Score: 0
+            };
+            var trebleStreakRecord = {
+                Record: 'Longest Treble Streak',
+                Event: '',
+                Player: '',
+                Score: 0
+            };
+            var profitRecord = {
+                Record: 'Largest Event Profit',
+                Event: '',
+                Player: '',
+                Score: 0
+            };
+            var winStreaks = {
+                Alex: 0,
+                Kieran: 0,
+                Rob: 0,
+                Jake: 0
+            };
+            var trebleStreaks = {
+                Alex: 0,
+                Kieran: 0,
+                Rob: 0,
+                Jake: 0
+            };
+
             // Calculate scores for each player.
+            var lastCard = "";
             for (var cardName in cardData) {
                 var card = cardData[cardName];
                 var cardScores = {};
+                var cardProfit = {
+                    Alex: 0,
+                    Kieran: 0,
+                    Rob: 0,
+                    Jake: 0
+                };
                 for (var fx in card) {
                     var fight = card[fx];
 
@@ -314,10 +365,35 @@
                         var isMethod = isCorrect && pick.Method == fight.Method;
                         var isRound = isCorrect && pick.Round == fight.Round;
                         var isTreble = isCorrect && isMethod && isRound;
-                        if (isCorrect) playerInfo[player].Correct++;
+                        if (isCorrect) 
+                        {
+                            playerInfo[player].Correct++;
+                            winStreaks[player]++;
+                        }
+                        else {
+                            if (winStreaks[player] > winStreakRecord.Score) {
+                                winStreakRecord.Score = winStreaks[player];
+                                winStreakRecord.Player = player;
+                                winStreakRecord.Event = cardName;
+                            }
+                            winStreaks[player] = 0;
+                        }
                         if (isMethod) playerInfo[player].Methods++;
                         if (isRound) playerInfo[player].Rounds++;
-                        if (isTreble) playerInfo[player].Trebles++;
+                        if (isTreble) 
+                        {
+                            playerInfo[player].Trebles++;
+                            trebleStreaks[player]++;
+                        }
+                        else {
+                            if (trebleStreaks[player] > trebleStreakRecord.Score) {
+                                trebleStreakRecord.Score = trebleStreaks[player];
+                                trebleStreakRecord.Player = player;
+                                trebleStreakRecord.Event = cardName;
+                            }
+                            trebleStreaks[player] = 0;
+                        }
+                        cardProfit[player] += pick.Profit;
                         playerInfo[player].Points = pick.Total;
                         playerInfo[player].Profit += pick.Profit;
                         cardScores[player] = pick.CardTotal;
@@ -335,9 +411,36 @@
                         cardWinner = player;
                     }
                 }
+                for (var px in players) {
+                    var player = players[px];
+                    var profit = cardProfit[player];
+                    if (profit > profitRecord.Score) {
+                        profitRecord.Score = profit;
+                        profitRecord.Player = player;
+                        profitRecord.Event = cardName;
+                    }
+                }
+
                 playerInfo[cardWinner].Titles++;
                 cardInfo[cardName].Winner = cardWinner;
                 cardInfo[cardName].Accuracy = winnerScore / cardInfo[cardName].MaxPts;
+                lastCard = cardName;
+            }
+
+            for (var px in players) {
+                var player = players[px];
+                var currentWinStreak = winStreaks[player];
+                if (currentWinStreak > winStreakRecord.Score) {
+                    winStreakRecord.Score = currentWinStreak;
+                    winStreakRecord.Player = player;
+                    winStreakRecord.Event = lastCard;
+                }
+                var currentTrebleStreak = trebleStreaks[player];
+                if (currentTrebleStreak > trebleStreakRecord.Score) {
+                    trebleStreakRecord.Score = currentTrebleStreak;
+                    trebleStreakRecord.Player = player;
+                    trebleStreakRecord.Event = lastCard;
+                }
             }
 
             // Generate individual row data for the league table.
@@ -369,6 +472,20 @@
                 data: leagueRows
             });
 
+            var accuracyRecord = {
+                Record: 'Highest Point % Scored',
+                Event: '',
+                Player: '',
+                Score: 0
+            };
+
+            var pointsRecord = {
+                Record: 'Most Points Scored',
+                Event: '',
+                Player: '',
+                Score: 0
+            };
+
             var titleRows = [];
             for (var cardName in cardInfo) {
                 var card = cardInfo[cardName];
@@ -380,6 +497,17 @@
                 titleData.datasets[1].data.push(card.Kieran);
                 titleData.datasets[2].data.push(card.Rob);
                 titleData.datasets[3].data.push(card.Jake);
+
+                if (card.Accuracy > accuracyRecord.Score) {
+                    accuracyRecord.Player = card.Winner;
+                    accuracyRecord.Score = card.Accuracy;
+                    accuracyRecord.Event = cardName;
+                }
+                if (card[card.Winner] > pointsRecord.Score) {
+                    pointsRecord.Player = card.Winner;
+                    pointsRecord.Score = card[card.Winner];
+                    pointsRecord.Event = cardName;
+                }
             }
 
             // Create the title history datatable.
@@ -418,6 +546,27 @@
                 $("#title-history-container").toggle();
             });
             $("#title-history-container").hide();
+
+            var recordRows = [
+                [pointsRecord.Record, pointsRecord.Player, pointsRecord.Score, pointsRecord.Event],
+                [accuracyRecord.Record, accuracyRecord.Player, formatPercentage(accuracyRecord.Score), accuracyRecord.Event],
+                [winStreakRecord.Record, winStreakRecord.Player, winStreakRecord.Score, winStreakRecord.Event],
+                [trebleStreakRecord.Record, trebleStreakRecord.Player, trebleStreakRecord.Score, trebleStreakRecord.Event],
+                [profitRecord.Record, profitRecord.Player, gbpFormat.format(profitRecord.Score), profitRecord.Event]
+            ];
+            var recordTable = new DataTable("#player-records", {
+                columns: [
+                    { title: "Record" },
+                    { title: "Player" },
+                    { title: "Score" },
+                    { title: "Event" }
+                ],
+                paging: false,
+                searching: false,
+                info: false,
+                responsive: true,
+                data: recordRows
+            })
         }
 
         function populateEventResults() {
