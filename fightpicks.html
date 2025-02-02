@@ -30,6 +30,12 @@
                     <table id="league-table" class="table table-sm table-striped m-0"></table>
                 </div>
             </div>
+            <div class="card-footer text-center">
+                <button id="league-table-chart-btn" class="btn btn-sm btn-info">Toggle Chart</button>
+            </div>
+            <div id="league-table-container" class="card-body p-0">
+                <canvas id="league-table-canvas" style="min-height:640px;"></canvas>
+            </div>
         </div>
 
         <div class="card mt-3">
@@ -40,6 +46,12 @@
                 <div class="table-responsive">
                     <table id="title-history" class="table table-sm table-striped m-0"></table>
                 </div>
+            </div>
+            <div class="card-footer text-center">
+                <button id="title-history-chart-btn" class="btn btn-sm btn-info">Toggle Chart</button>
+            </div>
+            <div id="title-history-container" class="card-body p-0">
+                <canvas id="title-history-canvas" style="min-height:640px;"></canvas>
             </div>
         </div>
 
@@ -98,7 +110,10 @@
                     </table>
                 </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-footer text-center">
+                <button id="event-result-chart-btn" class="btn btn-sm btn-info">Toggle Chart</button>
+            </div>
+            <div id="event-result-container" class="card-body p-0">
                 <canvas id="event-result-canvas" style="min-height:640px;"></canvas>
             </div>
         </div>
@@ -114,11 +129,11 @@
     <script>
         const players = ["Alex", "Kieran", "Rob", "Jake"];
         const CHART_COLORS = {
-                red: 'rgb(255, 99, 132)',
-                yellow: 'rgb(255, 205, 86)',
-                green: 'rgb(75, 192, 192)',
-                blue: 'rgb(54, 162, 235)'
-            };
+            red: 'rgb(255, 99, 132)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)'
+        };
         const fightData = [
             { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Deiveson Figueiredo', Right: 'Cody Garbrandt', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Deiveson Figueiredo', Method: 'Submission', Round: '2', Picks: { Alex: { Pick: 'Deiveson Figueiredo', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 5, Total: 5, Profit: 0.33 }, Kieran: { Pick: 'Deiveson Figueiredo', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 5, Total: 5, Profit: 0.33 }, Rob: { Pick: 'Cody Garbrandt', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 0, Total: 0, Profit: -1 }, Jake: { Pick: 'Deiveson Figueiredo', Method: 'Submission', Round: '2', Points: 15, CardTotal: 15, Total: 15, Profit: 0.33 }, } },
             { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Bobby Green', Right: 'Jim Miller', LeftLine: 1.57, RightLine: 2.5, FiveRound: false, Winner: 'Bobby Green', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 20, Total: 20, Profit: 0.57 }, Kieran: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 20, Total: 20, Profit: 0.57 }, Rob: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 15, Total: 15, Profit: 0.57 }, Jake: { Pick: 'Jim Miller', Method: 'Submission', Round: '2', Points: 0, CardTotal: 15, Total: 15, Profit: -1 }, } },
@@ -169,6 +184,55 @@
 
         function formatPercentage(num) { return Number(num).toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2 }); }
 
+        var leagueTableChart = new Chart(document.getElementById("league-table-canvas"), {
+            type: 'line',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function (a, b) {
+                                var labelText = leagueTableChartLabels[a];
+                                if (labelText.length > 0) return labelText;
+                                return null;
+                            },
+                            align: 'end',
+                            //maxRotation: 0,
+                            //minRotation: 0,
+                            display: true,
+                            autoSkip: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        var leagueTableChartLabels = [];
+
+        var titleHistoryChart = new Chart(document.getElementById("title-history-canvas"), {
+            type: 'bar',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
         function generateLeagueTable() {
             // Generate a record for each player.
             var playerInfo = {};
@@ -201,6 +265,27 @@
                 };
             }
 
+            // Generate chart data for league history.
+            var chartData = {
+                labels: [],
+                datasets: [
+                    { label: 'Alex', data: [], borderColor: CHART_COLORS.blue, backgroundColor: CHART_COLORS.blue },
+                    { label: 'Kieran', data: [], borderColor: CHART_COLORS.green, backgroundColor: CHART_COLORS.green },
+                    { label: 'Rob', data: [], borderColor: CHART_COLORS.yellow, backgroundColor: CHART_COLORS.yellow },
+                    { label: 'Jake', data: [], borderColor: CHART_COLORS.red, backgroundColor: CHART_COLORS.red },
+                ]
+            }
+
+            var titleData = {
+                labels: [],
+                datasets: [
+                    { label: 'Alex', data: [], borderColor: CHART_COLORS.blue, backgroundColor: CHART_COLORS.blue },
+                    { label: 'Kieran', data: [], borderColor: CHART_COLORS.green, backgroundColor: CHART_COLORS.green },
+                    { label: 'Rob', data: [], borderColor: CHART_COLORS.yellow, backgroundColor: CHART_COLORS.yellow },
+                    { label: 'Jake', data: [], borderColor: CHART_COLORS.red, backgroundColor: CHART_COLORS.red },
+                ]
+            }
+
             // Calculate scores for each player.
             for (var cardName in cardData) {
                 var card = cardData[cardName];
@@ -210,6 +295,17 @@
 
                     var maxPts = fight.FiveRound ? 30 : 15;
                     cardInfo[cardName].MaxPts += maxPts;
+
+                    chartData.datasets[0].data.push(fight.Picks.Alex.Total);
+                    chartData.datasets[1].data.push(fight.Picks.Kieran.Total);
+                    chartData.datasets[2].data.push(fight.Picks.Rob.Total);
+                    chartData.datasets[3].data.push(fight.Picks.Jake.Total);
+                    if (fx == card.length - 1) {
+                        chartData.labels.push(cardName);
+                    }
+                    else {
+                        chartData.labels.push("");
+                    }
 
                     for (var px in players) {
                         var player = players[px];
@@ -278,6 +374,12 @@
                 var card = cardInfo[cardName];
                 var cardRow = [card.Date, cardName, card.MaxPts, card.Alex, card.Kieran, card.Rob, card.Jake, card.Winner, formatPercentage(card.Accuracy)];
                 titleRows.push(cardRow);
+
+                titleData.labels.push(cardName);
+                titleData.datasets[0].data.push(card.Alex);
+                titleData.datasets[1].data.push(card.Kieran);
+                titleData.datasets[2].data.push(card.Rob);
+                titleData.datasets[3].data.push(card.Jake);
             }
 
             // Create the title history datatable.
@@ -299,6 +401,23 @@
                 responsive: true,
                 data: titleRows
             });
+
+            leagueTableChart.data = chartData;
+            leagueTableChartLabels = chartData.labels;
+            leagueTableChart.update();
+
+            titleHistoryChart.data = titleData;
+            titleHistoryChart.update();
+
+            $("#league-table-chart-btn").click(function () {
+                $("#league-table-container").toggle();
+            });
+            $("#league-table-container").hide();
+
+            $("#title-history-chart-btn").click(function () {
+                $("#title-history-container").toggle();
+            });
+            $("#title-history-container").hide();
         }
 
         function populateEventResults() {
@@ -330,29 +449,31 @@
             ]
         });
 
+        var eventResultChartVisible = false;
         var eventResultChart = new Chart(document.getElementById("event-result-canvas"), {
-                type: 'line',
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            ticks: {
-                                maxRotation: 90,
-                                minRotation: 90
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
+            type: 'line',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            maxRotation: 90,
+                            minRotation: 90
                         }
                     }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
-            });
+            }
+        });
 
         function generateEventTable() {
             var selectedCardName = $("#event-result-select").val();
+            $("#event-result-container").show();
             var cardFights = cardData[selectedCardName];
 
             eventResultTable.clear();
@@ -387,7 +508,21 @@
             eventResultTable.draw();
             eventResultChart.data = chartData;
             eventResultChart.update();
+            if (!eventResultChartVisible) {
+                $("#event-result-container").hide();
+            }
         }
+
+        $("#event-result-chart-btn").click(function () {
+            if (eventResultChartVisible) {
+                $("#event-result-container").hide();
+                eventResultChartVisible = false;
+            }
+            else {
+                $("#event-result-container").show();
+                eventResultChartVisible = true;
+            }
+        });
 
         function shortMethod(method) {
             switch (method) {
