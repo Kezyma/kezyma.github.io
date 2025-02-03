@@ -12,6 +12,10 @@
         .dt-container .row div{
             padding: 0 !important;
         }
+
+        canvas {
+            min-height: 40vmax !important;
+        }
     </style>
 </head>
 
@@ -39,16 +43,16 @@
                 </div>
             </div>
             <div id="league-table-container" class="card-body p-0 league-chart-container">
-                <canvas id="league-table-canvas" style="min-height:640px;"></canvas>
+                <canvas id="league-table-canvas"></canvas>
             </div>
             <div id="league-percent-container" class="card-body p-0 league-chart-container">
-                <canvas id="league-percent-canvas" style="min-height:640px;"></canvas>
+                <canvas id="league-percent-canvas"></canvas>
             </div>
             <div id="league-gap-container" class="card-body p-0 league-chart-container">
-                <canvas id="league-gap-canvas" style="min-height:640px;"></canvas>
+                <canvas id="league-gap-canvas"></canvas>
             </div>
             <div id="league-elo-container" class="card-body p-0 league-chart-container">
-                <canvas id="league-elo-canvas" style="min-height:640px;"></canvas>
+                <canvas id="league-elo-canvas"></canvas>
             </div>
         </div>
 
@@ -66,7 +70,7 @@
                 <button id="title-history-chart-btn" class="btn btn-sm btn-info">Points Chart</button>
             </div>
             <div id="title-history-container" class="card-body p-0">
-                <canvas id="title-history-canvas" style="min-height:640px;"></canvas>
+                <canvas id="title-history-canvas"></canvas>
             </div>
         </div>
 
@@ -135,7 +139,7 @@
                 <button id="event-result-chart-btn" class="btn btn-sm btn-info">Points Chart</button>
             </div>
             <div id="event-result-container" class="card-body p-0">
-                <canvas id="event-result-canvas" style="min-height:640px;"></canvas>
+                <canvas id="event-result-canvas"></canvas>
             </div>
         </div>
 
