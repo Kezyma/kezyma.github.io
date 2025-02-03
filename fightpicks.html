@@ -31,10 +31,12 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <button id="league-table-chart-btn" class="btn btn-sm btn-info">Toggle Points Chart</button>
-                <button id="league-percent-chart-btn" class="btn btn-sm btn-info">Toggle Percentage Chart</button>
-                <button id="league-gap-chart-btn" class="btn btn-sm btn-info">Toggle Gap Chart</button>
-                <button id="league-elo-chart-btn" class="btn btn-sm btn-info">Toggle Elo Chart</button>
+                <div class="btn-group" role="group">
+                    <button id="league-table-chart-btn" class="btn btn-sm btn-info">Points Chart</button>
+                    <button id="league-percent-chart-btn" class="btn btn-sm btn-info">Percentage Chart</button>
+                    <button id="league-gap-chart-btn" class="btn btn-sm btn-info">Gap Chart</button>
+                    <button id="league-elo-chart-btn" class="btn btn-sm btn-info">Elo Chart</button>
+                </div>
             </div>
             <div id="league-table-container" class="card-body p-0 league-chart-container">
                 <canvas id="league-table-canvas" style="min-height:640px;"></canvas>
@@ -61,7 +63,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <button id="title-history-chart-btn" class="btn btn-sm btn-info">Toggle Chart</button>
+                <button id="title-history-chart-btn" class="btn btn-sm btn-info">Points Chart</button>
             </div>
             <div id="title-history-container" class="card-body p-0">
                 <canvas id="title-history-canvas" style="min-height:640px;"></canvas>
@@ -130,7 +132,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <button id="event-result-chart-btn" class="btn btn-sm btn-info">Toggle Chart</button>
+                <button id="event-result-chart-btn" class="btn btn-sm btn-info">Points Chart</button>
             </div>
             <div id="event-result-container" class="card-body p-0">
                 <canvas id="event-result-canvas" style="min-height:640px;"></canvas>
@@ -302,6 +304,7 @@
 
         var leagueTableChartLabels = [];
         var eventResultChartVisible = false;
+        var currentLeagueChartVisible = '';
 
         var leagueTableChart = new Chart(document.getElementById("league-table-canvas"), {
             type: 'line',
@@ -368,6 +371,8 @@
         var pointsRecord = { Event: '', Player: '', Score: 0 };
         var lowAccuracyRecord = { Event: '', Player: '', Score: 1 };
         var lowPointsRecord = { Event: '', Player: '', Score: 100 };
+        var eloRecord = { Event: '', Player: '', Score: 0};
+        var lowEloRecord = { Event: '', Player: '', Score: 100};
     </script>
 
     <!-- Datatable Initialisation -->
@@ -397,24 +402,36 @@
         });
 
         $("#league-table-chart-btn").click(function () {
-            $("#league-table-container").toggle();
+            toggleLeagueChart("league-table-container");
         });
 
         $("#league-elo-chart-btn").click(function () {
-            $("#league-elo-container").toggle();
+            toggleLeagueChart("league-elo-container");
         });
 
         $("#league-percent-chart-btn").click(function () {
-            $("#league-percent-container").toggle();
+            toggleLeagueChart("league-percent-container");
         });
 
         $("#league-gap-chart-btn").click(function () {
-            $("#league-gap-container").toggle();
+            toggleLeagueChart("league-gap-container");
         });
 
         $("#title-history-chart-btn").click(function () {
             $("#title-history-container").toggle();
         });
+
+        function toggleLeagueChart(id) {
+            $(".league-chart-container").hide();
+            if (currentLeagueChartVisible == id) {
+                $(`#${id}`).hide();
+                currentLeagueChartVisible = "";
+            }
+            else {
+                $(`#${id}`).show();
+                currentLeagueChartVisible = id;
+            }
+        }
     </script>
 
     <!-- Table & Chart Setup-->
@@ -877,7 +894,8 @@
                 ["Profit Earned", profitRecord.Player, gbpFormat.format(profitRecord.Score), profitRecord.Event, lossRecord.Player, gbpFormat.format(lossRecord.Score), lossRecord.Event],
                 ["Correct Picks", correctPicksRecord.Player, correctPicksRecord.Score, correctPercentRecord.Event, incorrectPicksRecord.Player, incorrectPicksRecord.Score, incorrectPicksRecord.Event],
                 ["Correct Percentage", correctPercentRecord.Player, formatPercentage(correctPercentRecord.Score), correctPercentRecord.Event, incorrectPercentRecord.Player, formatPercentage(incorrectPercentRecord.Score), incorrectPercentRecord.Event],
-                ["Profit Percentage", profitPercentRecord.Player, formatPercentage(profitPercentRecord.Score), profitPercentRecord.Event, lossPercentRecord.Player, formatPercentage(lossPercentRecord.Score), lossPercentRecord.Event]
+                ["Profit Percentage", profitPercentRecord.Player, formatPercentage(profitPercentRecord.Score), profitPercentRecord.Event, lossPercentRecord.Player, formatPercentage(lossPercentRecord.Score), lossPercentRecord.Event],
+                ["Elo Rating", eloRecord.Player, formatElo(eloRecord.Score), eloRecord.Event, lowEloRecord.Player, formatElo(lowEloRecord.Score), lowEloRecord.Event]
             ];
             var recordTable = new DataTable("#player-records", { data: recordRows });
         }
@@ -911,17 +929,48 @@
                             var p2n = players[p2];
                             var p1s = fight.Picks[p1n].Points;
                             var p2s = fight.Picks[p2n].Points;
-                            var ttlPts = p1s + p2s;
+                            var ms = fight.FiveRound ? 30 : 15;
+
+                            var gap = Math.abs(p1s-p2s) / ms;
+                            var winp = 0.5 + (gap / 2);
                             var p1score = 0.5;
                             var p2score = 0.5;
-                            if (ttlPts > 0) {
-                                p1score = p1s / ttlPts;
-                                p2score = p2s / ttlPts;
+                            
+                            // Relative Treble.
+                            if (p1s > p2s) {
+                                p1score = winp;
+                                p2score = 1 - winp;
                             }
+                            if (p2s > p1s) {
+                                p2score = winp;
+                                p1score = 1 - winp;
+                            }
+
+                            // Relative Compared
+                            var ttlPts = p1s + p2s;
+                            if (ttlPts > 0) {
+                                //p1score = p1s / ttlPts;
+                                //p2score = p2s / ttlPts;
+                            }
+
                             var newRatings = eloCalculate(priorRatings[p1n], priorRatings[p2n], p1score, p2score, k);
                             eloRatings[p1n] += (newRatings[0] - priorRatings[p1n]);
                             eloRatings[p2n] += (newRatings[1] - priorRatings[p2n]);
                         }
+                    }
+                }
+
+                for (var p in players) {
+                    var r = eloRatings[players[p]];
+                    if (r > eloRecord.Score) {
+                        eloRecord.Score = r;
+                        eloRecord.Player = players[p];
+                        eloRecord.Event = fight.Card;
+                    }
+                    if (r < lowEloRecord.Score) {
+                        lowEloRecord.Score = r;
+                        lowEloRecord.Player = players[p];
+                        lowEloRecord.Event = fight.Card;
                     }
                 }
 
