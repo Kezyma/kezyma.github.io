@@ -389,6 +389,8 @@
         var lowPointsRecord = { Event: '', Player: '', Score: 100 };
         var eloRecord = { Event: '', Player: '', Score: 0};
         var lowEloRecord = { Event: '', Player: '', Score: 100};
+        var perfRecord = { Event: '', Player: '', Score: 0 };
+        var lowPerfRecord = { Event: '', Player: '', Score: 100 };
     </script>
 
     <!-- Datatable Initialisation -->
@@ -934,7 +936,8 @@
                 ["Correct Picks", correctPicksRecord.Player, correctPicksRecord.Score, correctPercentRecord.Event, incorrectPicksRecord.Player, incorrectPicksRecord.Score, incorrectPicksRecord.Event],
                 ["Correct Percentage", correctPercentRecord.Player, formatPercentage(correctPercentRecord.Score), correctPercentRecord.Event, incorrectPercentRecord.Player, formatPercentage(incorrectPercentRecord.Score), incorrectPercentRecord.Event],
                 ["Profit Percentage", profitPercentRecord.Player, formatPercentage(profitPercentRecord.Score), profitPercentRecord.Event, lossPercentRecord.Player, formatPercentage(lossPercentRecord.Score), lossPercentRecord.Event],
-                ["Elo Rating", eloRecord.Player, formatElo(eloRecord.Score), eloRecord.Event, lowEloRecord.Player, formatElo(lowEloRecord.Score), lowEloRecord.Event]
+                ["Elo Rating", eloRecord.Player, formatElo(eloRecord.Score), eloRecord.Event, lowEloRecord.Player, formatElo(lowEloRecord.Score), lowEloRecord.Event],
+                ["Performance Rating", perfRecord.Player, formatElo(perfRecord.Score), perfRecord.Event, lowPerfRecord.Player, formatElo(lowPerfRecord.Score), lowPerfRecord.Event]
             ];
             var recordTable = new DataTable("#player-records", { data: recordRows });
         }
@@ -1061,6 +1064,21 @@
                 Rob: performanceRating(opponentRatings.Rob, cardScores.Rob),
                 Jake: performanceRating(opponentRatings.Jake, cardScores.Jake),
             };
+
+            for (var card in perfRatings) {
+                for (var player in perfRatings[card]) {
+                    if (perfRatings[card][player] > perfRecord.Score) {
+                        perfRecord.Score = perfRatings[card][player];
+                        perfRecord.Player = player;
+                        perfRecord.Event = card;
+                    }
+                    if (perfRatings[card][player] < lowPerfRecord.Score) {
+                        lowPerfRecord.Score = perfRatings[card][player];
+                        lowPerfRecord.Player = player;
+                        lowPerfRecord.Event = card;
+                    }
+                }
+            }
 
             console.log(perfRatings);
         }
