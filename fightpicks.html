@@ -259,6 +259,7 @@
         Chart.defaults.scale.ticks.color = "#dee2e6";
         Chart.defaults.scale.grid.color = "#343a40";
         Chart.defaults.plugins.legend.position = "bottom";
+        Chart.defaults.plugins.legend.labels.color = "#dee2e6";
         Chart.defaults.maintainAspectRatio = false;
         Chart.defaults.elements.point.radius = 0;
 
@@ -778,6 +779,7 @@
             $("#title-history-container").hide();
         }
 
+        // Generates the event list and sets up the event table selector.
         function bindEventSelect() {
             var selectInput = $("#event-result-select");
 
