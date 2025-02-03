@@ -9,12 +9,12 @@
             margin: 0 !important;
         }
 
-        .dt-container .row div{
+        .dt-container .row div {
             padding: 0 !important;
         }
 
         canvas {
-            min-height: min(40vmax,640px) !important;
+            min-height: min(40vmax, 640px) !important;
         }
     </style>
 </head>
@@ -197,44 +197,44 @@
     <script>
         // Imported json from fight tracker sheet.
         const fightData = [
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Deiveson Figueiredo', Right: 'Cody Garbrandt', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Deiveson Figueiredo', Method: 'Submission', Round: '2', Picks: { Alex: { Pick: 'Deiveson Figueiredo', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 5, Total: 5, Profit: 0.33 }, Kieran: { Pick: 'Deiveson Figueiredo', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 5, Total: 5, Profit: 0.33 }, Rob: { Pick: 'Cody Garbrandt', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 0, Total: 0, Profit: -1 }, Jake: { Pick: 'Deiveson Figueiredo', Method: 'Submission', Round: '2', Points: 15, CardTotal: 15, Total: 15, Profit: 0.33 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Bobby Green', Right: 'Jim Miller', LeftLine: 1.57, RightLine: 2.5, FiveRound: false, Winner: 'Bobby Green', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 20, Total: 20, Profit: 0.57 }, Kieran: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 20, Total: 20, Profit: 0.57 }, Rob: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 15, Total: 15, Profit: 0.57 }, Jake: { Pick: 'Jim Miller', Method: 'Submission', Round: '2', Points: 0, CardTotal: 15, Total: 15, Profit: -1 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Jessica Andrade', Right: 'Marina Rodriguez', LeftLine: 1.8, RightLine: 2, FiveRound: false, Winner: 'Jessica Andrade', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Jessica Andrade', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 35, Total: 35, Profit: 0.8 }, Kieran: { Pick: 'Marina Rodriguez', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 20, Total: 20, Profit: -1 }, Rob: { Pick: 'Jessica Andrade', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 30, Total: 30, Profit: 0.8 }, Jake: { Pick: 'Jessica Andrade', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 30, Total: 30, Profit: 0.8 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Jalin Turner', Right: 'Renato Moicano', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Jalin Turner', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Jalin Turner', Method: 'Knockout', Round: '3', Points: 5, CardTotal: 40, Total: 40, Profit: 0.4 }, Kieran: { Pick: 'Jalin Turner', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 25, Total: 25, Profit: 0.4 }, Rob: { Pick: 'Jalin Turner', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 45, Total: 45, Profit: 0.4 }, Jake: { Pick: 'Jalin Turner', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 45, Total: 45, Profit: 0.4 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Sodiq Yusuff', Right: 'Diego Lopes', LeftLine: 2.1, RightLine: 1.72, FiveRound: false, Winner: 'Diego Lopes', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Sodiq Yusuff', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 40, Total: 40, Profit: -1 }, Kieran: { Pick: 'Diego Lopes', Method: 'Knockout', Round: '1', Points: 15, CardTotal: 40, Total: 40, Profit: 0.72 }, Rob: { Pick: 'Diego Lopes', Method: 'Knockout', Round: '1', Points: 15, CardTotal: 60, Total: 60, Profit: 0.72 }, Jake: { Pick: 'Diego Lopes', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 50, Total: 50, Profit: 0.72 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Holly Holm', Right: 'Kayla Harrison', LeftLine: 4.5, RightLine: 1.22, FiveRound: false, Winner: 'Kayla Harrison', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 55, Total: 55, Profit: 0.22 }, Kieran: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 55, Total: 55, Profit: 0.22 }, Rob: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 75, Total: 75, Profit: 0.22 }, Jake: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 65, Total: 65, Profit: 0.22 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Calvin Kattar', Right: 'Aljamain Sterling', LeftLine: 2.4, RightLine: 1.58, FiveRound: false, Winner: 'Aljamain Sterling', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Aljamain Sterling', Method: 'Submission', Round: '2', Points: 5, CardTotal: 60, Total: 60, Profit: 0.58 }, Kieran: { Pick: 'Aljamain Sterling', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 70, Total: 70, Profit: 0.58 }, Rob: { Pick: 'Aljamain Sterling', Method: 'Knockout', Round: '2', Points: 5, CardTotal: 80, Total: 80, Profit: 0.58 }, Jake: { Pick: 'Aljamain Sterling', Method: 'Knockout', Round: '2', Points: 5, CardTotal: 70, Total: 70, Profit: 0.58 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Jiri Prochazka', Right: 'Aleksandar Rakic', LeftLine: 2, RightLine: 1.8, FiveRound: false, Winner: 'Jiri Prochazka', Method: 'Knockout', Round: '2', Picks: { Alex: { Pick: 'Jiri Prochazka', Method: 'Knockout', Round: '1', Points: 7, CardTotal: 67, Total: 67, Profit: 1 }, Kieran: { Pick: 'Jiri Prochazka', Method: 'Knockout', Round: '1', Points: 7, CardTotal: 77, Total: 77, Profit: 1 }, Rob: { Pick: 'Jiri Prochazka', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 85, Total: 85, Profit: 1 }, Jake: { Pick: 'Aleksandar Rakic', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 70, Total: 70, Profit: -1 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Bo Nickal', Right: 'Cody Brundage', LeftLine: 1.05, RightLine: 11, FiveRound: false, Winner: 'Bo Nickal', Method: 'Submission', Round: '2', Picks: { Alex: { Pick: 'Bo Nickal', Method: 'Submission', Round: '1', Points: 7, CardTotal: 74, Total: 74, Profit: 0.05 }, Kieran: { Pick: 'Bo Nickal', Method: 'Knockout', Round: '2', Points: 8, CardTotal: 85, Total: 85, Profit: 0.05 }, Rob: { Pick: 'Bo Nickal', Method: 'Knockout', Round: '2', Points: 8, CardTotal: 93, Total: 93, Profit: 0.05 }, Jake: { Pick: 'Bo Nickal', Method: 'Submission', Round: '1', Points: 7, CardTotal: 77, Total: 77, Profit: 0.05 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Charles Oliveira', Right: 'Arman Tsarukyan', LeftLine: 2.87, RightLine: 1.44, FiveRound: false, Winner: 'Arman Tsarukyan', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Arman Tsarukyan', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 89, Total: 89, Profit: 0.44 }, Kieran: { Pick: 'Charles Oliveira', Method: 'Submission', Round: '2', Points: 0, CardTotal: 85, Total: 85, Profit: -1 }, Rob: { Pick: 'Charles Oliveira', Method: 'Submission', Round: '2', Points: 0, CardTotal: 93, Total: 93, Profit: -1 }, Jake: { Pick: 'Charles Oliveira', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 77, Total: 77, Profit: -1 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Justin Gaethje', Right: 'Max Holloway', LeftLine: 1.57, RightLine: 2.5, FiveRound: true, Winner: 'Max Holloway', Method: 'Knockout', Round: '5', Picks: { Alex: { Pick: 'Justin Gaethje', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 89, Total: 89, Profit: -1 }, Kieran: { Pick: 'Justin Gaethje', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 85, Total: 85, Profit: -1 }, Rob: { Pick: 'Justin Gaethje', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 93, Total: 93, Profit: -1 }, Jake: { Pick: 'Justin Gaethje', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 77, Total: 77, Profit: -1 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Zhang Weili', Right: 'Yan Xiaonan', LeftLine: 1.25, RightLine: 4, FiveRound: true, Winner: 'Zhang Weili', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Zhang Weili', Method: 'Decision', Round: 'D', Points: 30, CardTotal: 119, Total: 119, Profit: 0.25 }, Kieran: { Pick: 'Zhang Weili', Method: 'Knockout', Round: '2', Points: 10, CardTotal: 95, Total: 95, Profit: 0.25 }, Rob: { Pick: 'Zhang Weili', Method: 'Decision', Round: 'D', Points: 30, CardTotal: 123, Total: 123, Profit: 0.25 }, Jake: { Pick: 'Zhang Weili', Method: 'Decision', Round: 'D', Points: 30, CardTotal: 107, Total: 107, Profit: 0.25 }, } },
-            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Alex Pereira', Right: 'Jamahal Hill', LeftLine: 1.8, RightLine: 2, FiveRound: true, Winner: 'Alex Pereira', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Alex Pereira', Method: 'Knockout', Round: '2', Points: 14, CardTotal: 133, Total: 133, Profit: 0.8 }, Kieran: { Pick: 'Jamahal Hill', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 95, Total: 95, Profit: -1 }, Rob: { Pick: 'Alex Pereira', Method: 'Knockout', Round: '3', Points: 14, CardTotal: 137, Total: 137, Profit: 0.8 }, Jake: { Pick: 'Alex Pereira', Method: 'Knockout', Round: '2', Points: 14, CardTotal: 121, Total: 121, Profit: 0.8 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Shauna Bannon', Right: 'Alice Ardelean', LeftLine: 2.1, RightLine: 1.72, FiveRound: false, Winner: 'Shauna Bannon', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Shauna Bannon', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 15, Total: 148, Profit: 1.1 }, Kieran: { Pick: 'Shauna Bannon', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 15, Total: 110, Profit: 1.1 }, Rob: { Pick: 'Alice Ardelean', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 0, Total: 137, Profit: -1 }, Jake: { Pick: 'Shauna Bannon', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 15, Total: 136, Profit: 1.1 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Mick Parkin', Right: 'Lukasz Brzeski', LeftLine: 1.5, RightLine: 2.7, FiveRound: false, Winner: 'Mick Parkin', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 20, Total: 153, Profit: 0.5 }, Kieran: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 20, Total: 115, Profit: 0.5 }, Rob: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 5, Total: 142, Profit: 0.5 }, Jake: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 20, Total: 141, Profit: 0.5 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Sam Patterson', Right: 'Kiefer Crosbie', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Sam Patterson', Method: 'Submission', Round: '1', Picks: { Alex: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2', Points: 7, CardTotal: 27, Total: 160, Profit: 0.33 }, Kieran: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2', Points: 7, CardTotal: 27, Total: 122, Profit: 0.33 }, Rob: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2', Points: 7, CardTotal: 12, Total: 149, Profit: 0.33 }, Jake: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2', Points: 7, CardTotal: 27, Total: 148, Profit: 0.33 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Modestas Bukauskas', Right: 'Marcin Prachnio', LeftLine: 1.66, RightLine: 2.25, FiveRound: false, Winner: 'Modestas Bukauskas', Method: 'Submission', Round: '3', Picks: { Alex: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 32, Total: 165, Profit: 0.66 }, Kieran: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 32, Total: 127, Profit: 0.66 }, Rob: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 17, Total: 154, Profit: 0.66 }, Jake: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 32, Total: 153, Profit: 0.66 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Oban Elliott', Right: 'Preston Parsons', LeftLine: 2.25, RightLine: 1.66, FiveRound: false, Winner: 'Oban Elliott', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Oban Elliott', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 47, Total: 180, Profit: 1.25 }, Kieran: { Pick: 'Preston Parsons', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 32, Total: 127, Profit: -1 }, Rob: { Pick: 'Oban Elliott', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 32, Total: 169, Profit: 1.25 }, Jake: { Pick: 'Oban Elliott', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 47, Total: 168, Profit: 1.25 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Muhammad Mokaev', Right: 'Manel Kape', LeftLine: 1.8, RightLine: 2, FiveRound: false, Winner: 'Muhammad Mokaev', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Muhammad Mokaev', Method: 'Submission', Round: '1', Points: 5, CardTotal: 52, Total: 185, Profit: 0.8 }, Kieran: { Pick: 'Muhammad Mokaev', Method: 'Submission', Round: '3', Points: 5, CardTotal: 37, Total: 132, Profit: 0.8 }, Rob: { Pick: 'Muhammad Mokaev', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 47, Total: 184, Profit: 0.8 }, Jake: { Pick: 'Muhammad Mokaev', Method: 'Submission', Round: '3', Points: 5, CardTotal: 52, Total: 173, Profit: 0.8 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Caolan Loughran', Right: 'Jake Hadley', LeftLine: 1.53, RightLine: 2.62, FiveRound: false, Winner: 'Jake Hadley', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Caolan Loughran', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 52, Total: 185, Profit: -1 }, Kieran: { Pick: 'Caolan Loughran', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 37, Total: 132, Profit: -1 }, Rob: { Pick: 'Caolan Loughran', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 47, Total: 184, Profit: -1 }, Jake: { Pick: 'Jake Hadley', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 67, Total: 188, Profit: 1.62 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Molly McCann', Right: 'Bruna Brasil', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Bruna Brasil', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Molly McCann', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 52, Total: 185, Profit: -1 }, Kieran: { Pick: 'Molly McCann', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 37, Total: 132, Profit: -1 }, Rob: { Pick: 'Molly McCann', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 47, Total: 184, Profit: -1 }, Jake: { Pick: 'Molly McCann', Method: 'Submission', Round: '1', Points: 0, CardTotal: 67, Total: 188, Profit: -1 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Nathaniel Wood', Right: 'Daniel Pineda', LeftLine: 1.25, RightLine: 4, FiveRound: false, Winner: 'Nathaniel Wood', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 67, Total: 200, Profit: 0.25 }, Kieran: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 52, Total: 147, Profit: 0.25 }, Rob: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 62, Total: 199, Profit: 0.25 }, Jake: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 82, Total: 203, Profit: 0.25 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Arnold Allen', Right: 'Giga Chikadze', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Arnold Allen', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Arnold Allen', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 82, Total: 215, Profit: 0.4 }, Kieran: { Pick: 'Arnold Allen', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 67, Total: 162, Profit: 0.4 }, Rob: { Pick: 'Arnold Allen', Method: 'Knockout', Round: '2', Points: 5, CardTotal: 67, Total: 204, Profit: 0.4 }, Jake: { Pick: 'Arnold Allen', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 87, Total: 208, Profit: 0.4 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Christian Duncan', Right: 'Gregory Rodrigues', LeftLine: 1.8, RightLine: 2, FiveRound: false, Winner: 'Gregory Rodrigues', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Christian Duncan', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 82, Total: 215, Profit: -1 }, Kieran: { Pick: 'Gregory Rodrigues', Method: 'Knockout', Round: '2', Points: 5, CardTotal: 72, Total: 167, Profit: 1 }, Rob: { Pick: 'Christian Duncan', Method: 'Knockout', Round: '3', Points: 0, CardTotal: 67, Total: 204, Profit: -1 }, Jake: { Pick: 'Christian Duncan', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 87, Total: 208, Profit: -1 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Bobby Green', Right: 'Paddy Pimblett', LeftLine: 1.72, RightLine: 2.1, FiveRound: false, Winner: 'Paddy Pimblett', Method: 'Submission', Round: '1', Picks: { Alex: { Pick: 'Paddy Pimblett', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 87, Total: 220, Profit: 1.1 }, Kieran: { Pick: 'Paddy Pimblett', Method: 'Submission', Round: '2', Points: 7, CardTotal: 79, Total: 174, Profit: 1.1 }, Rob: { Pick: 'Paddy Pimblett', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 72, Total: 209, Profit: 1.1 }, Jake: { Pick: 'Paddy Pimblett', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 92, Total: 213, Profit: 1.1 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Tom Aspinall', Right: 'Curtis Blaydes', LeftLine: 1.36, RightLine: 3.25, FiveRound: true, Winner: 'Tom Aspinall', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '1', Points: 30, CardTotal: 117, Total: 250, Profit: 0.36 }, Kieran: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '2', Points: 14, CardTotal: 93, Total: 188, Profit: 0.36 }, Rob: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '2', Points: 14, CardTotal: 86, Total: 223, Profit: 0.36 }, Jake: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '1', Points: 30, CardTotal: 122, Total: 243, Profit: 0.36 }, } },
-            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Leon Edwards', Right: 'Belal Muhammad', LeftLine: 1.5, RightLine: 2.7, FiveRound: true, Winner: 'Belal Muhammad', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 117, Total: 250, Profit: -1 }, Kieran: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 93, Total: 188, Profit: -1 }, Rob: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 86, Total: 223, Profit: -1 }, Jake: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 122, Total: 243, Profit: -1 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Hamdy Abdelwahab', Right: 'Jamal Pogues', LeftLine: 1.9, RightLine: 1.9, FiveRound: false, Winner: 'Hamdy Abdelwahab', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Hamdy Abdelwahab', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 5, Total: 255, Profit: 0.9 }, Kieran: { Pick: 'Jamal Pogues', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 0, Total: 188, Profit: -1 }, Rob: { Pick: 'Hamdy Abdelwahab', Method: 'Knockout', Round: '3', Points: 5, CardTotal: 5, Total: 228, Profit: 0.9 }, Jake: { Pick: 'Hamdy Abdelwahab', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 5, Total: 248, Profit: 0.9 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Bogdan Grad', Right: 'Lucas Alexander', LeftLine: 2, RightLine: 1.8, FiveRound: false, Winner: 'Bogdan Grad', Method: 'Knockout', Round: '2', Picks: { Alex: { Pick: 'Bogdan Grad', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 10, Total: 260, Profit: 1 }, Kieran: { Pick: 'Bogdan Grad', Method: 'Knockout', Round: '1', Points: 7, CardTotal: 7, Total: 195, Profit: 1 }, Rob: { Pick: 'Bogdan Grad', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 10, Total: 233, Profit: 1 }, Jake: { Pick: 'Bogdan Grad', Method: 'Knockout', Round: '2', Points: 15, CardTotal: 20, Total: 263, Profit: 1 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Jasmine Jasudavicius', Right: 'Mayra Bueno Silva', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Jasmine Jasudavicius', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Jasmine Jasudavicius', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 25, Total: 275, Profit: 0.4 }, Kieran: { Pick: 'Jasmine Jasudavicius', Method: 'Submission', Round: '3', Points: 5, CardTotal: 12, Total: 200, Profit: 0.4 }, Rob: { Pick: 'Mayra Bueno Silva', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 10, Total: 233, Profit: -1 }, Jake: { Pick: 'Jasmine Jasudavicius', Method: 'Submission', Round: '3', Points: 5, CardTotal: 25, Total: 268, Profit: 0.4 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Terrance McKinney', Right: 'Damir Hadzovic', LeftLine: 1.22, RightLine: 4.5, FiveRound: false, Winner: 'Terrance McKinney', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Terrance McKinney', Method: 'Knockout', Round: '1', Points: 15, CardTotal: 40, Total: 290, Profit: 0.22 }, Kieran: { Pick: 'Terrance McKinney', Method: 'Knockout', Round: '2', Points: 7, CardTotal: 19, Total: 207, Profit: 0.22 }, Rob: { Pick: 'Terrance McKinney', Method: 'Knockout', Round: '1', Points: 15, CardTotal: 25, Total: 248, Profit: 0.22 }, Jake: { Pick: 'Terrance McKinney', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 30, Total: 273, Profit: 0.22 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Shamil Gaziev', Right: 'Thomas Petersen', LeftLine: 1.28, RightLine: 3.75, FiveRound: false, Winner: 'Shamil Gaziev', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Shamil Gaziev', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 45, Total: 295, Profit: 0.28 }, Kieran: { Pick: 'Shamil Gaziev', Method: 'Knockout', Round: '2', Points: 7, CardTotal: 26, Total: 214, Profit: 0.28 }, Rob: { Pick: 'Shamil Gaziev', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 30, Total: 253, Profit: 0.28 }, Jake: { Pick: 'Shamil Gaziev', Method: 'Decision', Round: 'D', Points: 5, CardTotal: 35, Total: 278, Profit: 0.28 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Muhammad Naimov', Right: 'Kaan Ofli', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Muhammad Naimov', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Muhammad Naimov', Method: 'Knockout', Round: '2', Points: 5, CardTotal: 50, Total: 300, Profit: 0.33 }, Kieran: { Pick: 'Kaan Ofli', Method: 'Submission', Round: '2', Points: 0, CardTotal: 26, Total: 214, Profit: -1 }, Rob: { Pick: 'Muhammad Naimov', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 45, Total: 268, Profit: 0.33 }, Jake: { Pick: 'Muhammad Naimov', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 40, Total: 283, Profit: 0.33 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Farès Ziam', Right: 'Mike Davis', LeftLine: 2.25, RightLine: 1.66, FiveRound: false, Winner: 'Farès Ziam', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Farès Ziam', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 65, Total: 315, Profit: 1.25 }, Kieran: { Pick: 'Mike Davis', Method: 'Submission', Round: '2', Points: 0, CardTotal: 26, Total: 214, Profit: -1 }, Rob: { Pick: 'Mike Davis', Method: 'Knockout', Round: '3', Points: 0, CardTotal: 45, Total: 268, Profit: -1 }, Jake: { Pick: 'Mike Davis', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 40, Total: 283, Profit: -1 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Said Nurmagomedov', Right: 'Vinicius Oliveira', LeftLine: 1.62, RightLine: 2.3, FiveRound: false, Winner: 'Vinicius Oliveira', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Said Nurmagomedov', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 65, Total: 315, Profit: -1 }, Kieran: { Pick: 'Said Nurmagomedov', Method: 'Submission', Round: '2', Points: 0, CardTotal: 26, Total: 214, Profit: -1 }, Rob: { Pick: 'Vinicius Oliveira', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 60, Total: 283, Profit: 1.3 }, Jake: { Pick: 'Said Nurmagomedov', Method: 'Submission', Round: '1', Points: 0, CardTotal: 40, Total: 283, Profit: -1 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Sergei Pavlovic', Right: 'Jairzinho Rozenstruik', LeftLine: 1.3, RightLine: 3.5, FiveRound: false, Winner: 'Sergei Pavlovic', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Sergei Pavlovic', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 70, Total: 320, Profit: 0.3 }, Kieran: { Pick: 'Sergei Pavlovic', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 31, Total: 219, Profit: 0.3 }, Rob: { Pick: 'Sergei Pavlovic', Method: 'Knockout', Round: '1', Points: 5, CardTotal: 65, Total: 288, Profit: 0.3 }, Jake: { Pick: 'Sergei Pavlovic', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 55, Total: 298, Profit: 0.3 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Shara Magomedov', Right: 'Michael Page', LeftLine: 1.53, RightLine: 2.62, FiveRound: false, Winner: 'Michael Page', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Michael Page', Method: 'Decision', Round: 'D', Points: 15, CardTotal: 85, Total: 335, Profit: 1.62 }, Kieran: { Pick: 'Shara Magomedov', Method: 'Knockout', Round: '3', Points: 0, CardTotal: 31, Total: 219, Profit: -1 }, Rob: { Pick: 'Shara Magomedov', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 65, Total: 288, Profit: -1 }, Jake: { Pick: 'Shara Magomedov', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 55, Total: 298, Profit: -1 }, } },
-            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Israel Adesanya', Right: 'Nassourdine Imavov', LeftLine: 1.61, RightLine: 2.37, FiveRound: true, Winner: 'Nassourdine Imavov', Method: 'Knockout', Round: '2', Picks: { Alex: { Pick: 'Israel Adesanya', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 85, Total: 335, Profit: -1 }, Kieran: { Pick: 'Israel Adesanya', Method: 'Decision', Round: 'D', Points: 0, CardTotal: 31, Total: 219, Profit: -1 }, Rob: { Pick: 'Israel Adesanya', Method: 'Knockout', Round: '2', Points: 0, CardTotal: 65, Total: 288, Profit: -1 }, Jake: { Pick: 'Nassourdine Imavov', Method: 'Decision', Round: 'D', Points: 10, CardTotal: 65, Total: 308, Profit: 1.37 }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Deiveson Figueiredo', Right: 'Cody Garbrandt', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Deiveson Figueiredo', Method: 'Submission', Round: '2', Picks: { Alex: { Pick: 'Deiveson Figueiredo', Method: 'Knockout', Round: '1' }, Kieran: { Pick: 'Deiveson Figueiredo', Method: 'Knockout', Round: '1' }, Rob: { Pick: 'Cody Garbrandt', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Deiveson Figueiredo', Method: 'Submission', Round: '2' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Bobby Green', Right: 'Jim Miller', LeftLine: 1.57, RightLine: 2.5, FiveRound: false, Winner: 'Bobby Green', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Bobby Green', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Jim Miller', Method: 'Submission', Round: '2' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Jessica Andrade', Right: 'Marina Rodriguez', LeftLine: 1.8, RightLine: 2, FiveRound: false, Winner: 'Jessica Andrade', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Jessica Andrade', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Marina Rodriguez', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Jessica Andrade', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Jessica Andrade', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Jalin Turner', Right: 'Renato Moicano', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Jalin Turner', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Jalin Turner', Method: 'Knockout', Round: '3' }, Kieran: { Pick: 'Jalin Turner', Method: 'Knockout', Round: '1' }, Rob: { Pick: 'Jalin Turner', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Jalin Turner', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Sodiq Yusuff', Right: 'Diego Lopes', LeftLine: 2.1, RightLine: 1.72, FiveRound: false, Winner: 'Diego Lopes', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Sodiq Yusuff', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Diego Lopes', Method: 'Knockout', Round: '1' }, Rob: { Pick: 'Diego Lopes', Method: 'Knockout', Round: '1' }, Jake: { Pick: 'Diego Lopes', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Holly Holm', Right: 'Kayla Harrison', LeftLine: 4.5, RightLine: 1.22, FiveRound: false, Winner: 'Kayla Harrison', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Kayla Harrison', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Calvin Kattar', Right: 'Aljamain Sterling', LeftLine: 2.4, RightLine: 1.58, FiveRound: false, Winner: 'Aljamain Sterling', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Aljamain Sterling', Method: 'Submission', Round: '2' }, Kieran: { Pick: 'Aljamain Sterling', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Aljamain Sterling', Method: 'Knockout', Round: '2' }, Jake: { Pick: 'Aljamain Sterling', Method: 'Knockout', Round: '2' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Jiri Prochazka', Right: 'Aleksandar Rakic', LeftLine: 2, RightLine: 1.8, FiveRound: false, Winner: 'Jiri Prochazka', Method: 'Knockout', Round: '2', Picks: { Alex: { Pick: 'Jiri Prochazka', Method: 'Knockout', Round: '1' }, Kieran: { Pick: 'Jiri Prochazka', Method: 'Knockout', Round: '1' }, Rob: { Pick: 'Jiri Prochazka', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Aleksandar Rakic', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Bo Nickal', Right: 'Cody Brundage', LeftLine: 1.05, RightLine: 11, FiveRound: false, Winner: 'Bo Nickal', Method: 'Submission', Round: '2', Picks: { Alex: { Pick: 'Bo Nickal', Method: 'Submission', Round: '1' }, Kieran: { Pick: 'Bo Nickal', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Bo Nickal', Method: 'Knockout', Round: '2' }, Jake: { Pick: 'Bo Nickal', Method: 'Submission', Round: '1' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Charles Oliveira', Right: 'Arman Tsarukyan', LeftLine: 2.87, RightLine: 1.44, FiveRound: false, Winner: 'Arman Tsarukyan', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Arman Tsarukyan', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Charles Oliveira', Method: 'Submission', Round: '2' }, Rob: { Pick: 'Charles Oliveira', Method: 'Submission', Round: '2' }, Jake: { Pick: 'Charles Oliveira', Method: 'Knockout', Round: '2' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Justin Gaethje', Right: 'Max Holloway', LeftLine: 1.57, RightLine: 2.5, FiveRound: true, Winner: 'Max Holloway', Method: 'Knockout', Round: '5', Picks: { Alex: { Pick: 'Justin Gaethje', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Justin Gaethje', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Justin Gaethje', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Justin Gaethje', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Zhang Weili', Right: 'Yan Xiaonan', LeftLine: 1.25, RightLine: 4, FiveRound: true, Winner: 'Zhang Weili', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Zhang Weili', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Zhang Weili', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Zhang Weili', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Zhang Weili', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 300: Pereira vs Hill', Date: '2024-04-13', Left: 'Alex Pereira', Right: 'Jamahal Hill', LeftLine: 1.8, RightLine: 2, FiveRound: true, Winner: 'Alex Pereira', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Alex Pereira', Method: 'Knockout', Round: '2' }, Kieran: { Pick: 'Jamahal Hill', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Alex Pereira', Method: 'Knockout', Round: '3' }, Jake: { Pick: 'Alex Pereira', Method: 'Knockout', Round: '2' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Shauna Bannon', Right: 'Alice Ardelean', LeftLine: 2.1, RightLine: 1.72, FiveRound: false, Winner: 'Shauna Bannon', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Shauna Bannon', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Shauna Bannon', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Alice Ardelean', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Shauna Bannon', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Mick Parkin', Right: 'Lukasz Brzeski', LeftLine: 1.5, RightLine: 2.7, FiveRound: false, Winner: 'Mick Parkin', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Mick Parkin', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Sam Patterson', Right: 'Kiefer Crosbie', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Sam Patterson', Method: 'Submission', Round: '1', Picks: { Alex: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2' }, Kieran: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2' }, Rob: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2' }, Jake: { Pick: 'Sam Patterson', Method: 'Submission', Round: '2' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Modestas Bukauskas', Right: 'Marcin Prachnio', LeftLine: 1.66, RightLine: 2.25, FiveRound: false, Winner: 'Modestas Bukauskas', Method: 'Submission', Round: '3', Picks: { Alex: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Modestas Bukauskas', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Oban Elliott', Right: 'Preston Parsons', LeftLine: 2.25, RightLine: 1.66, FiveRound: false, Winner: 'Oban Elliott', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Oban Elliott', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Preston Parsons', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Oban Elliott', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Oban Elliott', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Muhammad Mokaev', Right: 'Manel Kape', LeftLine: 1.8, RightLine: 2, FiveRound: false, Winner: 'Muhammad Mokaev', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Muhammad Mokaev', Method: 'Submission', Round: '1' }, Kieran: { Pick: 'Muhammad Mokaev', Method: 'Submission', Round: '3' }, Rob: { Pick: 'Muhammad Mokaev', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Muhammad Mokaev', Method: 'Submission', Round: '3' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Caolan Loughran', Right: 'Jake Hadley', LeftLine: 1.53, RightLine: 2.62, FiveRound: false, Winner: 'Jake Hadley', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Caolan Loughran', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Caolan Loughran', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Caolan Loughran', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Jake Hadley', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Molly McCann', Right: 'Bruna Brasil', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Bruna Brasil', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Molly McCann', Method: 'Knockout', Round: '2' }, Kieran: { Pick: 'Molly McCann', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Molly McCann', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Molly McCann', Method: 'Submission', Round: '1' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Nathaniel Wood', Right: 'Daniel Pineda', LeftLine: 1.25, RightLine: 4, FiveRound: false, Winner: 'Nathaniel Wood', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Nathaniel Wood', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Arnold Allen', Right: 'Giga Chikadze', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Arnold Allen', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Arnold Allen', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Arnold Allen', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Arnold Allen', Method: 'Knockout', Round: '2' }, Jake: { Pick: 'Arnold Allen', Method: 'Knockout', Round: '1' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Christian Duncan', Right: 'Gregory Rodrigues', LeftLine: 1.8, RightLine: 2, FiveRound: false, Winner: 'Gregory Rodrigues', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Christian Duncan', Method: 'Knockout', Round: '2' }, Kieran: { Pick: 'Gregory Rodrigues', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Christian Duncan', Method: 'Knockout', Round: '3' }, Jake: { Pick: 'Christian Duncan', Method: 'Knockout', Round: '2' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Bobby Green', Right: 'Paddy Pimblett', LeftLine: 1.72, RightLine: 2.1, FiveRound: false, Winner: 'Paddy Pimblett', Method: 'Submission', Round: '1', Picks: { Alex: { Pick: 'Paddy Pimblett', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Paddy Pimblett', Method: 'Submission', Round: '2' }, Rob: { Pick: 'Paddy Pimblett', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Paddy Pimblett', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Tom Aspinall', Right: 'Curtis Blaydes', LeftLine: 1.36, RightLine: 3.25, FiveRound: true, Winner: 'Tom Aspinall', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '1' }, Kieran: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '2' }, Jake: { Pick: 'Tom Aspinall', Method: 'Knockout', Round: '1' }, } },
+            { Card: 'UFC 304: Edwards vs Muhammad', Date: '2024-07-27', Left: 'Leon Edwards', Right: 'Belal Muhammad', LeftLine: 1.5, RightLine: 2.7, FiveRound: true, Winner: 'Belal Muhammad', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Leon Edwards', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Hamdy Abdelwahab', Right: 'Jamal Pogues', LeftLine: 1.9, RightLine: 1.9, FiveRound: false, Winner: 'Hamdy Abdelwahab', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Hamdy Abdelwahab', Method: 'Knockout', Round: '1' }, Kieran: { Pick: 'Jamal Pogues', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Hamdy Abdelwahab', Method: 'Knockout', Round: '3' }, Jake: { Pick: 'Hamdy Abdelwahab', Method: 'Knockout', Round: '1' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Bogdan Grad', Right: 'Lucas Alexander', LeftLine: 2, RightLine: 1.8, FiveRound: false, Winner: 'Bogdan Grad', Method: 'Knockout', Round: '2', Picks: { Alex: { Pick: 'Bogdan Grad', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Bogdan Grad', Method: 'Knockout', Round: '1' }, Rob: { Pick: 'Bogdan Grad', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Bogdan Grad', Method: 'Knockout', Round: '2' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Jasmine Jasudavicius', Right: 'Mayra Bueno Silva', LeftLine: 1.4, RightLine: 3, FiveRound: false, Winner: 'Jasmine Jasudavicius', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Jasmine Jasudavicius', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Jasmine Jasudavicius', Method: 'Submission', Round: '3' }, Rob: { Pick: 'Mayra Bueno Silva', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Jasmine Jasudavicius', Method: 'Submission', Round: '3' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Terrance McKinney', Right: 'Damir Hadzovic', LeftLine: 1.22, RightLine: 4.5, FiveRound: false, Winner: 'Terrance McKinney', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Terrance McKinney', Method: 'Knockout', Round: '1' }, Kieran: { Pick: 'Terrance McKinney', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Terrance McKinney', Method: 'Knockout', Round: '1' }, Jake: { Pick: 'Terrance McKinney', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Shamil Gaziev', Right: 'Thomas Petersen', LeftLine: 1.28, RightLine: 3.75, FiveRound: false, Winner: 'Shamil Gaziev', Method: 'Knockout', Round: '1', Picks: { Alex: { Pick: 'Shamil Gaziev', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Shamil Gaziev', Method: 'Knockout', Round: '2' }, Rob: { Pick: 'Shamil Gaziev', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Shamil Gaziev', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Muhammad Naimov', Right: 'Kaan Ofli', LeftLine: 1.33, RightLine: 3.4, FiveRound: false, Winner: 'Muhammad Naimov', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Muhammad Naimov', Method: 'Knockout', Round: '2' }, Kieran: { Pick: 'Kaan Ofli', Method: 'Submission', Round: '2' }, Rob: { Pick: 'Muhammad Naimov', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Muhammad Naimov', Method: 'Knockout', Round: '1' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Farès Ziam', Right: 'Mike Davis', LeftLine: 2.25, RightLine: 1.66, FiveRound: false, Winner: 'Farès Ziam', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Farès Ziam', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Mike Davis', Method: 'Submission', Round: '2' }, Rob: { Pick: 'Mike Davis', Method: 'Knockout', Round: '3' }, Jake: { Pick: 'Mike Davis', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Said Nurmagomedov', Right: 'Vinicius Oliveira', LeftLine: 1.62, RightLine: 2.3, FiveRound: false, Winner: 'Vinicius Oliveira', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Said Nurmagomedov', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Said Nurmagomedov', Method: 'Submission', Round: '2' }, Rob: { Pick: 'Vinicius Oliveira', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Said Nurmagomedov', Method: 'Submission', Round: '1' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Sergei Pavlovic', Right: 'Jairzinho Rozenstruik', LeftLine: 1.3, RightLine: 3.5, FiveRound: false, Winner: 'Sergei Pavlovic', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Sergei Pavlovic', Method: 'Knockout', Round: '1' }, Kieran: { Pick: 'Sergei Pavlovic', Method: 'Knockout', Round: '1' }, Rob: { Pick: 'Sergei Pavlovic', Method: 'Knockout', Round: '1' }, Jake: { Pick: 'Sergei Pavlovic', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Shara Magomedov', Right: 'Michael Page', LeftLine: 1.53, RightLine: 2.62, FiveRound: false, Winner: 'Michael Page', Method: 'Decision', Round: 'D', Picks: { Alex: { Pick: 'Michael Page', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Shara Magomedov', Method: 'Knockout', Round: '3' }, Rob: { Pick: 'Shara Magomedov', Method: 'Decision', Round: 'D' }, Jake: { Pick: 'Shara Magomedov', Method: 'Decision', Round: 'D' }, } },
+            { Card: 'UFC Fight Night: Adesanya vs Imavov', Date: '2025-02-01', Left: 'Israel Adesanya', Right: 'Nassourdine Imavov', LeftLine: 1.61, RightLine: 2.37, FiveRound: true, Winner: 'Nassourdine Imavov', Method: 'Knockout', Round: '2', Picks: { Alex: { Pick: 'Israel Adesanya', Method: 'Decision', Round: 'D' }, Kieran: { Pick: 'Israel Adesanya', Method: 'Decision', Round: 'D' }, Rob: { Pick: 'Israel Adesanya', Method: 'Knockout', Round: '2' }, Jake: { Pick: 'Nassourdine Imavov', Method: 'Decision', Round: 'D' }, } },
         ];
     </script>
 
@@ -267,7 +267,7 @@
 
         // Formatter for elo fields.
         function formatElo(num) {
-                return Number(num).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            return Number(num).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
         // Formatter for method fields.
@@ -387,8 +387,8 @@
         var pointsRecord = { Event: '', Player: '', Score: 0 };
         var lowAccuracyRecord = { Event: '', Player: '', Score: 1 };
         var lowPointsRecord = { Event: '', Player: '', Score: 100 };
-        var eloRecord = { Event: '', Player: '', Score: 0};
-        var lowEloRecord = { Event: '', Player: '', Score: 100};
+        var eloRecord = { Event: '', Player: '', Score: 0 };
+        var lowEloRecord = { Event: '', Player: '', Score: 100 };
         var perfRecord = { Event: '', Player: '', Score: 0 };
         var lowPerfRecord = { Event: '', Player: '', Score: 100 };
     </script>
@@ -500,6 +500,8 @@
             var trebleStreaks = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
             var noTrebleStreaks = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
 
+            var pointTotals = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
+
             // Calculate scores for each player.
             var lastCard = "";
             for (var cardName in cardData) {
@@ -507,10 +509,13 @@
 
                 // Container for total card scores.
                 var cardScores = {};
+                var cardTrebles = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
 
                 // Configure card stats to track.
                 var cardProfit = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
                 var cardCorrect = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
+
+                var cardTotals = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
 
                 // Process each fight in the current card.
                 for (var fx in card) {
@@ -519,12 +524,6 @@
                     // Update the maximum possible card score.
                     var maxPts = fight.FiveRound ? 30 : 15;
                     cardInfo[cardName].MaxPts += maxPts;
-
-                    // Update the current chart totals for the league table.
-                    chartData.datasets[0].data.push(fight.Picks.Alex.Total);
-                    chartData.datasets[1].data.push(fight.Picks.Kieran.Total);
-                    chartData.datasets[2].data.push(fight.Picks.Rob.Total);
-                    chartData.datasets[3].data.push(fight.Picks.Jake.Total);
 
                     // Add the league card label if it's the last fight on the card.
                     if (fx == card.length - 1) {
@@ -544,6 +543,27 @@
                         var isMethod = isCorrect && pick.Method == fight.Method;
                         var isRound = isCorrect && pick.Round == fight.Round;
                         var isTreble = isCorrect && isMethod && isRound;
+
+                        var score = 0;
+                        if (isCorrect) score = 5;
+                        if (isMethod) score = 7;
+                        if (isRound) score = 8;
+                        if (isTreble) score = 15;
+                        if (fight.FiveRound) score *= 2;
+
+                        cardTotals[player] += score;
+                        pointTotals[player] += score;
+
+                        pick.Points = score;
+                        pick.Total = pointTotals[player];
+                        pick.CardTotal = cardTotals[player];
+
+                        var winnerLine = fight.Left == fight.Winner ? fight.LeftLine : fight.RightLine;
+                        var profit = -1;
+                        if (isCorrect) {
+                            profit = winnerLine - 1;
+                        }
+                        pick.Profit = profit;
 
                         if (isCorrect) {
                             // Check for a new longest losing streak.
@@ -584,6 +604,7 @@
                             // Update scores.
                             noTrebleStreaks[player] = 0;
                             playerInfo[player].Trebles++;
+                            cardTrebles[player]++;
                             trebleStreaks[player]++;
                         }
                         else {
@@ -606,18 +627,45 @@
                         cardScores[player] = pick.CardTotal;
                         cardInfo[cardName][player] = pick.CardTotal;
                     }
+
+                    // Update the current chart totals for the league table.
+                    chartData.datasets[0].data.push(fight.Picks.Alex.Total);
+                    chartData.datasets[1].data.push(fight.Picks.Kieran.Total);
+                    chartData.datasets[2].data.push(fight.Picks.Rob.Total);
+                    chartData.datasets[3].data.push(fight.Picks.Jake.Total);
                 }
 
                 // Determine the winner of the current card.
-                // TODO: add in tie-break calculation.
                 var cardWinner = null;
                 var winnerScore = 0;
+                var winnerTrebles = 0;
+                var winnerPicks = 0;
                 for (var px in players) {
                     var player = players[px];
                     var score = cardScores[player];
                     if (score > winnerScore) {
                         winnerScore = score;
                         cardWinner = player;
+                        winnerTrebles = cardTrebles[player];
+                        winnerPicks = cardCorrect[player];
+                    }
+                    if (score == winnerScore) {
+                        var treble = cardTrebles[player];
+                        if (treble > winnerTrebles) {
+                            winnerScore = score;
+                            cardWinner = player;
+                            winnerTrebles = treble;
+                            winnerPicks = cardCorrect[player];
+                        }
+                        if (treble == winnerTrebles) {
+                            var pick = cardCorrect[player];
+                            if (pick > winnerPicks) {
+                                winnerScore = score;
+                                cardWinner = player;
+                                winnerTrebles = treble;
+                                winnerPicks = pick;
+                            }
+                        }
                     }
                 }
 
@@ -679,6 +727,9 @@
                 lastCard = cardName;
             }
 
+            // Calculate elo ratings of each player.
+            calculateElo();
+
             // Check for any streaks that a player could currently hold the record.
             for (var px in players) {
                 var player = players[px];
@@ -713,7 +764,7 @@
             for (var px in players) {
                 var player = players[px];
                 var result = playerInfo[player];
-                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points, result.Titles, gbpFormat.format(result.Profit),formatElo(eloRatings[player])];
+                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points, result.Titles, gbpFormat.format(result.Profit), formatElo(eloRatings[player])];
                 leagueRows.push(playerRow);
             }
 
@@ -970,7 +1021,7 @@
             for (var p in players) {
                 eloRatings[players[p]] = defaultElo;
             }
-            
+
             for (var ix in fightData) {
                 var fight = fightData[ix];
 
@@ -999,11 +1050,11 @@
                             var p2s = fight.Picks[p2n].Points;
                             var ms = fight.FiveRound ? 30 : 15;
 
-                            var gap = Math.abs(p1s-p2s) / ms;
+                            var gap = Math.abs(p1s - p2s) / ms;
                             var winp = 0.5 + (gap / 2);
                             var p1score = 0.5;
                             var p2score = 0.5;
-                            
+
                             // Relative Treble.
                             if (p1s > p2s) {
                                 p1score = winp;
@@ -1093,7 +1144,7 @@
         function eloPredict(ratingA, ratingB) {
             var ea = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
             var eb = 1 / (1 + Math.pow(10, (ratingA - ratingB) / 400));
-            return [ea,eb];
+            return [ea, eb];
         }
 
         function performanceRating(opponentRatings, totalScore) {
@@ -1119,8 +1170,6 @@
     <!-- Startup Script -->
     <script>
         $(document).ready(function () {
-            // Calculate elo ratings of each player.
-            calculateElo();
 
             // Generate all the initial page data and load the league table and title history.
             generateLeagueTable();
