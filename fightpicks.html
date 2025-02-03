@@ -956,13 +956,13 @@
                 var fight = cardFights[ix];
                 var left = fight.Left.split(" ")[1];
                 var right = fight.Right.split(" ")[1];
+                var fightName = `${left} vs ${right}`;
                 if (fight.Winner == fight.Left) {
                     left = `<i class='fa-solid fa-trophy text-warning'></i> ${left}`;
                 }
                 if (fight.Winner == fight.Right) {
                     right = `<i class='fa-solid fa-trophy text-warning'></i> ${right}`;
                 }
-                var fightName = `${left} vs ${right}`;
                 var fightMulti = "";
                 if (fight.FiveRound) { fightMulti = "<i class='fa-solid fa-asterisk text-warning'></i>" };
 
