@@ -75,7 +75,7 @@
                     <table id="event-results" class="table table-sm table-striped m-0">
                         <thead>
                             <tr>
-                                <th colspan="5"></th>
+                                <th colspan="6"></th>
                                 <th colspan="6" class="text-center">Alex</th>
                                 <th colspan="6" class="text-center">Kieran</th>
                                 <th colspan="6" class="text-center">Rob</th>
@@ -87,24 +87,29 @@
                                 <th>Winner</th>
                                 <th>M.</th>
                                 <th>R.</th>
+                                <th>*</th>
+
                                 <th>Pick</th>
                                 <th>M.</th>
                                 <th>R.</th>
                                 <th>Pts.</th>
                                 <th>£+/-</th>
                                 <th>Total</th>
+
                                 <th>Pick</th>
                                 <th>M.</th>
                                 <th>R.</th>
                                 <th>Pts.</th>
                                 <th>£+/-</th>
                                 <th>Total</th>
+
                                 <th>Pick</th>
                                 <th>M.</th>
                                 <th>R.</th>
                                 <th>Pts.</th>
                                 <th>£+/-</th>
                                 <th>Total</th>
+
                                 <th>Pick</th>
                                 <th>M.</th>
                                 <th>R.</th>
@@ -356,10 +361,10 @@
         var eventResultTable = new DataTable("#event-results", {
             order: [[0, "asc"]],
             columnDefs: [
-                { className: 'table-info', targets: [5, 6, 7, 8, 9, 10] },
-                { className: 'table-success', targets: [11, 12, 13, 14, 15, 16] },
-                { className: 'table-warning', targets: [17, 18, 19, 20, 21, 22] },
-                { className: 'table-danger', targets: [23, 24, 25, 26, 27, 28] }
+                { className: 'table-info', targets: [6, 7, 8, 9, 10, 11] },
+                { className: 'table-success', targets: [12, 13, 14, 15, 16, 17] },
+                { className: 'table-warning', targets: [18, 19, 20, 21, 22, 23] },
+                { className: 'table-danger', targets: [24, 25, 26, 27, 28, 29] }
             ]
         });
     </script>
@@ -807,9 +812,11 @@
             for (var ix in cardFights) {
                 var fight = cardFights[ix];
                 var fightName = `${fight.Left.split(" ")[1]} vs ${fight.Right.split(" ")[1]}`;
+                var fightMulti = "";
+                if (fight.FiveRound) { fightMulti = "2x" };
 
                 // Generate the datatable row.
-                var fightRow = [parseInt(ix) + 1, fightName, fight.Winner.split(" ")[1], shortMethod(fight.Method), fight.Round,
+                var fightRow = [parseInt(ix) + 1, fightName, fight.Winner.split(" ")[1], shortMethod(fight.Method), fight.Round, fightMulti,
                 fight.Picks.Alex.Pick.split(" ")[1], shortMethod(fight.Picks.Alex.Method), fight.Picks.Alex.Round, fight.Picks.Alex.Points, gbpFormat.format(fight.Picks.Alex.Profit), fight.Picks.Alex.CardTotal,
                 fight.Picks.Kieran.Pick.split(" ")[1], shortMethod(fight.Picks.Kieran.Method), fight.Picks.Kieran.Round, fight.Picks.Kieran.Points, gbpFormat.format(fight.Picks.Kieran.Profit), fight.Picks.Kieran.CardTotal,
                 fight.Picks.Rob.Pick.split(" ")[1], shortMethod(fight.Picks.Rob.Method), fight.Picks.Rob.Round, fight.Picks.Rob.Points, gbpFormat.format(fight.Picks.Rob.Profit), fight.Picks.Rob.CardTotal,
