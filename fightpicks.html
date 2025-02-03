@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="FightPicks" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    
     <style>
         .dt-container .row {
             margin: 0 !important;
@@ -20,6 +19,10 @@
 
         canvas {
             min-height: min(40vmax, 640px) !important;
+        }
+
+        .text-bronze {
+            color: #e67e22;
         }
     </style>
     <link rel="shortcut icon"
@@ -480,7 +483,8 @@
                     Trebles: 0,
                     Points: 0,
                     Profit: 0,
-                    Titles: 0
+                    Titles: 0,
+                    History: []
                 };
             }
 
@@ -652,6 +656,43 @@
                 var winnerScore = 0;
                 var winnerTrebles = 0;
                 var winnerPicks = 0;
+
+                var order = players.sort(function (a, b) {
+                    var aScore = cardScores[a];
+                    var bScore = cardScores[b];
+                    if (aScore > bScore) {
+                        return -1;
+                    }
+                    if (aScore == bScore) {
+                        var aTreble = cardTrebles[a];
+                        var bTreble = cardTrebles[b];
+                        if (aTreble > bTreble) {
+                            return -1;
+                        }
+                        if (aTreble == bTreble) {
+                            var aPicks = cardCorrect[a];
+                            var bPicks = cardCorrect[b];
+                            if (aPicks > bPicks) {
+                                return -1;
+                            }
+                            if (aPicks == bPicks) {
+                                var aProfit = cardProfit[a];
+                                var bProfit = cardProfit[b];
+                                if (aProfit > bProfit) {
+                                    return -1;
+                                }
+                                return 1;
+                            }
+                            return 1;
+                        }
+                        return 1;
+                    }
+                    return 1;
+                });
+                for (var o in order) {
+                    playerInfo[order[o]].History.push(parseInt(o) + 1);
+                }
+
                 for (var px in players) {
                     var player = players[px];
                     var score = cardScores[player];
@@ -776,26 +817,15 @@
             for (var px in players) {
                 var player = players[px];
                 var result = playerInfo[player];
-                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points, result.Titles, gbpFormat.format(result.Profit), formatElo(eloRatings[player])];
+                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points,
+                    result.History.filter(x => x == 1).length,
+                    result.History.filter(x => x == 2).length,
+                    result.History.filter(x => x == 3).length,
+                    gbpFormat.format(result.Profit), formatElo(eloRatings[player]),
+                    formIcons(result.History)
+                ];
                 leagueRows.push(playerRow);
             }
-
-            // Create the league datatable.
-            var leagueTable = new DataTable("#league-table", {
-                columns: [
-                    { title: "Player" },
-                    { title: "Correct" },
-                    { title: "Method" },
-                    { title: "Round" },
-                    { title: "Treble" },
-                    { title: "Points" },
-                    { title: "Titles" },
-                    { title: "Profit", type: "num-fmt" },
-                    { title: "Elo" }
-                ],
-                order: [[5, "desc"]],
-                data: leagueRows
-            });
 
             // Generate individual row data for the title history table.
             var titleRows = [];
@@ -842,6 +872,26 @@
                     }
                 }
             }
+
+            // Create the league datatable.
+            var leagueTable = new DataTable("#league-table", {
+                columns: [
+                    { title: "Player" },
+                    { title: "Correct" },
+                    { title: "Method" },
+                    { title: "Round" },
+                    { title: "Treble" },
+                    { title: "Points" },
+                    { title: "<i class='fa-solid fa-trophy text-warning'></i>" },
+                    { title: "<i class='fa-solid fa-trophy text-secondary'></i>" },
+                    { title: "<i class='fa-solid fa-trophy text-bronze'></i>" },
+                    { title: "Profit", type: "num-fmt" },
+                    { title: "Elo" },
+                    { title: "Form" }
+                ],
+                order: [[5, "desc"]],
+                data: leagueRows
+            });
 
             // Create the title history datatable.
             var titleTable = new DataTable("#title-history", {
@@ -1068,6 +1118,30 @@
             else {
                 return `<span class='badge badge-sm bg-secondary w-100'>-</span>`;
             }
+        }
+
+        function formIcons(resultHistory) {
+            var lastFive = resultHistory.reverse().slice(0, 5).reverse();
+            console.log(lastFive);
+            var resStr = "";
+            for (var ix in lastFive) {
+                switch (lastFive[ix]) {
+                    case 1:
+                        resStr += "<i class='fa-solid fa-trophy text-warning ps-1 pe-1'></i>";
+                        break;
+                    case 2:
+                        resStr += "<i class='fa-solid fa-trophy text-secondary ps-1 pe-1'></i>";
+                        break;
+                    case 3:
+                        resStr += "<i class='fa-solid fa-trophy text-bronze ps-1 pe-1'></i>";
+                        break;
+                    case 4:
+                        resStr += "<i class='fa-solid fa-minus text-danger ps-1 pe-1'></i>";
+                        break;
+
+                }
+            }
+            return resStr;
         }
 
         // Generates the records table from league and title history.
