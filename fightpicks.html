@@ -74,6 +74,18 @@
             </div>
         </div>
 
+        <!-- Performance History Card -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="text-center mb-0">Performance Ratings</h3>
+            </div>
+            <div class="card-body p-0 text-nowrap">
+                <div class="table-responsive">
+                    <table id="perf-history" class="table table-sm table-striped m-0"></table>
+                </div>
+            </div>
+        </div>
+
         <!-- Event Results Card -->
         <div class="card mt-3 mb-3">
             <div class="card-header">
@@ -768,6 +780,7 @@
 
             // Create the title history datatable.
             var titleTable = new DataTable("#title-history", {
+                order: [[0, "desc"]],
                 columns: [
                     { title: "Date", type: "date" },
                     { title: "Event" },
@@ -798,6 +811,28 @@
                 chartGapData.datasets[2].data.push((chartData.datasets[2].data[ix] - worstScore) / totalGap);
                 chartGapData.datasets[3].data.push((chartData.datasets[3].data[ix] - worstScore) / totalGap);
             }
+
+            // Generate individual row data for the performance history table.
+            var perfRows = [];
+            for (var cardName in cardInfo) {
+                var card = cardInfo[cardName];
+                var date = card.Date;
+                perfRows.push([date, cardName, formatElo(perfRatings[cardName].Alex), formatElo(perfRatings[cardName].Kieran), formatElo(perfRatings[cardName].Rob), formatElo(perfRatings[cardName].Jake)]);
+            }
+
+            // Create the performance history datatable.
+            var perfTable = new DataTable("#perf-history", {
+                order: [[0, "desc"]],
+                columns: [
+                    { title: "Date", type: "date" },
+                    { title: "Event" },
+                    { title: "Alex" },
+                    { title: "Kieran" },
+                    { title: "Rob" },
+                    { title: "Jake" }
+                ],
+                data: perfRows
+            });
 
             // Update charts with new data.
             leagueTableChart.data = chartData;
@@ -908,11 +943,26 @@
     <!-- Simple Elo Calculation -->
     <script>
         var eloRatings = {};
+        var perfRatings = {};
         var eloChartData = getNewChartData();
 
         function calculateElo() {
             var k = 5;
             var defaultElo = 100;
+
+            var lastCard = "";
+            var cardScores = {
+                Alex: 0,
+                Kieran: 0,
+                Rob: 0,
+                Jake: 0
+            };
+            var opponentRatings = {
+                Alex: [],
+                Kieran: [],
+                Rob: [],
+                Jake: []
+            };
 
             for (var p in players) {
                 eloRatings[players[p]] = defaultElo;
@@ -920,6 +970,17 @@
             
             for (var ix in fightData) {
                 var fight = fightData[ix];
+
+                if (lastCard != fight.Card && lastCard != "") {
+                    perfRatings[lastCard] = {
+                        Alex: performanceRating(opponentRatings.Alex, cardScores.Alex),
+                        Kieran: performanceRating(opponentRatings.Kieran, cardScores.Kieran),
+                        Rob: performanceRating(opponentRatings.Rob, cardScores.Rob),
+                        Jake: performanceRating(opponentRatings.Jake, cardScores.Jake),
+                    };
+                    cardScores = { Alex: 0, Kieran: 0, Rob: 0, Jake: 0 };
+                    opponentRatings = { Alex: [], Kieran: [], Rob: [], Jake: [] };
+                }
 
                 var priorRatings = {};
                 for (var p in players) {
@@ -957,6 +1018,13 @@
                                 //p2score = p2s / ttlPts;
                             }
 
+                            var prior1 = priorRatings[p1n];
+                            var prior2 = priorRatings[p2n];
+                            opponentRatings[p1n].push(prior2);
+                            opponentRatings[p2n].push(prior1);
+                            cardScores[p1n] += p1score;
+                            cardScores[p2n] += p2score;
+
                             var newRatings = eloCalculate(priorRatings[p1n], priorRatings[p2n], p1score, p2score, k);
                             eloRatings[p1n] += (newRatings[0] - priorRatings[p1n]);
                             eloRatings[p2n] += (newRatings[1] - priorRatings[p2n]);
@@ -983,7 +1051,18 @@
                 eloChartData.datasets[2].data.push(eloRatings.Rob);
                 eloChartData.datasets[3].data.push(eloRatings.Jake);
                 leagueEloChart.data = eloChartData;
+
+                var lastCard = fight.Card;
             }
+
+            perfRatings[lastCard] = {
+                Alex: performanceRating(opponentRatings.Alex, cardScores.Alex),
+                Kieran: performanceRating(opponentRatings.Kieran, cardScores.Kieran),
+                Rob: performanceRating(opponentRatings.Rob, cardScores.Rob),
+                Jake: performanceRating(opponentRatings.Jake, cardScores.Jake),
+            };
+
+            console.log(perfRatings);
         }
 
         function eloCalculate(ratingA, ratingB, scoreA, scoreB, k) {
@@ -997,6 +1076,25 @@
             var ea = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
             var eb = 1 / (1 + Math.pow(10, (ratingA - ratingB) / 400));
             return [ea,eb];
+        }
+
+        function performanceRating(opponentRatings, totalScore) {
+            var lo = 0;
+            var hi = 400;
+            while (hi - lo > 1E-08) {
+                mid = (lo + hi) / 2
+                var expected = 0;
+                for (var ix in opponentRatings) {
+                    expected += eloPredict(mid, opponentRatings[ix])[0];
+                }
+                if (expected < totalScore) {
+                    lo = mid;
+                }
+                else {
+                    hi = mid;
+                }
+            }
+            return mid;
         }
     </script>
 
