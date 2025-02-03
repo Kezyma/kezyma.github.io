@@ -34,6 +34,7 @@
                 <button id="league-table-chart-btn" class="btn btn-sm btn-info">Toggle Points Chart</button>
                 <button id="league-percent-chart-btn" class="btn btn-sm btn-info">Toggle Percentage Chart</button>
                 <button id="league-gap-chart-btn" class="btn btn-sm btn-info">Toggle Gap Chart</button>
+                <button id="league-elo-chart-btn" class="btn btn-sm btn-info">Toggle Elo Chart</button>
             </div>
             <div id="league-table-container" class="card-body p-0 league-chart-container">
                 <canvas id="league-table-canvas" style="min-height:640px;"></canvas>
@@ -43,6 +44,9 @@
             </div>
             <div id="league-gap-container" class="card-body p-0 league-chart-container">
                 <canvas id="league-gap-canvas" style="min-height:640px;"></canvas>
+            </div>
+            <div id="league-elo-container" class="card-body p-0 league-chart-container">
+                <canvas id="league-elo-canvas" style="min-height:640px;"></canvas>
             </div>
         </div>
 
@@ -243,6 +247,11 @@
             return Number(num).toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2 });
         }
 
+        // Formatter for elo fields.
+        function formatElo(num) {
+                return Number(num).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
         // Formatter for method fields.
         function shortMethod(method) {
             switch (method) {
@@ -303,6 +312,10 @@
             options: leagueChartOptions
         });
         var leagueGapChart = new Chart(document.getElementById("league-gap-canvas"), {
+            type: 'line',
+            options: leagueChartOptions
+        });
+        var leagueEloChart = new Chart(document.getElementById("league-elo-canvas"), {
             type: 'line',
             options: leagueChartOptions
         });
@@ -387,6 +400,9 @@
             $("#league-table-container").toggle();
         });
 
+        $("#league-elo-chart-btn").click(function () {
+            $("#league-elo-container").toggle();
+        });
 
         $("#league-percent-chart-btn").click(function () {
             $("#league-percent-container").toggle();
@@ -662,7 +678,7 @@
             for (var px in players) {
                 var player = players[px];
                 var result = playerInfo[player];
-                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points, result.Titles, gbpFormat.format(result.Profit)];
+                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points, result.Titles, gbpFormat.format(result.Profit),formatElo(eloRatings[player])];
                 leagueRows.push(playerRow);
             }
 
@@ -676,7 +692,8 @@
                     { title: "Treble" },
                     { title: "Points" },
                     { title: "Titles" },
-                    { title: "Profit", type: "num-fmt" }
+                    { title: "Profit", type: "num-fmt" },
+                    { title: "Elo" }
                 ],
                 order: [[5, "desc"]],
                 data: leagueRows
@@ -771,12 +788,15 @@
             leagueGapChart.update();
             titleHistoryChart.data = titleData;
             titleHistoryChart.update();
+            eloChartData.labels = chartData.labels;
+            leagueEloChart.update();
 
             // Hide all the configured charts.
             $("#league-table-container").hide();
             $("#league-percent-container").hide();
             $("#league-gap-container").hide();
             $("#title-history-container").hide();
+            $("#league-elo-container").hide();
         }
 
         // Generates the event list and sets up the event table selector.
@@ -863,9 +883,76 @@
         }
     </script>
 
+    <!-- Simple Elo Calculation -->
+    <script>
+        var eloRatings = {};
+        var eloChartData = getNewChartData();
+
+        function calculateElo() {
+            var k = 10;
+            var defaultElo = 100;
+
+            for (var p in players) {
+                eloRatings[players[p]] = defaultElo;
+            }
+            
+            for (var ix in fightData) {
+                var fight = fightData[ix];
+
+                var priorRatings = {};
+                for (var p in players) {
+                    priorRatings[players[p]] = eloRatings[players[p]];
+                }
+
+                for (var p1 in players) {
+                    for (var p2 in players) {
+                        if (p2 > p1) {
+                            var p1n = players[p1];
+                            var p2n = players[p2];
+                            var p1s = fight.Picks[p1n].Points;
+                            var p2s = fight.Picks[p2n].Points;
+                            var ttlPts = p1s + p2s;
+                            var p1score = 0.5;
+                            var p2score = 0.5;
+                            if (ttlPts > 0) {
+                                p1score = p1s / ttlPts;
+                                p2score = p2s / ttlPts;
+                            }
+                            var newRatings = eloCalculate(priorRatings[p1n], priorRatings[p2n], p1score, p2score, k);
+                            eloRatings[p1n] += (newRatings[0] - priorRatings[p1n]);
+                            eloRatings[p2n] += (newRatings[1] - priorRatings[p2n]);
+                        }
+                    }
+                }
+
+                eloChartData.datasets[0].data.push(eloRatings.Alex);
+                eloChartData.datasets[1].data.push(eloRatings.Kieran);
+                eloChartData.datasets[2].data.push(eloRatings.Rob);
+                eloChartData.datasets[3].data.push(eloRatings.Jake);
+                leagueEloChart.data = eloChartData;
+            }
+        }
+
+        function eloCalculate(ratingA, ratingB, scoreA, scoreB, k) {
+            var exp = eloPredict(ratingA, ratingB);
+            var newA = ratingA + (k * (scoreA - exp[0]));
+            var newB = ratingB + (k * (scoreB - exp[1]));
+            return [newA, newB];
+        }
+
+        function eloPredict(ratingA, ratingB) {
+            var ea = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
+            var eb = 1 / (1 + Math.pow(10, (ratingA - ratingB) / 400));
+            return [ea,eb];
+        }
+    </script>
+
     <!-- Startup Script -->
     <script>
         $(document).ready(function () {
+            // Calculate elo ratings of each player.
+            calculateElo();
+
             // Generate all the initial page data and load the league table and title history.
             generateLeagueTable();
 
