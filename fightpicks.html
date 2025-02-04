@@ -78,10 +78,10 @@
             </div>
             <div class="card-footer text-center">
                 <div class="btn-group" role="group">
-                    <button id="league-table-chart-btn" class="btn btn-sm btn-secondary">Points Chart</button>
-                    <button id="league-percent-chart-btn" class="btn btn-sm btn-secondary">Percentage Chart</button>
-                    <button id="league-gap-chart-btn" class="btn btn-sm btn-secondary">Gap Chart</button>
-                    <button id="league-elo-chart-btn" class="btn btn-sm btn-secondary">Elo Chart</button>
+                    <button id="league-table-chart-btn" class="btn btn-sm btn-dark league-chart-btn">Points Chart</button>
+                    <button id="league-percent-chart-btn" class="btn btn-sm btn-dark league-chart-btn">Percentage Chart</button>
+                    <button id="league-gap-chart-btn" class="btn btn-sm btn-dark league-chart-btn">Gap Chart</button>
+                    <button id="league-elo-chart-btn" class="btn btn-sm btn-dark league-chart-btn">Elo Chart</button>
                 </div>
             </div>
             <div id="league-table-container" class="card-body p-0 league-chart-container">
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <button id="title-history-chart-btn" class="btn btn-sm btn-secondary">Points Chart</button>
+                <button id="title-history-chart-btn" class="btn btn-sm btn-dark">Points Chart</button>
             </div>
             <div id="title-history-container" class="card-body p-0">
                 <canvas id="title-history-canvas"></canvas>
@@ -184,7 +184,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <button id="event-result-chart-btn" class="btn btn-sm btn-secondary">Points Chart</button>
+                <button id="event-result-chart-btn" class="btn btn-sm btn-dark">Points Chart</button>
             </div>
             <div id="event-result-container" class="card-body p-0">
                 <canvas id="event-result-canvas"></canvas>
@@ -453,34 +453,43 @@
             if (eventResultChartVisible) {
                 $("#event-result-container").hide();
                 eventResultChartVisible = false;
+                $(this).removeClass("active");
             }
             else {
                 $("#event-result-container").show();
                 eventResultChartVisible = true;
+                $(this).addClass("active");
             }
         });
 
         $("#league-table-chart-btn").click(function () {
-            toggleLeagueChart("league-table-container");
+            toggleLeagueChart("league-table-container", "league-table-chart-btn");
         });
 
         $("#league-elo-chart-btn").click(function () {
-            toggleLeagueChart("league-elo-container");
+            toggleLeagueChart("league-elo-container", "league-elo-chart-btn");
         });
 
         $("#league-percent-chart-btn").click(function () {
-            toggleLeagueChart("league-percent-container");
+            toggleLeagueChart("league-percent-container", "league-percent-chart-btn");
         });
 
         $("#league-gap-chart-btn").click(function () {
-            toggleLeagueChart("league-gap-container");
+            toggleLeagueChart("league-gap-container", "league-gap-chart-btn");
         });
 
         $("#title-history-chart-btn").click(function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+            }
+            else {
+                $(this).addClass("active");
+            }
             $("#title-history-container").toggle();
         });
 
-        function toggleLeagueChart(id) {
+        function toggleLeagueChart(id, button) {
+            $(".league-chart-btn").removeClass("active");
             $(".league-chart-container").hide();
             if (currentLeagueChartVisible == id) {
                 $(`#${id}`).hide();
@@ -488,6 +497,7 @@
             }
             else {
                 $(`#${id}`).show();
+                $(`#${button}`).addClass("active");
                 currentLeagueChartVisible = id;
             }
         }
