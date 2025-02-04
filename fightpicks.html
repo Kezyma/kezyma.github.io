@@ -850,10 +850,11 @@
 
             // Generate individual row data for the league table.
             var leagueRows = [];
+            var maxPts = Math.max(playerInfo.Alex.Points, playerInfo.Kieran.Points, playerInfo.Rob.Points, playerInfo.Jake.Points);
             for (var px in players) {
                 var player = players[px];
                 var result = playerInfo[player];
-                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, result.Points,
+                var playerRow = [player, result.Correct, result.Methods, result.Rounds, result.Trebles, pointBar(result.Points, maxPts),
                     result.History.filter(x => x == 1).length,
                     result.History.filter(x => x == 2).length,
                     result.History.filter(x => x == 3).length,
@@ -1207,6 +1208,11 @@
                 return "<span class='badge badge-sm bg-success p-1'>W</span>";
             }
             return "";// "<span class='badge badge-sm bg-danger p-1'>L</span>";
+        }
+
+        function pointBar(points, maxPoints) {
+            var prog = (points / maxPoints) * 100;
+            return `<div class='progress' style='height:2em;'><div class='progress-bar bg-secondary  text-start ps-2' role='progressbar' style='width: ${prog}%;' aria-valuenow="${points}" aria-valuemin="0" aria-valuemax="${maxPoints}">${points}</div></div>`;
         }
 
         // Generates the records table from league and title history.
