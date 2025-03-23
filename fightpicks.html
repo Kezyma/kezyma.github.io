@@ -752,7 +752,7 @@
                         winnerTrebles = cardTrebles[player];
                         winnerPicks = cardCorrect[player];
                     }
-                    if (score == winnerScore) {
+                    else if (score == winnerScore) {
                         var treble = cardTrebles[player];
                         if (treble > winnerTrebles) {
                             winnerScore = score;
@@ -760,7 +760,7 @@
                             winnerTrebles = treble;
                             winnerPicks = cardCorrect[player];
                         }
-                        if (treble == winnerTrebles) {
+                        else if (treble == winnerTrebles) {
                             var pick = cardCorrect[player];
                             if (pick > winnerPicks) {
                                 winnerScore = score;
@@ -882,15 +882,20 @@
             // Generate individual row data for the title history table.
             var titleRows = [];
             var titleIndex = 0;
+            playerInfo.Alex.History.reverse();
+            playerInfo.Kieran.History.reverse();
+            playerInfo.Rob.History.reverse();
+            playerInfo.Jake.History.reverse();
+
             for (var cardName in cardInfo) {
                 var card = cardInfo[cardName];
 
                 // Generate the datatable row.
                 var cardRow = [card.Date, cardName, card.MaxPts,
-                /*`${formIcon(playerInfo.Alex.History.reverse()[titleIndex])}*/ `${card.Alex}`,
-                /*`${formIcon(playerInfo.Kieran.History.reverse()[titleIndex])}*/ `${card.Kieran}`,
-                /*`${formIcon(playerInfo.Rob.History.reverse()[titleIndex])}*/ `${card.Rob}`,
-                /*`${formIcon(playerInfo.Jake.History.reverse()[titleIndex])}*/ `${card.Jake}`,
+                `${formIcon(playerInfo.Alex.History[titleIndex])} ${card.Alex}`,
+                `${formIcon(playerInfo.Kieran.History[titleIndex])} ${card.Kieran}`,
+                `${formIcon(playerInfo.Rob.History[titleIndex])} ${card.Rob}`,
+                `${formIcon(playerInfo.Jake.History[titleIndex])} ${card.Jake}`,
                 card.Winner, formatPercentage(card.Accuracy)];
                 titleIndex++;
                 titleRows.push(cardRow);
