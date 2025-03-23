@@ -887,10 +887,10 @@
 
                 // Generate the datatable row.
                 var cardRow = [card.Date, cardName, card.MaxPts,
-                `${formIcon(playerInfo.Alex.History.reverse()[titleIndex])} ${card.Alex}`,
-                `${formIcon(playerInfo.Kieran.History.reverse()[titleIndex])} ${card.Kieran}`,
-                `${formIcon(playerInfo.Rob.History.reverse()[titleIndex])} ${card.Rob}`,
-                `${formIcon(playerInfo.Jake.History.reverse()[titleIndex])} ${card.Jake}`,
+                /*`${formIcon(playerInfo.Alex.History.reverse()[titleIndex])}*/ `${card.Alex}`,
+                /*`${formIcon(playerInfo.Kieran.History.reverse()[titleIndex])}*/ `${card.Kieran}`,
+                /*`${formIcon(playerInfo.Rob.History.reverse()[titleIndex])}*/ `${card.Rob}`,
+                /*`${formIcon(playerInfo.Jake.History.reverse()[titleIndex])}*/ `${card.Jake}`,
                 card.Winner, formatPercentage(card.Accuracy)];
                 titleIndex++;
                 titleRows.push(cardRow);
