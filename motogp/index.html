@@ -138,6 +138,7 @@
                                 <th>18</th>
                                 <th>19</th>
                                 <th>20</th>
+                                <th>%</th>
                             </tr>
                         </thead>
                         <tbody class="">
@@ -256,12 +257,15 @@
                 seasonRow.append($(`<th style='vertical-align:middle;'>${season.Key}</th>`));
                 var imageStyle = "width:48px;height:32px;padding:0px;";
 
+                var sr = 0;
+                var vr = 0;
                 for (var i = 0; i < 20; i++) {
                     var race = season.Value[i];
                     if (race != null) {
                         var flag = findFlag(race.Code);
                         if (race.Url != "") {
                             t++;
+                            vr++;
                             var raceCell = $(`<td><a href='${race.Url}' target='_blank' style='padding:0px;'><img data-bs-toggle="tooltip" data-bs-title="${race.Name}" src='flags/${flag}' style='${imageStyle}${goodStyle}' /></a></td>`);
                             seasonRow.append(raceCell);
                         }
@@ -269,12 +273,18 @@
                             var raceCell = $(`<td><img src='flags/${flag}' data-bs-toggle="tooltip" data-bs-title="${race.Name}" style='${imageStyle}${badStyle}' /></td>`);
                             seasonRow.append(raceCell);
                         }
+                        sr++;
                     }
                     else {
                         var raceCell = $(`<td></td>`);
                         seasonRow.append(raceCell);
                     }
                 }
+                var pct = vr / sr;
+
+                var prog = $(`<td><div class='progress' style='height:3em;'><div class='progress-bar bg-secondary p-1' style='width: ${(pct * 100).toFixed(0)}%;overflow:visible;'>${vr}/${sr}</div></div></td>`);
+
+                seasonRow.append(prog);
                 raceTable.append(seasonRow);
             }
 
