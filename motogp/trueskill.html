@@ -216,6 +216,65 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
+
+        /* Yearly table styling */
+        #yearlyTable {
+            width: 100% !important;
+        }
+
+        #yearlyTable th,
+        #yearlyTable td {
+            border: 1px solid #444 !important;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        #yearlyTable thead th {
+            border-bottom: 2px solid #666 !important;
+        }
+
+        /* Highlight sorted column in yearly table */
+        #yearlyTable thead th.sorting_asc,
+        #yearlyTable thead th.sorting_desc {
+            background-color: #375a7f !important;
+        }
+
+        #yearlyTable tbody td.sorting_1 {
+            background-color: #2a3f54 !important;
+        }
+
+        /* Sticky year column */
+        #yearlyTable th:first-child,
+        #yearlyTable td:first-child {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            border-right: 2px solid #666 !important;
+        }
+
+        #yearlyTable thead th:first-child {
+            z-index: 11;
+            background-color: #222 !important;
+        }
+
+        #yearlyTable tbody td:first-child {
+            background-color: #303030 !important;
+        }
+
+        /* Darker background for sticky column when sorting */
+        #yearlyTable tbody td:first-child.sorting_1 {
+            background-color: #2a3f54 !important;
+        }
+
+        /* Stripe pattern for sticky column */
+        #yearlyTable tbody tr:nth-of-type(odd) td:first-child {
+            background-color: #2b2b2b !important;
+        }
+
+        #yearlyTable tbody tr:nth-of-type(odd) td:first-child.sorting_1 {
+            background-color: #2a3f54 !important;
+        }
     </style>
 </head>
 <body>
@@ -255,6 +314,11 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false">
                         Statistics
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="yearly-tab" data-bs-toggle="tab" data-bs-target="#yearly" type="button" role="tab" aria-controls="yearly" aria-selected="false">
+                        Yearly Summary
                     </button>
                 </li>
             </ul>
@@ -463,6 +527,58 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- Yearly Summary Tab -->
+                <div class="tab-pane fade" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
+                    <div class="filters">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="filter-group">
+                                    <label for="yearlyRating">Rating Type</label>
+                                    <select id="yearlyRating" class="form-select">
+                                        <option value="conservative">Conservative</option>
+                                        <option value="mean">Mean</option>
+                                        <option value="optimistic">Optimistic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="filter-group">
+                                    <label for="yearlyValue">Value Type</label>
+                                    <select id="yearlyValue" class="form-select">
+                                        <option value="final">Final (End of Year)</option>
+                                        <option value="best">Best (Peak)</option>
+                                        <option value="average">Average</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary btn-sm" id="resetYearlyBtn">Reset Filters</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark table-striped table-hover" id="yearlyTable">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>1st Place Rider</th>
+                                    <th>Rating</th>
+                                    <th>2nd Place Rider</th>
+                                    <th>Rating</th>
+                                    <th>3rd Place Rider</th>
+                                    <th>Rating</th>
+                                    <th>Best Bike</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearlyTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -584,6 +700,13 @@
             });
         }
 
+        function saveYearlyStateToUrl() {
+            setUrlParams({
+                yearlyRating: $('#yearlyRating').val(),
+                yearlyValue: $('#yearlyValue').val()
+            });
+        }
+
         // Reset functions
         function resetRatingsTab() {
             // Reset to defaults
@@ -645,6 +768,19 @@
             saveStatsStateToUrl();
 
             renderStatisticsTable();
+        }
+
+        function resetYearlyTab() {
+            // Reset to defaults
+            $('#yearlyRating').val('conservative');
+            $('#yearlyValue').val('final');
+
+            // Clear all URL params and set tab + defaults
+            clearAllUrlParams();
+            setUrlParam('tab', 'yearly');
+            saveYearlyStateToUrl();
+
+            renderYearlyTable();
         }
 
         // Chart instances
@@ -1037,6 +1173,12 @@
                 populateStatsDates();
                 saveStatsStateToUrl();
                 renderStatisticsTable();
+            } else if (tab === 'yearly') {
+                // Load Yearly Summary tab state
+                if (params.yearlyRating) $('#yearlyRating').val(params.yearlyRating);
+                if (params.yearlyValue) $('#yearlyValue').val(params.yearlyValue);
+                saveYearlyStateToUrl();
+                renderYearlyTable();
             }
         }
 
@@ -1197,7 +1339,22 @@
                             $('#statsTable').DataTable().columns.adjust();
                         }
                     }, 100);
+                } else if (targetId === '#yearly') {
+                    saveYearlyStateToUrl();
+                    renderYearlyTable();
+                    // Adjust columns after tab is shown
+                    setTimeout(function() {
+                        if ($.fn.DataTable.isDataTable('#yearlyTable')) {
+                            $('#yearlyTable').DataTable().columns.adjust();
+                        }
+                    }, 100);
                 }
+            });
+
+            // Yearly summary filters
+            $('#yearlyRating, #yearlyValue').on('change', function() {
+                saveYearlyStateToUrl();
+                renderYearlyTable();
             });
 
             // Reset button event handlers
@@ -1205,6 +1362,7 @@
             $('#resetSeasonBtn').on('click', resetSeasonTab);
             $('#resetCareerBtn').on('click', resetCareerTab);
             $('#resetStatsBtn').on('click', resetStatsTab);
+            $('#resetYearlyBtn').on('click', resetYearlyTab);
         }
 
         // Chart 1: Ratings Bar Chart
@@ -2258,6 +2416,149 @@
                     api.column(0, {page: 'current'}).nodes().each(function(cell, i) {
                         cell.innerHTML = start + i + 1;
                     });
+                }
+            });
+        }
+
+        // Yearly Summary Table
+        function renderYearlyTable() {
+            const ratingType = $('#yearlyRating').val();
+            const valueType = $('#yearlyValue').val();
+
+            // Calculate data for each year
+            const yearlyData = [];
+
+            appData.years.forEach(year => {
+                const riders = appData.yearData[year]?.riders || {};
+                const bikes = appData.yearData[year]?.bikes || {};
+
+                // Get all unique dates for this year
+                const allDatesInYear = new Set();
+                Object.values(riders).forEach(records => {
+                    records.forEach(r => allDatesInYear.add(r.Date));
+                });
+                Object.values(bikes).forEach(records => {
+                    records.forEach(r => allDatesInYear.add(r.Date));
+                });
+
+                const totalDates = allDatesInYear.size;
+                const requiredDates = Math.ceil(totalDates / 3);
+
+                // Calculate rider values based on valueType
+                const riderValues = {};
+                Object.keys(riders).forEach(riderName => {
+                    const records = riders[riderName];
+
+                    // Filter: require at least 1/3 of all possible dates
+                    if (records.length < requiredDates) return;
+
+                    let value;
+                    if (valueType === 'final') {
+                        // Get the last record of the year
+                        const lastRecord = records[records.length - 1];
+                        value = getRatingValue(lastRecord, ratingType);
+                    } else if (valueType === 'best') {
+                        // Get the maximum rating across all records
+                        value = Math.max(...records.map(r => getRatingValue(r, ratingType)));
+                    } else { // average
+                        // Get the average rating across all records
+                        const ratings = records.map(r => getRatingValue(r, ratingType));
+                        value = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                    }
+
+                    riderValues[riderName] = value;
+                });
+
+                // Calculate bike values based on valueType
+                const bikeValues = {};
+                Object.keys(bikes).forEach(bikeName => {
+                    const records = bikes[bikeName];
+
+                    // Filter: require at least 1/3 of all possible dates
+                    if (records.length < requiredDates) return;
+
+                    let value;
+                    if (valueType === 'final') {
+                        // Get the last record of the year
+                        const lastRecord = records[records.length - 1];
+                        value = getRatingValue(lastRecord, ratingType);
+                    } else if (valueType === 'best') {
+                        // Get the maximum rating across all records
+                        value = Math.max(...records.map(r => getRatingValue(r, ratingType)));
+                    } else { // average
+                        // Get the average rating across all records
+                        const ratings = records.map(r => getRatingValue(r, ratingType));
+                        value = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                    }
+
+                    bikeValues[bikeName] = value;
+                });
+
+                // Sort riders by value
+                const sortedRiders = Object.keys(riderValues)
+                    .map(name => ({ name, value: riderValues[name] }))
+                    .sort((a, b) => b.value - a.value);
+
+                // Sort bikes by value
+                const sortedBikes = Object.keys(bikeValues)
+                    .map(name => ({ name, value: bikeValues[name] }))
+                    .sort((a, b) => b.value - a.value);
+
+                // Get top 3 riders and best bike
+                const top3Riders = sortedRiders.slice(0, 3);
+                const bestBike = sortedBikes.length > 0 ? sortedBikes[0] : null;
+
+                yearlyData.push({
+                    year,
+                    riders: top3Riders,
+                    bike: bestBike
+                });
+            });
+
+            // Sort years in descending order
+            yearlyData.sort((a, b) => b.year - a.year);
+
+            // Destroy existing DataTable if it exists
+            if ($.fn.DataTable.isDataTable('#yearlyTable')) {
+                $('#yearlyTable').DataTable().destroy();
+            }
+
+            // Render table
+            let html = '';
+            yearlyData.forEach(data => {
+                const rider1 = data.riders[0] || null;
+                const rider2 = data.riders[1] || null;
+                const rider3 = data.riders[2] || null;
+                const bike = data.bike;
+
+                html += `
+                    <tr>
+                        <td>${data.year}</td>
+                        <td>${rider1 ? rider1.name : 'N/A'}</td>
+                        <td>${rider1 ? rider1.value.toFixed(2) : 'N/A'}</td>
+                        <td>${rider2 ? rider2.name : 'N/A'}</td>
+                        <td>${rider2 ? rider2.value.toFixed(2) : 'N/A'}</td>
+                        <td>${rider3 ? rider3.name : 'N/A'}</td>
+                        <td>${rider3 ? rider3.value.toFixed(2) : 'N/A'}</td>
+                        <td>${bike ? removeBikeYear(bike.name) : 'N/A'}</td>
+                        <td>${bike ? bike.value.toFixed(2) : 'N/A'}</td>
+                    </tr>
+                `;
+            });
+
+            $('#yearlyTableBody').html(html);
+
+            // Initialize DataTables
+            $('#yearlyTable').DataTable({
+                order: [[0, 'desc']], // Sort by Year column descending
+                pageLength: 25,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                language: {
+                    search: "Search years:",
+                    lengthMenu: "Show _MENU_ years per page",
+                    info: "Showing _START_ to _END_ of _TOTAL_ years",
+                    infoEmpty: "No years to display",
+                    infoFiltered: "(filtered from _MAX_ total years)"
                 }
             });
         }
