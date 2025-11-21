@@ -161,6 +161,15 @@
         }
 
         /* Statistics table borders */
+        #statsTable {
+            width: 100% !important;
+        }
+
+        .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody table,
+        .dataTables_wrapper .dataTables_scroll div.dataTables_scrollHead table {
+            width: 100% !important;
+        }
+
         #statsTable th,
         #statsTable td {
             border: 1px solid #444 !important;
@@ -179,6 +188,33 @@
             background-color: #5cb85c;
             border-radius: 50%;
             margin-left: 8px;
+        }
+
+        /* Highlight sorted column in statistics table */
+        #statsTable thead th.sorting_asc,
+        #statsTable thead th.sorting_desc {
+            background-color: #375a7f !important;
+        }
+
+        #statsTable tbody td.sorting_1 {
+            background-color: #2a3f54 !important;
+        }
+
+        /* Prevent wrapping in rider name and years columns */
+        #statsTable tbody td:nth-child(2),
+        #statsTable tbody td:nth-child(3) {
+            white-space: nowrap;
+        }
+
+        /* Prevent wrapping in Season Avg. header */
+        #statsTable thead th:nth-child(9) {
+            white-space: nowrap;
+        }
+
+        /* Make statistics table horizontally scrollable */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
@@ -1155,6 +1191,12 @@
                     populateStatsDates();
                     saveStatsStateToUrl();
                     renderStatisticsTable();
+                    // Adjust columns after tab is shown
+                    setTimeout(function() {
+                        if ($.fn.DataTable.isDataTable('#statsTable')) {
+                            $('#statsTable').DataTable().columns.adjust();
+                        }
+                    }, 100);
                 }
             });
 
@@ -2187,6 +2229,7 @@
                 order: [[5, 'desc']], // Sort by Highest column
                 pageLength: 25,
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                scrollX: true,
                 columnDefs: [
                     {
                         targets: 0, // # column
@@ -2200,6 +2243,13 @@
                     info: "Showing _START_ to _END_ of _TOTAL_ riders",
                     infoEmpty: "No riders to display",
                     infoFiltered: "(filtered from _MAX_ total riders)"
+                },
+                initComplete: function(settings, json) {
+                    // Adjust columns after initialization to ensure proper alignment
+                    const api = this.api();
+                    setTimeout(function() {
+                        api.columns.adjust();
+                    }, 100);
                 },
                 drawCallback: function(settings) {
                     // Update row numbers based on current display order
