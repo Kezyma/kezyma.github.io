@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoGP TrueSkill Ratings</title>
+
+    <!-- Bootswatch Darkly Theme (includes Bootstrap 5) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/darkly/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 600px;
+            margin-top: 20px;
+        }
+
+        .filters {
+            background-color: #303030;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.5rem;
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .entity-selector {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #222;
+        }
+
+        .entity-checkbox {
+            margin-bottom: 8px;
+        }
+
+        .selected-riders {
+            margin-top: 20px;
+        }
+
+        .rider-badge {
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .rider-badge .btn-close {
+            margin-left: 8px;
+            font-size: 0.7rem;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            background-color: #303030;
+            border: 1px solid #444;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            display: none;
+            margin-top: 2px;
+        }
+
+        .autocomplete-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #444;
+        }
+
+        .autocomplete-item:hover {
+            background-color: #375a7f;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .no-data-message {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        canvas {
+            max-height: 600px;
+        }
+
+        #careerChart {
+            cursor: crosshair;
+        }
+
+        .zoom-hint {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #375a7f;
+        }
+
+        .header-section h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        /* Statistics table borders */
+        #statsTable th,
+        #statsTable td {
+            border: 1px solid #444 !important;
+            vertical-align: middle;
+        }
+
+        #statsTable thead th {
+            border-bottom: 2px solid #666 !important;
+        }
+
+        /* Active rider indicator */
+        .active-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #5cb85c;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="header-section">
+            <h1>MotoGP TrueSkill Ratings</h1>
+            <p>Visualizing rider and bike performance using TrueSkill rankings</p>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Loading data...</p>
+        </div>
+
+        <!-- Main Content (hidden until data loads) -->
+        <div id="mainContent" style="display: none;">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs" id="chartTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="ratings-tab" data-bs-toggle="tab" data-bs-target="#ratings" type="button" role="tab" aria-controls="ratings" aria-selected="true">
+                        Ratings
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="season-tab" data-bs-toggle="tab" data-bs-target="#season" type="button" role="tab" aria-controls="season" aria-selected="false">
+                        Season Progress
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="career-tab" data-bs-toggle="tab" data-bs-target="#career" type="button" role="tab" aria-controls="career" aria-selected="false">
+                        Career Progress
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false">
+                        Statistics
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="chartTabsContent">
+                <!-- Ratings Tab -->
+                <div class="tab-pane fade show active" id="ratings" role="tabpanel" aria-labelledby="ratings-tab">
+                    <div class="filters">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="filter-group">
+                                    <label for="ratingsYear">Year</label>
+                                    <select id="ratingsYear" class="form-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="filter-group">
+                                    <label for="ratingsType">Type</label>
+                                    <select id="ratingsType" class="form-select">
+                                        <option value="Rider">Rider</option>
+                                        <option value="Bike">Bike</option>
+                                        <option value="Combined">Combined</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="filter-group">
+                                    <label for="ratingsDate">Date</label>
+                                    <select id="ratingsDate" class="form-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="filter-group">
+                                    <label for="ratingsSort">Sort By</label>
+                                    <select id="ratingsSort" class="form-select">
+                                        <option value="conservative">Conservative</option>
+                                        <option value="mean">Mean</option>
+                                        <option value="optimistic">Optimistic</option>
+                                        <option value="change">Year Change</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary btn-sm" id="resetRatingsBtn">Reset Filters</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="ratingsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Season Progress Tab -->
+                <div class="tab-pane fade" id="season" role="tabpanel" aria-labelledby="season-tab">
+                    <div class="filters">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="seasonYear">Year</label>
+                                    <select id="seasonYear" class="form-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="seasonType">Type</label>
+                                    <select id="seasonType" class="form-select">
+                                        <option value="Rider">Rider</option>
+                                        <option value="Bike">Bike</option>
+                                        <option value="Combined">Combined</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="seasonRating">Rating Type</label>
+                                    <select id="seasonRating" class="form-select">
+                                        <option value="mean">Mean</option>
+                                        <option value="conservative">Conservative</option>
+                                        <option value="optimistic">Optimistic</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary btn-sm" id="resetSeasonBtn">Reset Filters</button>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="mb-0">Select Entities to Display</label>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button type="button" class="btn btn-outline-primary" id="selectAllEntities">Select All</button>
+                                        <button type="button" class="btn btn-outline-secondary" id="deselectAllEntities">Deselect All</button>
+                                    </div>
+                                </div>
+                                <div class="entity-selector" id="seasonEntitySelector"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="seasonChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Career Progress Tab -->
+                <div class="tab-pane fade" id="career" role="tabpanel" aria-labelledby="career-tab">
+                    <div class="filters">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="filter-group">
+                                    <label for="careerRiderSearch">Add Rider</label>
+                                    <div class="input-group search-container">
+                                        <input type="text" id="careerRiderSearch" class="form-control" placeholder="Search for a rider...">
+                                        <button class="btn btn-primary" type="button" id="addRiderBtn">Add</button>
+                                        <div class="autocomplete-list" id="autocompleteList"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="careerRating">Rating Type</label>
+                                    <select id="careerRating" class="form-select">
+                                        <option value="mean">Mean</option>
+                                        <option value="conservative">Conservative</option>
+                                        <option value="optimistic">Optimistic</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary btn-sm" id="resetCareerBtn">Reset Filters</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="selected-riders" id="selectedRiders"></div>
+                                    <button type="button" class="btn btn-outline-warning btn-sm" id="resetCareerZoom" style="display: none;">Reset Zoom</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="careerChart"></canvas>
+                        <p class="zoom-hint text-center">Drag to select a date range to zoom in. Pan with mouse wheel or touchpad.</p>
+                    </div>
+                </div>
+
+                <!-- Statistics Tab -->
+                <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+                    <div class="filters">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="statsStartDate">Start Date</label>
+                                    <input type="text" id="statsStartDate" class="form-control" placeholder="Select start date...">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="statsEndDate">End Date</label>
+                                    <input type="text" id="statsEndDate" class="form-control" placeholder="Select end date...">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="filter-group">
+                                    <label for="statsRating">Rating Type</label>
+                                    <select id="statsRating" class="form-select">
+                                        <option value="conservative">Conservative</option>
+                                        <option value="mean">Mean</option>
+                                        <option value="optimistic">Optimistic</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary btn-sm" id="resetStatsBtn">Reset Filters</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark table-striped table-hover" id="statsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Rider Name</th>
+                                    <th>Years</th>
+                                    <th>Races</th>
+                                    <th>Lowest</th>
+                                    <th>Highest</th>
+                                    <th>Average</th>
+                                    <th>Median</th>
+                                    <th>Season Avg.</th>
+                                    <th>Season</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Chart.js Date Adapter -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <!-- Chart.js Data Labels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <!-- Chart.js Zoom Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+
+    <script>
+        // Global data store
+        const appData = {
+            rawData: [],
+            years: [],
+            riders: {},
+            bikes: {},
+            yearData: {},
+            allRiderNames: [],
+            ridersByPeakRating: [] // Sorted by peak conservative rating
+        };
+
+        // URL Query String Management
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const result = {};
+            for (const [key, value] of params) {
+                result[key] = value;
+            }
+            return result;
+        }
+
+        function setUrlParam(key, value) {
+            const url = new URL(window.location);
+            if (value === null || value === undefined || value === '') {
+                url.searchParams.delete(key);
+            } else {
+                url.searchParams.set(key, value);
+            }
+            window.history.replaceState({}, '', url);
+        }
+
+        function setUrlParams(params) {
+            const url = new URL(window.location);
+            for (const [key, value] of Object.entries(params)) {
+                if (value === null || value === undefined || value === '') {
+                    url.searchParams.delete(key);
+                } else {
+                    url.searchParams.set(key, value);
+                }
+            }
+            window.history.replaceState({}, '', url);
+        }
+
+        function clearAllUrlParams() {
+            const url = new URL(window.location);
+            url.search = '';
+            window.history.replaceState({}, '', url);
+        }
+
+        // Save tab state functions
+        function saveRatingsStateToUrl() {
+            setUrlParams({
+                ratingsYear: $('#ratingsYear').val(),
+                ratingsType: $('#ratingsType').val(),
+                ratingsDate: $('#ratingsDate').val(),
+                ratingsSort: $('#ratingsSort').val()
+            });
+        }
+
+        function saveSeasonStateToUrl() {
+            // Get indices of selected entities
+            const selectedIndices = [];
+            $('.season-entity-check').each(function(index) {
+                if ($(this).is(':checked')) {
+                    selectedIndices.push(index);
+                }
+            });
+
+            setUrlParams({
+                seasonYear: $('#seasonYear').val(),
+                seasonType: $('#seasonType').val(),
+                seasonRating: $('#seasonRating').val(),
+                seasonEntities: selectedIndices.length > 0 ? selectedIndices.join(',') : ''
+            });
+        }
+
+        function saveCareerStateToUrl() {
+            setUrlParams({
+                careerRating: $('#careerRating').val(),
+                careerRiders: careerState.selectedRiders.join(',')
+            });
+        }
+
+        function saveStatsStateToUrl() {
+            setUrlParams({
+                statsStartDate: $('#statsStartDate').val(),
+                statsEndDate: $('#statsEndDate').val(),
+                statsRating: $('#statsRating').val()
+            });
+        }
+
+        // Reset functions
+        function resetRatingsTab() {
+            // Reset to defaults
+            $('#ratingsYear').val(appData.years[0]);
+            $('#ratingsType').val('Rider');
+            $('#ratingsSort').val('conservative');
+            populateRatingsDates();
+
+            // Clear all URL params and set tab + defaults
+            clearAllUrlParams();
+            setUrlParam('tab', 'ratings');
+            saveRatingsStateToUrl();
+
+            renderRatingsChart();
+        }
+
+        function resetSeasonTab() {
+            // Reset to defaults
+            $('#seasonYear').val(appData.years[0]);
+            $('#seasonType').val('Rider');
+            $('#seasonRating').val('mean');
+
+            // Clear all URL params and set tab
+            clearAllUrlParams();
+            setUrlParam('tab', 'season');
+
+            populateSeasonEntitySelector();
+            saveSeasonStateToUrl();
+            renderSeasonChart();
+        }
+
+        function resetCareerTab() {
+            // Reset to defaults
+            $('#careerRating').val('mean');
+            careerState.selectedRiders = [];
+
+            // Clear all URL params and set tab + defaults
+            clearAllUrlParams();
+            setUrlParam('tab', 'career');
+            saveCareerStateToUrl();
+
+            updateSelectedRidersDisplay();
+            renderCareerChart();
+        }
+
+        function resetStatsTab() {
+            // Reset to defaults
+            $('#statsRating').val('conservative');
+            if (startDatePicker) {
+                startDatePicker.setDate('2002-01-01', false);
+            }
+            if (endDatePicker) {
+                endDatePicker.setDate(new Date(), false);
+            }
+
+            // Clear all URL params and set tab + defaults
+            clearAllUrlParams();
+            setUrlParam('tab', 'statistics');
+            saveStatsStateToUrl();
+
+            renderStatisticsTable();
+        }
+
+        // Chart instances
+        let ratingsChartInstance = null;
+        let seasonChartInstance = null;
+        let careerChartInstance = null;
+
+        // Career chart state
+        const careerState = {
+            selectedRiders: []
+        };
+
+        // Ratings chart value visibility state
+        const ratingsValueVisibility = {
+            conservative: true,
+            mean: true,
+            optimistic: true
+        };
+
+        // Initialize application
+        $(document).ready(function() {
+            loadCSV();
+        });
+
+        // CSV Loading and Parsing
+        async function loadCSV() {
+            try {
+                const response = await fetch('MotoGP_TrueSkill_Default.csv');
+                const csvText = await response.text();
+                parseCSV(csvText);
+                buildIndexes();
+                initializeUI();
+                $('#loading').hide();
+                $('#mainContent').show();
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                $('#loading').html('<div class="alert alert-danger">Error loading data. Please make sure MotoGP_TrueSkill_Default.csv is in the same directory.</div>');
+            }
+        }
+
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const headers = lines[0].replace('\ufeff', '').split(','); // Remove BOM if present
+
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+
+                const values = line.split(',');
+                if (values.length < headers.length) continue;
+
+                const record = {};
+                headers.forEach((header, index) => {
+                    record[header.trim()] = values[index] ? values[index].trim() : '';
+                });
+
+                // Convert numeric fields
+                record.Mean = parseFloat(record.Mean);
+                record.StdDev = parseFloat(record.StdDev);
+                record.Id = parseInt(record.Id);
+                record.Order = parseInt(record.Order);
+
+                appData.rawData.push(record);
+            }
+        }
+
+        function buildIndexes() {
+            // Extract unique years
+            const yearSet = new Set();
+            appData.rawData.forEach(record => {
+                const year = new Date(record.Date).getFullYear();
+                yearSet.add(year);
+            });
+            appData.years = Array.from(yearSet).sort((a, b) => b - a); // Descending order
+
+            // Group by rider name
+            appData.rawData.forEach(record => {
+                if (record.Type === 'Rider') {
+                    if (!appData.riders[record.Name]) {
+                        appData.riders[record.Name] = [];
+                    }
+                    appData.riders[record.Name].push(record);
+                }
+
+                if (record.Type === 'Bike') {
+                    if (!appData.bikes[record.Name]) {
+                        appData.bikes[record.Name] = [];
+                    }
+                    appData.bikes[record.Name].push(record);
+                }
+            });
+
+            // Sort records by date for each rider/bike
+            Object.keys(appData.riders).forEach(name => {
+                appData.riders[name].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+            });
+            Object.keys(appData.bikes).forEach(name => {
+                appData.bikes[name].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+            });
+
+            // Build year data index
+            appData.years.forEach(year => {
+                appData.yearData[year] = {
+                    riders: {},
+                    bikes: {}
+                };
+            });
+
+            appData.rawData.forEach(record => {
+                const year = new Date(record.Date).getFullYear();
+                if (record.Type === 'Rider') {
+                    if (!appData.yearData[year].riders[record.Name]) {
+                        appData.yearData[year].riders[record.Name] = [];
+                    }
+                    appData.yearData[year].riders[record.Name].push(record);
+                } else if (record.Type === 'Bike') {
+                    if (!appData.yearData[year].bikes[record.Name]) {
+                        appData.yearData[year].bikes[record.Name] = [];
+                    }
+                    appData.yearData[year].bikes[record.Name].push(record);
+                }
+            });
+
+            // Get all rider names for autocomplete
+            appData.allRiderNames = Object.keys(appData.riders).sort();
+
+            // Calculate peak conservative rating for each rider and sort
+            // Filter to only include riders with at least 2 ratings (career progression)
+            appData.ridersByPeakRating = Object.keys(appData.riders)
+                .filter(riderName => appData.riders[riderName].length >= 2)
+                .map(riderName => {
+                    const records = appData.riders[riderName];
+                    let peakConservative = -Infinity;
+
+                    records.forEach(record => {
+                        const conservative = getConservative(record.Mean, record.StdDev);
+                        if (conservative > peakConservative) {
+                            peakConservative = conservative;
+                        }
+                    });
+
+                    return {
+                        name: riderName,
+                        peakConservative: peakConservative
+                    };
+                }).sort((a, b) => b.peakConservative - a.peakConservative);
+        }
+
+        // Helper functions for rating calculations
+        function getConservative(mean, stddev) {
+            return mean - 3 * stddev;
+        }
+
+        function getOptimistic(mean, stddev) {
+            return mean + 3 * stddev;
+        }
+
+        function getRatingValue(record, ratingType) {
+            switch(ratingType) {
+                case 'conservative':
+                    return getConservative(record.Mean, record.StdDev);
+                case 'optimistic':
+                    return getOptimistic(record.Mean, record.StdDev);
+                case 'mean':
+                default:
+                    return record.Mean;
+            }
+        }
+
+        // Remove year brackets from bike names
+        function removeBikeYear(bikeName) {
+            if (!bikeName) return bikeName;
+            return bikeName.replace(/\s*\[\d{4}\]\s*$/, '').trim();
+        }
+
+        // Combine rider and bike ratings using TrueSkill formulas
+        function combineRatings(riderRecord, bikeRecord) {
+            if (!riderRecord || !bikeRecord) return null;
+
+            // Combined Mean = Sum of Rider Mean and Bike Mean
+            const combinedMean = riderRecord.Mean + bikeRecord.Mean;
+
+            // Combined StdDev = sqrt(Rider StdDev^2 + Bike StdDev^2)
+            const combinedStdDev = Math.sqrt(
+                Math.pow(riderRecord.StdDev, 2) + Math.pow(bikeRecord.StdDev, 2)
+            );
+
+            const bikeName = removeBikeYear(bikeRecord.Name);
+
+            return {
+                Id: riderRecord.Id,
+                Type: 'Combined',
+                Name: `${riderRecord.Name} (${bikeName})`,
+                Mean: combinedMean,
+                StdDev: combinedStdDev,
+                Date: riderRecord.Date,
+                Order: riderRecord.Order,
+                Bike: bikeRecord.Name,
+                Series: riderRecord.Series
+            };
+        }
+
+        // Get latest rating for each entity in a year
+        function getLatestRatingByYear(year, type) {
+            const result = {};
+
+            if (type === 'Combined') {
+                // For combined, we need to combine rider + their latest bike
+                const riders = appData.yearData[year]?.riders || {};
+                const bikes = appData.yearData[year]?.bikes || {};
+
+                Object.keys(riders).forEach(riderName => {
+                    const riderRecords = riders[riderName];
+                    if (riderRecords.length > 0) {
+                        const latestRider = riderRecords[riderRecords.length - 1];
+
+                        if (latestRider.Bike) {
+                            const bikeRecords = bikes[latestRider.Bike] || [];
+                            if (bikeRecords.length > 0) {
+                                const latestBike = bikeRecords[bikeRecords.length - 1];
+                                const combined = combineRatings(latestRider, latestBike);
+
+                                if (combined) {
+                                    // Store by rider name for year-over-year comparison
+                                    result[riderName] = combined;
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                const source = type === 'Rider' ?
+                    (appData.yearData[year]?.riders || {}) :
+                    (appData.yearData[year]?.bikes || {});
+
+                Object.keys(source).forEach(name => {
+                    const records = source[name];
+                    if (records.length > 0) {
+                        // Get the latest record (records are sorted by date)
+                        result[name] = records[records.length - 1];
+                    }
+                });
+            }
+
+            return result;
+        }
+
+        // Get ratings by specific date
+        function getRatingsByDate(year, type, date) {
+            const result = {};
+
+            if (type === 'Combined') {
+                // For combined, we need to combine rider + their bike
+                const riders = appData.yearData[year]?.riders || {};
+                const bikes = appData.yearData[year]?.bikes || {};
+
+                Object.keys(riders).forEach(riderName => {
+                    const riderRecords = riders[riderName];
+
+                    // Find rider's record at this date
+                    let riderRecord = null;
+                    for (let i = riderRecords.length - 1; i >= 0; i--) {
+                        if (riderRecords[i].Date <= date) {
+                            riderRecord = riderRecords[i];
+                            break;
+                        }
+                    }
+
+                    if (riderRecord && riderRecord.Bike) {
+                        // Find the bike's record at this date
+                        const bikeName = riderRecord.Bike;
+                        const bikeRecords = bikes[bikeName] || [];
+
+                        let bikeRecord = null;
+                        for (let i = bikeRecords.length - 1; i >= 0; i--) {
+                            if (bikeRecords[i].Date <= date) {
+                                bikeRecord = bikeRecords[i];
+                                break;
+                            }
+                        }
+
+                        if (bikeRecord) {
+                            const combined = combineRatings(riderRecord, bikeRecord);
+                            if (combined) {
+                                // Store by rider name for year-over-year comparison
+                                result[riderName] = combined;
+                            }
+                        }
+                    }
+                });
+            } else {
+                const source = type === 'Rider' ?
+                    (appData.yearData[year]?.riders || {}) :
+                    (appData.yearData[year]?.bikes || {});
+
+                Object.keys(source).forEach(name => {
+                    const records = source[name];
+                    // Find the record for the specific date, or the most recent before it
+                    let targetRecord = null;
+                    for (let i = records.length - 1; i >= 0; i--) {
+                        if (records[i].Date <= date) {
+                            targetRecord = records[i];
+                            break;
+                        }
+                    }
+                    if (targetRecord) {
+                        // Remove year from bike names in display
+                        if (type === 'Bike') {
+                            targetRecord = {...targetRecord, Name: removeBikeYear(targetRecord.Name)};
+                        }
+                        result[name] = targetRecord;
+                    }
+                });
+            }
+
+            return result;
+        }
+
+        // Calculate year-over-year change
+        function calculateYearChange(name, year, type, currentRecord) {
+            const previousYear = getLatestRatingByYear(year - 1, type);
+
+            if (currentRecord && previousYear[name]) {
+                return currentRecord.Mean - previousYear[name].Mean;
+            }
+
+            return null;
+        }
+
+        // Initialize UI
+        function initializeUI() {
+            populateYearDropdowns();
+            populateRatingsDates();
+            setupEventHandlers();
+            loadStateFromUrl();
+            updateSelectedRidersDisplay(); // Initialize career chart message
+        }
+
+        function loadStateFromUrl() {
+            const params = getUrlParams();
+
+            // Load tab
+            const tab = params.tab || 'ratings';
+            const tabButton = $(`button[data-bs-target="#${tab}"]`);
+            if (tabButton.length) {
+                const bsTab = new bootstrap.Tab(tabButton[0]);
+                bsTab.show();
+            }
+
+            // Clear URL and set only the tab parameter
+            clearAllUrlParams();
+            setUrlParam('tab', tab);
+
+            // Load state based on active tab
+            if (tab === 'ratings') {
+                // Load Ratings tab state
+                if (params.ratingsYear) $('#ratingsYear').val(params.ratingsYear);
+                if (params.ratingsType) $('#ratingsType').val(params.ratingsType);
+                if (params.ratingsYear || params.ratingsType) {
+                    populateRatingsDates(); // Repopulate dates if year or type changed
+                }
+                if (params.ratingsDate) $('#ratingsDate').val(params.ratingsDate);
+                if (params.ratingsSort) $('#ratingsSort').val(params.ratingsSort);
+                saveRatingsStateToUrl();
+                renderRatingsChart();
+            } else if (tab === 'season') {
+                // Load Season tab state
+                if (params.seasonYear) $('#seasonYear').val(params.seasonYear);
+                if (params.seasonType) $('#seasonType').val(params.seasonType);
+                if (params.seasonRating) $('#seasonRating').val(params.seasonRating);
+                populateSeasonEntitySelector();
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            } else if (tab === 'career') {
+                // Load Career tab state
+                if (params.careerRating) $('#careerRating').val(params.careerRating);
+                if (params.careerRiders) {
+                    const riders = params.careerRiders.split(',').filter(r => r.trim());
+                    riders.forEach(rider => {
+                        if (appData.allRiderNames.includes(rider)) {
+                            careerState.selectedRiders.push(rider);
+                        }
+                    });
+                }
+                saveCareerStateToUrl();
+                renderCareerChart();
+            } else if (tab === 'statistics') {
+                // Load Statistics tab state (dates are loaded in populateStatsDates)
+                if (params.statsRating) $('#statsRating').val(params.statsRating);
+                populateStatsDates();
+                saveStatsStateToUrl();
+                renderStatisticsTable();
+            }
+        }
+
+        function populateYearDropdowns() {
+            const yearOptions = appData.years.map(year =>
+                `<option value="${year}">${year}</option>`
+            ).join('');
+
+            $('#ratingsYear').html(yearOptions);
+            $('#seasonYear').html(yearOptions);
+        }
+
+        function populateRatingsDates() {
+            const year = parseInt($('#ratingsYear').val());
+            const type = $('#ratingsType').val();
+
+            // Get all unique dates for the year/type combination
+            const dates = new Set();
+
+            if (type === 'Combined') {
+                if (appData.yearData[year]) {
+                    Object.values(appData.yearData[year].riders).forEach(records => {
+                        records.forEach(r => dates.add(r.Date));
+                    });
+                    Object.values(appData.yearData[year].bikes).forEach(records => {
+                        records.forEach(r => dates.add(r.Date));
+                    });
+                }
+            } else {
+                const source = type === 'Rider' ?
+                    (appData.yearData[year]?.riders || {}) :
+                    (appData.yearData[year]?.bikes || {});
+
+                Object.values(source).forEach(records => {
+                    records.forEach(r => dates.add(r.Date));
+                });
+            }
+
+            // Sort dates in descending order (most recent first)
+            const sortedDates = Array.from(dates).sort((a, b) => new Date(b) - new Date(a));
+
+            const dateOptions = sortedDates.map(date => {
+                const dateObj = new Date(date);
+                const formatted = dateObj.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                return `<option value="${date}">${formatted}</option>`;
+            }).join('');
+
+            $('#ratingsDate').html(dateOptions);
+        }
+
+        function setupEventHandlers() {
+            // Ratings chart filters
+            $('#ratingsYear, #ratingsType').on('change', function() {
+                saveRatingsStateToUrl();
+                populateRatingsDates();
+                renderRatingsChart();
+            });
+            $('#ratingsDate, #ratingsSort').on('change', function() {
+                saveRatingsStateToUrl();
+                renderRatingsChart();
+            });
+
+            // Season chart filters
+            $('#seasonYear, #seasonType').on('change', function() {
+                // Clear entity selection from URL when year/type changes
+                setUrlParam('seasonEntities', '');
+                populateSeasonEntitySelector();
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+
+            $('#seasonRating').on('change', function() {
+                saveSeasonStateToUrl();
+                renderSeasonChart(); // Don't repopulate, just re-render
+            });
+
+            // Season entity select all/deselect all
+            $('#selectAllEntities').on('click', function() {
+                $('.season-entity-check').prop('checked', true);
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+
+            $('#deselectAllEntities').on('click', function() {
+                $('.season-entity-check').prop('checked', false);
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+
+            // Career chart
+            $('#careerRating').on('change', function() {
+                saveCareerStateToUrl();
+                renderCareerChart();
+            });
+            $('#careerRiderSearch').on('input', handleAutocomplete);
+            $('#careerRiderSearch').on('click focus', showAllRiders);
+            $('#addRiderBtn').on('click', addRiderFromSearch);
+            $('#careerRiderSearch').on('keypress', function(e) {
+                if (e.which === 13) { // Enter key
+                    addRiderFromSearch();
+                }
+            });
+
+            // Career chart zoom reset
+            $('#resetCareerZoom').on('click', function() {
+                if (careerChartInstance) {
+                    careerChartInstance.resetZoom();
+                    $(this).hide();
+                }
+            });
+
+            // Close autocomplete when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.search-container').length) {
+                    $('#autocompleteList').hide();
+                }
+            });
+
+            // Statistics table filters (date pickers have their own onChange handlers)
+            $('#statsRating').on('change', function() {
+                saveStatsStateToUrl();
+                renderStatisticsTable();
+            });
+
+            // Tab change events
+            $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+                const targetId = $(e.target).attr('data-bs-target');
+                const tabName = targetId.substring(1); // Remove # prefix
+
+                // Clear all URL params first
+                clearAllUrlParams();
+
+                // Set the tab parameter
+                setUrlParam('tab', tabName);
+
+                // Load and save state for the new tab
+                if (targetId === '#ratings') {
+                    saveRatingsStateToUrl();
+                    renderRatingsChart();
+                } else if (targetId === '#season') {
+                    populateSeasonEntitySelector();
+                    saveSeasonStateToUrl();
+                    renderSeasonChart();
+                } else if (targetId === '#career') {
+                    saveCareerStateToUrl();
+                    renderCareerChart();
+                } else if (targetId === '#statistics') {
+                    populateStatsDates();
+                    saveStatsStateToUrl();
+                    renderStatisticsTable();
+                }
+            });
+
+            // Reset button event handlers
+            $('#resetRatingsBtn').on('click', resetRatingsTab);
+            $('#resetSeasonBtn').on('click', resetSeasonTab);
+            $('#resetCareerBtn').on('click', resetCareerTab);
+            $('#resetStatsBtn').on('click', resetStatsTab);
+        }
+
+        // Chart 1: Ratings Bar Chart
+        function renderRatingsChart() {
+            const year = parseInt($('#ratingsYear').val());
+            const type = $('#ratingsType').val();
+            const selectedDate = $('#ratingsDate').val();
+            const sortBy = $('#ratingsSort').val();
+
+            const ratings = getRatingsByDate(year, type, selectedDate);
+            const data = Object.values(ratings);
+
+            // Calculate values for sorting
+            // For combined, we need to extract rider name for year-over-year comparison
+            const dataWithValues = data.map(d => {
+                let nameForComparison = d.Name;
+
+                // For combined type, extract rider name from "Rider (Bike)" format
+                if (type === 'Combined' && d.Type === 'Combined') {
+                    // The data is already stored by rider name in the result object
+                    // but d.Name contains the full "Rider (Bike)" format
+                    // We need to get the actual key used to store it
+                    const riderMatch = Object.keys(ratings).find(key => ratings[key] === d);
+                    if (riderMatch) {
+                        nameForComparison = riderMatch;
+                    }
+                }
+
+                return {
+                    ...d,
+                    conservative: getConservative(d.Mean, d.StdDev),
+                    mean: d.Mean,
+                    optimistic: getOptimistic(d.Mean, d.StdDev),
+                    change: calculateYearChange(nameForComparison, year, d.Type, d)
+                };
+            });
+
+            // Sort based on selected criterion
+            dataWithValues.sort((a, b) => {
+                switch(sortBy) {
+                    case 'conservative':
+                        return b.conservative - a.conservative;
+                    case 'optimistic':
+                        return b.optimistic - a.optimistic;
+                    case 'change':
+                        const changeA = a.change !== null ? a.change : -Infinity;
+                        const changeB = b.change !== null ? b.change : -Infinity;
+                        return changeB - changeA;
+                    case 'mean':
+                    default:
+                        return b.mean - a.mean;
+                }
+            });
+
+            // Take top 30 (or all if less)
+            const displayData = dataWithValues.slice(0, 30);
+
+            // Create labels without change information
+            const labels = displayData.map(d => d.Name);
+
+            // Store changes for the custom plugin
+            const changes = displayData.map(d => d.change);
+
+            // Create floating bar data (from conservative to optimistic)
+            const barData = displayData.map(d => [d.conservative, d.optimistic]);
+
+            // Create scatter data for the three points
+            const conservativePoints = displayData.map(d => d.conservative);
+            const meanPoints = displayData.map(d => d.mean);
+            const optimisticPoints = displayData.map(d => d.optimistic);
+
+            // Destroy existing chart
+            if (ratingsChartInstance) {
+                ratingsChartInstance.destroy();
+            }
+
+            // Custom plugin to draw vertical lines, values, and changes
+            const verticalLinesAndChangesPlugin = {
+                id: 'verticalLinesAndChanges',
+                afterDatasetsDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const xScale = chart.scales.x;
+                    const yScale = chart.scales.y;
+
+                    ctx.save();
+                    ctx.textBaseline = 'middle';
+                    ctx.font = 'bold 10px sans-serif';
+
+                    // Draw vertical lines and values for each rating point
+                    displayData.forEach((d, index) => {
+                        const y = yScale.getPixelForValue(index);
+                        const barHeight = 18;
+
+                        // Conservative line (red) - always visible
+                        const consX = xScale.getPixelForValue(d.conservative);
+                        ctx.strokeStyle = 'rgba(220, 53, 69, 1)';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.moveTo(consX, y - barHeight/2);
+                        ctx.lineTo(consX, y + barHeight/2);
+                        ctx.stroke();
+
+                        // Conservative value - toggle based on visibility state
+                        if (ratingsValueVisibility.conservative) {
+                            ctx.fillStyle = '#fff';
+                            ctx.textAlign = 'right';
+                            ctx.fillText(d.conservative.toFixed(2), consX - 5, y);
+                        }
+
+                        // Mean line (blue) - always visible
+                        const meanX = xScale.getPixelForValue(d.mean);
+                        ctx.strokeStyle = 'rgba(13, 110, 253, 1)';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.moveTo(meanX, y - barHeight/2);
+                        ctx.lineTo(meanX, y + barHeight/2);
+                        ctx.stroke();
+
+                        // Mean value - toggle based on visibility state
+                        if (ratingsValueVisibility.mean) {
+                            ctx.fillStyle = '#fff';
+                            ctx.textAlign = 'right';
+                            ctx.fillText(d.mean.toFixed(2), meanX - 5, y);
+                        }
+
+                        // Optimistic line (green) - always visible
+                        const optX = xScale.getPixelForValue(d.optimistic);
+                        ctx.strokeStyle = 'rgba(25, 135, 84, 1)';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.moveTo(optX, y - barHeight/2);
+                        ctx.lineTo(optX, y + barHeight/2);
+                        ctx.stroke();
+
+                        // Optimistic value - toggle based on visibility state
+                        if (ratingsValueVisibility.optimistic) {
+                            ctx.fillStyle = '#fff';
+                            ctx.textAlign = 'right';
+                            ctx.fillText(d.optimistic.toFixed(2), optX - 5, y);
+                        }
+                    });
+
+                    // Draw changes to the right of the bar
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.textAlign = 'left';
+
+                    changes.forEach((change, index) => {
+                        if (change !== null) {
+                            const d = displayData[index];
+                            const y = yScale.getPixelForValue(index);
+                            const optX = xScale.getPixelForValue(d.optimistic);
+                            const x = optX + 10; // 10px to the right of optimistic line
+
+                            const sign = change > 0 ? '+' : '';
+                            const text = `${sign}${change.toFixed(1)}`;
+
+                            // Color based on positive/negative
+                            ctx.fillStyle = change > 0 ? '#5cb85c' : (change < 0 ? '#d9534f' : '#aaa');
+                            ctx.fillText(text, x, y);
+                        }
+                    });
+
+                    ctx.restore();
+                }
+            };
+
+            const ctx = document.getElementById('ratingsChart').getContext('2d');
+            ratingsChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: 'Range',
+                            data: barData,
+                            backgroundColor: 'rgba(25, 135, 84, 0.25)',
+                            borderColor: 'rgba(25, 135, 84, 0.4)',
+                            borderWidth: 1,
+                            barThickness: 20,
+                            datalabels: {
+                                display: false
+                            }
+                        },
+                        {
+                            type: 'scatter',
+                            label: 'Conservative',
+                            data: conservativePoints,
+                            backgroundColor: 'transparent',
+                            borderColor: 'transparent',
+                            pointRadius: 0,
+                            pointBorderWidth: 0,
+                            datalabels: {
+                                display: false
+                            }
+                        },
+                        {
+                            type: 'scatter',
+                            label: 'Mean',
+                            data: meanPoints,
+                            backgroundColor: 'transparent',
+                            borderColor: 'transparent',
+                            pointRadius: 0,
+                            pointBorderWidth: 0,
+                            datalabels: {
+                                display: false
+                            }
+                        },
+                        {
+                            type: 'scatter',
+                            label: 'Optimistic',
+                            data: optimisticPoints,
+                            backgroundColor: 'transparent',
+                            borderColor: 'transparent',
+                            pointRadius: 0,
+                            pointBorderWidth: 0,
+                            datalabels: {
+                                display: false
+                            }
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                filter: function(item) {
+                                    return item.text !== 'Range'; // Hide the range bar from legend
+                                },
+                                generateLabels: function(chart) {
+                                    return [
+                                        {
+                                            text: 'Conservative',
+                                            fillStyle: 'rgba(220, 53, 69, 1)',
+                                            strokeStyle: 'rgba(220, 53, 69, 1)',
+                                            lineWidth: 3,
+                                            fontColor: '#fff',
+                                            hidden: !ratingsValueVisibility.conservative,
+                                            datasetIndex: 1
+                                        },
+                                        {
+                                            text: 'Mean',
+                                            fillStyle: 'rgba(13, 110, 253, 1)',
+                                            strokeStyle: 'rgba(13, 110, 253, 1)',
+                                            lineWidth: 3,
+                                            fontColor: '#fff',
+                                            hidden: !ratingsValueVisibility.mean,
+                                            datasetIndex: 2
+                                        },
+                                        {
+                                            text: 'Optimistic',
+                                            fillStyle: 'rgba(25, 135, 84, 1)',
+                                            strokeStyle: 'rgba(25, 135, 84, 1)',
+                                            lineWidth: 3,
+                                            fontColor: '#fff',
+                                            hidden: !ratingsValueVisibility.optimistic,
+                                            datasetIndex: 3
+                                        }
+                                    ];
+                                }
+                            },
+                            onClick: function(e, legendItem, legend) {
+                                const index = legendItem.datasetIndex;
+                                const labels = ['', 'conservative', 'mean', 'optimistic'];
+                                const key = labels[index];
+
+                                if (key) {
+                                    // Toggle visibility
+                                    ratingsValueVisibility[key] = !ratingsValueVisibility[key];
+
+                                    // Update the chart
+                                    legend.chart.update();
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.type === 'bar') {
+                                        return null;
+                                    }
+                                    return `${context.dataset.label}: ${context.parsed.x.toFixed(2)}`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels, verticalLinesAndChangesPlugin]
+            });
+        }
+
+        // Chart 2: Season Progress
+        function populateSeasonEntitySelector() {
+            const year = parseInt($('#seasonYear').val());
+            const type = $('#seasonType').val();
+
+            let entitiesWithRatings = [];
+
+            if (type === 'Combined') {
+                // For combined, create rider+bike entities
+                const riders = appData.yearData[year].riders;
+
+                Object.keys(riders).forEach(riderName => {
+                    const riderRecords = riders[riderName];
+
+                    // Only include if rider has at least 2 ratings in this season
+                    if (riderRecords.length < 2) return;
+
+                    const latestRider = riderRecords[riderRecords.length - 1];
+
+                    if (latestRider.Bike) {
+                        const bikeName = latestRider.Bike;
+                        const bikeRecords = appData.yearData[year].bikes[bikeName];
+
+                        // Only include if bike has at least 2 ratings in this season
+                        if (bikeRecords && bikeRecords.length >= 2) {
+                            const latestBike = bikeRecords[bikeRecords.length - 1];
+                            const combined = combineRatings(latestRider, latestBike);
+
+                            if (combined) {
+                                entitiesWithRatings.push({
+                                    name: riderName, // Store rider name for lookups
+                                    displayName: combined.Name,
+                                    rating: combined.Mean,
+                                    isCombined: true
+                                });
+                            }
+                        }
+                    }
+                });
+            } else {
+                const data = type === 'Rider' ? appData.yearData[year].riders : appData.yearData[year].bikes;
+
+                // Get entities sorted by their latest mean rating (descending)
+                // Only include entities with at least 2 ratings in this season
+                entitiesWithRatings = Object.keys(data)
+                    .filter(entity => data[entity].length >= 2)
+                    .map(entity => {
+                        const records = data[entity];
+                        const latestRecord = records[records.length - 1];
+                        const displayName = type === 'Bike' ? removeBikeYear(entity) : entity;
+                        return {
+                            name: entity,
+                            displayName: displayName,
+                            rating: latestRecord.Mean,
+                            isCombined: false
+                        };
+                    });
+            }
+
+            entitiesWithRatings.sort((a, b) => b.rating - a.rating);
+
+            // Determine which should be checked
+            let checkedIndices;
+            const params = getUrlParams();
+
+            if (params.seasonEntities) {
+                // Use indices from URL if available
+                checkedIndices = params.seasonEntities.split(',').map(i => parseInt(i.trim())).filter(i => !isNaN(i));
+            } else {
+                // Otherwise use default logic
+                if (type === 'Bike') {
+                    // All bikes checked by default
+                    checkedIndices = entitiesWithRatings.map((e, idx) => idx);
+                } else {
+                    // Top 5 for Rider and Combined
+                    checkedIndices = [0, 1, 2, 3, 4].filter(idx => idx < entitiesWithRatings.length);
+                }
+            }
+
+            let html = '';
+            entitiesWithRatings.forEach((entity, index) => {
+                const isChecked = checkedIndices.includes(index);
+                const checked = isChecked ? 'checked' : '';
+                const safeId = entity.name.replace(/\s+/g, '-').replace(/\[/g, '').replace(/\]/g, '').replace(/\(/g, '').replace(/\)/g, '');
+                html += `
+                    <div class="form-check entity-checkbox">
+                        <input class="form-check-input season-entity-check" type="checkbox" value="${entity.name}" data-combined="${entity.isCombined}" id="entity-${safeId}" ${checked}>
+                        <label class="form-check-label" for="entity-${safeId}">
+                            ${entity.displayName}
+                        </label>
+                    </div>
+                `;
+            });
+
+            $('#seasonEntitySelector').html(html);
+
+            // Add event handlers
+            $('.season-entity-check').on('change', function() {
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+        }
+
+        function renderSeasonChart() {
+            const year = parseInt($('#seasonYear').val());
+            const type = $('#seasonType').val();
+            const ratingType = $('#seasonRating').val();
+
+            // Get selected entities
+            const selectedEntities = [];
+            $('.season-entity-check:checked').each(function() {
+                const entityName = $(this).val();
+                const isCombined = $(this).data('combined');
+                selectedEntities.push({
+                    name: entityName,
+                    isCombined: isCombined
+                });
+            });
+
+            if (selectedEntities.length === 0) {
+                if (seasonChartInstance) {
+                    seasonChartInstance.destroy();
+                }
+                return;
+            }
+
+            // Build datasets
+            const datasets = [];
+            const colors = generateColors(selectedEntities.length);
+
+            selectedEntities.forEach((entity, index) => {
+                let chartData = [];
+                let displayLabel = '';
+
+                if (type === 'Combined' && entity.isCombined) {
+                    // For combined, get rider records and combine with bike
+                    const riderRecords = appData.yearData[year].riders[entity.name] || [];
+
+                    riderRecords.forEach(riderRecord => {
+                        if (riderRecord.Bike) {
+                            const bikeRecords = appData.yearData[year].bikes[riderRecord.Bike];
+                            if (bikeRecords) {
+                                // Find bike record at the same date
+                                const bikeRecord = bikeRecords.find(b => b.Date === riderRecord.Date) ||
+                                                   bikeRecords[bikeRecords.length - 1];
+
+                                const combined = combineRatings(riderRecord, bikeRecord);
+                                if (combined) {
+                                    chartData.push({
+                                        x: new Date(combined.Date),
+                                        y: getRatingValue(combined, ratingType)
+                                    });
+
+                                    if (!displayLabel) {
+                                        displayLabel = combined.Name;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    // For Rider or Bike
+                    const data = type === 'Rider' ? appData.yearData[year].riders : appData.yearData[year].bikes;
+                    const records = data[entity.name] || [];
+
+                    chartData = records.map(record => ({
+                        x: new Date(record.Date),
+                        y: getRatingValue(record, ratingType)
+                    }));
+
+                    displayLabel = type === 'Bike' ? removeBikeYear(entity.name) : entity.name;
+                }
+
+                if (chartData.length > 0) {
+                    datasets.push({
+                        label: displayLabel,
+                        data: chartData,
+                        borderColor: colors[index],
+                        backgroundColor: colors[index],
+                        tension: 0.1,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    });
+                }
+            });
+
+            // Destroy existing chart
+            if (seasonChartInstance) {
+                seasonChartInstance.destroy();
+            }
+
+            const ctx = document.getElementById('seasonChart').getContext('2d');
+            seasonChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        datalabels: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'month',
+                                displayFormats: {
+                                    month: 'MMM yyyy'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // Chart 3: Career Progress
+        function handleAutocomplete() {
+            const searchTerm = $('#careerRiderSearch').val().toLowerCase();
+
+            // Get available riders sorted by peak conservative rating
+            let availableRiders = appData.ridersByPeakRating
+                .filter(rider => !careerState.selectedRiders.includes(rider.name))
+                .map(rider => rider.name);
+
+            // Filter if user is typing
+            if (searchTerm.length > 0) {
+                availableRiders = availableRiders.filter(name =>
+                    name.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (availableRiders.length === 0) {
+                $('#autocompleteList').hide();
+                return;
+            }
+
+            let html = '';
+            availableRiders.forEach(name => {
+                html += `<div class="autocomplete-item" data-rider="${name}">${name}</div>`;
+            });
+
+            $('#autocompleteList').html(html).show();
+
+            // Add click handlers
+            $('.autocomplete-item').on('click', function() {
+                const rider = $(this).data('rider');
+                addRider(rider);
+                $('#careerRiderSearch').val('');
+                $('#autocompleteList').hide();
+            });
+        }
+
+        function showAllRiders() {
+            // Show all riders when clicked/focused
+            handleAutocomplete();
+        }
+
+        function addRiderFromSearch() {
+            const searchTerm = $('#careerRiderSearch').val();
+            const exactMatch = appData.allRiderNames.find(name =>
+                name.toLowerCase() === searchTerm.toLowerCase()
+            );
+
+            if (exactMatch && !careerState.selectedRiders.includes(exactMatch)) {
+                addRider(exactMatch);
+                $('#careerRiderSearch').val('');
+                $('#autocompleteList').hide();
+            }
+        }
+
+        function addRider(riderName) {
+            if (careerState.selectedRiders.includes(riderName)) {
+                return;
+            }
+
+            careerState.selectedRiders.push(riderName);
+            saveCareerStateToUrl();
+            updateSelectedRidersDisplay();
+            renderCareerChart();
+        }
+
+        function removeRider(riderName) {
+            careerState.selectedRiders = careerState.selectedRiders.filter(r => r !== riderName);
+            saveCareerStateToUrl();
+            updateSelectedRidersDisplay();
+            renderCareerChart();
+        }
+
+        function updateSelectedRidersDisplay() {
+            if (careerState.selectedRiders.length === 0) {
+                $('#selectedRiders').html('<p class="text-muted">No riders selected. Use the search box above to add riders.</p>');
+                return;
+            }
+
+            let html = '<h6>Selected Riders:</h6>';
+            careerState.selectedRiders.forEach(rider => {
+                html += `
+                    <span class="badge bg-primary rider-badge">
+                        ${rider}
+                        <button type="button" class="btn-close btn-close-white" data-rider="${rider}"></button>
+                    </span>
+                `;
+            });
+
+            $('#selectedRiders').html(html);
+
+            // Add remove handlers
+            $('.rider-badge .btn-close').on('click', function() {
+                const rider = $(this).data('rider');
+                removeRider(rider);
+            });
+        }
+
+        function renderCareerChart() {
+            if (careerState.selectedRiders.length === 0) {
+                if (careerChartInstance) {
+                    careerChartInstance.destroy();
+                    careerChartInstance = null;
+                }
+                return;
+            }
+
+            const ratingType = $('#careerRating').val();
+
+            // Build datasets
+            const datasets = [];
+            const colors = generateColors(careerState.selectedRiders.length);
+
+            careerState.selectedRiders.forEach((rider, index) => {
+                const records = appData.riders[rider] || [];
+                const chartData = records.map(record => ({
+                    x: new Date(record.Date),
+                    y: getRatingValue(record, ratingType)
+                }));
+
+                datasets.push({
+                    label: rider,
+                    data: chartData,
+                    borderColor: colors[index],
+                    backgroundColor: colors[index],
+                    tension: 0.2,
+                    pointRadius: 2,
+                    pointHoverRadius: 5
+                });
+            });
+
+            // Destroy existing chart
+            if (careerChartInstance) {
+                careerChartInstance.destroy();
+            }
+
+            const ctx = document.getElementById('careerChart').getContext('2d');
+            careerChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        zoom: {
+                            zoom: {
+                                drag: {
+                                    enabled: true,
+                                    backgroundColor: 'rgba(13, 110, 253, 0.3)',
+                                    borderColor: 'rgba(13, 110, 253, 0.8)',
+                                    borderWidth: 2
+                                },
+                                mode: 'x',
+                                onZoomComplete: function() {
+                                    $('#resetCareerZoom').show();
+                                }
+                            },
+                            pan: {
+                                enabled: true,
+                                mode: 'x',
+                                onPanComplete: function() {
+                                    $('#resetCareerZoom').show();
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'year',
+                                displayFormats: {
+                                    year: 'yyyy'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // Utility function to generate distinct colors
+        function generateColors(count) {
+            const colors = [];
+            const hueStep = 360 / count;
+
+            for (let i = 0; i < count; i++) {
+                const hue = i * hueStep;
+                colors.push(`hsl(${hue}, 70%, 60%)`);
+            }
+
+            return colors;
+        }
+
+        // Chart 4: Statistics Table
+        let startDatePicker, endDatePicker;
+        let mostRecentRatingYear = null;
+
+        function populateStatsDates() {
+            // Destroy existing date pickers if they exist
+            if (startDatePicker) {
+                startDatePicker.destroy();
+            }
+            if (endDatePicker) {
+                endDatePicker.destroy();
+            }
+
+            // Calculate the most recent rating year across all data
+            let maxYear = 0;
+            appData.rawData.forEach(record => {
+                if (record.Type === 'Rider') {
+                    const year = new Date(record.Date).getFullYear();
+                    if (year > maxYear) {
+                        maxYear = year;
+                    }
+                }
+            });
+            mostRecentRatingYear = maxYear;
+
+            // Get URL params to check for saved dates
+            const params = getUrlParams();
+            const startDateDefault = params.statsStartDate || "2002-01-01";
+            const endDateDefault = params.statsEndDate || new Date();
+
+            // Initialize start date picker
+            startDatePicker = flatpickr("#statsStartDate", {
+                dateFormat: "Y-m-d",
+                defaultDate: startDateDefault,
+                theme: "dark",
+                allowInput: true,
+                onChange: function(selectedDates, dateStr, instance) {
+                    saveStatsStateToUrl();
+                    renderStatisticsTable();
+                }
+            });
+
+            // Initialize end date picker
+            endDatePicker = flatpickr("#statsEndDate", {
+                dateFormat: "Y-m-d",
+                defaultDate: endDateDefault,
+                theme: "dark",
+                allowInput: true,
+                onChange: function(selectedDates, dateStr, instance) {
+                    saveStatsStateToUrl();
+                    renderStatisticsTable();
+                }
+            });
+        }
+
+        function renderStatisticsTable() {
+            const startDateVal = $('#statsStartDate').val();
+            const endDateVal = $('#statsEndDate').val();
+
+            // Don't render if dates aren't set yet
+            if (!startDateVal || !endDateVal) return;
+
+            const startDate = new Date(startDateVal);
+            const endDate = new Date(endDateVal);
+            const ratingType = $('#statsRating').val();
+
+            // Get all riders and their records within the date range
+            const riderStats = {};
+
+            Object.keys(appData.riders).forEach(riderName => {
+                const records = appData.riders[riderName].filter(record => {
+                    const recordDate = new Date(record.Date);
+                    return recordDate >= startDate && recordDate <= endDate;
+                });
+
+                if (records.length === 0) return;
+
+                // Calculate rating values for each record
+                const ratings = records.map(record => {
+                    if (ratingType === 'conservative') {
+                        return getConservative(record.Mean, record.StdDev);
+                    } else if (ratingType === 'mean') {
+                        return record.Mean;
+                    } else {
+                        return getOptimistic(record.Mean, record.StdDev);
+                    }
+                });
+
+                // Basic statistics
+                const lowest = Math.min(...ratings);
+                const highest = Math.max(...ratings);
+                const average = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+
+                // Median
+                const sortedRatings = [...ratings].sort((a, b) => a - b);
+                const median = sortedRatings.length % 2 === 0
+                    ? (sortedRatings[sortedRatings.length / 2 - 1] + sortedRatings[sortedRatings.length / 2]) / 2
+                    : sortedRatings[Math.floor(sortedRatings.length / 2)];
+
+                // Years
+                const years = records.map(r => new Date(r.Date).getFullYear());
+                const earliestYear = Math.min(...years);
+                const latestYear = Math.max(...years);
+
+                // Season average calculation
+                let bestSeasonAvg = -Infinity;
+                let bestSeasonYear = null;
+
+                // Group records by year
+                const recordsByYear = {};
+                records.forEach(record => {
+                    const year = new Date(record.Date).getFullYear();
+                    if (!recordsByYear[year]) {
+                        recordsByYear[year] = [];
+                    }
+                    recordsByYear[year].push(record);
+                });
+
+                // Get all dates in the date range for calculating possible races per year
+                const allDatesInRange = new Set();
+                appData.rawData.forEach(record => {
+                    if (record.Type === 'Rider') {
+                        const recordDate = new Date(record.Date);
+                        if (recordDate >= startDate && recordDate <= endDate) {
+                            allDatesInRange.add(record.Date);
+                        }
+                    }
+                });
+
+                // Group all dates by year to calculate possible races per year
+                const datesByYear = {};
+                allDatesInRange.forEach(date => {
+                    const year = new Date(date).getFullYear();
+                    if (!datesByYear[year]) {
+                        datesByYear[year] = [];
+                    }
+                    datesByYear[year].push(date);
+                });
+
+                // Calculate best season average
+                Object.keys(recordsByYear).forEach(year => {
+                    const yearRecords = recordsByYear[year];
+                    const possibleRaces = datesByYear[year]?.length || 0;
+                    const requiredRaces = Math.ceil(possibleRaces / 3);
+
+                    if (yearRecords.length >= requiredRaces) {
+                        const yearRatings = yearRecords.map(record => {
+                            if (ratingType === 'conservative') {
+                                return getConservative(record.Mean, record.StdDev);
+                            } else if (ratingType === 'mean') {
+                                return record.Mean;
+                            } else {
+                                return getOptimistic(record.Mean, record.StdDev);
+                            }
+                        });
+
+                        const yearAvg = yearRatings.reduce((a, b) => a + b, 0) / yearRatings.length;
+
+                        if (yearAvg > bestSeasonAvg) {
+                            bestSeasonAvg = yearAvg;
+                            bestSeasonYear = year;
+                        }
+                    }
+                });
+
+                // Check if rider has a rating in the most recent year
+                const hasRecentRating = records.some(record => {
+                    return new Date(record.Date).getFullYear() === mostRecentRatingYear;
+                });
+
+                riderStats[riderName] = {
+                    name: riderName,
+                    years: `${earliestYear}-${latestYear}`,
+                    races: records.length,
+                    lowest: lowest,
+                    highest: highest,
+                    average: average,
+                    median: median,
+                    seasonAvg: bestSeasonYear ? bestSeasonAvg : null,
+                    season: bestSeasonYear,
+                    isActive: hasRecentRating
+                };
+            });
+
+            // Sort by rider name
+            const sortedStats = Object.values(riderStats).sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
+
+            // Destroy existing DataTable if it exists
+            if ($.fn.DataTable.isDataTable('#statsTable')) {
+                $('#statsTable').DataTable().destroy();
+            }
+
+            // Render table
+            let html = '';
+            sortedStats.forEach((stat) => {
+                const rowClass = stat.isActive ? 'fw-bold' : '';
+                const activeIcon = stat.isActive ? '<span class="active-indicator"></span>' : '';
+                html += `
+                    <tr class="${rowClass}">
+                        <td></td>
+                        <td>${stat.name} ${activeIcon}</td>
+                        <td>${stat.years}</td>
+                        <td>${stat.races}</td>
+                        <td>${stat.lowest.toFixed(2)}</td>
+                        <td>${stat.highest.toFixed(2)}</td>
+                        <td>${stat.average.toFixed(2)}</td>
+                        <td>${stat.median.toFixed(2)}</td>
+                        <td>${stat.seasonAvg !== null ? stat.seasonAvg.toFixed(2) : 'N/A'}</td>
+                        <td>${stat.season !== null ? stat.season : 'N/A'}</td>
+                    </tr>
+                `;
+            });
+
+            $('#statsTableBody').html(html);
+
+            // Initialize DataTables with default sort by Highest column (index 5) descending
+            const table = $('#statsTable').DataTable({
+                order: [[5, 'desc']], // Sort by Highest column
+                pageLength: 25,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                columnDefs: [
+                    {
+                        targets: 0, // # column
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                language: {
+                    search: "Search riders:",
+                    lengthMenu: "Show _MENU_ riders per page",
+                    info: "Showing _START_ to _END_ of _TOTAL_ riders",
+                    infoEmpty: "No riders to display",
+                    infoFiltered: "(filtered from _MAX_ total riders)"
+                },
+                drawCallback: function(settings) {
+                    // Update row numbers based on current display order
+                    const api = this.api();
+                    const start = api.page.info().start;
+                    api.column(0, {page: 'current'}).nodes().each(function(cell, i) {
+                        cell.innerHTML = start + i + 1;
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
