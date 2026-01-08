@@ -1,0 +1,214 @@
+<div class="container mb-3">
+    <div class="row row-cols-1">
+        <div class="col text-center mt-3">
+            <a href="#intro-col" class="btn btn-sm btn-success m-1"><i class="fas fa-play"></i> Introduction</a>
+            <a href="#install-col" class="btn btn-sm btn-success m-1"><i class="fas fa-download"></i> Installation</a>
+            <a href="#usage-col" class="btn btn-sm btn-info m-1"><i class="fas fa-book"></i> Usage</a>
+            <a href="#formats-col" class="btn btn-sm btn-info m-1"><i class="fas fa-file-export"></i> Formats</a>
+            <a href="#setting-col" class="btn btn-sm btn-info m-1"><i class="fas fa-cog"></i> Settings</a>
+            <a href="#uninst-col" class="btn btn-sm btn-danger m-1"><i class="fas fa-trash-alt"></i> Uninstallation</a>
+        </div>
+        <div class="col">
+            <div class="card border-dark bg-dark mt-3">
+                <img src="img/listexporter/background.jpg" class="card-img rounded">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <div class="row plugin-heading-text">
+                        <div class="col-12 p-2 text-center">
+                            <h1 class="vw-10 em-sm-8 em-md-10 em-lg-12 em-xl-16 em-xxl-20 mb-0 text-white">List Exporter</h1>
+                            <h1 class="vw-5 em-sm-4 em-md-5 em-lg-6 em-xl-8 em-xxl-10 mb-0 text-white">for Mod Organizer 2</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="intro-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-play"></i> Introduction</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        List Exporter is a plugin for Mod Organizer 2 that exports your mod list to various formats for sharing or documentation purposes.
+                    </p>
+                    <p>
+                        Some of the things you can do with List Exporter:
+                    </p>
+                    <ul>
+                        <li>Export your mod list to HTML, Markdown, CSV, or JSON formats.</li>
+                        <li>Include mods from multiple profiles in a single export.</li>
+                        <li>Organize exports by category using your existing separators.</li>
+                        <li>Choose which columns to include and customize their order.</li>
+                        <li>Automatically generate NexusMods links for mods with valid mod IDs.</li>
+                        <li>Exclude specific mods from exports using a simple tag.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="install-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-download"></i> Installation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To install List Exporter, you will first need to download it from the Github releases page. Make sure to download the latest version.
+                    </p>
+                    <p>
+                        <a href="https://github.com/Kezyma/ModOrganizer-Plugins/releases/tag/listexporter" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Github</a>
+                    </p>
+                    <p>
+                        Once you've downloaded the List Exporter zip file, extract the <code>listexporter</code> folder and place it in the Mod Organizer plugins folder. If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then the plugins folder is located at <code>C:\Mod Organizer\plugins\</code>
+                    </p>
+                    <p>
+                        If you have done this correctly, inside <code>C:\Mod Organizer\plugins\listexporter\</code> you should find two folders, <code>shared</code> and <code>listexporter</code> as well as a file called <code>__init__.py</code>
+                    </p>
+                    <p>
+                        List Exporter is now installed and will start the next time you run Mod Organizer.
+                    </p>
+                    <p>
+                        Alternatively, if you have Plugin Finder installed, you can install List Exporter directly from within Mod Organizer.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="usage-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-book"></i> Usage</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        List Exporter can be opened through a new link added to Mod Organizer's tools menu.
+                    </p>
+                    <h6>Export Format</h6>
+                    <p>
+                        Select the format for your export using the radio buttons at the top. Each format has different use cases:
+                    </p>
+                    <ul>
+                        <li><strong>HTML</strong> - A styled web page suitable for sharing online or viewing in a browser.</li>
+                        <li><strong>Markdown</strong> - Plain text tables ideal for GitHub, Discord, forums, or README files.</li>
+                        <li><strong>CSV</strong> - Spreadsheet format compatible with Excel, Google Sheets, or other applications.</li>
+                        <li><strong>JSON</strong> - Structured data format for programmatic use or data processing.</li>
+                    </ul>
+                    <h6>Options</h6>
+                    <p>
+                        Enable <strong>Separate table for each category</strong> to split your export into multiple tables, one for each category defined by your separator mods. When disabled, all mods appear in a single table with a Category column.
+                    </p>
+                    <h6>Profile Selection</h6>
+                    <p>
+                        Select one or more profiles to include in the export. A mod will be included if it is enabled in <em>any</em> of the selected profiles. When multiple profiles are selected, additional columns show the enabled/disabled status for each profile.
+                    </p>
+                    <p>
+                        Use the <strong>Select All</strong> and <strong>Select None</strong> buttons to quickly manage profile selection.
+                    </p>
+                    <h6>Column Selection</h6>
+                    <p>
+                        Choose which columns to include in your export by checking or unchecking them in the column list. You can also <strong>drag columns</strong> to reorder them - the export will use the order shown in the list.
+                    </p>
+                    <p>Available columns:</p>
+                    <ul>
+                        <li><strong>Mod Name</strong> - The name of the mod, with a hyperlink to NexusMods if a mod ID is available.</li>
+                        <li><strong>Category</strong> - The category the mod belongs to (only shown when not using separate tables).</li>
+                        <li><strong>Notes</strong> - Notes from the mod's meta.ini file.</li>
+                        <li><strong>Comments</strong> - Comments from the mod's meta.ini file.</li>
+                        <li><strong>Profile columns</strong> - When multiple profiles are selected, shows enabled status per profile.</li>
+                    </ul>
+                    <h6>Excluding Mods</h6>
+                    <p>
+                        To exclude a specific mod from all exports, add <code>&lt;LE_Exclude&gt;</code> anywhere in the mod's Notes or Comments field in Mod Organizer. The tag is not case-sensitive.
+                    </p>
+                    <p>
+                        This is useful for hiding utility mods, merged patches, or other mods you don't want to appear in shared mod lists.
+                    </p>
+                    <h6>Exporting</h6>
+                    <p>
+                        Click the <strong>Export</strong> button to generate your mod list. You will be prompted to choose a save location and filename. The appropriate file extension will be added based on your selected format.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="formats-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-file-export"></i> Export Formats</h5>
+                </div>
+                <div class="card-body">
+                    <h6>HTML Export</h6>
+                    <p>
+                        Creates a complete HTML page with Bootstrap styling. The page includes a responsive table with your mod list, styled headers for categories (if using separate tables), and clickable links to NexusMods where available. This format is ideal for sharing on websites or viewing locally in a browser.
+                    </p>
+                    <h6>Markdown Export</h6>
+                    <p>
+                        Generates Markdown-formatted tables that render nicely on GitHub, GitLab, Discord, Reddit, and many forums. Category headers use Markdown heading syntax. This format is perfect for README files, wiki pages, or sharing in communities that support Markdown.
+                    </p>
+                    <h6>CSV Export</h6>
+                    <p>
+                        Produces a comma-separated values file that can be opened in Excel, Google Sheets, LibreOffice Calc, or any spreadsheet application. When using separate categories, each category is preceded by a header row. This format is useful for further data analysis or manipulation.
+                    </p>
+                    <h6>JSON Export</h6>
+                    <p>
+                        Outputs structured JSON data containing all mod information. When using separate categories, the JSON is organized by category. This format is ideal for developers who want to process the mod list programmatically or integrate it with other tools.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="setting-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cog"></i> Settings</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th colspan="1">Setting</th>
+                                <th colspan="1">Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>enabled</td>
+                                <td>true</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Determines whether List Exporter is enabled.</td>
+                            </tr>
+                            <tr>
+                                <td>defaultformat</td>
+                                <td>html</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">The default export format when opening the List Exporter dialog. Valid values are: html, markdown, csv, json.</td>
+                            </tr>
+                            <tr>
+                                <td>separatecategories</td>
+                                <td>false</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Whether to separate tables by category by default when opening the List Exporter dialog.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="uninst-col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trash-alt"></i> Uninstallation</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        To remove List Exporter from Mod Organizer, two folders need to be deleted from Mod Organizer's plugins folder: <code>listexporter</code> and <code>data\listexporter</code>. Once deleted, List Exporter will no longer be installed the next time Mod Organizer starts.
+                    </p>
+                    <p>
+                        If Mod Organizer is installed to <code>C:\Mod Organizer\</code> then these folders are located at <code>C:\Mod Organizer\plugins\listexporter\</code> and <code>C:\Mod Organizer\plugins\data\listexporter\</code>
+                    </p>
+                    <p>
+                        Alternatively, if you installed List Exporter through Plugin Finder, you can uninstall it from there.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
