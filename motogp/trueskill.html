@@ -27,6 +27,24 @@
             margin-top: 20px;
         }
 
+        .chart-resize-handle {
+            height: 8px;
+            background-color: #444;
+            cursor: ns-resize;
+            border-radius: 0 0 4px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-resize-handle::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background-color: #888;
+            border-radius: 2px;
+        }
+
         .filters {
             background-color: #303030;
             padding: 20px;
@@ -129,7 +147,6 @@
         }
 
         canvas {
-            max-height: 600px;
         }
 
         #careerChart {
@@ -295,33 +312,41 @@
         <!-- Main Content (hidden until data loads) -->
         <div id="mainContent" style="display: none;">
             <!-- Navigation Tabs -->
-            <ul class="nav nav-tabs" id="chartTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="ratings-tab" data-bs-toggle="tab" data-bs-target="#ratings" type="button" role="tab" aria-controls="ratings" aria-selected="true">
-                        Ratings
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="season-tab" data-bs-toggle="tab" data-bs-target="#season" type="button" role="tab" aria-controls="season" aria-selected="false">
-                        Season Progress
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="career-tab" data-bs-toggle="tab" data-bs-target="#career" type="button" role="tab" aria-controls="career" aria-selected="false">
-                        Career Progress
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false">
-                        Statistics
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="yearly-tab" data-bs-toggle="tab" data-bs-target="#yearly" type="button" role="tab" aria-controls="yearly" aria-selected="false">
-                        Yearly Summary
-                    </button>
-                </li>
-            </ul>
+            <div class="d-flex align-items-end">
+                <ul class="nav nav-tabs flex-grow-1 mb-0" id="chartTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="ratings-tab" data-bs-toggle="tab" data-bs-target="#ratings" type="button" role="tab" aria-controls="ratings" aria-selected="true">
+                            Ratings
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="season-tab" data-bs-toggle="tab" data-bs-target="#season" type="button" role="tab" aria-controls="season" aria-selected="false">
+                            Season Progress
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="career-tab" data-bs-toggle="tab" data-bs-target="#career" type="button" role="tab" aria-controls="career" aria-selected="false">
+                            Career Progress
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false">
+                            Statistics
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="yearly-tab" data-bs-toggle="tab" data-bs-target="#yearly" type="button" role="tab" aria-controls="yearly" aria-selected="false">
+                            Yearly Summary
+                        </button>
+                    </li>
+                    <li class="nav-item ms-3" role="presentation">
+                        <select id="ratingSystem" class="form-select form-select-sm" style="width: auto; min-width: 220px;">
+                            <option value="trueskill">TrueSkill</option>
+                            <option value="ttt">TrueSkill Through Time</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
 
             <!-- Tab Content -->
             <div class="tab-content" id="chartTabsContent">
@@ -369,9 +394,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="chart-container">
+                    <div class="chart-container" id="ratingsChartContainer">
                         <canvas id="ratingsChart"></canvas>
                     </div>
+                    <div class="chart-resize-handle" data-target="ratingsChartContainer"></div>
                 </div>
 
                 <!-- Season Progress Tab -->
@@ -406,8 +432,12 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-12">
+                            <div class="col-12 d-flex align-items-center gap-3">
                                 <button type="button" class="btn btn-secondary btn-sm" id="resetSeasonBtn">Reset Filters</button>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" id="seasonMarkers" checked>
+                                    <label class="form-check-label" for="seasonMarkers">Show Markers</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -423,9 +453,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="chart-container">
+                    <div class="chart-container" id="seasonChartContainer">
                         <canvas id="seasonChart"></canvas>
                     </div>
+                    <div class="chart-resize-handle" data-target="seasonChartContainer"></div>
                 </div>
 
                 <!-- Career Progress Tab -->
@@ -454,8 +485,12 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-12">
+                            <div class="col-12 d-flex align-items-center gap-3">
                                 <button type="button" class="btn btn-secondary btn-sm" id="resetCareerBtn">Reset Filters</button>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" id="careerMarkers" checked>
+                                    <label class="form-check-label" for="careerMarkers">Show Markers</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -467,10 +502,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="chart-container">
+                    <div class="chart-container" id="careerChartContainer">
                         <canvas id="careerChart"></canvas>
                         <p class="zoom-hint text-center">Drag to select a date range to zoom in. Pan with mouse wheel or touchpad.</p>
                     </div>
+                    <div class="chart-resize-handle" data-target="careerChartContainer"></div>
                 </div>
 
                 <!-- Statistics Tab -->
@@ -654,8 +690,36 @@
 
         function clearAllUrlParams() {
             const url = new URL(window.location);
+            const system = url.searchParams.get('system');
             url.search = '';
+            if (system) {
+                url.searchParams.set('system', system);
+            }
             window.history.replaceState({}, '', url);
+        }
+
+        // Global Chart.js plugin: fill canvas background so saved images aren't transparent
+        Chart.register({
+            id: 'customCanvasBackgroundColor',
+            beforeDraw: (chart) => {
+                const {ctx} = chart;
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-over';
+                ctx.fillStyle = '#222';
+                ctx.fillRect(0, 0, chart.width, chart.height);
+                ctx.restore();
+            }
+        });
+
+        // Rating system configuration
+        const RATING_SYSTEMS = {
+            trueskill: { file: 'MotoGP_TrueSkill_Default.csv', label: 'TrueSkill' },
+            ttt: { file: 'TTT_MotoGP_History.csv', label: 'TrueSkill Through Time' }
+        };
+
+        function getCurrentSystem() {
+            const params = getUrlParams();
+            return params.system || 'trueskill';
         }
 
         // Save tab state functions
@@ -681,14 +745,16 @@
                 seasonYear: $('#seasonYear').val(),
                 seasonType: $('#seasonType').val(),
                 seasonRating: $('#seasonRating').val(),
-                seasonEntities: selectedIndices.length > 0 ? selectedIndices.join(',') : ''
+                seasonEntities: selectedIndices.length > 0 ? selectedIndices.join(',') : '',
+                seasonMarkers: $('#seasonMarkers').is(':checked') ? 'on' : 'off'
             });
         }
 
         function saveCareerStateToUrl() {
             setUrlParams({
                 careerRating: $('#careerRating').val(),
-                careerRiders: careerState.selectedRiders.join(',')
+                careerRiders: careerState.selectedRiders.join(','),
+                careerMarkers: $('#careerMarkers').is(':checked') ? 'on' : 'off'
             });
         }
 
@@ -728,6 +794,7 @@
             $('#seasonYear').val(appData.years[0]);
             $('#seasonType').val('Rider');
             $('#seasonRating').val('mean');
+            $('#seasonMarkers').prop('checked', true);
 
             // Clear all URL params and set tab
             clearAllUrlParams();
@@ -741,6 +808,7 @@
         function resetCareerTab() {
             // Reset to defaults
             $('#careerRating').val('mean');
+            $('#careerMarkers').prop('checked', true);
             careerState.selectedRiders = [];
 
             // Clear all URL params and set tab + defaults
@@ -802,22 +870,32 @@
 
         // Initialize application
         $(document).ready(function() {
+            // Initialize rating system dropdown from URL
+            $('#ratingSystem').val(getCurrentSystem());
             loadCSV();
         });
 
         // CSV Loading and Parsing
         async function loadCSV() {
             try {
-                const response = await fetch('MotoGP_TrueSkill_Default.csv');
+                const system = getCurrentSystem();
+                const csvFile = RATING_SYSTEMS[system].file;
+                const response = await fetch(csvFile);
                 const csvText = await response.text();
                 parseCSV(csvText);
                 buildIndexes();
                 initializeUI();
                 $('#loading').hide();
                 $('#mainContent').show();
+
+                // Update page title to reflect current system
+                const label = RATING_SYSTEMS[system].label;
+                $('h1').text('MotoGP ' + label + ' Ratings');
+                document.title = 'MotoGP ' + label + ' Ratings';
             } catch (error) {
                 console.error('Error loading CSV:', error);
-                $('#loading').html('<div class="alert alert-danger">Error loading data. Please make sure MotoGP_TrueSkill_Default.csv is in the same directory.</div>');
+                const csvFile = RATING_SYSTEMS[getCurrentSystem()].file;
+                $('#loading').html('<div class="alert alert-danger">Error loading data. Please make sure ' + csvFile + ' is in the same directory.</div>');
             }
         }
 
@@ -843,8 +921,89 @@
                 record.Id = parseInt(record.Id);
                 record.Order = parseInt(record.Order);
 
+                // Normalize date format: convert DD/MM/YYYY HH:MM:SS to YYYY-MM-DD
+                if (record.Date && record.Date.includes('/')) {
+                    const datePart = record.Date.split(' ')[0];
+                    const parts = datePart.split('/');
+                    if (parts.length === 3) {
+                        record.Date = parts[2] + '-' + parts[1].padStart(2, '0') + '-' + parts[0].padStart(2, '0');
+                    }
+                }
+
                 appData.rawData.push(record);
             }
+        }
+
+        function resetAppData() {
+            appData.rawData = [];
+            appData.years = [];
+            appData.riders = {};
+            appData.bikes = {};
+            appData.yearData = {};
+            appData.allRiderNames = [];
+            appData.ridersByPeakRating = [];
+
+            // Destroy existing chart instances
+            if (ratingsChartInstance) {
+                ratingsChartInstance.destroy();
+                ratingsChartInstance = null;
+            }
+            if (seasonChartInstance) {
+                seasonChartInstance.destroy();
+                seasonChartInstance = null;
+            }
+            if (careerChartInstance) {
+                careerChartInstance.destroy();
+                careerChartInstance = null;
+            }
+
+            // Reset career state
+            careerState.selectedRiders = [];
+
+            // Destroy Flatpickr instances
+            if (startDatePicker) {
+                startDatePicker.destroy();
+                startDatePicker = null;
+            }
+            if (endDatePicker) {
+                endDatePicker.destroy();
+                endDatePicker = null;
+            }
+
+            // Destroy DataTables if they exist
+            if ($.fn.DataTable.isDataTable('#statsTable')) {
+                $('#statsTable').DataTable().destroy();
+                $('#statsTable tbody').empty();
+            }
+            if ($.fn.DataTable.isDataTable('#yearlyTable')) {
+                $('#yearlyTable').DataTable().destroy();
+                $('#yearlyTable tbody').empty();
+            }
+        }
+
+        async function switchRatingSystem(system) {
+            // Show loading indicator
+            $('#mainContent').hide();
+            $('#loading').show();
+            $('#loading').html(
+                '<div class="spinner-border text-primary" role="status">' +
+                '<span class="visually-hidden">Loading...</span>' +
+                '</div>' +
+                '<p class="mt-3">Loading ' + RATING_SYSTEMS[system].label + ' data...</p>'
+            );
+
+            // Reset all data and UI
+            resetAppData();
+
+            // Update system in URL, preserve all other params (filters, tab)
+            if (system !== 'trueskill') {
+                setUrlParam('system', system);
+            } else {
+                setUrlParam('system', '');
+            }
+
+            // Load new data
+            await loadCSV();
         }
 
         function buildIndexes() {
@@ -1111,16 +1270,23 @@
         }
 
         // Initialize UI
+        let handlersInitialized = false;
         function initializeUI() {
             populateYearDropdowns();
             populateRatingsDates();
-            setupEventHandlers();
+            if (!handlersInitialized) {
+                setupEventHandlers();
+                handlersInitialized = true;
+            }
             loadStateFromUrl();
             updateSelectedRidersDisplay(); // Initialize career chart message
         }
 
         function loadStateFromUrl() {
             const params = getUrlParams();
+
+            // Ensure rating system dropdown matches URL
+            $('#ratingSystem').val(params.system || 'trueskill');
 
             // Load tab
             const tab = params.tab || 'ratings';
@@ -1151,12 +1317,14 @@
                 if (params.seasonYear) $('#seasonYear').val(params.seasonYear);
                 if (params.seasonType) $('#seasonType').val(params.seasonType);
                 if (params.seasonRating) $('#seasonRating').val(params.seasonRating);
+                if (params.seasonMarkers === 'off') $('#seasonMarkers').prop('checked', false);
                 populateSeasonEntitySelector();
                 saveSeasonStateToUrl();
                 renderSeasonChart();
             } else if (tab === 'career') {
                 // Load Career tab state
                 if (params.careerRating) $('#careerRating').val(params.careerRating);
+                if (params.careerMarkers === 'off') $('#careerMarkers').prop('checked', false);
                 if (params.careerRiders) {
                     const riders = params.careerRiders.split(',').filter(r => r.trim());
                     riders.forEach(rider => {
@@ -1357,6 +1525,49 @@
                 renderYearlyTable();
             });
 
+            // Rating system dropdown
+            $('#ratingSystem').on('change', function() {
+                switchRatingSystem($(this).val());
+            });
+
+            // Marker toggles
+            $('#seasonMarkers').on('change', function() {
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+            $('#careerMarkers').on('change', function() {
+                saveCareerStateToUrl();
+                renderCareerChart();
+            });
+
+            // Chart resize handles
+            $('.chart-resize-handle').on('mousedown', function(e) {
+                e.preventDefault();
+                const handle = $(this);
+                const targetId = handle.data('target');
+                const container = $('#' + targetId);
+                const startY = e.clientY;
+                const startHeight = container.height();
+
+                function onMouseMove(e) {
+                    const newHeight = Math.max(200, startHeight + (e.clientY - startY));
+                    container.css('height', newHeight + 'px');
+                }
+                function onMouseUp() {
+                    $(document).off('mousemove', onMouseMove);
+                    $(document).off('mouseup', onMouseUp);
+                    if (targetId === 'ratingsChartContainer' && ratingsChartInstance) {
+                        ratingsChartInstance.resize();
+                    } else if (targetId === 'seasonChartContainer' && seasonChartInstance) {
+                        seasonChartInstance.resize();
+                    } else if (targetId === 'careerChartContainer' && careerChartInstance) {
+                        careerChartInstance.resize();
+                    }
+                }
+                $(document).on('mousemove', onMouseMove);
+                $(document).on('mouseup', onMouseUp);
+            });
+
             // Reset button event handlers
             $('#resetRatingsBtn').on('click', resetRatingsTab);
             $('#resetSeasonBtn').on('click', resetSeasonTab);
@@ -1449,7 +1660,7 @@
 
                     ctx.save();
                     ctx.textBaseline = 'middle';
-                    ctx.font = 'bold 10px sans-serif';
+                    ctx.font = '12px sans-serif';
 
                     // Draw vertical lines and values for each rating point
                     displayData.forEach((d, index) => {
@@ -1506,7 +1717,7 @@
                     });
 
                     // Draw changes to the right of the bar
-                    ctx.font = 'bold 11px sans-serif';
+                    ctx.font = '12px sans-serif';
                     ctx.textAlign = 'left';
 
                     changes.forEach((change, index) => {
@@ -1862,7 +2073,7 @@
                         borderColor: colors[index],
                         backgroundColor: colors[index],
                         tension: 0.1,
-                        pointRadius: 3,
+                        pointRadius: $('#seasonMarkers').is(':checked') ? 3 : 0,
                         pointHoverRadius: 5
                     });
                 }
@@ -2060,7 +2271,7 @@
                     borderColor: colors[index],
                     backgroundColor: colors[index],
                     tension: 0.2,
-                    pointRadius: 2,
+                    pointRadius: $('#careerMarkers').is(':checked') ? 2 : 0,
                     pointHoverRadius: 5
                 });
             });
