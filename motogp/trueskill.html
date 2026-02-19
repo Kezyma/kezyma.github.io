@@ -339,7 +339,15 @@
                             Yearly Summary
                         </button>
                     </li>
-                    <li class="nav-item ms-3" role="presentation">
+                    <li class="nav-item ms-auto" role="presentation">
+                        <select id="seriesSelect" class="form-select form-select-sm" style="width: auto; min-width: 130px;">
+                            <option value="MotoGP">MotoGP</option>
+                            <option value="Moto2">Moto2</option>
+                            <option value="Moto3">Moto3</option>
+                            <option value="WSBK">WSBK</option>
+                        </select>
+                    </li>
+                    <li class="nav-item ms-2" role="presentation">
                         <select id="ratingSystem" class="form-select form-select-sm" style="width: auto; min-width: 220px;">
                             <option value="trueskill">TrueSkill</option>
                             <option value="ttt">TrueSkill Through Time</option>
@@ -691,10 +699,10 @@
         function clearAllUrlParams() {
             const url = new URL(window.location);
             const system = url.searchParams.get('system');
+            const series = url.searchParams.get('series');
             url.search = '';
-            if (system) {
-                url.searchParams.set('system', system);
-            }
+            if (system) url.searchParams.set('system', system);
+            if (series) url.searchParams.set('series', series);
             window.history.replaceState({}, '', url);
         }
 
@@ -711,15 +719,26 @@
             }
         });
 
-        // Rating system configuration
-        const RATING_SYSTEMS = {
-            trueskill: { file: 'MotoGP_TrueSkill_Default.csv', label: 'TrueSkill' },
-            ttt: { file: 'TTT_MotoGP_History.csv', label: 'TrueSkill Through Time' }
-        };
-
+        // Rating system and series configuration
         function getCurrentSystem() {
             const params = getUrlParams();
             return params.system || 'trueskill';
+        }
+
+        function getCurrentSeries() {
+            const params = getUrlParams();
+            return params.series || 'MotoGP';
+        }
+
+        function getCsvFile(series, system) {
+            if (system === 'ttt') {
+                return 'TTT_' + series + '_History.csv';
+            }
+            return series + '_TrueSkill_Default.csv';
+        }
+
+        function getSystemLabel(system) {
+            return system === 'ttt' ? 'TrueSkill Through Time' : 'TrueSkill';
         }
 
         // Save tab state functions
@@ -870,7 +889,8 @@
 
         // Initialize application
         $(document).ready(function() {
-            // Initialize rating system dropdown from URL
+            // Initialize dropdowns from URL
+            $('#seriesSelect').val(getCurrentSeries());
             $('#ratingSystem').val(getCurrentSystem());
             loadCSV();
         });
@@ -879,7 +899,8 @@
         async function loadCSV() {
             try {
                 const system = getCurrentSystem();
-                const csvFile = RATING_SYSTEMS[system].file;
+                const series = getCurrentSeries();
+                const csvFile = getCsvFile(series, system);
                 const response = await fetch(csvFile);
                 const csvText = await response.text();
                 parseCSV(csvText);
@@ -888,13 +909,18 @@
                 $('#loading').hide();
                 $('#mainContent').show();
 
-                // Update page title to reflect current system
-                const label = RATING_SYSTEMS[system].label;
-                $('h1').text('MotoGP ' + label + ' Ratings');
-                document.title = 'MotoGP ' + label + ' Ratings';
+                // Resize charts after container becomes visible
+                if (ratingsChartInstance) ratingsChartInstance.resize();
+                if (seasonChartInstance) seasonChartInstance.resize();
+                if (careerChartInstance) careerChartInstance.resize();
+
+                // Update page title to reflect current series and system
+                const systemLabel = getSystemLabel(system);
+                $('h1').text(series + ' ' + systemLabel + ' Ratings');
+                document.title = series + ' ' + systemLabel + ' Ratings';
             } catch (error) {
                 console.error('Error loading CSV:', error);
-                const csvFile = RATING_SYSTEMS[getCurrentSystem()].file;
+                const csvFile = getCsvFile(getCurrentSeries(), getCurrentSystem());
                 $('#loading').html('<div class="alert alert-danger">Error loading data. Please make sure ' + csvFile + ' is in the same directory.</div>');
             }
         }
@@ -989,7 +1015,7 @@
                 '<div class="spinner-border text-primary" role="status">' +
                 '<span class="visually-hidden">Loading...</span>' +
                 '</div>' +
-                '<p class="mt-3">Loading ' + RATING_SYSTEMS[system].label + ' data...</p>'
+                '<p class="mt-3">Loading ' + getSystemLabel(system) + ' data...</p>'
             );
 
             // Reset all data and UI
@@ -1000,6 +1026,31 @@
                 setUrlParam('system', system);
             } else {
                 setUrlParam('system', '');
+            }
+
+            // Load new data
+            await loadCSV();
+        }
+
+        async function switchSeries(series) {
+            // Show loading indicator
+            $('#mainContent').hide();
+            $('#loading').show();
+            $('#loading').html(
+                '<div class="spinner-border text-primary" role="status">' +
+                '<span class="visually-hidden">Loading...</span>' +
+                '</div>' +
+                '<p class="mt-3">Loading ' + series + ' data...</p>'
+            );
+
+            // Reset all data and UI
+            resetAppData();
+
+            // Update series in URL, preserve all other params (filters, tab)
+            if (series !== 'MotoGP') {
+                setUrlParam('series', series);
+            } else {
+                setUrlParam('series', '');
             }
 
             // Load new data
@@ -1285,7 +1336,8 @@
         function loadStateFromUrl() {
             const params = getUrlParams();
 
-            // Ensure rating system dropdown matches URL
+            // Ensure series and rating system dropdowns match URL
+            $('#seriesSelect').val(params.series || 'MotoGP');
             $('#ratingSystem').val(params.system || 'trueskill');
 
             // Load tab
@@ -1309,6 +1361,8 @@
                     populateRatingsDates(); // Repopulate dates if year or type changed
                 }
                 if (params.ratingsDate) $('#ratingsDate').val(params.ratingsDate);
+                // Fall back to first date if the requested date doesn't exist in this dataset
+                if (!$('#ratingsDate').val()) $('#ratingsDate').prop('selectedIndex', 0);
                 if (params.ratingsSort) $('#ratingsSort').val(params.ratingsSort);
                 saveRatingsStateToUrl();
                 renderRatingsChart();
@@ -1523,6 +1577,11 @@
             $('#yearlyRating, #yearlyValue').on('change', function() {
                 saveYearlyStateToUrl();
                 renderYearlyTable();
+            });
+
+            // Series dropdown
+            $('#seriesSelect').on('change', function() {
+                switchSeries($(this).val());
             });
 
             // Rating system dropdown
