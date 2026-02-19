@@ -1539,7 +1539,7 @@
 
             // Close autocomplete when clicking outside
             $(document).on('click', function(e) {
-                if (!$(e.target).closest('.search-container').length) {
+                if (!$(e.target).closest('#autocompleteList, #careerRiderSearch, #addRiderBtn').length) {
                     $('#autocompleteList').hide();
                 }
             });
