@@ -397,8 +397,12 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-12">
+                            <div class="col-12 d-flex align-items-center gap-3">
                                 <button type="button" class="btn btn-secondary btn-sm" id="resetRatingsBtn">Reset Filters</button>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" id="ratingsZero">
+                                    <label class="form-check-label" for="ratingsZero">Start at Zero</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -445,6 +449,10 @@
                                 <div class="form-check form-switch mb-0">
                                     <input class="form-check-input" type="checkbox" id="seasonMarkers" checked>
                                     <label class="form-check-label" for="seasonMarkers">Show Markers</label>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" id="seasonZero">
+                                    <label class="form-check-label" for="seasonZero">Start at Zero</label>
                                 </div>
                             </div>
                         </div>
@@ -498,6 +506,10 @@
                                 <div class="form-check form-switch mb-0">
                                     <input class="form-check-input" type="checkbox" id="careerMarkers" checked>
                                     <label class="form-check-label" for="careerMarkers">Show Markers</label>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" id="careerZero">
+                                    <label class="form-check-label" for="careerZero">Start at Zero</label>
                                 </div>
                             </div>
                         </div>
@@ -749,7 +761,8 @@
                 ratingsYear: $('#ratingsYear').val(),
                 ratingsType: $('#ratingsType').val(),
                 ratingsDate: $('#ratingsDate').val(),
-                ratingsSort: $('#ratingsSort').val()
+                ratingsSort: $('#ratingsSort').val(),
+                ratingsZero: $('#ratingsZero').is(':checked') ? 'on' : 'off'
             });
         }
 
@@ -767,7 +780,8 @@
                 seasonType: $('#seasonType').val(),
                 seasonRating: $('#seasonRating').val(),
                 seasonEntities: selectedIndices.length > 0 ? selectedIndices.join(',') : '',
-                seasonMarkers: $('#seasonMarkers').is(':checked') ? 'on' : 'off'
+                seasonMarkers: $('#seasonMarkers').is(':checked') ? 'on' : 'off',
+                seasonZero: $('#seasonZero').is(':checked') ? 'on' : 'off'
             });
         }
 
@@ -775,7 +789,8 @@
             setUrlParams({
                 careerRating: $('#careerRating').val(),
                 careerRiders: careerState.selectedRiders.join(','),
-                careerMarkers: $('#careerMarkers').is(':checked') ? 'on' : 'off'
+                careerMarkers: $('#careerMarkers').is(':checked') ? 'on' : 'off',
+                careerZero: $('#careerZero').is(':checked') ? 'on' : 'off'
             });
         }
 
@@ -1373,6 +1388,7 @@
                 // Fall back to first date if the requested date doesn't exist in this dataset
                 if (!$('#ratingsDate').val()) $('#ratingsDate').prop('selectedIndex', 0);
                 if (params.ratingsSort) $('#ratingsSort').val(params.ratingsSort);
+                if (params.ratingsZero === 'on') $('#ratingsZero').prop('checked', true);
                 saveRatingsStateToUrl();
                 renderRatingsChart();
             } else if (tab === 'season') {
@@ -1381,6 +1397,7 @@
                 if (params.seasonType) $('#seasonType').val(params.seasonType);
                 if (params.seasonRating) $('#seasonRating').val(params.seasonRating);
                 if (params.seasonMarkers === 'off') $('#seasonMarkers').prop('checked', false);
+                if (params.seasonZero === 'on') $('#seasonZero').prop('checked', true);
                 populateSeasonEntitySelector();
                 saveSeasonStateToUrl();
                 renderSeasonChart();
@@ -1388,6 +1405,7 @@
                 // Load Career tab state
                 if (params.careerRating) $('#careerRating').val(params.careerRating);
                 if (params.careerMarkers === 'off') $('#careerMarkers').prop('checked', false);
+                if (params.careerZero === 'on') $('#careerZero').prop('checked', true);
                 if (params.careerRiders) {
                     const riders = params.careerRiders.split(',').filter(r => r.trim());
                     riders.forEach(rider => {
@@ -1606,6 +1624,20 @@
                 renderSeasonChart();
             });
             $('#careerMarkers').on('change', function() {
+                saveCareerStateToUrl();
+                renderCareerChart();
+            });
+
+            // Start at Zero toggles
+            $('#ratingsZero').on('change', function() {
+                saveRatingsStateToUrl();
+                renderRatingsChart();
+            });
+            $('#seasonZero').on('change', function() {
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+            $('#careerZero').on('change', function() {
                 saveCareerStateToUrl();
                 renderCareerChart();
             });
@@ -1947,7 +1979,7 @@
                     },
                     scales: {
                         x: {
-                            beginAtZero: false,
+                            beginAtZero: $('#ratingsZero').is(':checked'),
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
@@ -2203,7 +2235,7 @@
                             }
                         },
                         y: {
-                            beginAtZero: false,
+                            beginAtZero: $('#seasonZero').is(':checked'),
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
@@ -2421,7 +2453,7 @@
                             }
                         },
                         y: {
-                            beginAtZero: false,
+                            beginAtZero: $('#careerZero').is(':checked'),
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
