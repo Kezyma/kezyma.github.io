@@ -616,6 +616,8 @@
                                     <th>Rating</th>
                                     <th>Best Bike</th>
                                     <th>Rating</th>
+                                    <th>Best Combined</th>
+                                    <th>Rating</th>
                                 </tr>
                             </thead>
                             <tbody id="yearlyTableBody">
@@ -870,6 +872,9 @@
             renderYearlyTable();
         }
 
+        // Guard flag to prevent tab event handler from firing during state loading
+        let isLoadingState = false;
+
         // Chart instances
         let ratingsChartInstance = null;
         let seasonChartInstance = null;
@@ -947,12 +952,15 @@
                 record.Id = parseInt(record.Id);
                 record.Order = parseInt(record.Order);
 
-                // Normalize date format: convert DD/MM/YYYY HH:MM:SS to YYYY-MM-DD
+                // Normalize date format: convert DD/MM/YYYY HH:MM:SS to YYYY-MM-DD and add 1 day to align with TrueSkill dates
                 if (record.Date && record.Date.includes('/')) {
                     const datePart = record.Date.split(' ')[0];
                     const parts = datePart.split('/');
                     if (parts.length === 3) {
-                        record.Date = parts[2] + '-' + parts[1].padStart(2, '0') + '-' + parts[0].padStart(2, '0');
+                        const d = new Date(parts[2], parts[1] - 1, parseInt(parts[0]) + 1);
+                        record.Date = d.getFullYear() + '-' +
+                            String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                            String(d.getDate()).padStart(2, '0');
                     }
                 }
 
@@ -1334,6 +1342,7 @@
         }
 
         function loadStateFromUrl() {
+            isLoadingState = true;
             const params = getUrlParams();
 
             // Ensure series and rating system dropdowns match URL
@@ -1402,6 +1411,7 @@
                 saveYearlyStateToUrl();
                 renderYearlyTable();
             }
+            isLoadingState = false;
         }
 
         function populateYearDropdowns() {
@@ -1531,6 +1541,7 @@
 
             // Tab change events
             $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+                if (isLoadingState) return;
                 const targetId = $(e.target).attr('data-bs-target');
                 const tabName = targetId.substring(1); // Remove # prefix
 
@@ -1672,19 +1683,25 @@
 
             // Sort based on selected criterion
             dataWithValues.sort((a, b) => {
+                let diff;
                 switch(sortBy) {
                     case 'conservative':
-                        return b.conservative - a.conservative;
+                        diff = b.conservative - a.conservative;
+                        break;
                     case 'optimistic':
-                        return b.optimistic - a.optimistic;
+                        diff = b.optimistic - a.optimistic;
+                        break;
                     case 'change':
                         const changeA = a.change !== null ? a.change : -Infinity;
                         const changeB = b.change !== null ? b.change : -Infinity;
-                        return changeB - changeA;
+                        diff = changeB - changeA;
+                        break;
                     case 'mean':
                     default:
-                        return b.mean - a.mean;
+                        diff = b.mean - a.mean;
+                        break;
                 }
+                return diff !== 0 ? diff : a.Name.localeCompare(b.Name);
             });
 
             // Take top 30 (or all if less)
@@ -2764,6 +2781,41 @@
                     bikeValues[bikeName] = value;
                 });
 
+                // Calculate combined (rider+bike) values based on valueType
+                const combinedValues = {};
+                Object.keys(riders).forEach(riderName => {
+                    const riderRecords = riders[riderName];
+                    if (riderRecords.length < requiredDates) return;
+
+                    const combinedRecords = [];
+                    riderRecords.forEach(riderRecord => {
+                        if (riderRecord.Bike) {
+                            const bikeRecords = bikes[riderRecord.Bike];
+                            if (bikeRecords) {
+                                const bikeRecord = bikeRecords.find(b => b.Date === riderRecord.Date);
+                                if (bikeRecord) {
+                                    combinedRecords.push(combineRatings(riderRecord, bikeRecord));
+                                }
+                            }
+                        }
+                    });
+
+                    if (combinedRecords.length < requiredDates) return;
+
+                    let value;
+                    if (valueType === 'final') {
+                        const lastRecord = combinedRecords[combinedRecords.length - 1];
+                        value = getRatingValue(lastRecord, ratingType);
+                    } else if (valueType === 'best') {
+                        value = Math.max(...combinedRecords.map(r => getRatingValue(r, ratingType)));
+                    } else {
+                        const ratings = combinedRecords.map(r => getRatingValue(r, ratingType));
+                        value = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                    }
+
+                    combinedValues[riderName] = { value, name: combinedRecords[combinedRecords.length - 1].Name };
+                });
+
                 // Sort riders by value
                 const sortedRiders = Object.keys(riderValues)
                     .map(name => ({ name, value: riderValues[name] }))
@@ -2774,14 +2826,21 @@
                     .map(name => ({ name, value: bikeValues[name] }))
                     .sort((a, b) => b.value - a.value);
 
-                // Get top 3 riders and best bike
+                // Sort combined by value
+                const sortedCombined = Object.keys(combinedValues)
+                    .map(key => ({ name: combinedValues[key].name, value: combinedValues[key].value }))
+                    .sort((a, b) => b.value - a.value);
+
+                // Get top 3 riders, best bike, and best combined
                 const top3Riders = sortedRiders.slice(0, 3);
                 const bestBike = sortedBikes.length > 0 ? sortedBikes[0] : null;
+                const bestCombined = sortedCombined.length > 0 ? sortedCombined[0] : null;
 
                 yearlyData.push({
                     year,
                     riders: top3Riders,
-                    bike: bestBike
+                    bike: bestBike,
+                    combined: bestCombined
                 });
             });
 
@@ -2800,6 +2859,7 @@
                 const rider2 = data.riders[1] || null;
                 const rider3 = data.riders[2] || null;
                 const bike = data.bike;
+                const combined = data.combined;
 
                 html += `
                     <tr>
@@ -2812,6 +2872,8 @@
                         <td>${rider3 ? rider3.value.toFixed(2) : 'N/A'}</td>
                         <td>${bike ? removeBikeYear(bike.name) : 'N/A'}</td>
                         <td>${bike ? bike.value.toFixed(2) : 'N/A'}</td>
+                        <td>${combined ? combined.name : 'N/A'}</td>
+                        <td>${combined ? combined.value.toFixed(2) : 'N/A'}</td>
                     </tr>
                 `;
             });
