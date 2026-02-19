@@ -348,6 +348,12 @@
                         </select>
                     </li>
                     <li class="nav-item ms-2" role="presentation">
+                        <select id="sessionSelect" class="form-select form-select-sm" style="width: auto; min-width: 130px;">
+                            <option value="race">Race</option>
+                            <option value="qualifying">Qualifying</option>
+                        </select>
+                    </li>
+                    <li class="nav-item ms-2" role="presentation">
                         <select id="ratingSystem" class="form-select form-select-sm" style="width: auto; min-width: 220px;">
                             <option value="trueskill">TrueSkill</option>
                             <option value="ttt">TrueSkill Through Time</option>
@@ -714,9 +720,11 @@
             const url = new URL(window.location);
             const system = url.searchParams.get('system');
             const series = url.searchParams.get('series');
+            const session = url.searchParams.get('session');
             url.search = '';
             if (system) url.searchParams.set('system', system);
             if (series) url.searchParams.set('series', series);
+            if (session) url.searchParams.set('session', session);
             window.history.replaceState({}, '', url);
         }
 
@@ -744,11 +752,18 @@
             return params.series || 'MotoGP';
         }
 
+        function getCurrentSession() {
+            const params = getUrlParams();
+            return params.session || 'race';
+        }
+
         function getCsvFile(series, system) {
+            const session = getCurrentSession();
+            const quali = session === 'qualifying' ? '_Quali' : '';
             if (system === 'ttt') {
-                return 'TTT_' + series + '_History.csv';
+                return 'TTT_' + series + quali + '_History.csv';
             }
-            return series + '_TrueSkill_Default.csv';
+            return series + quali + '_TrueSkill_Default.csv';
         }
 
         function getSystemLabel(system) {
@@ -1080,6 +1095,31 @@
             await loadCSV();
         }
 
+        async function switchSession(session) {
+            // Show loading indicator
+            $('#mainContent').hide();
+            $('#loading').show();
+            $('#loading').html(
+                '<div class="spinner-border text-primary" role="status">' +
+                '<span class="visually-hidden">Loading...</span>' +
+                '</div>' +
+                '<p class="mt-3">Loading ' + (session === 'qualifying' ? 'Qualifying' : 'Race') + ' data...</p>'
+            );
+
+            // Reset all data and UI
+            resetAppData();
+
+            // Update session in URL, preserve all other params (filters, tab)
+            if (session !== 'race') {
+                setUrlParam('session', session);
+            } else {
+                setUrlParam('session', '');
+            }
+
+            // Load new data
+            await loadCSV();
+        }
+
         function buildIndexes() {
             // Extract unique years
             const yearSet = new Set();
@@ -1360,8 +1400,9 @@
             isLoadingState = true;
             const params = getUrlParams();
 
-            // Ensure series and rating system dropdowns match URL
+            // Ensure series, session, and rating system dropdowns match URL
             $('#seriesSelect').val(params.series || 'MotoGP');
+            $('#sessionSelect').val(params.session || 'race');
             $('#ratingSystem').val(params.system || 'trueskill');
 
             // Load tab
@@ -1611,6 +1652,11 @@
             // Series dropdown
             $('#seriesSelect').on('change', function() {
                 switchSeries($(this).val());
+            });
+
+            // Session dropdown
+            $('#sessionSelect').on('change', function() {
+                switchSession($(this).val());
             });
 
             // Rating system dropdown
