@@ -16,9 +16,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 
     <style>
-        body {
-            padding-top: 20px;
-            padding-bottom: 40px;
+        :root {
+            --color-primary: #375a7f;
+            --color-border: #444;
+            --color-border-strong: #666;
+            --color-muted: #888;
+            --color-text-light: #aaa;
+            --color-bg-dark: #222;
+            --color-bg-panel: #303030;
+            --color-bg-sorted: #2a3f54;
+            --color-bg-stripe: #2b2b2b;
+            --color-success: #5cb85c;
         }
 
         .chart-container {
@@ -29,7 +37,7 @@
 
         .chart-resize-handle {
             height: 8px;
-            background-color: #444;
+            background-color: var(--color-border);
             cursor: ns-resize;
             border-radius: 0 0 4px 4px;
             display: flex;
@@ -41,12 +49,12 @@
             content: '';
             width: 40px;
             height: 3px;
-            background-color: #888;
+            background-color: var(--color-muted);
             border-radius: 2px;
         }
 
         .filters {
-            background-color: #303030;
+            background-color: var(--color-bg-panel);
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
@@ -66,32 +74,13 @@
             display: block;
         }
 
-        #loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.5rem;
-        }
-
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-        }
-
         .entity-selector {
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #444;
+            border: 1px solid var(--color-border);
             border-radius: 4px;
             padding: 10px;
-            background-color: #222;
-        }
-
-        .entity-checkbox {
-            margin-bottom: 8px;
-        }
-
-        .selected-riders {
-            margin-top: 20px;
+            background-color: var(--color-bg-dark);
         }
 
         .rider-badge {
@@ -106,17 +95,13 @@
             font-size: 0.7rem;
         }
 
-        .search-container {
-            position: relative;
-        }
-
         .autocomplete-list {
             position: absolute;
             top: 100%;
             left: 0;
             z-index: 1000;
-            background-color: #303030;
-            border: 1px solid #444;
+            background-color: var(--color-bg-panel);
+            border: 1px solid var(--color-border);
             border-radius: 4px;
             max-height: 200px;
             overflow-y: auto;
@@ -128,57 +113,30 @@
         .autocomplete-item {
             padding: 10px;
             cursor: pointer;
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid var(--color-border);
         }
 
         .autocomplete-item:hover {
-            background-color: #375a7f;
+            background-color: var(--color-primary);
         }
 
         .autocomplete-item:last-child {
             border-bottom: none;
         }
 
-        .no-data-message {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2rem;
-            color: #888;
-        }
-
-        canvas {
-        }
-
         #careerChart {
             cursor: crosshair;
-        }
-
-        .zoom-hint {
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-top: 5px;
-            font-style: italic;
         }
 
         .header-section {
             text-align: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #375a7f;
+            border-bottom: 2px solid var(--color-primary);
         }
 
-        .header-section h1 {
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .header-section p {
-            color: #aaa;
-            font-size: 1.1rem;
-        }
-
-        /* Statistics table borders */
-        #statsTable {
+        /* Shared DataTables styling */
+        .data-table {
             width: 100% !important;
         }
 
@@ -187,14 +145,27 @@
             width: 100% !important;
         }
 
-        #statsTable th,
-        #statsTable td {
-            border: 1px solid #444 !important;
+        .data-table th,
+        .data-table td {
+            border: 1px solid var(--color-border) !important;
             vertical-align: middle;
         }
 
-        #statsTable thead th {
-            border-bottom: 2px solid #666 !important;
+        .data-table thead th {
+            border-bottom: 2px solid var(--color-border-strong) !important;
+        }
+
+        .data-table thead th.sorting_asc,
+        .data-table thead th.sorting_desc {
+            background-color: var(--color-primary) !important;
+        }
+
+        .data-table tbody td.sorting_1 {
+            background-color: var(--color-bg-sorted) !important;
+        }
+
+        .data-table td[data-bar] {
+            background-image: linear-gradient(to right, rgba(40, 167, 69, 0.4) var(--bar-pct), transparent var(--bar-pct)) !important;
         }
 
         /* Active rider indicator */
@@ -202,62 +173,25 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            background-color: #5cb85c;
+            background-color: var(--color-success);
             border-radius: 50%;
             margin-left: 8px;
         }
 
-        /* Highlight sorted column in statistics table */
-        #statsTable thead th.sorting_asc,
-        #statsTable thead th.sorting_desc {
-            background-color: #375a7f !important;
-        }
-
-        #statsTable tbody td.sorting_1 {
-            background-color: #2a3f54 !important;
-        }
-
-        /* Prevent wrapping in rider name and years columns */
+        /* Stats table specific */
         #statsTable tbody td:nth-child(2),
         #statsTable tbody td:nth-child(3) {
             white-space: nowrap;
         }
 
-        /* Prevent wrapping in Season Avg. header */
         #statsTable thead th:nth-child(9) {
             white-space: nowrap;
         }
 
-        /* Make statistics table horizontally scrollable */
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Yearly table styling */
-        #yearlyTable {
-            width: 100% !important;
-        }
-
+        /* Yearly table specific */
         #yearlyTable th,
         #yearlyTable td {
-            border: 1px solid #444 !important;
-            vertical-align: middle;
             white-space: nowrap;
-        }
-
-        #yearlyTable thead th {
-            border-bottom: 2px solid #666 !important;
-        }
-
-        /* Highlight sorted column in yearly table */
-        #yearlyTable thead th.sorting_asc,
-        #yearlyTable thead th.sorting_desc {
-            background-color: #375a7f !important;
-        }
-
-        #yearlyTable tbody td.sorting_1 {
-            background-color: #2a3f54 !important;
         }
 
         /* Sticky year column */
@@ -267,43 +201,43 @@
             position: sticky;
             left: 0;
             z-index: 10;
-            border-right: 2px solid #666 !important;
+            border-right: 2px solid var(--color-border-strong) !important;
         }
 
         #yearlyTable thead th:first-child {
             z-index: 11;
-            background-color: #222 !important;
+            background-color: var(--color-bg-dark) !important;
         }
 
         #yearlyTable tbody td:first-child {
-            background-color: #303030 !important;
+            background-color: var(--color-bg-panel) !important;
         }
 
         /* Darker background for sticky column when sorting */
         #yearlyTable tbody td:first-child.sorting_1 {
-            background-color: #2a3f54 !important;
+            background-color: var(--color-bg-sorted) !important;
         }
 
         /* Stripe pattern for sticky column */
         #yearlyTable tbody tr:nth-of-type(odd) td:first-child {
-            background-color: #2b2b2b !important;
+            background-color: var(--color-bg-stripe) !important;
         }
 
         #yearlyTable tbody tr:nth-of-type(odd) td:first-child.sorting_1 {
-            background-color: #2a3f54 !important;
+            background-color: var(--color-bg-sorted) !important;
         }
     </style>
 </head>
-<body>
+<body class="pt-4 pb-5">
     <div class="container-fluid">
         <!-- Header -->
         <div class="header-section">
-            <h1>MotoGP TrueSkill Ratings</h1>
+            <h1 class="fw-bold mb-2">MotoGP TrueSkill Ratings</h1>
         </div>
 
         <!-- Loading Indicator -->
-        <div id="loading">
-            <div class="spinner-border text-primary" role="status">
+        <div id="loading" class="text-center p-5 fs-5">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
                 <span class="visually-hidden">Loading...</span>
             </div>
             <p class="mt-3">Loading data...</p>
@@ -486,7 +420,7 @@
                             <div class="col-md-8">
                                 <div class="filter-group">
                                     <label for="careerRiderSearch">Add Rider</label>
-                                    <div class="input-group search-container">
+                                    <div class="input-group position-relative">
                                         <input type="text" id="careerRiderSearch" class="form-control" placeholder="Search for a rider...">
                                         <button class="btn btn-primary" type="button" id="addRiderBtn">Add</button>
                                         <div class="autocomplete-list" id="autocompleteList"></div>
@@ -520,7 +454,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="selected-riders" id="selectedRiders"></div>
+                                    <div class="mt-4" id="selectedRiders"></div>
                                     <button type="button" class="btn btn-outline-warning btn-sm" id="resetCareerZoom" style="display: none;">Reset Zoom</button>
                                 </div>
                             </div>
@@ -528,7 +462,7 @@
                     </div>
                     <div class="chart-container" id="careerChartContainer">
                         <canvas id="careerChart"></canvas>
-                        <p class="zoom-hint text-center">Drag to select a date range to zoom in. Pan with mouse wheel or touchpad.</p>
+                        <p class="small text-center fst-italic mt-1" style="color: var(--color-text-light)">Drag to select a date range to zoom in. Pan with mouse wheel or touchpad.</p>
                     </div>
                     <div class="chart-resize-handle" data-target="careerChartContainer"></div>
                 </div>
@@ -567,7 +501,7 @@
                         </div>
                     </div>
                     <div class="table-responsive mt-3">
-                        <table class="table table-dark table-striped table-hover" id="statsTable">
+                        <table class="table table-dark table-striped table-hover data-table" id="statsTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -620,7 +554,7 @@
                         </div>
                     </div>
                     <div class="table-responsive mt-3">
-                        <table class="table table-dark table-striped table-hover" id="yearlyTable">
+                        <table class="table table-dark table-striped table-hover data-table" id="yearlyTable">
                             <thead>
                                 <tr>
                                     <th>Year</th>
@@ -671,6 +605,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
 
     <script>
+        // Configuration constants
+        const CONFIG = {
+            TOP_RATINGS_COUNT: 30,
+            MIN_SEASON_RATINGS: 2,
+            MIN_CHART_HEIGHT_PX: 200,
+            BAR_THICKNESS_PX: 20,
+            REQUIRED_RACE_FRACTION: 1 / 3,
+            DEFAULT_START_DATE: '2002-01-01',
+            DEFAULT_PAGE_LENGTH: 25,
+            COLUMN_ADJUST_DELAY_MS: 100
+        };
+
         // Global data store
         const appData = {
             rawData: [],
@@ -801,7 +747,7 @@
         function saveCareerStateToUrl() {
             setUrlParams({
                 careerRating: $('#careerRating').val(),
-                careerRiders: careerState.selectedRiders.join(','),
+                careerRiders: uiState.career.selectedRiders.join(','),
                 careerMarkers: $('#careerMarkers').is(':checked') ? 'on' : 'off',
                 careerZero: $('#careerZero').is(':checked') ? 'on' : 'off'
             });
@@ -858,7 +804,7 @@
             // Reset to defaults
             $('#careerRating').val('mean');
             $('#careerMarkers').prop('checked', true);
-            careerState.selectedRiders = [];
+            uiState.career.selectedRiders = [];
 
             // Clear all URL params and set tab + defaults
             clearAllUrlParams();
@@ -872,11 +818,11 @@
         function resetStatsTab() {
             // Reset to defaults
             $('#statsRating').val('conservative');
-            if (startDatePicker) {
-                startDatePicker.setDate('2002-01-01', false);
+            if (uiState.datePickers.start) {
+                uiState.datePickers.start.setDate(CONFIG.DEFAULT_START_DATE, false);
             }
-            if (endDatePicker) {
-                endDatePicker.setDate(new Date(), false);
+            if (uiState.datePickers.end) {
+                uiState.datePickers.end.setDate(new Date(), false);
             }
 
             // Clear all URL params and set tab + defaults
@@ -900,24 +846,14 @@
             renderYearlyTable();
         }
 
-        // Guard flag to prevent tab event handler from firing during state loading
-        let isLoadingState = false;
-
-        // Chart instances
-        let ratingsChartInstance = null;
-        let seasonChartInstance = null;
-        let careerChartInstance = null;
-
-        // Career chart state
-        const careerState = {
-            selectedRiders: []
-        };
-
-        // Ratings chart value visibility state
-        const ratingsValueVisibility = {
-            conservative: true,
-            mean: true,
-            optimistic: true
+        // Consolidated UI state
+        const uiState = {
+            isLoading: false,
+            charts: { ratings: null, season: null, career: null },
+            career: { selectedRiders: [] },
+            ratingsValueVisibility: { conservative: true, mean: true, optimistic: true },
+            datePickers: { start: null, end: null },
+            mostRecentRatingYear: null
         };
 
         // Initialize application
@@ -943,9 +879,9 @@
                 $('#mainContent').show();
 
                 // Resize charts after container becomes visible
-                if (ratingsChartInstance) ratingsChartInstance.resize();
-                if (seasonChartInstance) seasonChartInstance.resize();
-                if (careerChartInstance) careerChartInstance.resize();
+                if (uiState.charts.ratings) uiState.charts.ratings.resize();
+                if (uiState.charts.season) uiState.charts.season.resize();
+                if (uiState.charts.career) uiState.charts.career.resize();
 
                 // Update page title to reflect current series and system
                 const systemLabel = getSystemLabel(system);
@@ -1006,30 +942,30 @@
             appData.ridersByPeakRating = [];
 
             // Destroy existing chart instances
-            if (ratingsChartInstance) {
-                ratingsChartInstance.destroy();
-                ratingsChartInstance = null;
+            if (uiState.charts.ratings) {
+                uiState.charts.ratings.destroy();
+                uiState.charts.ratings = null;
             }
-            if (seasonChartInstance) {
-                seasonChartInstance.destroy();
-                seasonChartInstance = null;
+            if (uiState.charts.season) {
+                uiState.charts.season.destroy();
+                uiState.charts.season = null;
             }
-            if (careerChartInstance) {
-                careerChartInstance.destroy();
-                careerChartInstance = null;
+            if (uiState.charts.career) {
+                uiState.charts.career.destroy();
+                uiState.charts.career = null;
             }
 
             // Reset career state
-            careerState.selectedRiders = [];
+            uiState.career.selectedRiders = [];
 
             // Destroy Flatpickr instances
-            if (startDatePicker) {
-                startDatePicker.destroy();
-                startDatePicker = null;
+            if (uiState.datePickers.start) {
+                uiState.datePickers.start.destroy();
+                uiState.datePickers.start = null;
             }
-            if (endDatePicker) {
-                endDatePicker.destroy();
-                endDatePicker = null;
+            if (uiState.datePickers.end) {
+                uiState.datePickers.end.destroy();
+                uiState.datePickers.end = null;
             }
 
             // Destroy DataTables if they exist
@@ -1181,7 +1117,7 @@
             // Calculate peak conservative rating for each rider and sort
             // Filter to only include riders with at least 2 ratings (career progression)
             appData.ridersByPeakRating = Object.keys(appData.riders)
-                .filter(riderName => appData.riders[riderName].length >= 2)
+                .filter(riderName => appData.riders[riderName].length >= CONFIG.MIN_SEASON_RATINGS)
                 .map(riderName => {
                     const records = appData.riders[riderName];
                     let peakConservative = -Infinity;
@@ -1395,7 +1331,7 @@
         }
 
         function loadStateFromUrl() {
-            isLoadingState = true;
+            uiState.isLoading = true;
             const params = getUrlParams();
 
             // Ensure series, session, and rating system dropdowns match URL
@@ -1449,7 +1385,7 @@
                     const riders = params.careerRiders.split(',').filter(r => r.trim());
                     riders.forEach(rider => {
                         if (appData.allRiderNames.includes(rider)) {
-                            careerState.selectedRiders.push(rider);
+                            uiState.career.selectedRiders.push(rider);
                         }
                     });
                 }
@@ -1468,7 +1404,7 @@
                 saveYearlyStateToUrl();
                 renderYearlyTable();
             }
-            isLoadingState = false;
+            uiState.isLoading = false;
         }
 
         function populateYearDropdowns() {
@@ -1548,6 +1484,12 @@
                 renderSeasonChart(); // Don't repopulate, just re-render
             });
 
+            // Season entity checkbox changes (delegated)
+            $('#seasonEntitySelector').on('change', '.season-entity-check', function() {
+                saveSeasonStateToUrl();
+                renderSeasonChart();
+            });
+
             // Season entity select all/deselect all
             $('#selectAllEntities').on('click', function() {
                 $('.season-entity-check').prop('checked', true);
@@ -1575,10 +1517,22 @@
                 }
             });
 
+            // Career autocomplete and rider badge clicks (delegated)
+            $('#autocompleteList').on('click', '.autocomplete-item', function() {
+                const rider = $(this).data('rider');
+                addRider(rider);
+                $('#careerRiderSearch').val('');
+                $('#autocompleteList').hide();
+            });
+            $('#selectedRiders').on('click', '.rider-badge .btn-close', function() {
+                const rider = $(this).data('rider');
+                removeRider(rider);
+            });
+
             // Career chart zoom reset
             $('#resetCareerZoom').on('click', function() {
-                if (careerChartInstance) {
-                    careerChartInstance.resetZoom();
+                if (uiState.charts.career) {
+                    uiState.charts.career.resetZoom();
                     $(this).hide();
                 }
             });
@@ -1598,7 +1552,7 @@
 
             // Tab change events
             $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
-                if (isLoadingState) return;
+                if (uiState.isLoading) return;
                 const targetId = $(e.target).attr('data-bs-target');
                 const tabName = targetId.substring(1); // Remove # prefix
 
@@ -1628,7 +1582,7 @@
                         if ($.fn.DataTable.isDataTable('#statsTable')) {
                             $('#statsTable').DataTable().columns.adjust();
                         }
-                    }, 100);
+                    }, CONFIG.COLUMN_ADJUST_DELAY_MS);
                 } else if (targetId === '#yearly') {
                     saveYearlyStateToUrl();
                     renderYearlyTable();
@@ -1637,7 +1591,7 @@
                         if ($.fn.DataTable.isDataTable('#yearlyTable')) {
                             $('#yearlyTable').DataTable().columns.adjust();
                         }
-                    }, 100);
+                    }, CONFIG.COLUMN_ADJUST_DELAY_MS);
                 }
             });
 
@@ -1696,18 +1650,18 @@
                 const startHeight = container.height();
 
                 function onMouseMove(e) {
-                    const newHeight = Math.max(200, startHeight + (e.clientY - startY));
+                    const newHeight = Math.max(CONFIG.MIN_CHART_HEIGHT_PX, startHeight + (e.clientY - startY));
                     container.css('height', newHeight + 'px');
                 }
                 function onMouseUp() {
                     $(document).off('mousemove', onMouseMove);
                     $(document).off('mouseup', onMouseUp);
-                    if (targetId === 'ratingsChartContainer' && ratingsChartInstance) {
-                        ratingsChartInstance.resize();
-                    } else if (targetId === 'seasonChartContainer' && seasonChartInstance) {
-                        seasonChartInstance.resize();
-                    } else if (targetId === 'careerChartContainer' && careerChartInstance) {
-                        careerChartInstance.resize();
+                    if (targetId === 'ratingsChartContainer' && uiState.charts.ratings) {
+                        uiState.charts.ratings.resize();
+                    } else if (targetId === 'seasonChartContainer' && uiState.charts.season) {
+                        uiState.charts.season.resize();
+                    } else if (targetId === 'careerChartContainer' && uiState.charts.career) {
+                        uiState.charts.career.resize();
                     }
                 }
                 $(document).on('mousemove', onMouseMove);
@@ -1781,7 +1735,7 @@
             });
 
             // Take top 30 (or all if less)
-            const displayData = dataWithValues.slice(0, 30);
+            const displayData = dataWithValues.slice(0, CONFIG.TOP_RATINGS_COUNT);
 
             // Create labels without change information
             const labels = displayData.map(d => d.Name);
@@ -1798,8 +1752,8 @@
             const optimisticPoints = displayData.map(d => d.optimistic);
 
             // Destroy existing chart
-            if (ratingsChartInstance) {
-                ratingsChartInstance.destroy();
+            if (uiState.charts.ratings) {
+                uiState.charts.ratings.destroy();
             }
 
             // Custom plugin to draw vertical lines, values, and changes
@@ -1829,7 +1783,7 @@
                         ctx.stroke();
 
                         // Conservative value - toggle based on visibility state
-                        if (ratingsValueVisibility.conservative) {
+                        if (uiState.ratingsValueVisibility.conservative) {
                             ctx.fillStyle = '#fff';
                             ctx.textAlign = 'right';
                             ctx.fillText(d.conservative.toFixed(2), consX - 5, y);
@@ -1845,7 +1799,7 @@
                         ctx.stroke();
 
                         // Mean value - toggle based on visibility state
-                        if (ratingsValueVisibility.mean) {
+                        if (uiState.ratingsValueVisibility.mean) {
                             ctx.fillStyle = '#fff';
                             ctx.textAlign = 'right';
                             ctx.fillText(d.mean.toFixed(2), meanX - 5, y);
@@ -1861,7 +1815,7 @@
                         ctx.stroke();
 
                         // Optimistic value - toggle based on visibility state
-                        if (ratingsValueVisibility.optimistic) {
+                        if (uiState.ratingsValueVisibility.optimistic) {
                             ctx.fillStyle = '#fff';
                             ctx.textAlign = 'right';
                             ctx.fillText(d.optimistic.toFixed(2), optX - 5, y);
@@ -1893,7 +1847,7 @@
             };
 
             const ctx = document.getElementById('ratingsChart').getContext('2d');
-            ratingsChartInstance = new Chart(ctx, {
+            uiState.charts.ratings = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
@@ -1905,7 +1859,7 @@
                             backgroundColor: 'rgba(25, 135, 84, 0.25)',
                             borderColor: 'rgba(25, 135, 84, 0.4)',
                             borderWidth: 1,
-                            barThickness: 20,
+                            barThickness: CONFIG.BAR_THICKNESS_PX,
                             datalabels: {
                                 display: false
                             }
@@ -1969,7 +1923,7 @@
                                             strokeStyle: 'rgba(220, 53, 69, 1)',
                                             lineWidth: 3,
                                             fontColor: '#fff',
-                                            hidden: !ratingsValueVisibility.conservative,
+                                            hidden: !uiState.ratingsValueVisibility.conservative,
                                             datasetIndex: 1
                                         },
                                         {
@@ -1978,7 +1932,7 @@
                                             strokeStyle: 'rgba(13, 110, 253, 1)',
                                             lineWidth: 3,
                                             fontColor: '#fff',
-                                            hidden: !ratingsValueVisibility.mean,
+                                            hidden: !uiState.ratingsValueVisibility.mean,
                                             datasetIndex: 2
                                         },
                                         {
@@ -1987,7 +1941,7 @@
                                             strokeStyle: 'rgba(25, 135, 84, 1)',
                                             lineWidth: 3,
                                             fontColor: '#fff',
-                                            hidden: !ratingsValueVisibility.optimistic,
+                                            hidden: !uiState.ratingsValueVisibility.optimistic,
                                             datasetIndex: 3
                                         }
                                     ];
@@ -2000,7 +1954,7 @@
 
                                 if (key) {
                                     // Toggle visibility
-                                    ratingsValueVisibility[key] = !ratingsValueVisibility[key];
+                                    uiState.ratingsValueVisibility[key] = !uiState.ratingsValueVisibility[key];
 
                                     // Update the chart
                                     legend.chart.update();
@@ -2045,6 +1999,63 @@
             });
         }
 
+        // Shared line chart options builder for season and career charts
+        function buildLineChartOptions({ timeUnit, displayFormat, beginAtZero, extraPlugins }) {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#fff',
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    datalabels: {
+                        display: false
+                    },
+                    ...(extraPlugins || {})
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: timeUnit,
+                            displayFormats: {
+                                [timeUnit]: displayFormat
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    },
+                    y: {
+                        beginAtZero: beginAtZero,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            };
+        }
+
         // Chart 2: Season Progress
         function populateSeasonEntitySelector() {
             const year = parseInt($('#seasonYear').val());
@@ -2060,7 +2071,7 @@
                     const riderRecords = riders[riderName];
 
                     // Only include if rider has at least 2 ratings in this season
-                    if (riderRecords.length < 2) return;
+                    if (riderRecords.length < CONFIG.MIN_SEASON_RATINGS) return;
 
                     const latestRider = riderRecords[riderRecords.length - 1];
 
@@ -2069,7 +2080,7 @@
                         const bikeRecords = appData.yearData[year].bikes[bikeName];
 
                         // Only include if bike has at least 2 ratings in this season
-                        if (bikeRecords && bikeRecords.length >= 2) {
+                        if (bikeRecords && bikeRecords.length >= CONFIG.MIN_SEASON_RATINGS) {
                             const latestBike = bikeRecords[bikeRecords.length - 1];
                             const combined = combineRatings(latestRider, latestBike);
 
@@ -2090,7 +2101,7 @@
                 // Get entities sorted by their latest mean rating (descending)
                 // Only include entities with at least 2 ratings in this season
                 entitiesWithRatings = Object.keys(data)
-                    .filter(entity => data[entity].length >= 2)
+                    .filter(entity => data[entity].length >= CONFIG.MIN_SEASON_RATINGS)
                     .map(entity => {
                         const records = data[entity];
                         const latestRecord = records[records.length - 1];
@@ -2130,7 +2141,7 @@
                 const checked = isChecked ? 'checked' : '';
                 const safeId = entity.name.replace(/\s+/g, '-').replace(/\[/g, '').replace(/\]/g, '').replace(/\(/g, '').replace(/\)/g, '');
                 html += `
-                    <div class="form-check entity-checkbox">
+                    <div class="form-check mb-2">
                         <input class="form-check-input season-entity-check" type="checkbox" value="${entity.name}" data-combined="${entity.isCombined}" id="entity-${safeId}" ${checked}>
                         <label class="form-check-label" for="entity-${safeId}">
                             ${entity.displayName}
@@ -2140,12 +2151,6 @@
             });
 
             $('#seasonEntitySelector').html(html);
-
-            // Add event handlers
-            $('.season-entity-check').on('change', function() {
-                saveSeasonStateToUrl();
-                renderSeasonChart();
-            });
         }
 
         function renderSeasonChart() {
@@ -2165,8 +2170,8 @@
             });
 
             if (selectedEntities.length === 0) {
-                if (seasonChartInstance) {
-                    seasonChartInstance.destroy();
+                if (uiState.charts.season) {
+                    uiState.charts.season.destroy();
                 }
                 return;
             }
@@ -2232,68 +2237,19 @@
             });
 
             // Destroy existing chart
-            if (seasonChartInstance) {
-                seasonChartInstance.destroy();
+            if (uiState.charts.season) {
+                uiState.charts.season.destroy();
             }
 
             const ctx = document.getElementById('seasonChart').getContext('2d');
-            seasonChartInstance = new Chart(ctx, {
+            uiState.charts.season = new Chart(ctx, {
                 type: 'line',
-                data: {
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                                color: '#fff',
-                                usePointStyle: true
-                            }
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        datalabels: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'month',
-                                displayFormats: {
-                                    month: 'MMM yyyy'
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#fff'
-                            }
-                        },
-                        y: {
-                            beginAtZero: $('#seasonZero').is(':checked'),
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#fff'
-                            }
-                        }
-                    },
-                    interaction: {
-                        mode: 'nearest',
-                        axis: 'x',
-                        intersect: false
-                    }
-                }
+                data: { datasets: datasets },
+                options: buildLineChartOptions({
+                    timeUnit: 'month',
+                    displayFormat: 'MMM yyyy',
+                    beginAtZero: $('#seasonZero').is(':checked')
+                })
             });
         }
 
@@ -2303,7 +2259,7 @@
 
             // Get available riders sorted by peak conservative rating
             let availableRiders = appData.ridersByPeakRating
-                .filter(rider => !careerState.selectedRiders.includes(rider.name))
+                .filter(rider => !uiState.career.selectedRiders.includes(rider.name))
                 .map(rider => rider.name);
 
             // Filter if user is typing
@@ -2324,14 +2280,6 @@
             });
 
             $('#autocompleteList').html(html).show();
-
-            // Add click handlers
-            $('.autocomplete-item').on('click', function() {
-                const rider = $(this).data('rider');
-                addRider(rider);
-                $('#careerRiderSearch').val('');
-                $('#autocompleteList').hide();
-            });
         }
 
         function showAllRiders() {
@@ -2345,7 +2293,7 @@
                 name.toLowerCase() === searchTerm.toLowerCase()
             );
 
-            if (exactMatch && !careerState.selectedRiders.includes(exactMatch)) {
+            if (exactMatch && !uiState.career.selectedRiders.includes(exactMatch)) {
                 addRider(exactMatch);
                 $('#careerRiderSearch').val('');
                 $('#autocompleteList').hide();
@@ -2353,31 +2301,31 @@
         }
 
         function addRider(riderName) {
-            if (careerState.selectedRiders.includes(riderName)) {
+            if (uiState.career.selectedRiders.includes(riderName)) {
                 return;
             }
 
-            careerState.selectedRiders.push(riderName);
+            uiState.career.selectedRiders.push(riderName);
             saveCareerStateToUrl();
             updateSelectedRidersDisplay();
             renderCareerChart();
         }
 
         function removeRider(riderName) {
-            careerState.selectedRiders = careerState.selectedRiders.filter(r => r !== riderName);
+            uiState.career.selectedRiders = uiState.career.selectedRiders.filter(r => r !== riderName);
             saveCareerStateToUrl();
             updateSelectedRidersDisplay();
             renderCareerChart();
         }
 
         function updateSelectedRidersDisplay() {
-            if (careerState.selectedRiders.length === 0) {
+            if (uiState.career.selectedRiders.length === 0) {
                 $('#selectedRiders').html('<p class="text-muted">No riders selected. Use the search box above to add riders.</p>');
                 return;
             }
 
             let html = '<h6>Selected Riders:</h6>';
-            careerState.selectedRiders.forEach(rider => {
+            uiState.career.selectedRiders.forEach(rider => {
                 html += `
                     <span class="badge bg-primary rider-badge">
                         ${rider}
@@ -2387,19 +2335,13 @@
             });
 
             $('#selectedRiders').html(html);
-
-            // Add remove handlers
-            $('.rider-badge .btn-close').on('click', function() {
-                const rider = $(this).data('rider');
-                removeRider(rider);
-            });
         }
 
         function renderCareerChart() {
-            if (careerState.selectedRiders.length === 0) {
-                if (careerChartInstance) {
-                    careerChartInstance.destroy();
-                    careerChartInstance = null;
+            if (uiState.career.selectedRiders.length === 0) {
+                if (uiState.charts.career) {
+                    uiState.charts.career.destroy();
+                    uiState.charts.career = null;
                 }
                 return;
             }
@@ -2408,9 +2350,9 @@
 
             // Build datasets
             const datasets = [];
-            const colors = generateColors(careerState.selectedRiders.length);
+            const colors = generateColors(uiState.career.selectedRiders.length);
 
-            careerState.selectedRiders.forEach((rider, index) => {
+            uiState.career.selectedRiders.forEach((rider, index) => {
                 const records = appData.riders[rider] || [];
                 const chartData = records.map(record => ({
                     x: new Date(record.Date),
@@ -2429,32 +2371,19 @@
             });
 
             // Destroy existing chart
-            if (careerChartInstance) {
-                careerChartInstance.destroy();
+            if (uiState.charts.career) {
+                uiState.charts.career.destroy();
             }
 
             const ctx = document.getElementById('careerChart').getContext('2d');
-            careerChartInstance = new Chart(ctx, {
+            uiState.charts.career = new Chart(ctx, {
                 type: 'line',
-                data: {
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                                color: '#fff',
-                                usePointStyle: true
-                            }
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false
-                        },
+                data: { datasets: datasets },
+                options: buildLineChartOptions({
+                    timeUnit: 'year',
+                    displayFormat: 'yyyy',
+                    beginAtZero: $('#careerZero').is(':checked'),
+                    extraPlugins: {
                         zoom: {
                             zoom: {
                                 drag: {
@@ -2475,47 +2404,31 @@
                                     $('#resetCareerZoom').show();
                                 }
                             }
-                        },
-                        datalabels: {
-                            display: false
                         }
-                    },
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'year',
-                                displayFormats: {
-                                    year: 'yyyy'
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#fff'
-                            }
-                        },
-                        y: {
-                            beginAtZero: $('#careerZero').is(':checked'),
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#fff'
-                            }
-                        }
-                    },
-                    interaction: {
-                        mode: 'nearest',
-                        axis: 'x',
-                        intersect: false
                     }
-                }
+                })
             });
         }
 
         // Utility function to generate distinct colors
+        // Apply data bars to numeric columns in a DataTable
+        function applyDataBars(tableId, numericColumns, maxValues) {
+            $(`#${tableId} tbody tr`).each(function() {
+                const cells = $(this).find('td');
+                numericColumns.forEach((colIndex, i) => {
+                    const cell = cells.eq(colIndex);
+                    const value = parseFloat(cell.text());
+                    if (!isNaN(value) && maxValues[i] > 0) {
+                        const pct = (value / maxValues[i]) * 100;
+                        cell.attr('data-bar', '');
+                        cell.css('--bar-pct', pct + '%');
+                    } else {
+                        cell.removeAttr('data-bar');
+                    }
+                });
+            });
+        }
+
         function generateColors(count) {
             const colors = [];
             const hueStep = 360 / count;
@@ -2529,16 +2442,14 @@
         }
 
         // Chart 4: Statistics Table
-        let startDatePicker, endDatePicker;
-        let mostRecentRatingYear = null;
 
         function populateStatsDates() {
             // Destroy existing date pickers if they exist
-            if (startDatePicker) {
-                startDatePicker.destroy();
+            if (uiState.datePickers.start) {
+                uiState.datePickers.start.destroy();
             }
-            if (endDatePicker) {
-                endDatePicker.destroy();
+            if (uiState.datePickers.end) {
+                uiState.datePickers.end.destroy();
             }
 
             // Calculate the most recent rating year across all data
@@ -2551,15 +2462,15 @@
                     }
                 }
             });
-            mostRecentRatingYear = maxYear;
+            uiState.mostRecentRatingYear = maxYear;
 
             // Get URL params to check for saved dates
             const params = getUrlParams();
-            const startDateDefault = params.statsStartDate || "2002-01-01";
-            const endDateDefault = params.statsEndDate || new Date();
+            const startDateDefault = params.statsStartDate || CONFIG.DEFAULT_START_DATE;
+            const endDateDefault = params.statsEndDate || new Date().toISOString().split('T')[0];
 
             // Initialize start date picker
-            startDatePicker = flatpickr("#statsStartDate", {
+            uiState.datePickers.start = flatpickr("#statsStartDate", {
                 dateFormat: "Y-m-d",
                 defaultDate: startDateDefault,
                 theme: "dark",
@@ -2571,7 +2482,7 @@
             });
 
             // Initialize end date picker
-            endDatePicker = flatpickr("#statsEndDate", {
+            uiState.datePickers.end = flatpickr("#statsEndDate", {
                 dateFormat: "Y-m-d",
                 defaultDate: endDateDefault,
                 theme: "dark",
@@ -2606,15 +2517,7 @@
                 if (records.length === 0) return;
 
                 // Calculate rating values for each record
-                const ratings = records.map(record => {
-                    if (ratingType === 'conservative') {
-                        return getConservative(record.Mean, record.StdDev);
-                    } else if (ratingType === 'mean') {
-                        return record.Mean;
-                    } else {
-                        return getOptimistic(record.Mean, record.StdDev);
-                    }
-                });
+                const ratings = records.map(record => getRatingValue(record, ratingType));
 
                 // Basic statistics
                 const lowest = Math.min(...ratings);
@@ -2671,18 +2574,10 @@
                 Object.keys(recordsByYear).forEach(year => {
                     const yearRecords = recordsByYear[year];
                     const possibleRaces = datesByYear[year]?.length || 0;
-                    const requiredRaces = Math.ceil(possibleRaces / 3);
+                    const requiredRaces = Math.ceil(possibleRaces * CONFIG.REQUIRED_RACE_FRACTION);
 
                     if (yearRecords.length >= requiredRaces) {
-                        const yearRatings = yearRecords.map(record => {
-                            if (ratingType === 'conservative') {
-                                return getConservative(record.Mean, record.StdDev);
-                            } else if (ratingType === 'mean') {
-                                return record.Mean;
-                            } else {
-                                return getOptimistic(record.Mean, record.StdDev);
-                            }
-                        });
+                        const yearRatings = yearRecords.map(record => getRatingValue(record, ratingType));
 
                         const yearAvg = yearRatings.reduce((a, b) => a + b, 0) / yearRatings.length;
 
@@ -2695,7 +2590,7 @@
 
                 // Check if rider has a rating in the most recent year
                 const hasRecentRating = records.some(record => {
-                    return new Date(record.Date).getFullYear() === mostRecentRatingYear;
+                    return new Date(record.Date).getFullYear() === uiState.mostRecentRatingYear;
                 });
 
                 riderStats[riderName] = {
@@ -2716,6 +2611,15 @@
             const sortedStats = Object.values(riderStats).sort((a, b) =>
                 a.name.localeCompare(b.name)
             );
+
+            // Calculate max values for data bars (races independent, ratings shared scale)
+            const maxRaces = Math.max(...sortedStats.map(s => s.races), 0);
+            const allRatingValues = sortedStats.flatMap(s => [
+                s.lowest, s.highest, s.average, s.median,
+                ...(s.seasonAvg !== null ? [s.seasonAvg] : [])
+            ]);
+            const maxRating = Math.max(...allRatingValues, 0);
+            const statsMaxValues = [maxRaces, maxRating, maxRating, maxRating, maxRating, maxRating];
 
             // Destroy existing DataTable if it exists
             if ($.fn.DataTable.isDataTable('#statsTable')) {
@@ -2748,7 +2652,7 @@
             // Initialize DataTables with default sort by Highest column (index 5) descending
             const table = $('#statsTable').DataTable({
                 order: [[5, 'desc']], // Sort by Highest column
-                pageLength: 25,
+                pageLength: CONFIG.DEFAULT_PAGE_LENGTH,
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 scrollX: true,
                 columnDefs: [
@@ -2756,6 +2660,17 @@
                         targets: 0, // # column
                         orderable: false,
                         searchable: false
+                    },
+                    {
+                        targets: [8, 9], // Season Avg. and Season columns - sort N/A below all values
+                        type: 'num',
+                        render: function(data, type) {
+                            if (type === 'sort' || type === 'type') {
+                                const val = parseFloat(data);
+                                return isNaN(val) ? -Infinity : val;
+                            }
+                            return data;
+                        }
                     }
                 ],
                 language: {
@@ -2770,7 +2685,7 @@
                     const api = this.api();
                     setTimeout(function() {
                         api.columns.adjust();
-                    }, 100);
+                    }, CONFIG.COLUMN_ADJUST_DELAY_MS);
                 },
                 drawCallback: function(settings) {
                     // Update row numbers based on current display order
@@ -2779,8 +2694,21 @@
                     api.column(0, {page: 'current'}).nodes().each(function(cell, i) {
                         cell.innerHTML = start + i + 1;
                     });
+                    applyDataBars('statsTable', [3, 4, 5, 6, 7, 8], statsMaxValues);
                 }
             });
+        }
+
+        // Calculate a single value from a set of records based on value type (final/best/average)
+        function calculateValueByType(records, ratingType, valueType) {
+            if (valueType === 'final') {
+                return getRatingValue(records[records.length - 1], ratingType);
+            } else if (valueType === 'best') {
+                return Math.max(...records.map(r => getRatingValue(r, ratingType)));
+            } else { // average
+                const ratings = records.map(r => getRatingValue(r, ratingType));
+                return ratings.reduce((a, b) => a + b, 0) / ratings.length;
+            }
         }
 
         // Yearly Summary Table
@@ -2805,56 +2733,22 @@
                 });
 
                 const totalDates = allDatesInYear.size;
-                const requiredDates = Math.ceil(totalDates / 3);
+                const requiredDates = Math.ceil(totalDates * CONFIG.REQUIRED_RACE_FRACTION);
 
                 // Calculate rider values based on valueType
                 const riderValues = {};
                 Object.keys(riders).forEach(riderName => {
                     const records = riders[riderName];
-
-                    // Filter: require at least 1/3 of all possible dates
                     if (records.length < requiredDates) return;
-
-                    let value;
-                    if (valueType === 'final') {
-                        // Get the last record of the year
-                        const lastRecord = records[records.length - 1];
-                        value = getRatingValue(lastRecord, ratingType);
-                    } else if (valueType === 'best') {
-                        // Get the maximum rating across all records
-                        value = Math.max(...records.map(r => getRatingValue(r, ratingType)));
-                    } else { // average
-                        // Get the average rating across all records
-                        const ratings = records.map(r => getRatingValue(r, ratingType));
-                        value = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-                    }
-
-                    riderValues[riderName] = value;
+                    riderValues[riderName] = calculateValueByType(records, ratingType, valueType);
                 });
 
                 // Calculate bike values based on valueType
                 const bikeValues = {};
                 Object.keys(bikes).forEach(bikeName => {
                     const records = bikes[bikeName];
-
-                    // Filter: require at least 1/3 of all possible dates
                     if (records.length < requiredDates) return;
-
-                    let value;
-                    if (valueType === 'final') {
-                        // Get the last record of the year
-                        const lastRecord = records[records.length - 1];
-                        value = getRatingValue(lastRecord, ratingType);
-                    } else if (valueType === 'best') {
-                        // Get the maximum rating across all records
-                        value = Math.max(...records.map(r => getRatingValue(r, ratingType)));
-                    } else { // average
-                        // Get the average rating across all records
-                        const ratings = records.map(r => getRatingValue(r, ratingType));
-                        value = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-                    }
-
-                    bikeValues[bikeName] = value;
+                    bikeValues[bikeName] = calculateValueByType(records, ratingType, valueType);
                 });
 
                 // Calculate combined (rider+bike) values based on valueType
@@ -2878,17 +2772,7 @@
 
                     if (combinedRecords.length < requiredDates) return;
 
-                    let value;
-                    if (valueType === 'final') {
-                        const lastRecord = combinedRecords[combinedRecords.length - 1];
-                        value = getRatingValue(lastRecord, ratingType);
-                    } else if (valueType === 'best') {
-                        value = Math.max(...combinedRecords.map(r => getRatingValue(r, ratingType)));
-                    } else {
-                        const ratings = combinedRecords.map(r => getRatingValue(r, ratingType));
-                        value = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-                    }
-
+                    const value = calculateValueByType(combinedRecords, ratingType, valueType);
                     combinedValues[riderName] = { value, name: combinedRecords[combinedRecords.length - 1].Name };
                 });
 
@@ -2922,6 +2806,16 @@
 
             // Sort years in descending order
             yearlyData.sort((a, b) => b.year - a.year);
+
+            // Calculate max values for data bars (all rating columns share one scale)
+            const riderBikeValues = yearlyData.flatMap(d => [
+                d.riders[0]?.value, d.riders[1]?.value, d.riders[2]?.value,
+                d.bike?.value
+            ].filter(v => v != null));
+            const combinedValues = yearlyData.map(d => d.combined?.value).filter(v => v != null);
+            const riderBikeMax = Math.max(...riderBikeValues, 0);
+            const combinedMax = Math.max(...combinedValues, 0);
+            const yearlyMaxValues = [riderBikeMax, riderBikeMax, riderBikeMax, riderBikeMax, combinedMax];
 
             // Destroy existing DataTable if it exists
             if ($.fn.DataTable.isDataTable('#yearlyTable')) {
@@ -2959,7 +2853,7 @@
             // Initialize DataTables
             $('#yearlyTable').DataTable({
                 order: [[0, 'desc']], // Sort by Year column descending
-                pageLength: 25,
+                pageLength: CONFIG.DEFAULT_PAGE_LENGTH,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 language: {
                     search: "Search years:",
@@ -2967,6 +2861,9 @@
                     info: "Showing _START_ to _END_ of _TOTAL_ years",
                     infoEmpty: "No years to display",
                     infoFiltered: "(filtered from _MAX_ total years)"
+                },
+                drawCallback: function() {
+                    applyDataBars('yearlyTable', [2, 4, 6, 8, 10], yearlyMaxValues);
                 }
             });
         }
