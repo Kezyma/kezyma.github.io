@@ -348,8 +348,8 @@ const SITE = {
             id: "masseffectmap",
             name: "Mass Effect Galaxy Map",
             category: "tools",
-            type: "html",
-            source: "MassEffect-Map/index.html"
+            type: "redirect",
+            source: "https://kezyma.github.io/MassEffect-Map/"
         }
     ],
 
