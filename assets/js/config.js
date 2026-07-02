@@ -343,6 +343,13 @@ const SITE = {
             category: "tools",
             type: "html",
             source: "pages/nms-browser.html"
+        },
+        {
+            id: "masseffectmap",
+            name: "Mass Effect Galaxy Map",
+            category: "tools",
+            type: "html",
+            source: "MassEffect-Map/index.html"
         }
     ],
 
